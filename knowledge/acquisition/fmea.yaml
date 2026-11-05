@@ -1,0 +1,399 @@
+# =============================================================================
+# Metal Tech – FMEA (versión máquina-legible). Tabla legible en fmea.md.
+# Escalas S/O/D 1–10 y NPR = S*O*D según D-035. Agente Investigador, 2026-10-29.
+# IDs de síntomas: configs/assets.yaml; modos de falla: configs/failure_modes.yaml.
+# =============================================================================
+version: 1
+escalas: D-035
+
+motor_electrico:
+  - componente: estator_devanado
+    modo_falla: degradacion_aislamiento
+    sintomas: [temp_devanado_alta, desbalance_corriente_alto, corriente_alta, olor_quemado_percibido]
+    causas: [sobrecarga_sostenida, perdida_de_fase, ventilacion_obstruida, humedad_contaminacion, picos_dv_dt_variador]
+    acciones: [prueba_megohmetro_e_indice_polarizacion, prueba_surge, reducir_carga, rebobinado_o_reemplazo]
+    severidad: 9
+    ocurrencia: 4
+    deteccion: 5
+    npr: 180
+    fuentes: [D-005, D-006, D-032]
+  - componente: ventilacion
+    modo_falla: sobrecalentamiento_ventilacion
+    sintomas: [temp_devanado_alta, corriente_en_rango]
+    causas: [rejillas_aletas_sucias, ventilador_danado, temperatura_ambiente_alta, operacion_a_baja_velocidad_con_variador]
+    acciones: [limpiar_carcasa_y_rejillas, verificar_ventilador, ventilacion_forzada_si_baja_velocidad]
+    severidad: 7
+    ocurrencia: 5
+    deteccion: 3
+    npr: 105
+    fuentes: [D-005, D-033]
+  - componente: rodamientos
+    modo_falla: desgaste_rodamiento
+    sintomas: [vibracion_impulsiva, vibracion_hf_alta, vibracion_hf_critica, temp_rodamiento_alta]
+    causas: [fatiga, contaminacion_lubricante, sobrecarga_por_desalineacion, corrientes_por_rodamiento_variador]
+    acciones: [analisis_envolvente, planificar_cambio_rodamiento, aislar_rodamiento_o_escobilla_a_tierra]
+    severidad: 8
+    ocurrencia: 6
+    deteccion: 4
+    npr: 192
+    fuentes: [D-010, D-036]
+  - componente: rodamientos
+    modo_falla: falla_lubricacion_rodamiento
+    sintomas: [temp_rodamiento_alta, vibracion_hf_alta]
+    causas: [falta_de_grasa, exceso_de_grasa, grasa_incompatible_o_degradada]
+    acciones: [relubricar_segun_plan, corregir_cantidad_e_intervalo, vigilar_tendencia_24h]
+    severidad: 7
+    ocurrencia: 6
+    deteccion: 5
+    npr: 210
+    fuentes: [D-008, D-010, D-033]
+  - componente: eje_acople
+    modo_falla: desalineacion_eje
+    sintomas: [vibracion_alerta, vibracion_creciente, vibracion_2x_elevada, vibracion_axial_alta]
+    causas: [montaje_incorrecto, pata_coja, dilatacion_termica, asentamiento_de_base]
+    acciones: [alineacion_laser, corregir_pata_coja, reapriete_anclajes]
+    severidad: 6
+    ocurrencia: 6
+    deteccion: 3
+    npr: 108
+    fuentes: [D-003, D-004, D-011]
+  - componente: rotor
+    modo_falla: desbalanceo_rotor
+    sintomas: [vibracion_alerta, vibracion_creciente, vibracion_1x_dominante]
+    causas: [acumulacion_de_suciedad, perdida_de_masa_ventilador, barras_de_rotor_danadas]
+    acciones: [limpieza, balanceo_en_sitio]
+    severidad: 6
+    ocurrencia: 4
+    deteccion: 3
+    npr: 72
+    fuentes: [D-003, D-011]
+  - componente: contactor
+    modo_falla: falla_contactor
+    sintomas: [desbalance_corriente_critico, temp_devanado_alta]
+    causas: [contactos_picados, bobina_debil, bornes_flojos, fin_de_vida_electrica]
+    acciones: [inspeccion_termografica_tablero, cambio_de_contactos_o_contactor, reapriete_bornes]
+    severidad: 7
+    ocurrencia: 4
+    deteccion: 5
+    npr: 140
+    fuentes: [D-006, D-031]
+  - componente: variador
+    modo_falla: falla_variador
+    sintomas: [disparos_intermitentes, disparos_frecuentes, distorsion_armonica_alta, tension_bus_dc_alta, temp_variador_alta]
+    causas: [rampas_muy_cortas, datos_de_motor_erroneos, cable_largo_sin_reactancia, regeneracion_sin_resistencia_de_frenado, condensadores_bus_envejecidos, ventilador_del_variador]
+    acciones: [leer_registro_de_fallas, ajustar_rampas_y_parametros, reactancia_o_filtro, resistencia_de_frenado, mantenimiento_ventiladores]
+    severidad: 6
+    ocurrencia: 5
+    deteccion: 6
+    npr: 180
+    fuentes: [D-030]
+  - componente: carga_accionada
+    modo_falla: sobrecarga_mecanica
+    sintomas: [sobrecorriente, corriente_alta, temp_devanado_alta]
+    causas: [atasco_de_la_maquina_accionada, freno_arrastrando, proceso_fuera_de_diseno]
+    acciones: [verificar_carga, comparar_con_corriente_de_placa_y_fs, ajustar_proteccion]
+    severidad: 7
+    ocurrencia: 5
+    deteccion: 3
+    npr: 105
+    fuentes: [D-005, D-007]
+
+bomba_centrifuga:
+  - componente: impulsor
+    modo_falla: cavitacion
+    sintomas: [margen_npsh_bajo, margen_npsh_insuficiente, vibracion_hf_alta, caudal_inestable, presion_descarga_baja, golpeteo_percibido]
+    causas: [nivel_bajo_en_succion, filtro_succion_obstruido, temperatura_liquido_alta, operacion_lejos_del_bep]
+    acciones: [restablecer_npsha, limpiar_filtro_succion, reducir_caudal, inspeccionar_erosion_impulsor]
+    severidad: 8
+    ocurrencia: 5
+    deteccion: 4
+    npr: 160
+    fuentes: [D-012, D-013]
+  - componente: carcasa_succion
+    modo_falla: obstruccion_bomba
+    sintomas: [caudal_bajo, corriente_baja, presion_descarga_baja]
+    causas: [objetos_extranos, incrustaciones, canastilla_sucia, valvula_parcialmente_cerrada]
+    acciones: [limpiar_canastilla_e_impulsor, verificar_valvulas]
+    severidad: 6
+    ocurrencia: 5
+    deteccion: 4
+    npr: 120
+    fuentes: [D-014]
+  - componente: sello_mecanico
+    modo_falla: desgaste_sello_mecanico
+    sintomas: [fuga_sello]
+    causas: [operacion_en_seco, vibracion_excesiva, abrasivos, plan_de_lavado_inadecuado]
+    acciones: [cambio_de_sello, revisar_plan_de_lavado, corregir_vibracion_y_alineacion]
+    severidad: 7
+    ocurrencia: 6
+    deteccion: 5
+    npr: 210
+    fuentes: [D-015]
+  - componente: rodamientos
+    modo_falla: desgaste_rodamiento
+    sintomas: [vibracion_impulsiva, vibracion_hf_alta, temp_rodamiento_alta]
+    causas: [fatiga, contaminacion_del_aceite, sobrecarga_axial_por_operacion_fuera_bep]
+    acciones: [analisis_envolvente, cambio_de_rodamientos, revisar_lubricante]
+    severidad: 8
+    ocurrencia: 5
+    deteccion: 4
+    npr: 160
+    fuentes: [D-009, D-010]
+  - componente: eje_acople
+    modo_falla: desalineacion_eje
+    sintomas: [vibracion_creciente, vibracion_2x_elevada, vibracion_axial_alta]
+    causas: [esfuerzos_de_tuberia, montaje, dilatacion_termica]
+    acciones: [alineacion_laser, revisar_soportes_de_tuberia]
+    severidad: 6
+    ocurrencia: 5
+    deteccion: 3
+    npr: 90
+    fuentes: [D-004, D-011]
+  - componente: impulsor
+    modo_falla: desbalanceo_rotor
+    sintomas: [vibracion_alerta, vibracion_1x_dominante]
+    causas: [erosion_por_cavitacion, incrustaciones_en_impulsor]
+    acciones: [balanceo_del_impulsor, reemplazo_del_impulsor]
+    severidad: 5
+    ocurrencia: 3
+    deteccion: 3
+    npr: 45
+    fuentes: [D-003, D-011]
+
+compresor_tornillo:
+  - componente: enfriador_aceite
+    modo_falla: sobrecalentamiento_compresor
+    sintomas: [temp_descarga_alta, temp_descarga_critica, corriente_en_rango, calor_percibido]
+    causas: [enfriador_sucio, nivel_de_aceite_bajo, aceite_degradado, valvula_termostatica, ventilacion_de_sala_deficiente]
+    acciones: [limpiar_enfriador, reponer_o_cambiar_aceite, verificar_termostatica, mejorar_ventilacion]
+    severidad: 8
+    ocurrencia: 5
+    deteccion: 2
+    npr: 80
+    fuentes: [D-016]
+  - componente: separador_aceite
+    modo_falla: obstruccion_separador
+    sintomas: [dp_separador_alto, presion_descarga_baja]
+    causas: [fin_de_vida_del_elemento, aceite_degradado_o_barnizado]
+    acciones: [cambiar_elemento_separador, cambiar_aceite]
+    severidad: 6
+    ocurrencia: 5
+    deteccion: 3
+    npr: 90
+    fuentes: [D-017, D-018]
+  - componente: red_distribucion
+    modo_falla: fuga_aire_red
+    sintomas: [carga_compresor_alta, presion_descarga_baja]
+    causas: [racores_y_mangueras, purgadores_abiertos, herramientas_y_acoples_desgastados]
+    acciones: [deteccion_ultrasonica_de_fugas, prueba_de_aislamiento, programa_de_fugas]
+    severidad: 5
+    ocurrencia: 8
+    deteccion: 5
+    npr: 200
+    fuentes: [D-017, D-019]
+  - componente: valvula_admision
+    modo_falla: falla_valvula_admision
+    sintomas: [presion_descarga_baja, corriente_baja]
+    causas: [solenoide_de_control, barniz_en_el_piston, filtro_de_aire_obstruido]
+    acciones: [revisar_apertura_en_carga, limpiar_o_reparar_valvula, cambiar_filtro_de_aire]
+    severidad: 6
+    ocurrencia: 4
+    deteccion: 4
+    npr: 96
+    fuentes: [D-017]
+  - componente: rodamientos
+    modo_falla: desgaste_rodamiento
+    sintomas: [vibracion_impulsiva, vibracion_hf_alta]
+    causas: [fatiga, dilucion_o_degradacion_del_aceite]
+    acciones: [analisis_envolvente, analisis_de_aceite, overhaul_del_elemento]
+    severidad: 9
+    ocurrencia: 3
+    deteccion: 5
+    npr: 135
+    fuentes: [D-010]
+  - componente: elemento_tornillo
+    modo_falla: desalineacion_eje
+    sintomas: [vibracion_alerta, vibracion_2x_elevada, vibracion_axial_alta]
+    causas: [montaje_del_acople, desgaste_del_acople]
+    acciones: [alineacion, cambio_de_elemento_elastico]
+    severidad: 6
+    ocurrencia: 3
+    deteccion: 3
+    npr: 54
+    fuentes: [D-011]
+
+prensa_hidraulica:
+  - componente: sellos
+    modo_falla: fuga_hidraulica_externa
+    sintomas: [nivel_tanque_bajo, presion_sistema_baja]
+    causas: [manguera_danada, racor_flojo, sello_de_vastago_desgastado, temperatura_excesiva]
+    acciones: [bloqueo_y_aislamiento_de_energia, reemplazo_de_manguera_o_sello, reponer_aceite_filtrado]
+    severidad: 8
+    ocurrencia: 6
+    deteccion: 3
+    npr: 144
+    fuentes: [D-020, D-022]
+  - componente: cilindro_principal
+    modo_falla: fuga_interna_cilindro
+    sintomas: [caida_presion_retencion, tiempo_ciclo_alto, temp_aceite_alta]
+    causas: [sello_de_piston_desgastado, rayado_de_camisa, contaminacion]
+    acciones: [prueba_de_bypass_fin_de_carrera, aislar_valvulas, reemplazo_de_sellos]
+    severidad: 7
+    ocurrencia: 5
+    deteccion: 6
+    npr: 210
+    fuentes: [D-022]
+  - componente: tanque_filtros
+    modo_falla: contaminacion_aceite_hidraulico
+    sintomas: [aceite_contaminado]
+    causas: [filtro_saturado_o_bypass, respiradero_sin_filtro, ingreso_por_sellos, aceite_nuevo_sin_filtrar]
+    acciones: [cambio_de_filtros, filtrado_en_rinon, conteo_de_particulas_iso4406]
+    severidad: 6
+    ocurrencia: 6
+    deteccion: 4
+    npr: 144
+    fuentes: [D-021]
+  - componente: valvula_direccional_proporcional
+    modo_falla: valvula_hidraulica_pegada
+    sintomas: [presion_sistema_alta, tiempo_ciclo_alto, aceite_contaminado, prensa_dura_percibida]
+    causas: [barniz, particulas_en_carrete, bobina_debil, aceite_frio]
+    acciones: [verificar_respuesta_bobina_vs_posicion, limpiar_o_reemplazar_valvula, filtrar_aceite, calentar_aceite_antes_de_producir]
+    severidad: 8
+    ocurrencia: 4
+    deteccion: 6
+    npr: 192
+    fuentes: [D-021, D-023]
+  - componente: enfriador
+    modo_falla: sobrecalentamiento_aceite_hidraulico
+    sintomas: [temp_aceite_alta, temp_aceite_critica]
+    causas: [enfriador_sucio_o_sin_agua, valvula_de_alivio_descargando, fugas_internas]
+    acciones: [limpiar_enfriador, ajustar_alivio, buscar_fugas_internas]
+    severidad: 6
+    ocurrencia: 5
+    deteccion: 2
+    npr: 60
+    fuentes: [D-020]
+
+banda_transportadora:
+  - componente: banda_empalme
+    modo_falla: desalineacion_banda
+    sintomas: [desvio_banda, corriente_alta, banda_corrida_percibida]
+    causas: [tambores_o_rodillos_fuera_de_escuadra, empalme_no_escuadrado, rodillo_trabado, carga_descentrada, acumulacion_de_material]
+    acciones: [alinear_tambores_y_rodillos, rehacer_empalme, rodillos_autoalineantes, centrar_carga]
+    severidad: 6
+    ocurrencia: 7
+    deteccion: 3
+    npr: 126
+    fuentes: [D-024]
+  - componente: tambor_motriz
+    modo_falla: deslizamiento_banda
+    sintomas: [deslizamiento_alto]
+    causas: [tension_insuficiente, recubrimiento_de_tambor_gastado, agua_o_material_entre_banda_y_tambor, sobrecarga]
+    acciones: [ajustar_tension, recubrir_tambor, limpiar]
+    severidad: 5
+    ocurrencia: 5
+    deteccion: 4
+    npr: 100
+    fuentes: [D-025]
+  - componente: banda_empalme
+    modo_falla: rotura_banda
+    sintomas: [velocidad_banda_nula, corriente_baja]
+    causas: [empalme_deteriorado, objeto_atrapado, sobretension, desgaste_de_bordes_por_corrimiento]
+    acciones: [paro_y_bloqueo, reemplazar_o_reempalmar, inspeccion_periodica_de_empalmes]
+    severidad: 9
+    ocurrencia: 2
+    deteccion: 7
+    npr: 126
+    fuentes: [D-025]
+  - componente: rodillos_portantes
+    modo_falla: falla_rodillo
+    sintomas: [vibracion_impulsiva, corriente_alta, cascabeleo_percibido]
+    causas: [rodamiento_del_rodillo_danado, rodillo_trabado_por_material, sellos_del_rodillo]
+    acciones: [inspeccion_termografica_o_acustica, reemplazo_de_rodillos]
+    severidad: 5
+    ocurrencia: 7
+    deteccion: 6
+    npr: 210
+    fuentes: [D-024, D-026]
+  - componente: rodamientos
+    modo_falla: desgaste_rodamiento
+    sintomas: [vibracion_impulsiva, temp_rodamiento_alta]
+    causas: [fatiga, contaminacion]
+    acciones: [analisis_envolvente, cambio_de_rodamiento_del_tambor]
+    severidad: 7
+    ocurrencia: 4
+    deteccion: 4
+    npr: 112
+    fuentes: [D-010]
+  - componente: motorreductor
+    modo_falla: sobrecarga_mecanica
+    sintomas: [sobrecorriente, corriente_alta]
+    causas: [atasco_de_material, sobrecarga_de_piezas]
+    acciones: [despejar_atasco, verificar_carga]
+    severidad: 7
+    ocurrencia: 4
+    deteccion: 3
+    npr: 84
+    fuentes: [D-007]
+
+centro_cnc:
+  - componente: herramienta
+    modo_falla: desgaste_herramienta
+    sintomas: [desgaste_herramienta_alto, desgaste_herramienta_limite, carga_husillo_alta]
+    causas: [vida_util_alcanzada, parametros_de_corte_agresivos, refrigerante_insuficiente]
+    acciones: [cambio_de_herramienta, revisar_parametros_de_corte]
+    severidad: 5
+    ocurrencia: 9
+    deteccion: 3
+    npr: 135
+    fuentes: [D-027, D-036]
+  - componente: herramienta
+    modo_falla: rotura_herramienta
+    sintomas: [carga_husillo_caida_subita, impacto_vibracion]
+    causas: [desgaste_no_detectado, chatter, inclusion_dura_en_material, evacuacion_de_viruta_deficiente]
+    acciones: [paro_de_avance, inspeccion_con_palpador, revisar_pieza]
+    severidad: 7
+    ocurrencia: 5
+    deteccion: 4
+    npr: 140
+    fuentes: [D-028]
+  - componente: husillo
+    modo_falla: colision_husillo
+    sintomas: [impacto_vibracion, carga_husillo_critica]
+    causas: [error_de_programa, offset_de_herramienta_erroneo, sujecion_de_pieza]
+    acciones: [paro_inmediato, verificar_runout_y_rodamientos, simulacion_de_programa]
+    severidad: 10
+    ocurrencia: 2
+    deteccion: 6
+    npr: 120
+    fuentes: [D-028]
+  - componente: husillo
+    modo_falla: vibracion_chatter
+    sintomas: [carga_husillo_inestable, vibracion_hf_alta, vibracion_alerta]
+    causas: [profundidad_de_corte_excesiva, voladizo_largo, velocidad_en_zona_inestable]
+    acciones: [ajustar_rpm_a_lobulo_estable, reducir_profundidad, acortar_voladizo]
+    severidad: 5
+    ocurrencia: 6
+    deteccion: 4
+    npr: 120
+    fuentes: [D-029]
+  - componente: rodamientos_husillo
+    modo_falla: sobrecalentamiento_husillo
+    sintomas: [temp_husillo_alta, vibracion_hf_alta]
+    causas: [falla_del_enfriador, lubricacion_aceite_aire_deficiente, precarga_excesiva]
+    acciones: [revisar_enfriador, revisar_lubricacion, ciclo_de_calentamiento]
+    severidad: 7
+    ocurrencia: 3
+    deteccion: 3
+    npr: 63
+    fuentes: [D-010, D-029]
+  - componente: rodamientos_husillo
+    modo_falla: desgaste_rodamiento
+    sintomas: [vibracion_impulsiva, vibracion_hf_alta, temp_husillo_alta]
+    causas: [fatiga, colisiones_previas, contaminacion_por_refrigerante]
+    acciones: [analisis_envolvente, reconstruccion_del_husillo]
+    severidad: 8
+    ocurrencia: 3
+    deteccion: 5
+    npr: 120
+    fuentes: [D-010]

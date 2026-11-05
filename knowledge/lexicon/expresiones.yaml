@@ -1,0 +1,232 @@
+# =============================================================================
+# Metal Tech – Léxico de expresiones coloquiales de técnicos
+# expresión -> síntoma percibido -> síntomas formales medibles -> variables y
+# dirección -> modos de falla candidatos (con FC máximo que aporta la expresión).
+# Agente Investigador, Fase 1 (2026-10-29). Criterios en D-038.
+#
+# fc_max: certeza máxima que la expresión aporta por sí sola a cada candidato.
+# Nunca supera 0.6 sin confirmación por sensores (sesgo de técnico/turno).
+# La desambiguación se hace con los síntomas medidos (reglas de rules.yaml).
+# =============================================================================
+
+- id: EXP01
+  expresion: "el motor está cantando"
+  variantes: ["está chillando", "está silbando", "zumba raro"]
+  sintoma_percibido: ruido_agudo_percibido
+  activos: [motor_electrico, bomba_centrifuga, compresor_tornillo]
+  fisica: >
+    Un tono agudo y continuo en un motor viene de dos fuentes. La primera es
+    mecánica: un rodamiento seco o con defecto incipiente emite energía de alta
+    frecuencia (etapas 1–2 de falla de rodamiento). La segunda es
+    electromagnética: la magnetostricción por la frecuencia de conmutación del
+    variador o por armónicos de la red produce un zumbido agudo.
+  sintomas_formales: [vibracion_hf_alta, distorsion_armonica_alta]
+  variables:
+    - {variable: vib_hf_rel, cambio: aumenta}
+    - {variable: thd_tension_pct, cambio: aumenta}
+    - {variable: temp_rodamiento_c, cambio: aumenta_leve}
+  modos_falla_candidatos:
+    - {id: falla_lubricacion_rodamiento, fc_max: 0.5}
+    - {id: desgaste_rodamiento, fc_max: 0.4}
+    - {id: falla_variador, fc_max: 0.3}
+  decisiones: [D-038, D-010, D-030]
+
+- id: EXP02
+  expresion: "huele a quemado"
+  variantes: ["huele a barniz", "huele a caucho quemado"]
+  sintoma_percibido: olor_quemado_percibido
+  activos: [motor_electrico, banda_transportadora]
+  fisica: >
+    El olor a barniz se produce cuando el aislamiento del devanado supera su
+    clase térmica y se degrada (pirólisis de resinas). Su causa suele ser
+    sobrecarga, pérdida de fase o ventilación obstruida. En bandas, el olor a
+    caucho indica fricción por patinaje sobre el tambor o un rodillo trabado.
+  sintomas_formales: [temp_devanado_alta, corriente_alta, desbalance_corriente_alto, deslizamiento_alto]
+  variables:
+    - {variable: temp_devanado_c, cambio: aumenta}
+    - {variable: corriente_pct, cambio: aumenta}
+    - {variable: desbalance_corriente_pct, cambio: aumenta}
+    - {variable: deslizamiento_pct, cambio: aumenta, activo: banda_transportadora}
+  modos_falla_candidatos:
+    - {id: degradacion_aislamiento, fc_max: 0.6}
+    - {id: sobrecarga_mecanica, fc_max: 0.5}
+    - {id: falla_contactor, fc_max: 0.4}
+    - {id: sobrecalentamiento_ventilacion, fc_max: 0.4}
+    - {id: deslizamiento_banda, fc_max: 0.4}
+  decisiones: [D-038, D-005, D-032, D-031, D-025]
+
+- id: EXP03
+  expresion: "la bomba está golpeando"
+  variantes: ["suena como si tuviera piedras", "suena a grava"]
+  sintoma_percibido: golpeteo_percibido
+  activos: [bomba_centrifuga]
+  fisica: >
+    El colapso de burbujas de vapor en la zona de alta presión del impulsor
+    produce impulsos de presión que se oyen como grava o golpes, con energía de
+    vibración de banda ancha (1–20 kHz). A la vez cae el NPSH disponible y el
+    caudal se vuelve inestable.
+  sintomas_formales: [margen_npsh_bajo, vibracion_hf_alta, caudal_inestable, presion_descarga_baja]
+  variables:
+    - {variable: npsh_margen_ratio, cambio: disminuye}
+    - {variable: vib_hf_rel, cambio: aumenta}
+    - {variable: caudal_cv_pct, cambio: aumenta}
+    - {variable: presion_descarga_pct, cambio: disminuye}
+  modos_falla_candidatos:
+    - {id: cavitacion, fc_max: 0.6}
+    - {id: obstruccion_bomba, fc_max: 0.4}
+    - {id: desgaste_rodamiento, fc_max: 0.2}
+  decisiones: [D-038, D-012, D-013, D-014]
+
+- id: EXP04
+  expresion: "esto está cascabeleando"
+  variantes: ["suena suelto", "traquetea"]
+  sintoma_percibido: cascabeleo_percibido
+  activos: [motor_electrico, bomba_centrifuga, compresor_tornillo, banda_transportadora]
+  fisica: >
+    Un traqueteo metálico intermitente indica impactos repetidos: un defecto
+    localizado de rodamiento en etapa avanzada, holgura de componentes o, en
+    bombas, cavitación con sonido de "canicas". Los impactos elevan la curtosis
+    de la vibración por encima de 3, que es el valor de una señal gaussiana sana.
+  sintomas_formales: [vibracion_impulsiva, vibracion_hf_alta, vibracion_alerta]
+  variables:
+    - {variable: vib_curtosis, cambio: aumenta}
+    - {variable: vib_hf_rel, cambio: aumenta}
+    - {variable: vib_rms_mm_s, cambio: aumenta}
+  modos_falla_candidatos:
+    - {id: desgaste_rodamiento, fc_max: 0.5}
+    - {id: falla_rodillo, fc_max: 0.4}
+    - {id: cavitacion, fc_max: 0.3}
+  decisiones: [D-038, D-010, D-026, D-013]
+  nota: "La holgura mecánica no está modelada como modo de falla propio (hueco registrado)."
+
+- id: EXP05
+  expresion: "la prensa está dura"
+  variantes: ["la prensa está pesada", "no baja bien"]
+  sintoma_percibido: prensa_dura_percibida
+  activos: [prensa_hidraulica]
+  fisica: >
+    La prensa necesita más presión o más tiempo para completar el ciclo. Las
+    causas posibles son una válvula direccional/proporcional que responde lento
+    o se pega (por barniz o partículas), un aceite frío con viscosidad alta, o
+    contaminación que eleva la fricción de los carretes. Se interpreta como
+    resistencia hidráulica y no como fuga: una fuga deja la prensa "floja" o
+    lenta con presión baja.
+  sintomas_formales: [presion_sistema_alta, tiempo_ciclo_alto, temp_aceite_baja, aceite_contaminado]
+  variables:
+    - {variable: presion_sistema_pct, cambio: aumenta}
+    - {variable: tiempo_ciclo_pct, cambio: aumenta}
+    - {variable: temp_aceite_c, cambio: disminuye}
+    - {variable: iso4406_14um_codigo, cambio: aumenta}
+  modos_falla_candidatos:
+    - {id: valvula_hidraulica_pegada, fc_max: 0.5}
+    - {id: contaminacion_aceite_hidraulico, fc_max: 0.4}
+    - {id: fuga_interna_cilindro, fc_max: 0.2}
+  decisiones: [D-038, D-023, D-021, D-020]
+  confianza: baja
+
+- id: EXP06
+  expresion: "el compresor está trabajando caliente"
+  variantes: ["el compresor está recalentando", "pita por temperatura"]
+  sintoma_percibido: calor_percibido
+  activos: [compresor_tornillo]
+  fisica: >
+    En un compresor de tornillo lubricado, el aceite retira el calor de la
+    compresión. Si el enfriador está sucio, el aceite está bajo o degradado, la
+    termostática falla o el separador está obstruido, la temperatura de
+    descarga sube por encima de su rango normal (aprox. 77–93 °C).
+  sintomas_formales: [temp_descarga_alta, dp_separador_alto, carga_compresor_alta]
+  variables:
+    - {variable: temp_descarga_c, cambio: aumenta}
+    - {variable: dp_separador_bar, cambio: aumenta}
+    - {variable: carga_pct, cambio: aumenta}
+    - {variable: presion_descarga_pct, cambio: disminuye}
+  modos_falla_candidatos:
+    - {id: sobrecalentamiento_compresor, fc_max: 0.6}
+    - {id: obstruccion_separador, fc_max: 0.4}
+    - {id: fuga_aire_red, fc_max: 0.2}
+  decisiones: [D-038, D-016, D-018, D-019]
+
+- id: EXP07
+  expresion: "ese rodamiento ya se va"
+  variantes: ["el rodamiento está pidiendo cambio", "suena a balinera"]
+  sintoma_percibido: rodamiento_terminal_percibido
+  activos: [motor_electrico, bomba_centrifuga, compresor_tornillo, banda_transportadora, centro_cnc]
+  fisica: >
+    El técnico oye un ruido áspero, cuando la falla de rodamiento ya está en
+    las etapas 3–4. En ese punto la vibración global, la curtosis y la energía
+    de alta frecuencia son altas, y la temperatura del rodamiento sube 8–15 °C
+    sobre su línea base.
+  sintomas_formales: [vibracion_impulsiva, vibracion_hf_critica, vibracion_alerta, temp_rodamiento_alta]
+  variables:
+    - {variable: vib_curtosis, cambio: aumenta}
+    - {variable: vib_hf_rel, cambio: aumenta}
+    - {variable: vib_rms_mm_s, cambio: aumenta}
+    - {variable: temp_rodamiento_c, cambio: aumenta}
+  modos_falla_candidatos:
+    - {id: desgaste_rodamiento, fc_max: 0.6}
+    - {id: falla_lubricacion_rodamiento, fc_max: 0.3}
+  decisiones: [D-038, D-010, D-008, D-009]
+
+- id: EXP08
+  expresion: "el variador está disparando por nada"
+  variantes: ["se dispara solo", "salta el variador sin razón"]
+  sintoma_percibido: disparo_sin_causa_percibido
+  activos: [motor_electrico, banda_transportadora, bomba_centrifuga]
+  fisica: >
+    El variador dispara aunque no hay una sobrecarga evidente. Las causas
+    típicas son transitorios de sobrecorriente por rampas cortas, datos de
+    motor mal cargados, fugas a tierra por aislamiento o cable degradado,
+    sobretensión del bus DC por regeneración, armónicos o sobretemperatura del
+    disipador.
+  sintomas_formales: [disparos_intermitentes, corriente_en_rango, tension_bus_dc_alta, distorsion_armonica_alta, temp_variador_alta]
+  variables:
+    - {variable: disparos_variador_24h, cambio: aumenta}
+    - {variable: tension_bus_dc_pct, cambio: aumenta}
+    - {variable: thd_tension_pct, cambio: aumenta}
+    - {variable: temp_variador_c, cambio: aumenta}
+  modos_falla_candidatos:
+    - {id: falla_variador, fc_max: 0.6}
+    - {id: degradacion_aislamiento, fc_max: 0.3}
+    - {id: sobrecarga_mecanica, fc_max: 0.3}
+    - {id: falla_contactor, fc_max: 0.2}
+  decisiones: [D-038, D-030, D-032]
+
+- id: EXP09
+  expresion: "la banda se está corriendo"
+  variantes: ["la banda se va de lado", "la banda está mordiendo el bastidor"]
+  sintoma_percibido: banda_corrida_percibida
+  activos: [banda_transportadora]
+  fisica: >
+    La banda se desplaza lateralmente hacia el lado de menor tensión o mayor
+    fricción. Las causas son tambores o rodillos fuera de escuadra, empalme no
+    escuadrado, rodillos trabados o carga descentrada. El roce con la
+    estructura añade arrastre, y la corriente del motor sube.
+  sintomas_formales: [desvio_banda, corriente_alta]
+  variables:
+    - {variable: desvio_lateral_mm, cambio: aumenta}
+    - {variable: corriente_pct, cambio: aumenta_leve}
+  modos_falla_candidatos:
+    - {id: desalineacion_banda, fc_max: 0.6}
+    - {id: falla_rodillo, fc_max: 0.3}
+  decisiones: [D-038, D-024, D-026]
+
+- id: EXP10
+  expresion: "hay cascabeleo en la línea"
+  variantes: ["la línea está sonando", "algo traquetea en el transportador"]
+  sintoma_percibido: cascabeleo_percibido
+  activos: [banda_transportadora, bomba_centrifuga]
+  fisica: >
+    "La línea" alude a un equipo distribuido: el transportador o una tubería.
+    En bandas, el traqueteo viene de rodillos con rodamiento dañado o de un
+    empalme dañado que golpea en cada vuelta. En tuberías de bombeo, puede ser
+    cavitación transmitida por la línea.
+  sintomas_formales: [vibracion_impulsiva, corriente_alta, caudal_inestable]
+  variables:
+    - {variable: vib_curtosis, cambio: aumenta}
+    - {variable: corriente_pct, cambio: aumenta_leve, activo: banda_transportadora}
+    - {variable: caudal_cv_pct, cambio: aumenta, activo: bomba_centrifuga}
+  modos_falla_candidatos:
+    - {id: falla_rodillo, fc_max: 0.5}
+    - {id: rotura_banda, fc_max: 0.2}
+    - {id: cavitacion, fc_max: 0.3}
+  decisiones: [D-038, D-026, D-025, D-013]

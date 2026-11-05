@@ -1,0 +1,414 @@
+# =============================================================================
+# Metal Tech – Modos de falla y firmas para el simulador
+# Agente Investigador, Fase 1 (2026-10-29). Decisiones en
+# knowledge/acquisition/decisiones.md (D-036, D-037 para formas y duraciones).
+#
+# Cómo leer cada firma:
+#   variable:  ID de configs/assets.yaml (si el activo no la tiene, se ignora).
+#   direccion: "+" aumenta | "-" disminuye
+#   cambio:    valor alcanzado al final de la degradación (momento de falla)
+#              tipo factor -> nominal_medio * valor
+#              tipo delta  -> nominal_medio + valor (en la unidad de la variable)
+#              tipo valor  -> valor absoluto objetivo
+#   forma:     lineal | exponencial | escalon | intermitente | sigmoide
+#              exponencial: x(t) = x0 + (xf - x0) * (exp(k*t/T) - 1)/(exp(k) - 1), k≈4 (D-037)
+#              intermitente: picos/eventos con tasa creciente hacia el final
+#   retardo_frac: fracción de la degradación antes de que la variable empiece a
+#              cambiar (p. ej. la temperatura de rodamiento solo sube al final).
+#   duracion_h: [min, max] duración típica de la degradación hasta la falla.
+#   sintomas:  síntomas esperados (IDs del catálogo de assets.yaml).
+# =============================================================================
+
+version: 1
+
+normal:
+  descripcion: "Operación sana con ciclo de carga por turno, ruido y deriva estacional; ninguna firma activa."
+
+modos_falla:
+
+  # ---------------------------- motor eléctrico -----------------------------
+  sobrecalentamiento_ventilacion:
+    nombre: Sobrecalentamiento por ventilación obstruida
+    activos: [motor_electrico]
+    componente: ventilacion
+    firma:
+      - {variable: temp_devanado_c, direccion: "+", cambio: {tipo: delta, valor: 60}, forma: lineal, retardo_frac: 0.0}
+      - {variable: temp_rodamiento_c, direccion: "+", cambio: {tipo: delta, valor: 12}, forma: lineal, retardo_frac: 0.3}
+    degradacion: {forma: lineal, duracion_h: [168, 720]}
+    sintomas: [temp_devanado_alta, corriente_en_rango]
+    fuentes: [D-005, D-033, D-037]
+
+  falla_lubricacion_rodamiento:
+    nombre: Lubricación deficiente de rodamientos (falta, exceso o grasa degradada)
+    activos: [motor_electrico]   # en otros activos se subsume en desgaste_rodamiento (hueco registrado)
+    componente: rodamientos
+    firma:
+      - {variable: temp_rodamiento_c, direccion: "+", cambio: {tipo: delta, valor: 30}, forma: lineal, retardo_frac: 0.0}
+      - {variable: vib_hf_rel, direccion: "+", cambio: {tipo: factor, valor: 3.0}, forma: lineal, retardo_frac: 0.0}
+      - {variable: vib_curtosis, direccion: "+", cambio: {tipo: delta, valor: 0.5}, forma: lineal, retardo_frac: 0.5}
+    degradacion: {forma: lineal, duracion_h: [72, 336]}
+    sintomas: [temp_rodamiento_alta, vibracion_hf_alta]
+    fuentes: [D-008, D-010, D-033]
+
+  desgaste_rodamiento:
+    nombre: Desgaste/defecto localizado de rodamiento (pista o elemento rodante)
+    activos: [motor_electrico, bomba_centrifuga, compresor_tornillo, banda_transportadora, centro_cnc]
+    componente: rodamientos
+    firma:
+      - {variable: vib_hf_rel, direccion: "+", cambio: {tipo: factor, valor: 6.0}, forma: exponencial, retardo_frac: 0.0}
+      - {variable: vib_curtosis, direccion: "+", cambio: {tipo: valor, valor: 8.0}, forma: exponencial, retardo_frac: 0.1}
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 5.0}, forma: exponencial, retardo_frac: 0.5}
+      - {variable: temp_rodamiento_c, direccion: "+", cambio: {tipo: delta, valor: 15}, forma: exponencial, retardo_frac: 0.7}
+      - {variable: temp_husillo_c, direccion: "+", cambio: {tipo: delta, valor: 15}, forma: exponencial, retardo_frac: 0.7}
+    degradacion: {forma: exponencial, duracion_h: [168, 1440]}
+    calibracion: "Forma exponencial tardía como en NASA IMS (falla de pista externa en test 2) y CWRU para firmas de impacto (D-036)."
+    sintomas: [vibracion_impulsiva, vibracion_hf_alta, vibracion_hf_critica, temp_rodamiento_alta]
+    fuentes: [D-010, D-036, D-037]
+
+  desalineacion_eje:
+    nombre: Desalineación de ejes/acople
+    activos: [motor_electrico, bomba_centrifuga, compresor_tornillo]
+    componente: eje_acople
+    firma:
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 4.0}, forma: lineal, retardo_frac: 0.0}
+      - {variable: vib_2x_1x_ratio, direccion: "+", cambio: {tipo: valor, valor: 0.9}, forma: lineal, retardo_frac: 0.0}
+      - {variable: vib_axial_radial_ratio, direccion: "+", cambio: {tipo: valor, valor: 0.7}, forma: lineal, retardo_frac: 0.0}
+      - {variable: temp_rodamiento_c, direccion: "+", cambio: {tipo: delta, valor: 8}, forma: lineal, retardo_frac: 0.5}
+    degradacion: {forma: lineal, duracion_h: [720, 2160]}
+    sintomas: [vibracion_alerta, vibracion_creciente, vibracion_2x_elevada, vibracion_axial_alta]
+    fuentes: [D-003, D-004, D-011]
+
+  desbalanceo_rotor:
+    nombre: Desbalanceo de rotor/impulsor
+    activos: [motor_electrico, bomba_centrifuga]
+    componente: rotor
+    firma:
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 4.0}, forma: lineal, retardo_frac: 0.0}
+      - {variable: vib_1x_frac, direccion: "+", cambio: {tipo: valor, valor: 0.9}, forma: lineal, retardo_frac: 0.0}
+    degradacion: {forma: lineal, duracion_h: [720, 2160]}
+    sintomas: [vibracion_alerta, vibracion_creciente, vibracion_1x_dominante]
+    fuentes: [D-003, D-011]
+
+  degradacion_aislamiento:
+    nombre: Degradación térmica del aislamiento del devanado
+    activos: [motor_electrico]
+    componente: estator_devanado
+    firma:
+      - {variable: temp_devanado_c, direccion: "+", cambio: {tipo: delta, valor: 50}, forma: exponencial, retardo_frac: 0.0}
+      - {variable: desbalance_corriente_pct, direccion: "+", cambio: {tipo: valor, valor: 8}, forma: exponencial, retardo_frac: 0.3}
+      - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 8}, forma: exponencial, retardo_frac: 0.5}
+    degradacion: {forma: exponencial, duracion_h: [720, 4320]}
+    sintomas: [temp_devanado_alta, desbalance_corriente_alto, olor_quemado_percibido]
+    fuentes: [D-005, D-006, D-032]
+
+  falla_contactor:
+    nombre: Falla de contactor (contactos picados/abiertos, pérdida de fase)
+    activos: [motor_electrico]
+    componente: contactor
+    firma:
+      - {variable: desbalance_corriente_pct, direccion: "+", cambio: {tipo: valor, valor: 25}, forma: intermitente, retardo_frac: 0.0}
+      - {variable: temp_devanado_c, direccion: "+", cambio: {tipo: delta, valor: 35}, forma: intermitente, retardo_frac: 0.2}
+      - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 15}, forma: intermitente, retardo_frac: 0.2}
+    degradacion: {forma: intermitente, duracion_h: [24, 336]}
+    sintomas: [desbalance_corriente_critico, temp_devanado_alta]
+    fuentes: [D-006, D-031]
+
+  falla_variador:
+    nombre: Falla de variador (disparos intermitentes, armónicos, bus DC, sobretemperatura)
+    activos: [motor_electrico]
+    componente: variador
+    firma:
+      - {variable: disparos_variador_24h, direccion: "+", cambio: {tipo: valor, valor: 5}, forma: intermitente, retardo_frac: 0.0}
+      - {variable: thd_tension_pct, direccion: "+", cambio: {tipo: valor, valor: 10}, forma: lineal, retardo_frac: 0.0}
+      - {variable: tension_bus_dc_pct, direccion: "+", cambio: {tipo: valor, valor: 118}, forma: intermitente, retardo_frac: 0.3}
+      - {variable: temp_variador_c, direccion: "+", cambio: {tipo: delta, valor: 25}, forma: lineal, retardo_frac: 0.2}
+    degradacion: {forma: intermitente, duracion_h: [24, 336]}
+    sintomas: [disparos_intermitentes, disparos_frecuentes, distorsion_armonica_alta, corriente_en_rango]
+    fuentes: [D-030]
+
+  sobrecarga_mecanica:
+    nombre: Sobrecarga mecánica / paro por sobrecorriente
+    activos: [motor_electrico, banda_transportadora]
+    componente: carga_accionada
+    firma:
+      - {variable: corriente_pct, direccion: "+", cambio: {tipo: valor, valor: 125}, forma: escalon, retardo_frac: 0.0}
+      - {variable: temp_devanado_c, direccion: "+", cambio: {tipo: delta, valor: 40}, forma: lineal, retardo_frac: 0.0}
+      - {variable: disparos_variador_24h, direccion: "+", cambio: {tipo: valor, valor: 2}, forma: intermitente, retardo_frac: 0.5}
+    degradacion: {forma: escalon, duracion_h: [1, 24]}
+    sintomas: [sobrecorriente, corriente_alta, temp_devanado_alta]
+    fuentes: [D-005, D-007]
+
+  # ---------------------------- bomba centrífuga ----------------------------
+  cavitacion:
+    nombre: Cavitación por NPSH disponible insuficiente
+    activos: [bomba_centrifuga]
+    componente: impulsor
+    firma:
+      - {variable: npsh_margen_ratio, direccion: "-", cambio: {tipo: valor, valor: 1.0}, forma: sigmoide, retardo_frac: 0.0}
+      - {variable: vib_hf_rel, direccion: "+", cambio: {tipo: factor, valor: 4.0}, forma: sigmoide, retardo_frac: 0.2}
+      - {variable: caudal_cv_pct, direccion: "+", cambio: {tipo: valor, valor: 8}, forma: sigmoide, retardo_frac: 0.2}
+      - {variable: presion_descarga_pct, direccion: "-", cambio: {tipo: valor, valor: 88}, forma: sigmoide, retardo_frac: 0.5}
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 3.5}, forma: sigmoide, retardo_frac: 0.3}
+    degradacion: {forma: sigmoide, duracion_h: [1, 48]}
+    calibracion: "SKAB incluye cavitación inducida en bomba de circulación: usar sus registros para la forma temporal (D-036)."
+    sintomas: [margen_npsh_bajo, margen_npsh_insuficiente, vibracion_hf_alta, caudal_inestable, presion_descarga_baja]
+    fuentes: [D-012, D-013, D-036]
+
+  obstruccion_bomba:
+    nombre: Obstrucción de succión/impulsor (filtro, canastilla, incrustaciones)
+    activos: [bomba_centrifuga]
+    componente: carcasa_succion
+    firma:
+      - {variable: caudal_pct, direccion: "-", cambio: {tipo: valor, valor: 75}, forma: lineal, retardo_frac: 0.0}
+      - {variable: corriente_pct, direccion: "-", cambio: {tipo: valor, valor: 70}, forma: lineal, retardo_frac: 0.0}
+      - {variable: presion_descarga_pct, direccion: "-", cambio: {tipo: valor, valor: 92}, forma: lineal, retardo_frac: 0.3}
+      - {variable: npsh_margen_ratio, direccion: "-", cambio: {tipo: valor, valor: 1.25}, forma: lineal, retardo_frac: 0.4}
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 2.5}, forma: lineal, retardo_frac: 0.5}
+    degradacion: {forma: lineal, duracion_h: [24, 336]}
+    sintomas: [caudal_bajo, corriente_baja, presion_descarga_baja]
+    fuentes: [D-014]
+
+  desgaste_sello_mecanico:
+    nombre: Desgaste de sello mecánico (caras, elastómeros)
+    activos: [bomba_centrifuga]
+    componente: sello_mecanico
+    firma:
+      - {variable: fuga_sello_ml_h, direccion: "+", cambio: {tipo: valor, valor: 30}, forma: exponencial, retardo_frac: 0.0}
+      - {variable: vib_hf_rel, direccion: "+", cambio: {tipo: factor, valor: 1.5}, forma: lineal, retardo_frac: 0.5}
+    degradacion: {forma: exponencial, duracion_h: [336, 2160]}
+    sintomas: [fuga_sello]
+    fuentes: [D-015]
+
+  # -------------------------- compresor de tornillo -------------------------
+  sobrecalentamiento_compresor:
+    nombre: Sobrecalentamiento (enfriador sucio, aceite bajo/degradado, termostática)
+    activos: [compresor_tornillo]
+    componente: enfriador_aceite
+    firma:
+      - {variable: temp_descarga_c, direccion: "+", cambio: {tipo: valor, valor: 115}, forma: lineal, retardo_frac: 0.0}
+      - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 3}, forma: lineal, retardo_frac: 0.5}
+    degradacion: {forma: lineal, duracion_h: [168, 1440]}
+    sintomas: [temp_descarga_alta, temp_descarga_critica, corriente_en_rango]
+    fuentes: [D-016]
+
+  obstruccion_separador:
+    nombre: Saturación/obstrucción del elemento separador de aceite
+    activos: [compresor_tornillo]
+    componente: separador_aceite
+    firma:
+      - {variable: dp_separador_bar, direccion: "+", cambio: {tipo: valor, valor: 1.1}, forma: lineal, retardo_frac: 0.0}
+      - {variable: presion_descarga_pct, direccion: "-", cambio: {tipo: valor, valor: 90}, forma: lineal, retardo_frac: 0.3}
+      - {variable: temp_descarga_c, direccion: "+", cambio: {tipo: delta, valor: 10}, forma: lineal, retardo_frac: 0.4}
+      - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 5}, forma: lineal, retardo_frac: 0.4}
+    degradacion: {forma: lineal, duracion_h: [720, 4000]}
+    sintomas: [dp_separador_alto, presion_descarga_baja]
+    fuentes: [D-017, D-018]
+
+  fuga_aire_red:
+    nombre: Fugas en la red de aire comprimido (pérdida de presión por demanda)
+    activos: [compresor_tornillo]
+    componente: red_distribucion
+    firma:
+      - {variable: carga_pct, direccion: "+", cambio: {tipo: valor, valor: 97}, forma: lineal, retardo_frac: 0.0}
+      - {variable: presion_descarga_pct, direccion: "-", cambio: {tipo: valor, valor: 88}, forma: lineal, retardo_frac: 0.4}
+      - {variable: temp_descarga_c, direccion: "+", cambio: {tipo: delta, valor: 4}, forma: lineal, retardo_frac: 0.5}
+    degradacion: {forma: lineal, duracion_h: [168, 2160]}
+    sintomas: [carga_compresor_alta, presion_descarga_baja]
+    fuentes: [D-017, D-019]
+
+  falla_valvula_admision:
+    nombre: Válvula de admisión que no abre por completo (solenoide, barniz)
+    activos: [compresor_tornillo]
+    componente: valvula_admision
+    firma:
+      - {variable: presion_descarga_pct, direccion: "-", cambio: {tipo: valor, valor: 82}, forma: intermitente, retardo_frac: 0.0}
+      - {variable: corriente_pct, direccion: "-", cambio: {tipo: valor, valor: 45}, forma: intermitente, retardo_frac: 0.0}
+      - {variable: carga_pct, direccion: "+", cambio: {tipo: valor, valor: 95}, forma: lineal, retardo_frac: 0.2}
+    degradacion: {forma: intermitente, duracion_h: [1, 72]}
+    sintomas: [presion_descarga_baja, corriente_baja]
+    fuentes: [D-017]
+
+  # ---------------------------- prensa hidráulica ---------------------------
+  fuga_hidraulica_externa:
+    nombre: Fuga hidráulica externa (manguera, racor, sello de vástago)
+    activos: [prensa_hidraulica]
+    componente: sellos
+    firma:
+      - {variable: nivel_tanque_pct, direccion: "-", cambio: {tipo: valor, valor: 72}, forma: lineal, retardo_frac: 0.0}
+      - {variable: presion_sistema_pct, direccion: "-", cambio: {tipo: valor, valor: 85}, forma: lineal, retardo_frac: 0.4}
+      - {variable: tiempo_ciclo_pct, direccion: "+", cambio: {tipo: valor, valor: 108}, forma: lineal, retardo_frac: 0.5}
+    degradacion: {forma: lineal, duracion_h: [24, 336]}
+    sintomas: [nivel_tanque_bajo, presion_sistema_baja]
+    fuentes: [D-022]
+
+  fuga_interna_cilindro:
+    nombre: Fuga interna (bypass del sello del pistón o de la válvula)
+    activos: [prensa_hidraulica]
+    componente: cilindro_principal
+    firma:
+      - {variable: caida_presion_bar_min, direccion: "+", cambio: {tipo: valor, valor: 12}, forma: exponencial, retardo_frac: 0.0}
+      - {variable: tiempo_ciclo_pct, direccion: "+", cambio: {tipo: valor, valor: 122}, forma: exponencial, retardo_frac: 0.2}
+      - {variable: temp_aceite_c, direccion: "+", cambio: {tipo: delta, valor: 10}, forma: exponencial, retardo_frac: 0.3}
+    degradacion: {forma: exponencial, duracion_h: [336, 2160]}
+    sintomas: [caida_presion_retencion, tiempo_ciclo_alto, temp_aceite_alta]
+    fuentes: [D-020, D-022]
+
+  contaminacion_aceite_hidraulico:
+    nombre: Contaminación por partículas del aceite hidráulico
+    activos: [prensa_hidraulica]
+    componente: tanque_filtros
+    firma:
+      - {variable: iso4406_14um_codigo, direccion: "+", cambio: {tipo: valor, valor: 17}, forma: lineal, retardo_frac: 0.0}
+      - {variable: tiempo_ciclo_pct, direccion: "+", cambio: {tipo: valor, valor: 106}, forma: lineal, retardo_frac: 0.6}
+    degradacion: {forma: lineal, duracion_h: [168, 1440]}
+    sintomas: [aceite_contaminado]
+    fuentes: [D-021]
+
+  valvula_hidraulica_pegada:
+    nombre: Válvula direccional/proporcional pegada o lenta ("prensa dura")
+    activos: [prensa_hidraulica]
+    componente: valvula_direccional_proporcional
+    firma:
+      - {variable: presion_sistema_pct, direccion: "+", cambio: {tipo: valor, valor: 118}, forma: intermitente, retardo_frac: 0.0}
+      - {variable: tiempo_ciclo_pct, direccion: "+", cambio: {tipo: valor, valor: 118}, forma: intermitente, retardo_frac: 0.0}
+      - {variable: iso4406_14um_codigo, direccion: "+", cambio: {tipo: delta, valor: 2}, forma: lineal, retardo_frac: 0.0}
+      - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 10}, forma: intermitente, retardo_frac: 0.2}
+    degradacion: {forma: intermitente, duracion_h: [24, 336]}
+    sintomas: [presion_sistema_alta, tiempo_ciclo_alto, aceite_contaminado, prensa_dura_percibida]
+    fuentes: [D-021, D-023]
+
+  sobrecalentamiento_aceite_hidraulico:
+    nombre: Sobrecalentamiento del aceite hidráulico (enfriador, alivio, fugas)
+    activos: [prensa_hidraulica]
+    componente: enfriador
+    firma:
+      - {variable: temp_aceite_c, direccion: "+", cambio: {tipo: valor, valor: 75}, forma: lineal, retardo_frac: 0.0}
+      - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 5}, forma: lineal, retardo_frac: 0.3}
+    degradacion: {forma: lineal, duracion_h: [24, 336]}
+    sintomas: [temp_aceite_alta, temp_aceite_critica]
+    fuentes: [D-020]
+
+  # --------------------------- banda transportadora -------------------------
+  desalineacion_banda:
+    nombre: Corrimiento (desalineación) de la banda
+    activos: [banda_transportadora]
+    componente: banda_empalme
+    firma:
+      - {variable: desvio_lateral_mm, direccion: "+", cambio: {tipo: valor, valor: 60}, forma: lineal, retardo_frac: 0.0}
+      - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 12}, forma: lineal, retardo_frac: 0.4}
+    degradacion: {forma: lineal, duracion_h: [24, 336]}
+    sintomas: [desvio_banda, corriente_alta]
+    fuentes: [D-024]
+
+  deslizamiento_banda:
+    nombre: Deslizamiento (patinaje) banda-tambor
+    activos: [banda_transportadora]
+    componente: tambor_motriz
+    firma:
+      - {variable: deslizamiento_pct, direccion: "+", cambio: {tipo: valor, valor: 7}, forma: lineal, retardo_frac: 0.0}
+      - {variable: velocidad_banda_pct, direccion: "-", cambio: {tipo: valor, valor: 93}, forma: lineal, retardo_frac: 0.0}
+      - {variable: corriente_pct, direccion: "-", cambio: {tipo: delta, valor: -8}, forma: intermitente, retardo_frac: 0.3}
+    degradacion: {forma: lineal, duracion_h: [24, 168]}
+    sintomas: [deslizamiento_alto]
+    fuentes: [D-025]
+
+  rotura_banda:
+    nombre: Rotura de banda o de empalme
+    activos: [banda_transportadora]
+    componente: banda_empalme
+    firma:
+      - {variable: velocidad_banda_pct, direccion: "-", cambio: {tipo: valor, valor: 0}, forma: escalon, retardo_frac: 0.0}
+      - {variable: corriente_pct, direccion: "-", cambio: {tipo: valor, valor: 22}, forma: escalon, retardo_frac: 0.0}
+      - {variable: vib_curtosis, direccion: "+", cambio: {tipo: valor, valor: 5}, forma: lineal, retardo_frac: 0.0, nota: "precursor opcional: golpe periódico del empalme dañado"}
+    degradacion: {forma: escalon, duracion_h: [0, 72]}
+    sintomas: [velocidad_banda_nula, corriente_baja]
+    fuentes: [D-025]
+
+  falla_rodillo:
+    nombre: Rodillo trabado o con rodamiento dañado ("cascabeleo en la línea")
+    activos: [banda_transportadora]
+    componente: rodillos_portantes
+    firma:
+      - {variable: vib_curtosis, direccion: "+", cambio: {tipo: valor, valor: 6.5}, forma: exponencial, retardo_frac: 0.0}
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 3.0}, forma: exponencial, retardo_frac: 0.4}
+      - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 18}, forma: exponencial, retardo_frac: 0.5}
+      - {variable: desvio_lateral_mm, direccion: "+", cambio: {tipo: valor, valor: 20}, forma: lineal, retardo_frac: 0.6}
+    degradacion: {forma: exponencial, duracion_h: [168, 1440]}
+    sintomas: [vibracion_impulsiva, corriente_alta, cascabeleo_percibido]
+    fuentes: [D-024, D-026]
+
+  # -------------------------------- centro CNC ------------------------------
+  desgaste_herramienta:
+    nombre: Desgaste progresivo de herramienta (flanco)
+    activos: [centro_cnc]
+    componente: herramienta
+    firma:
+      - {variable: desgaste_herramienta_min, direccion: "+", cambio: {tipo: valor, valor: 240}, forma: lineal, retardo_frac: 0.0}
+      - {variable: carga_husillo_rel, direccion: "+", cambio: {tipo: valor, valor: 1.35}, forma: exponencial, retardo_frac: 0.3}
+      - {variable: vib_hf_rel, direccion: "+", cambio: {tipo: factor, valor: 1.6}, forma: exponencial, retardo_frac: 0.5}
+      - {variable: temp_husillo_c, direccion: "+", cambio: {tipo: delta, valor: 4}, forma: lineal, retardo_frac: 0.5}
+    degradacion: {forma: lineal, duracion_h: [3.3, 4.0]}
+    calibracion: "Vida de herramienta 200–240 min como en AI4I 2020 (TWF); se reinicia al cambiar herramienta (D-036)."
+    sintomas: [desgaste_herramienta_alto, desgaste_herramienta_limite, carga_husillo_alta]
+    fuentes: [D-027, D-036]
+
+  rotura_herramienta:
+    nombre: Rotura/astillado de herramienta
+    activos: [centro_cnc]
+    componente: herramienta
+    firma:
+      - {variable: vib_pico_g, direccion: "+", cambio: {tipo: valor, valor: 8}, forma: escalon, retardo_frac: 0.0}
+      - {variable: carga_husillo_rel, direccion: "-", cambio: {tipo: valor, valor: 0.35}, forma: escalon, retardo_frac: 0.0}
+      - {variable: carga_husillo_cv_pct, direccion: "+", cambio: {tipo: valor, valor: 15}, forma: intermitente, retardo_frac: 0.0, nota: "precursor: vibración irregular en pasadas previas"}
+    degradacion: {forma: escalon, duracion_h: [0, 2]}
+    sintomas: [carga_husillo_caida_subita, impacto_vibracion]
+    fuentes: [D-028]
+
+  colision_husillo:
+    nombre: Golpe/colisión de husillo o herramienta (error de programa/offset)
+    activos: [centro_cnc]
+    componente: husillo
+    firma:
+      - {variable: vib_pico_g, direccion: "+", cambio: {tipo: valor, valor: 15}, forma: escalon, retardo_frac: 0.0}
+      - {variable: carga_husillo_rel, direccion: "+", cambio: {tipo: valor, valor: 1.8}, forma: escalon, retardo_frac: 0.0}
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 3.5}, forma: escalon, retardo_frac: 0.0, nota: "queda elevada después del golpe si hay daño de rodamientos/runout"}
+    degradacion: {forma: escalon, duracion_h: [0, 0]}
+    sintomas: [impacto_vibracion, carga_husillo_critica]
+    fuentes: [D-028]
+
+  vibracion_chatter:
+    nombre: Vibración regenerativa (chatter)
+    activos: [centro_cnc]
+    componente: husillo
+    firma:
+      - {variable: carga_husillo_cv_pct, direccion: "+", cambio: {tipo: valor, valor: 18}, forma: escalon, retardo_frac: 0.0}
+      - {variable: vib_hf_rel, direccion: "+", cambio: {tipo: factor, valor: 3.0}, forma: escalon, retardo_frac: 0.0}
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 3.2}, forma: escalon, retardo_frac: 0.0}
+    degradacion: {forma: escalon, duracion_h: [0.1, 2]}
+    sintomas: [carga_husillo_inestable, vibracion_hf_alta, vibracion_alerta]
+    fuentes: [D-029]
+
+  sobrecalentamiento_husillo:
+    nombre: Sobrecalentamiento de husillo (refrigeración, lubricación, precarga)
+    activos: [centro_cnc]
+    componente: rodamientos_husillo
+    firma:
+      - {variable: temp_husillo_c, direccion: "+", cambio: {tipo: valor, valor: 62}, forma: lineal, retardo_frac: 0.0}
+      - {variable: vib_hf_rel, direccion: "+", cambio: {tipo: factor, valor: 2.5}, forma: lineal, retardo_frac: 0.3}
+      - {variable: carga_husillo_rel, direccion: "+", cambio: {tipo: valor, valor: 1.1}, forma: lineal, retardo_frac: 0.5}
+    degradacion: {forma: lineal, duracion_h: [24, 336]}
+    sintomas: [temp_husillo_alta, vibracion_hf_alta]
+    fuentes: [D-010, D-029]
+
+# =============================================================================
+# Eventos confusores (no son fallas): imitan firmas para generar falsas alarmas
+# realistas y medir la reducción de falsas alarmas de M3 (D-037).
+# =============================================================================
+confusores:
+  arranque_en_frio_prensa:  {activos: [prensa_hidraulica], efecto: "temp_aceite_c <= 20 y tiempo_ciclo_pct ~ 110 en la primera hora del turno"}
+  pico_demanda_aire:        {activos: [compresor_tornillo], efecto: "carga_pct ~ 90 y presion_descarga_pct ~ 94 durante 1–2 h"}
+  cambio_de_lote_cnc:       {activos: [centro_cnc], efecto: "carga_husillo_rel ~ 1.25 por material más duro; desgaste_herramienta_min no cambia"}
+  arranque_motor:           {activos: [motor_electrico, banda_transportadora], efecto: "corriente_pct 300–600 % durante segundos (se filtra en la ventana de 10 min)"}
+  golpe_de_ariete_valvula:  {activos: [bomba_centrifuga], efecto: "caudal_cv_pct ~ 6 durante una maniobra; npsh_margen_ratio normal"}
+  sensor_faltante:          {activos: [todos], efecto: "NaN en una variable durante 1–6 h"}
+  pico_espurio:             {activos: [todos], efecto: "un valor aislado > critico sin persistencia"}

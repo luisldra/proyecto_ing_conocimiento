@@ -1,0 +1,213 @@
+# =============================================================================
+# Metal Tech – Activos, variables, umbrales y catálogo de síntomas
+# Fuente única de verdad (junto con knowledge/). Cada umbral cita su decisión
+# D-NNN en knowledge/acquisition/decisiones.md.
+# Generado por: agente Investigador, Fase 1 (2026-10-29).
+#
+# Convenciones:
+#   direccion: alta  -> el síntoma aparece cuando valor >= umbral
+#              baja  -> el síntoma aparece cuando valor <= umbral
+#   nominal: [min, max] en operación sana (para el simulador).
+#   alerta / critico: umbrales en la dirección indicada.
+#   alerta_baja: umbral inferior opcional para variables con dos colas
+#                (p. ej. corriente: sobrecarga arriba, subcarga abajo).
+#   Variables *_pct se expresan en % de su valor nominal o de consigna;
+#   *_rel son relaciones adimensionales respecto a la línea base sana.
+# =============================================================================
+
+version: 1
+fecha: 2026-10-29
+muestreo_min: 10   # resolución del simulador (docs/PLAN.md, Fase 3)
+
+activos:
+
+  motor_electrico:
+    nombre: Motor eléctrico de inducción trifásico (con contactor y variador)
+    unidades: 4
+    potencia_kw: 30          # Grupo 2 de ISO 20816-3 (15–300 kW)
+    velocidad_rpm: 1780
+    clase_aislamiento: F     # 155 °C, con calentamiento de clase B (D-005)
+    soporte: rigido          # D-003
+    componentes: [estator_devanado, rotor, rodamientos, eje_acople, ventilacion, contactor, variador]
+    variables:
+      vib_rms_mm_s:        {unidad: mm/s RMS, direccion: alta, nominal: [0.5, 1.4], alerta: 2.8, critico: 4.5, fuentes: [D-003]}
+      vib_hf_rel:          {unidad: adimensional, direccion: alta, nominal: [0.8, 1.2], alerta: 2.0, critico: 4.0, fuentes: [D-010]}
+      vib_curtosis:        {unidad: adimensional, direccion: alta, nominal: [2.5, 3.5], alerta: 4.0, critico: 6.0, fuentes: [D-010]}
+      vib_1x_frac:         {unidad: fraccion, direccion: alta, nominal: [0.3, 0.6], alerta: 0.8, critico: 0.9, fuentes: [D-011]}
+      vib_2x_1x_ratio:     {unidad: adimensional, direccion: alta, nominal: [0.1, 0.3], alerta: 0.5, critico: 1.0, fuentes: [D-011]}
+      vib_axial_radial_ratio: {unidad: adimensional, direccion: alta, nominal: [0.1, 0.3], alerta: 0.5, critico: 0.75, fuentes: [D-011]}
+      temp_devanado_c:     {unidad: °C, direccion: alta, nominal: [60, 110], alerta: 130, critico: 155, fuentes: [D-005]}
+      temp_rodamiento_c:   {unidad: °C, direccion: alta, nominal: [45, 75], alerta: 90, critico: 95, fuentes: [D-008]}
+      corriente_pct:       {unidad: "% In", direccion: alta, nominal: [60, 95], alerta: 105, critico: 115, alerta_baja: 40, fuentes: [D-007]}
+      desbalance_corriente_pct: {unidad: "%", direccion: alta, nominal: [0, 2], alerta: 5, critico: 10, fuentes: [D-006]}
+      disparos_variador_24h: {unidad: eventos/24 h, direccion: alta, nominal: [0, 0], alerta: 1, critico: 3, fuentes: [D-030]}
+      tension_bus_dc_pct:  {unidad: "% Vdc nominal", direccion: alta, nominal: [97, 105], alerta: 115, critico: 130, fuentes: [D-030]}
+      thd_tension_pct:     {unidad: "%", direccion: alta, nominal: [1, 5], alerta: 8, critico: 12, fuentes: [D-030]}
+      temp_variador_c:     {unidad: °C, direccion: alta, nominal: [35, 60], alerta: 75, critico: 85, fuentes: [D-030]}
+
+  bomba_centrifuga:
+    nombre: Bomba centrífuga de refrigerante/agua de proceso
+    unidades: 3
+    potencia_kw: 22
+    velocidad_rpm: 3550
+    soporte: rigido
+    componentes: [impulsor, carcasa_succion, sello_mecanico, rodamientos, eje_acople]
+    variables:
+      vib_rms_mm_s:        {unidad: mm/s RMS, direccion: alta, nominal: [0.5, 1.4], alerta: 2.8, critico: 4.5, fuentes: [D-003]}
+      vib_hf_rel:          {unidad: adimensional, direccion: alta, nominal: [0.8, 1.2], alerta: 2.0, critico: 4.0, fuentes: [D-010, D-013]}
+      vib_curtosis:        {unidad: adimensional, direccion: alta, nominal: [2.5, 3.5], alerta: 4.0, critico: 6.0, fuentes: [D-010]}
+      vib_1x_frac:         {unidad: fraccion, direccion: alta, nominal: [0.3, 0.6], alerta: 0.8, critico: 0.9, fuentes: [D-011]}
+      vib_2x_1x_ratio:     {unidad: adimensional, direccion: alta, nominal: [0.1, 0.3], alerta: 0.5, critico: 1.0, fuentes: [D-011]}
+      vib_axial_radial_ratio: {unidad: adimensional, direccion: alta, nominal: [0.1, 0.3], alerta: 0.5, critico: 0.75, fuentes: [D-011]}
+      temp_rodamiento_c:   {unidad: °C, direccion: alta, nominal: [45, 68], alerta: 82, critico: 88, fuentes: [D-009]}
+      corriente_pct:       {unidad: "% In", direccion: alta, nominal: [80, 95], alerta: 105, critico: 115, alerta_baja: 75, fuentes: [D-007, D-014]}
+      npsh_margen_ratio:   {unidad: NPSHA/NPSH3, direccion: baja, nominal: [1.5, 3.0], alerta: 1.3, critico: 1.1, fuentes: [D-012]}
+      caudal_pct:          {unidad: "% Qnominal", direccion: baja, nominal: [95, 105], alerta: 90, critico: 80, fuentes: [D-014]}
+      caudal_cv_pct:       {unidad: "% (coef. de variación en la ventana)", direccion: alta, nominal: [0, 2], alerta: 5, critico: 10, fuentes: [D-013]}
+      presion_descarga_pct: {unidad: "% de la presión nominal", direccion: baja, nominal: [97, 103], alerta: 95, critico: 90, fuentes: [D-012, D-013]}
+      fuga_sello_ml_h:     {unidad: ml/h, direccion: alta, nominal: [0, 2], alerta: 5, critico: 20, fuentes: [D-015]}
+
+  compresor_tornillo:
+    nombre: Compresor de tornillo lubricado (aire de planta, consigna 7.5 bar)
+    unidades: 2
+    potencia_kw: 55
+    presion_consigna_bar: 7.5
+    soporte: rigido
+    componentes: [elemento_tornillo, valvula_admision, separador_aceite, enfriador_aceite, rodamientos, red_distribucion]
+    variables:
+      vib_rms_mm_s:        {unidad: mm/s RMS, direccion: alta, nominal: [0.5, 1.4], alerta: 2.8, critico: 4.5, fuentes: [D-003]}
+      vib_hf_rel:          {unidad: adimensional, direccion: alta, nominal: [0.8, 1.2], alerta: 2.0, critico: 4.0, fuentes: [D-010]}
+      vib_curtosis:        {unidad: adimensional, direccion: alta, nominal: [2.5, 3.5], alerta: 4.0, critico: 6.0, fuentes: [D-010]}
+      temp_descarga_c:     {unidad: °C, direccion: alta, nominal: [75, 95], alerta: 100, critico: 110, fuentes: [D-016]}
+      presion_descarga_pct: {unidad: "% de la consigna", direccion: baja, nominal: [97, 103], alerta: 93, critico: 85, fuentes: [D-017]}
+      dp_separador_bar:    {unidad: bar, direccion: alta, nominal: [0.1, 0.4], alerta: 0.7, critico: 1.0, fuentes: [D-018]}
+      carga_pct:           {unidad: "% del tiempo en carga", direccion: alta, nominal: [40, 75], alerta: 85, critico: 95, fuentes: [D-019]}
+      corriente_pct:       {unidad: "% In", direccion: alta, nominal: [60, 95], alerta: 105, critico: 115, alerta_baja: 50, fuentes: [D-007, D-017]}
+
+  prensa_hidraulica:
+    nombre: Prensa hidráulica de 200 t con unidad de potencia (bomba + motor)
+    unidades: 2
+    presion_nominal_bar: 200
+    componentes: [cilindro_principal, sellos, valvula_direccional_proporcional, bomba_hidraulica, tanque_filtros, enfriador]
+    variables:
+      presion_sistema_pct: {unidad: "% de la presión de receta", direccion: alta, nominal: [93, 105], alerta: 110, critico: 120, alerta_baja: 90, fuentes: [D-022, D-023]}
+      temp_aceite_c:       {unidad: °C, direccion: alta, nominal: [40, 55], alerta: 60, critico: 70, alerta_baja: 20, fuentes: [D-020]}
+      caida_presion_bar_min: {unidad: bar/min (en retención), direccion: alta, nominal: [0, 2], alerta: 5, critico: 10, fuentes: [D-022]}
+      nivel_tanque_pct:    {unidad: "% del nivel de llenado", direccion: baja, nominal: [90, 100], alerta: 85, critico: 75, fuentes: [D-022]}
+      tiempo_ciclo_pct:    {unidad: "% del tiempo de ciclo de receta", direccion: alta, nominal: [97, 103], alerta: 110, critico: 120, fuentes: [D-022, D-023]}
+      iso4406_14um_codigo: {unidad: código ISO 4406 (partículas ≥14 µm), direccion: alta, nominal: [10, 13], alerta: 14, critico: 15, fuentes: [D-021]}
+      corriente_pct:       {unidad: "% In (motor de la bomba)", direccion: alta, nominal: [40, 90], alerta: 105, critico: 115, alerta_baja: 30, fuentes: [D-007]}
+      vib_rms_mm_s:        {unidad: mm/s RMS (bomba hidráulica), direccion: alta, nominal: [0.5, 1.4], alerta: 2.8, critico: 4.5, fuentes: [D-003]}
+
+  banda_transportadora:
+    nombre: Banda transportadora de piezas (tambor motriz + motorreductor + rodillos)
+    unidades: 3
+    componentes: [banda_empalme, tambor_motriz, rodillos_portantes, motorreductor, rodamientos]
+    variables:
+      desvio_lateral_mm:   {unidad: mm, direccion: alta, nominal: [0, 10], alerta: 25, critico: 50, fuentes: [D-024]}
+      deslizamiento_pct:   {unidad: "% (vel. tambor vs. vel. banda)", direccion: alta, nominal: [0, 1], alerta: 2, critico: 5, fuentes: [D-025]}
+      velocidad_banda_pct: {unidad: "% de la velocidad nominal", direccion: baja, nominal: [97, 103], alerta: 95, critico: 10, fuentes: [D-025]}
+      corriente_pct:       {unidad: "% In", direccion: alta, nominal: [50, 85], alerta: 100, critico: 115, alerta_baja: 30, fuentes: [D-007, D-024]}
+      vib_rms_mm_s:        {unidad: mm/s RMS (motorreductor/tambor), direccion: alta, nominal: [0.5, 1.4], alerta: 2.8, critico: 4.5, fuentes: [D-003]}
+      vib_curtosis:        {unidad: adimensional, direccion: alta, nominal: [2.5, 3.5], alerta: 4.0, critico: 6.0, fuentes: [D-010, D-026]}
+      temp_rodamiento_c:   {unidad: °C (tambor motriz), direccion: alta, nominal: [40, 68], alerta: 82, critico: 88, fuentes: [D-009]}
+
+  centro_cnc:
+    nombre: Centro de mecanizado CNC de 3 ejes (husillo 15 kW)
+    unidades: 2
+    potencia_kw: 15
+    componentes: [herramienta, husillo, rodamientos_husillo, ejes_avance]
+    variables:
+      carga_husillo_rel:   {unidad: adimensional (vs. línea base de la operación), direccion: alta, nominal: [0.9, 1.1], alerta: 1.2, critico: 1.4, alerta_baja: 0.5, fuentes: [D-027, D-028]}
+      carga_husillo_cv_pct: {unidad: "% (coef. de variación en la pasada)", direccion: alta, nominal: [0, 5], alerta: 10, critico: 20, fuentes: [D-029]}
+      vib_rms_mm_s:        {unidad: mm/s RMS (cabezal), direccion: alta, nominal: [0.5, 1.4], alerta: 2.8, critico: 4.5, fuentes: [D-003, D-029]}
+      vib_hf_rel:          {unidad: adimensional, direccion: alta, nominal: [0.8, 1.2], alerta: 2.0, critico: 4.0, fuentes: [D-010, D-029]}
+      vib_curtosis:        {unidad: adimensional, direccion: alta, nominal: [2.5, 3.5], alerta: 4.0, critico: 6.0, fuentes: [D-010]}
+      vib_pico_g:          {unidad: g (pico), direccion: alta, nominal: [0, 2], alerta: 5, critico: 10, fuentes: [D-028]}
+      temp_husillo_c:      {unidad: °C, direccion: alta, nominal: [25, 40], alerta: 50, critico: 60, fuentes: [D-029]}
+      desgaste_herramienta_min: {unidad: min de corte acumulados, direccion: alta, nominal: [0, 180], alerta: 200, critico: 240, fuentes: [D-027]}
+
+# Nota (D-002): el puente grúa queda fuera del alcance; solo se documenta como
+# extensión futura (frenos, cables, ruedas/carriles). No tiene variables aquí.
+
+# =============================================================================
+# Catálogo de síntomas (IDs usados en rules.yaml, expresiones.yaml,
+# failure_modes.yaml y fmea.yaml).
+#   tipo: medido (se calcula con umbrales del activo) | percibido (observación)
+#   nivel: alerta | critico | alerta_baja | en_rango | tendencia
+#   en_rango: alerta_baja < valor < alerta
+#   tendencia: (valor - linea_base) >= 0.25 * umbral de alerta (D-004)
+# =============================================================================
+sintomas:
+  # --- vibración ---
+  vibracion_alerta:          {tipo: medido, variable: vib_rms_mm_s, nivel: alerta, descripcion: "Velocidad RMS en zona C (ISO 20816-3)"}
+  vibracion_critica:         {tipo: medido, variable: vib_rms_mm_s, nivel: critico, descripcion: "Velocidad RMS en zona D (ISO 20816-3)"}
+  vibracion_creciente:       {tipo: medido, variable: vib_rms_mm_s, nivel: tendencia, descripcion: "Aumento respecto a línea base >= 25 % del límite B/C (ISO 20816-1)"}
+  vibracion_hf_alta:         {tipo: medido, variable: vib_hf_rel, nivel: alerta, descripcion: "Energía de alta frecuencia/envolvente >= 2x línea base"}
+  vibracion_hf_critica:      {tipo: medido, variable: vib_hf_rel, nivel: critico, descripcion: "Energía de alta frecuencia/envolvente >= 4x línea base"}
+  vibracion_impulsiva:       {tipo: medido, variable: vib_curtosis, nivel: alerta, descripcion: "Curtosis >= 4 (impactos periódicos)"}
+  vibracion_1x_dominante:    {tipo: medido, variable: vib_1x_frac, nivel: alerta, descripcion: "La componente 1X concentra >= 80 % de la energía radial"}
+  vibracion_2x_elevada:      {tipo: medido, variable: vib_2x_1x_ratio, nivel: alerta, descripcion: "Amplitud 2X >= 50 % de 1X"}
+  vibracion_axial_alta:      {tipo: medido, variable: vib_axial_radial_ratio, nivel: alerta, descripcion: "Vibración axial >= 50 % de la radial"}
+  impacto_vibracion:         {tipo: medido, variable: vib_pico_g, nivel: alerta, descripcion: "Pico de aceleración >= 5 g (impacto)"}
+  # --- temperatura ---
+  temp_devanado_alta:        {tipo: medido, variable: temp_devanado_c, nivel: alerta, descripcion: "Devanado >= 130 °C (límite de clase B)"}
+  temp_devanado_critica:     {tipo: medido, variable: temp_devanado_c, nivel: critico, descripcion: "Devanado >= 155 °C (límite de clase F)"}
+  temp_rodamiento_alta:      {tipo: medido, variable: temp_rodamiento_c, nivel: alerta, descripcion: "Rodamiento en temperatura de alarma"}
+  temp_rodamiento_critica:   {tipo: medido, variable: temp_rodamiento_c, nivel: critico, descripcion: "Rodamiento en temperatura de disparo"}
+  temp_descarga_alta:        {tipo: medido, variable: temp_descarga_c, nivel: alerta, descripcion: "Descarga del compresor >= 100 °C"}
+  temp_descarga_critica:     {tipo: medido, variable: temp_descarga_c, nivel: critico, descripcion: "Descarga del compresor >= 110 °C"}
+  temp_aceite_alta:          {tipo: medido, variable: temp_aceite_c, nivel: alerta, descripcion: "Aceite hidráulico >= 60 °C"}
+  temp_aceite_critica:       {tipo: medido, variable: temp_aceite_c, nivel: critico, descripcion: "Aceite hidráulico >= 70 °C"}
+  temp_aceite_baja:          {tipo: medido, variable: temp_aceite_c, nivel: alerta_baja, descripcion: "Aceite hidráulico <= 20 °C (viscosidad alta)"}
+  temp_husillo_alta:         {tipo: medido, variable: temp_husillo_c, nivel: alerta, descripcion: "Husillo >= 50 °C"}
+  temp_variador_alta:        {tipo: medido, variable: temp_variador_c, nivel: alerta, descripcion: "Disipador del variador >= 75 °C"}
+  # --- eléctricas ---
+  corriente_alta:            {tipo: medido, variable: corriente_pct, nivel: alerta, descripcion: "Corriente por encima del umbral de alerta del activo"}
+  sobrecorriente:            {tipo: medido, variable: corriente_pct, nivel: critico, descripcion: "Corriente >= 115 % In (factor de servicio 1.15)"}
+  corriente_baja:            {tipo: medido, variable: corriente_pct, nivel: alerta_baja, descripcion: "Corriente por debajo de la subcarga del activo"}
+  corriente_en_rango:        {tipo: medido, variable: corriente_pct, nivel: en_rango, descripcion: "Corriente entre alerta_baja y alerta (carga normal)"}
+  desbalance_corriente_alto: {tipo: medido, variable: desbalance_corriente_pct, nivel: alerta, descripcion: "Desbalance de corriente >= 5 %"}
+  desbalance_corriente_critico: {tipo: medido, variable: desbalance_corriente_pct, nivel: critico, descripcion: "Desbalance de corriente >= 10 % (posible pérdida de fase)"}
+  disparos_intermitentes:    {tipo: medido, variable: disparos_variador_24h, nivel: alerta, descripcion: ">= 1 disparo del variador en 24 h"}
+  disparos_frecuentes:       {tipo: medido, variable: disparos_variador_24h, nivel: critico, descripcion: ">= 3 disparos del variador en 24 h"}
+  tension_bus_dc_alta:       {tipo: medido, variable: tension_bus_dc_pct, nivel: alerta, descripcion: "Bus DC >= 115 % del nominal (regeneración)"}
+  distorsion_armonica_alta:  {tipo: medido, variable: thd_tension_pct, nivel: alerta, descripcion: "THD de tensión >= 8 % (IEEE 519)"}
+  # --- bomba ---
+  margen_npsh_bajo:          {tipo: medido, variable: npsh_margen_ratio, nivel: alerta, descripcion: "NPSHA/NPSH3 <= 1.3"}
+  margen_npsh_insuficiente:  {tipo: medido, variable: npsh_margen_ratio, nivel: critico, descripcion: "NPSHA/NPSH3 <= 1.1"}
+  caudal_bajo:               {tipo: medido, variable: caudal_pct, nivel: alerta, descripcion: "Caudal <= 90 % del nominal"}
+  caudal_inestable:          {tipo: medido, variable: caudal_cv_pct, nivel: alerta, descripcion: "Coeficiente de variación del caudal >= 5 %"}
+  presion_descarga_baja:     {tipo: medido, variable: presion_descarga_pct, nivel: alerta, descripcion: "Presión de descarga bajo la consigna/nominal (umbral del activo)"}
+  fuga_sello:                {tipo: medido, variable: fuga_sello_ml_h, nivel: alerta, descripcion: "Fuga del sello mecánico >= 5 ml/h"}
+  # --- compresor ---
+  dp_separador_alto:         {tipo: medido, variable: dp_separador_bar, nivel: alerta, descripcion: "Presión diferencial del separador >= 0.7 bar"}
+  carga_compresor_alta:      {tipo: medido, variable: carga_pct, nivel: alerta, descripcion: "Compresor en carga >= 85 % del tiempo"}
+  # --- prensa ---
+  presion_sistema_alta:      {tipo: medido, variable: presion_sistema_pct, nivel: alerta, descripcion: "Presión de trabajo >= 110 % de la receta"}
+  presion_sistema_baja:      {tipo: medido, variable: presion_sistema_pct, nivel: alerta_baja, descripcion: "Presión de trabajo <= 90 % de la receta"}
+  caida_presion_retencion:   {tipo: medido, variable: caida_presion_bar_min, nivel: alerta, descripcion: "Caída de presión en retención >= 5 bar/min"}
+  nivel_tanque_bajo:         {tipo: medido, variable: nivel_tanque_pct, nivel: alerta, descripcion: "Nivel de tanque <= 85 %"}
+  tiempo_ciclo_alto:         {tipo: medido, variable: tiempo_ciclo_pct, nivel: alerta, descripcion: "Tiempo de ciclo >= 110 % de la receta"}
+  aceite_contaminado:        {tipo: medido, variable: iso4406_14um_codigo, nivel: alerta, descripcion: "Código ISO 4406 (>=14 µm) por encima de 13"}
+  # --- banda ---
+  desvio_banda:              {tipo: medido, variable: desvio_lateral_mm, nivel: alerta, descripcion: "Desvío lateral de la banda >= 25 mm"}
+  deslizamiento_alto:        {tipo: medido, variable: deslizamiento_pct, nivel: alerta, descripcion: "Deslizamiento banda/tambor >= 2 %"}
+  velocidad_banda_nula:      {tipo: medido, variable: velocidad_banda_pct, nivel: critico, descripcion: "Banda casi detenida (<= 10 %) con el motor en marcha"}
+  # --- CNC ---
+  carga_husillo_alta:        {tipo: medido, variable: carga_husillo_rel, nivel: alerta, descripcion: "Carga de husillo >= 1.2x la línea base de la operación"}
+  carga_husillo_critica:     {tipo: medido, variable: carga_husillo_rel, nivel: critico, descripcion: "Carga de husillo >= 1.4x la línea base"}
+  carga_husillo_caida_subita: {tipo: medido, variable: carga_husillo_rel, nivel: alerta_baja, descripcion: "Carga cae a <= 0.5x en pleno corte"}
+  carga_husillo_inestable:   {tipo: medido, variable: carga_husillo_cv_pct, nivel: alerta, descripcion: "Coeficiente de variación de la carga >= 10 %"}
+  desgaste_herramienta_alto: {tipo: medido, variable: desgaste_herramienta_min, nivel: alerta, descripcion: ">= 200 min de corte acumulados"}
+  desgaste_herramienta_limite: {tipo: medido, variable: desgaste_herramienta_min, nivel: critico, descripcion: ">= 240 min de corte acumulados"}
+  # --- percibidos (vienen del léxico; variable observacion_tecnico) ---
+  ruido_agudo_percibido:     {tipo: percibido, variable: observacion_tecnico, descripcion: "Silbido/zumbido agudo ('está cantando')"}
+  olor_quemado_percibido:    {tipo: percibido, variable: observacion_tecnico, descripcion: "Olor a barniz, aislamiento o caucho quemado"}
+  golpeteo_percibido:        {tipo: percibido, variable: observacion_tecnico, descripcion: "Golpes o crepitación tipo grava ('está golpeando')"}
+  cascabeleo_percibido:      {tipo: percibido, variable: observacion_tecnico, descripcion: "Traqueteo metálico intermitente ('cascabeleo')"}
+  prensa_dura_percibida:     {tipo: percibido, variable: observacion_tecnico, descripcion: "La prensa responde lenta o necesita más presión ('está dura')"}
+  calor_percibido:           {tipo: percibido, variable: observacion_tecnico, descripcion: "Equipo caliente al tacto o por indicador ('trabajando caliente')"}
+  rodamiento_terminal_percibido: {tipo: percibido, variable: observacion_tecnico, descripcion: "Ruido áspero de rodamiento ('ya se va')"}
+  disparo_sin_causa_percibido: {tipo: percibido, variable: observacion_tecnico, descripcion: "Disparos del variador sin causa aparente"}
+  banda_corrida_percibida:   {tipo: percibido, variable: observacion_tecnico, descripcion: "La banda se desplaza hacia un lado"}

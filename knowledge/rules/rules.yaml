@@ -1,0 +1,346 @@
+# =============================================================================
+# Metal Tech – Reglas SI-ENTONCES con factores de certeza (MYCIN)
+# Agente Investigador, Fase 1 (2026-10-29). Borrador para revisión del Revisor.
+#
+# Semántica (D-034):
+#   - "si" es una conjunción: todas las premisas deben estar activas.
+#     FC de la premisa = mínimo de los grados de los síntomas (1.0 si es nítido).
+#   - FC de la conclusión = fc_regla * FC_premisa.
+#   - Varias reglas que concluyen el mismo modo de falla se combinan con MYCIN:
+#       ambos positivos: FC = FC1 + FC2 * (1 - FC1)
+#   - Política de FC de la regla:
+#       0.85–0.90 umbral normativo + firma física específica (varias variables)
+#       0.75–0.80 >= 2 fuentes concordantes y firma específica
+#       0.65–0.70 fuentes secundarias concordantes o firma parcialmente ambigua
+#       0.60      heurística o premisa percibida/ambigua
+#   - Las reglas con síntomas percibidos (observaciones del técnico) no superan
+#     0.80 por el sesgo de técnico/turno (D-038).
+# Los IDs de síntomas están en configs/assets.yaml (sección "sintomas") y los
+# modos de falla en configs/failure_modes.yaml.
+# =============================================================================
+
+# ----------------------------- motor eléctrico -------------------------------
+- id: R01
+  activo: motor_electrico
+  si: [temp_devanado_alta, corriente_en_rango]
+  entonces: sobrecalentamiento_ventilacion
+  fc: 0.7
+  accion: "Inspeccionar y limpiar rejillas, aletas y ventilador; verificar temperatura ambiente y sentido de giro del ventilador."
+  fuentes: [D-005, D-033]
+
+- id: R02
+  activo: motor_electrico
+  si: [temp_rodamiento_alta, vibracion_hf_alta]
+  entonces: falla_lubricacion_rodamiento
+  fc: 0.7
+  accion: "Revisar plan de relubricación (cantidad, tipo e intervalo de grasa); relubricar y vigilar la tendencia de alta frecuencia y temperatura 24 h."
+  fuentes: [D-008, D-010, D-033]
+
+- id: R03
+  activo: motor_electrico
+  si: [vibracion_impulsiva, vibracion_hf_alta]
+  entonces: desgaste_rodamiento
+  fc: 0.75
+  accion: "Realizar análisis de envolvente para confirmar frecuencias de defecto (BPFO/BPFI); programar cambio de rodamiento en la próxima parada."
+  fuentes: [D-010]
+
+- id: R04
+  activo: motor_electrico
+  si: [vibracion_impulsiva, vibracion_hf_critica, temp_rodamiento_alta]
+  entonces: desgaste_rodamiento
+  fc: 0.9
+  accion: "Etapa avanzada de falla de rodamiento: planificar parada inmediata y reemplazo; no relubricar como solución."
+  fuentes: [D-008, D-010]
+
+- id: R05
+  activo: motor_electrico
+  si: [vibracion_alerta, vibracion_1x_dominante]
+  entonces: desbalanceo_rotor
+  fc: 0.75
+  accion: "Verificar suciedad o pérdida de masa en rotor/ventilador; balancear en sitio según grado de calidad del rotor."
+  fuentes: [D-003, D-011]
+
+- id: R06
+  activo: motor_electrico
+  si: [vibracion_alerta, vibracion_2x_elevada, vibracion_axial_alta]
+  entonces: desalineacion_eje
+  fc: 0.8
+  accion: "Verificar alineación del acople con láser/relojes; revisar pata coja y tornillería de anclaje."
+  fuentes: [D-003, D-011]
+
+- id: R07
+  activo: motor_electrico
+  si: [temp_devanado_alta, desbalance_corriente_alto]
+  entonces: degradacion_aislamiento
+  fc: 0.6
+  accion: "Medir resistencia de aislamiento (megóhmetro) e índice de polarización; revisar la tensión de alimentación por fase."
+  fuentes: [D-005, D-006, D-032]
+
+- id: R08
+  activo: motor_electrico
+  si: [olor_quemado_percibido, temp_devanado_alta]
+  entonces: degradacion_aislamiento
+  fc: 0.8
+  accion: "Sacar de servicio de forma controlada; prueba de aislamiento y de surge antes de volver a energizar."
+  fuentes: [D-032, D-038]
+
+- id: R09
+  activo: motor_electrico
+  si: [desbalance_corriente_critico, temp_devanado_alta]
+  entonces: falla_contactor
+  fc: 0.75
+  accion: "Inspeccionar contactos del contactor (picado, soldadura), bornes flojos y fusibles; descartar pérdida de fase."
+  fuentes: [D-006, D-031]
+
+- id: R10
+  activo: motor_electrico
+  si: [disparos_intermitentes, corriente_en_rango]
+  entonces: falla_variador
+  fc: 0.6
+  accion: "Leer registro de fallas del variador (código, corriente, bus DC y temperatura en el disparo); revisar rampas, datos de placa cargados y cable de motor."
+  fuentes: [D-030]
+
+- id: R11
+  activo: motor_electrico
+  si: [disparos_frecuentes, distorsion_armonica_alta]
+  entonces: falla_variador
+  fc: 0.75
+  accion: "Medir armónicos en el punto de conexión; evaluar reactancia de línea/filtro y estado de condensadores del bus DC."
+  fuentes: [D-030]
+
+- id: R12
+  activo: motor_electrico
+  si: [sobrecorriente, temp_devanado_alta]
+  entonces: sobrecarga_mecanica
+  fc: 0.8
+  accion: "Verificar carga accionada (atascos, freno, acople); comparar con la corriente de placa y el factor de servicio; reducir carga."
+  fuentes: [D-005, D-007]
+
+# ----------------------------- bomba centrífuga ------------------------------
+- id: R13
+  activo: bomba_centrifuga
+  si: [margen_npsh_bajo, vibracion_hf_alta, caudal_inestable]
+  entonces: cavitacion
+  fc: 0.85
+  accion: "Revisar NPSH disponible: nivel del depósito, válvula y filtro de succión, temperatura del líquido; evitar operar lejos del BEP."
+  fuentes: [D-012, D-013]
+
+- id: R14
+  activo: bomba_centrifuga
+  si: [margen_npsh_insuficiente, presion_descarga_baja]
+  entonces: cavitacion
+  fc: 0.9
+  accion: "Cavitación desarrollada (caída de altura): reducir caudal o aumentar presión de succión de inmediato; inspeccionar el impulsor por erosión."
+  fuentes: [D-012, D-013]
+
+- id: R15
+  activo: bomba_centrifuga
+  si: [golpeteo_percibido, margen_npsh_bajo]
+  entonces: cavitacion
+  fc: 0.75
+  accion: "Confirmar con medición de presión de succión y vibración de alta frecuencia; revisar el filtro de succión."
+  fuentes: [D-013, D-038]
+
+- id: R16
+  activo: bomba_centrifuga
+  si: [caudal_bajo, corriente_baja]
+  entonces: obstruccion_bomba
+  fc: 0.7
+  accion: "Inspeccionar canastilla/filtro de succión e impulsor por objetos o incrustaciones; verificar posición de válvulas."
+  fuentes: [D-014]
+
+- id: R17
+  activo: bomba_centrifuga
+  si: [fuga_sello]
+  entonces: desgaste_sello_mecanico
+  fc: 0.8
+  accion: "Inspeccionar el sello mecánico y su plan de lavado; programar el cambio; revisar vibración y alineación como causas de desgaste."
+  fuentes: [D-015]
+
+- id: R18
+  activo: bomba_centrifuga
+  si: [vibracion_impulsiva, vibracion_hf_alta, temp_rodamiento_alta]
+  entonces: desgaste_rodamiento
+  fc: 0.85
+  accion: "Confirmar con espectro de envolvente; revisar nivel/estado del lubricante; planificar el cambio de rodamientos."
+  fuentes: [D-009, D-010]
+
+- id: R19
+  activo: bomba_centrifuga
+  si: [vibracion_creciente, vibracion_2x_elevada, vibracion_axial_alta]
+  entonces: desalineacion_eje
+  fc: 0.7
+  accion: "Verificar alineación motor-bomba y esfuerzos de tubería sobre la carcasa."
+  fuentes: [D-004, D-011]
+
+# ---------------------------- compresor de tornillo --------------------------
+- id: R20
+  activo: compresor_tornillo
+  si: [temp_descarga_alta, corriente_en_rango]
+  entonces: sobrecalentamiento_compresor
+  fc: 0.7
+  accion: "Revisar nivel y estado del aceite, limpieza del enfriador, válvula termostática y ventilación de la sala."
+  fuentes: [D-016]
+
+- id: R21
+  activo: compresor_tornillo
+  si: [dp_separador_alto, presion_descarga_baja]
+  entonces: obstruccion_separador
+  fc: 0.8
+  accion: "Reemplazar el elemento separador de aceite según el diferencial del fabricante; revisar el arrastre de aceite."
+  fuentes: [D-017, D-018]
+
+- id: R22
+  activo: compresor_tornillo
+  si: [presion_descarga_baja, carga_compresor_alta]
+  entonces: fuga_aire_red
+  fc: 0.75
+  accion: "Prueba de aislamiento (compresor contra red) y detección ultrasónica de fugas; reparar fugas y revisar nuevos consumos."
+  fuentes: [D-017, D-019]
+
+- id: R23
+  activo: compresor_tornillo
+  si: [presion_descarga_baja, corriente_baja]
+  entonces: falla_valvula_admision
+  fc: 0.7
+  accion: "Verificar la apertura de la válvula de admisión en carga (solenoide, barniz, pistón) y el estado del filtro de aire."
+  fuentes: [D-017]
+
+- id: R24
+  activo: compresor_tornillo
+  si: [vibracion_impulsiva, vibracion_hf_alta]
+  entonces: desgaste_rodamiento
+  fc: 0.7
+  accion: "Análisis de envolvente del elemento tornillo; revisar el análisis de aceite (metales de desgaste); consultar al fabricante."
+  fuentes: [D-010]
+
+# ----------------------------- prensa hidráulica -----------------------------
+- id: R25
+  activo: prensa_hidraulica
+  si: [nivel_tanque_bajo, presion_sistema_baja]
+  entonces: fuga_hidraulica_externa
+  fc: 0.85
+  accion: "Inspección visual de mangueras, racores y sellos de vástago; bloquear y aislar energía antes de intervenir; reponer aceite filtrado."
+  fuentes: [D-022]
+
+- id: R26
+  activo: prensa_hidraulica
+  si: [caida_presion_retencion, tiempo_ciclo_alto]
+  entonces: fuga_interna_cilindro
+  fc: 0.75
+  accion: "Prueba de bypass del pistón en fin de carrera; aislar válvulas para separar fuga de válvula de fuga de cilindro."
+  fuentes: [D-022]
+
+- id: R27
+  activo: prensa_hidraulica
+  si: [aceite_contaminado]
+  entonces: contaminacion_aceite_hidraulico
+  fc: 0.9
+  accion: "Cambiar filtros, filtrar el aceite en circuito (riñón) hasta el código objetivo; buscar la fuente de ingreso (respiradero, sellos)."
+  fuentes: [D-021]
+
+- id: R28
+  activo: prensa_hidraulica
+  si: [aceite_contaminado, tiempo_ciclo_alto, presion_sistema_alta]
+  entonces: valvula_hidraulica_pegada
+  fc: 0.65
+  accion: "Revisar la respuesta de la válvula proporcional/direccional (corriente de bobina vs. posición); limpiar o reemplazar la válvula y filtrar el aceite."
+  fuentes: [D-021, D-023]
+
+- id: R29
+  activo: prensa_hidraulica
+  si: [prensa_dura_percibida, presion_sistema_alta]
+  entonces: valvula_hidraulica_pegada
+  fc: 0.6
+  accion: "Confirmar tiempos de ciclo y presión registrados; descartar aceite frío (calentar a temperatura de servicio) antes de intervenir la válvula."
+  fuentes: [D-023, D-038]
+
+- id: R30
+  activo: prensa_hidraulica
+  si: [temp_aceite_critica]
+  entonces: sobrecalentamiento_aceite_hidraulico
+  fc: 0.85
+  accion: "Revisar enfriador (caudal de agua, aletas), válvula de alivio descargando de forma continua y fugas internas."
+  fuentes: [D-020]
+
+# --------------------------- banda transportadora ----------------------------
+- id: R31
+  activo: banda_transportadora
+  si: [desvio_banda]
+  entonces: desalineacion_banda
+  fc: 0.8
+  accion: "Revisar escuadra de tambores y rodillos, empalme, rodillos trabados y carga centrada; ajustar con rodillos autoalineantes."
+  fuentes: [D-024]
+
+- id: R32
+  activo: banda_transportadora
+  si: [deslizamiento_alto]
+  entonces: deslizamiento_banda
+  fc: 0.75
+  accion: "Verificar tensión de la banda (contrapeso/tensor), recubrimiento del tambor motriz y presencia de material o agua entre banda y tambor."
+  fuentes: [D-025]
+
+- id: R33
+  activo: banda_transportadora
+  si: [velocidad_banda_nula, corriente_baja]
+  entonces: rotura_banda
+  fc: 0.9
+  accion: "Detener y bloquear la línea; inspeccionar banda y empalme; revisar interruptores de desalineación y de velocidad cero."
+  fuentes: [D-025]
+
+- id: R34
+  activo: banda_transportadora
+  si: [vibracion_impulsiva, cascabeleo_percibido]
+  entonces: falla_rodillo
+  fc: 0.7
+  accion: "Recorrer la línea e identificar rodillos trabados o con rodamiento dañado (termografía/estetoscopio); reemplazarlos."
+  fuentes: [D-026, D-038]
+
+- id: R35
+  activo: banda_transportadora
+  si: [vibracion_impulsiva, corriente_alta]
+  entonces: falla_rodillo
+  fc: 0.6
+  accion: "Inspeccionar rodillos que no giran (actúan como barra de fricción) y su efecto en el arrastre del motor."
+  fuentes: [D-024, D-026]
+
+# ------------------------------- centro CNC ----------------------------------
+- id: R36
+  activo: centro_cnc
+  si: [desgaste_herramienta_alto, carga_husillo_alta]
+  entonces: desgaste_herramienta
+  fc: 0.85
+  accion: "Cambiar la herramienta o el inserto; verificar acabado y medidas de la última pieza."
+  fuentes: [D-027]
+
+- id: R37
+  activo: centro_cnc
+  si: [carga_husillo_caida_subita, impacto_vibracion]
+  entonces: rotura_herramienta
+  fc: 0.8
+  accion: "Detener el programa (paro de avance), inspeccionar la herramienta y la pieza; medir la herramienta con el palpador."
+  fuentes: [D-028]
+
+- id: R38
+  activo: centro_cnc
+  si: [impacto_vibracion, carga_husillo_critica]
+  entonces: colision_husillo
+  fc: 0.85
+  accion: "Paro inmediato; verificar el programa/offsets; inspeccionar runout del husillo y rodamientos antes de reanudar."
+  fuentes: [D-028]
+
+- id: R39
+  activo: centro_cnc
+  si: [carga_husillo_inestable, vibracion_hf_alta]
+  entonces: vibracion_chatter
+  fc: 0.7
+  accion: "Ajustar velocidad de husillo hacia un lóbulo estable, reducir la profundidad de corte o el voladizo de la herramienta."
+  fuentes: [D-029]
+
+- id: R40
+  activo: centro_cnc
+  si: [temp_husillo_alta, vibracion_hf_alta]
+  entonces: sobrecalentamiento_husillo
+  fc: 0.65
+  accion: "Revisar el enfriador del husillo, la lubricación de rodamientos (aceite-aire/grasa) y la precarga; hacer ciclo de calentamiento."
+  fuentes: [D-010, D-029]

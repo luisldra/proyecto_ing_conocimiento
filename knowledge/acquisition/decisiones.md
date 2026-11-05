@@ -60,6 +60,8 @@
 | D-040 | Variables relativas (`_pct`, `_rel`) en lugar de absolutas | media |
 | D-041 | Holgura mecánica (modo nuevo) | media |
 | D-042 | Cierre de huecos: cobertura de reglas, variables y firmas coherentes | media |
+| D-043 | Semántica del motor de reglas (fusificación, FC y traza) | alta (método) / media (umbrales de rampa) |
+| D-044 | Diseño de la ontología OWL y validación con HermiT | alta |
 
 ---
 
@@ -546,6 +548,35 @@
 - **Fuentes:** D-003, D-007, D-009, D-010, D-011, D-021, D-022, D-024, D-029, D-030 y D-032 (las decisiones que ya respaldaban las reglas y umbrales afectados).
 - **Confianza:** media para las reglas; baja para las magnitudes de las firmas (calibración del simulador).
 
+## D-043 – Semántica del motor de reglas (fusificación, factores de certeza y traza)
+- **Contexto:** la Fase 2 implementa `kb/rules_engine.py`. D-034 fijó el modelo MYCIN pero no cómo se convierte una lectura de sensor en un síntoma, ni qué pasa con datos faltantes, tendencias y observaciones del técnico.
+- **Decisión:**
+  1. **Fusificación nítida por defecto.** Cada variable medida produce síntomas con un grado en [0, 1]: 1 si cruza el umbral de `assets.yaml` (comparación inclusiva) y 0 si no. Un parámetro opcional `margen_suave` agrega una rampa lineal bajo el umbral, de ancho `margen_suave × |umbral − borde nominal|` (limitada a la distancia alerta–crítico en el nivel crítico). La rampa nunca llega al rango nominal, de modo que la operación normal no activa síntomas con ningún margen.
+  2. **Niveles:** `alerta` y `critico` según la dirección de la variable; `alerta_baja` es la cola inferior; `en_rango` es la franja entre `alerta_baja` y `alerta` (síntoma de operación normal, p. ej. `corriente_en_rango`); `tendencia` compara el valor con la **línea base** de la unidad (D-040) y exige un cambio ≥ 25 % del límite de alerta (D-004). Sin línea base no hay tendencia.
+  3. **Datos faltantes** (None o NaN): el síntoma no se activa y la variable se lista en `datos_faltantes`. Las variables que el activo no define se ignoran y se reportan como `variables_desconocidas`.
+  4. **Observaciones del técnico:** son síntomas percibidos con grado 1. Entran por el léxico (D-038) y solo sirven de premisa de reglas de FC ≤ 0.8 (D-034). Una expresión sin síntomas medidos **no produce diagnóstico**; sus modos candidatos (`fc_max` ≤ 0.6) se informan aparte como `candidatos_lexico`.
+  5. **Encadenamiento:** una regla se dispara si todas sus premisas tienen grado > 0. FC de la premisa = mínimo de los grados; FC de la conclusión = `fc` × FC de la premisa. Las conclusiones del mismo modo se combinan con MYCIN, y el resultado queda siempre por debajo de 1. Si las evidencias son +1 y −1, el FC es 0.
+  6. **Traza:** cada regla disparada guarda sus premisas con el valor real, el umbral y el operador. También se informan las reglas **parciales** (algunas premisas cumplidas) y qué les falta, para explicar por qué un modo no se concluyó.
+- **Alternativas:** lógica difusa completa con inferencia de Mamdani (más difícil de explicar a técnicos y sin datos para ajustar las funciones de pertenencia); probabilidades bayesianas (no hay datos de campo para estimar las tablas); premisas negadas en las reglas (se evitan: la separación entre modos parecidos se logra con la firma y con la fusión M3, D-041).
+- **Verificación:** `tests/test_rules_engine.py` comprueba cada una de las 48 reglas con un caso positivo, un caso al que le falta una premisa y la operación normal en los 6 activos (punto medio y bordes del rango nominal). Sobre el valor final de las 41 firmas del simulador, el modo correcto está entre las conclusiones en 41 de 41 casos y es la conclusión principal en 39 de 41. Los dos casos restantes son ambigüedades reales: `falla_valvula_admision` (0.70) contra `fuga_aire_red` (0.75) en el compresor, y `valvula_hidraulica_pegada` (0.65) contra `contaminacion_aceite_hidraulico` (0.90) en la prensa, porque comparten síntomas.
+- **Fuentes:** Shortliffe y Buchanan (1975); Buchanan y Shortliffe (1984); D-004, D-034, D-038 y D-040.
+- **Confianza:** alta para el método; media para el ancho de la rampa, que es opcional y no se usa por defecto.
+
+## D-044 – Diseño de la ontología OWL y validación con HermiT
+- **Contexto:** el plan pide una ontología editable en Protégé, generada desde los YAML (fuente única de verdad, AGENTS.md §7), con consultas de dominio y validación de consistencia.
+- **Decisión:**
+  1. **Generación, no edición.** `kb/ontology.py` construye la ontología con Owlready2 en un `World` propio y la guarda como RDF/XML en `knowledge/ontology/metaltech.owl`. Un test comprueba que el archivo versionado coincide con lo que generan hoy los YAML.
+  2. **Clases.** Las 13 del plan (`Activo` con una subclase por tipo, `Componente`, `Sensor`, `Variable`, `Sintoma` con `SintomaMedido` y `SintomaPercibido`, `ModoFalla`, `Causa`, `Accion`, `Regla`, `ExpresionColoquial`, `Tecnico`, `Turno`, `Alerta`) más `FilaFMEA`. Esta última conserva las relaciones de la FMEA **por tipo de activo**: sin ella, un modo como `desgaste_rodamiento` mezclaría los síntomas, causas y acciones de cinco activos distintos.
+  3. **Individuos.** Los activos son las **unidades** (16 en total), con sus componentes y un sensor por variable. Los componentes y las variables se instancian por tipo de activo (`bomba_centrifuga__impulsor`). Los técnicos se anonimizan (T01–T08 e I01–I02) y los turnos son tres, como indica el enunciado; no hay datos personales (Ley 1581 de 2012). `Alerta` queda sin individuos: se crean en tiempo de ejecución con `sustentadaPor`.
+  4. **Propiedades.** Las del plan (`tieneComponente`, `monitoreadoPor`, `mide`, `manifiesta`, `causadoPor`, `mitigadoPor`, `refiereA`, `sustentadaPor`, `severidad`, `umbral`) más auxiliares (`concluye`, `tienePremisa`, `afectaComponente`, `sugiereModo`, `sobreVariable` y las de `FilaFMEA`). Todas tienen dominio y rango. `umbral` agrupa `umbralAlerta`, `umbralCritico` y `umbralAlertaBaja`.
+  5. **Axiomas que permiten razonar.** Las clases de nivel superior son **disjuntas**, igual que `SintomaMedido` y `SintomaPercibido` y los tipos de activo; `mide`, `concluye`, `modoDeFila` y `componenteDeFila` son **funcionales**. Así HermiT detecta individuos mal clasificados y valores en conflicto.
+  6. **Validación en dos niveles.** (a) `validar_estructura()`, en Python y sin Java: conteos contra los YAML, cada modo con síntomas, causas, acciones, componentes y reglas, cada regla con conclusión, premisas y fuente, y NPR coherente. (b) `validar_con_hermit()`: consistencia lógica y ausencia de clases insatisfacibles. Los tests de HermiT usan un JDK portable en `.tools/jdk17` (`scripts/instalar_jdk.py`, con verificación SHA-256) y se omiten si no hay Java.
+  7. **Consultas.** Síntomas, causas, acciones, componentes y reglas de un modo (en general o para un tipo de activo); diagnóstico diferencial por síntoma; expresiones por síntoma o modo; sensores por unidad; ficha de un modo (`detalle_modo`) y grafo de nodos y aristas para la web (`grafo`).
+- **Hallazgo durante la validación:** la primera versión declaraba `umbral` como propiedad funcional. Como `umbralAlerta` y `umbralCritico` son subpropiedades, cada variable acumulaba dos valores de una propiedad funcional y HermiT declaró la ontología inconsistente (ERR-011). Se corrigió haciendo `umbral` no funcional. La validación estructural en Python no lo habría detectado.
+- **Alternativas:** una clase por modo de falla (explosión de clases sin beneficio de razonamiento); ontología escrita a mano en Protégé (se desincroniza de las reglas); usar solo la validación en Python (no prueba la lógica OWL).
+- **Fuentes:** Lamy (2017), sobre Owlready y la programación orientada a ontologías en Python; Glimm et al. (2014), sobre HermiT y su cumplimiento de la semántica directa de OWL 2.
+- **Confianza:** alta.
+
 ---
 
 ## Resumen de conflictos registrados
@@ -598,6 +629,7 @@
 - Fabrico. (s. f.-e). *VFD overcurrent fault troubleshooting*. https://www.fabrico.io/es/blog/vfd-overcurrent-fault-troubleshooting/
 - Fluke. (2025, 18 de agosto). *Mechanical looseness: What it is and how to detect it*. https://www.fluke.com/en-au/learn/blog/predictive-maintenance/mechanical-looseness-what-it-is-how-to-detect
 - FridayParts. (s. f.). *How to check if a hydraulic cylinder is leaking internally*. https://www.fridayparts.com/blog/how-to-check-if-a-hydraulic-cylinder-is-leaking-internally
+- Glimm, B., Horrocks, I., Motik, B., Stoilos, G., & Wang, Z. (2014). HermiT: An OWL 2 reasoner. *Journal of Automated Reasoning, 53*(3), 245–269. https://doi.org/10.1007/s10817-014-9305-1
 - Google Patents. (2022). *US11415124B2 – Apparatus and method for detecting occurrence of cavitation*. https://patents.google.com/patent/US11415124
 - Hydraulic Institute. (2017). *ANSI/HI 9.6.1-2017 Rotodynamic pumps guideline for NPSH margin*. https://law.resource.org/pub/us/cfr/ibr/inc/ansi/ansi.hi.9.6.1.2017.pdf
 - Hydraulics & Pneumatics. (s. f.). *How well do you know your hydraulic fluid?* https://www.hydraulicspneumatics.com/200/TechZone/HydraulicFluids/Article/False/70639/TechZone-HydraulicFluids
@@ -618,6 +650,7 @@
 - Katser, I. D., & Kozitsin, V. O. (2020). *Skoltech Anomaly Benchmark (SKAB)* [Conjunto de datos]. GitHub. https://github.com/waico/SKAB
 - KSB GIW. (s. f.). *Why anti-friction bearings are heating up*. https://giw.ksb.com/blog/why-anti-friction-bearings-are-heating-up
 - Kusiak, A. (2024). Federated explainable artificial intelligence (fXAI): A digital manufacturing perspective. *International Journal of Production Research, 62*(1–2), 171–182. https://doi.org/10.1080/00207543.2023.2238083
+- Lamy, J.-B. (2017). Owlready: Ontology-oriented programming in Python with automatic classification and high level constructs for biomedical ontologies. *Artificial Intelligence in Medicine, 80*, 11–28. https://doi.org/10.1016/j.artmed.2017.07.002
 - Lee, J., Qiu, H., Yu, G., Lin, J., & Rexnord Technical Services. (2007). *IMS bearing data set* [Conjunto de datos]. NASA Prognostics Data Repository, NASA Ames Research Center. https://data.phmsociety.org/nasa/
 - Lei, Y., Li, N., Guo, L., Li, N., Yan, T., & Lin, J. (2018). Machinery health prognostics: A systematic review from data acquisition to RUL prediction. *Mechanical Systems and Signal Processing, 104*, 799–834. https://doi.org/10.1016/j.ymssp.2017.11.016
 - Machinery Lubrication. (s. f.). *Hydraulic equipment slowdown – Nailing internal leakage*. https://www.machinerylubrication.com/Articles/Print/550

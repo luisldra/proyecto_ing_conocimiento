@@ -49,7 +49,7 @@ AGENTS.md / CLAUDE.md / README.md
 configs/            assets.yaml, failure_modes.yaml, train.yaml
 knowledge/          ontology/, rules/, lexicon/, acquisition/ (decisiones.md, FMEA, matriz)
 data/synthetic/     dataset generado (no versionar archivos grandes)
-src/metaltech/      data/, kb/, models/, hybrid/, xai/, metrics/, api/, dashboard/
+src/metaltech/      data/, kb/ (base, lexicon, rules_engine, ontology), models/, hybrid/, xai/, metrics/, api/, dashboard/
 tests/              pytest
 reports/            figures/, tables/, sesgos_limitaciones.md
 landing/            landing page estática (GitHub Pages)
@@ -98,6 +98,9 @@ pip install -r requirements.txt && pip install -e . --no-deps
 pytest
 ruff check .
 python -m metaltech.proceso          # verifica enlaces MEMORIA <-> ERRORES
+python -m metaltech.kb.ontology      # regenera knowledge/ontology/metaltech.owl (obligatorio si cambia un YAML)
+python scripts/instalar_jdk.py       # JDK portable para HermiT (una vez, Windows x64)
+python -m metaltech.kb.rules_engine --activo bomba_centrifuga --valores '{...}' --texto "..."
 # --- se habilitan en fases posteriores ---
 python -m metaltech.data.generator --config configs/assets.yaml
 python -m metaltech.models.train --config configs/train.yaml

@@ -21,6 +21,13 @@ version: 1
 fecha: 2026-10-29
 muestreo_min: 10   # resolución del simulador (docs/PLAN.md, Fase 3)
 
+# Personal ficticio del enunciado (Metal Tech: 3 turnos; 8 técnicos electromecánicos y
+# 2 instrumentistas). Se usa en la ontología (Fase 2) y en las observaciones simuladas (Fase 3).
+# Los técnicos se anonimizan como T01..T08 e I01..I02; no hay datos personales (Ley 1581).
+planta:
+  turnos: [manana, tarde, noche]
+  tecnicos: {electromecanico: 8, instrumentista: 2}
+
 activos:
 
   motor_electrico:

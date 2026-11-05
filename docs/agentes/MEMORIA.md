@@ -3,20 +3,40 @@
 > Protocolo y formato: [AGENTS.md](../../AGENTS.md) · Errores: [ERRORES.md](ERRORES.md) · Plan: [PLAN.md](../PLAN.md)
 
 ## Estado actual
-- **Fase en curso:** Fase 0 cerrada (salvo reparto de roles y publicación en GitHub); Fase 1 con los huecos de cobertura cerrados, a la espera de la revisión del Revisor.
-- **Última tarea:** cierre de huecos de la Fase 1 (D-041, D-042, ERR-010). La base de conocimiento queda con 31 modos de falla, 41 filas FMEA, 48 reglas (R01–R48), 10 expresiones y 63 síntomas. `pytest`: 39 pruebas OK, `ruff` limpio.
-- **Siguiente tarea:** Fase 2 – ontología (`kb/ontology.py`), motor de reglas (`kb/rules_engine.py`) y léxico (`kb/lexicon.py`) con sus tests. La revisión cruzada del agente **Revisor de conocimiento** sigue pendiente y puede hacerse en paralelo.
-- **Bloqueos:** ninguno. Abiertos: normas de pago sin texto oficial (ERR-001), umbrales sin segunda fuente (ERR-003), Java no instalado para HermiT (ERR-008).
+- **Fase en curso:** Fase 2 terminada (ontología, motor de reglas y léxico). Fases 0 y 1 cerradas; la revisión cruzada del Revisor sigue pendiente.
+- **Última tarea:** Fase 2 completa (D-043, D-044, ERR-011 a ERR-013). `kb/base.py`, `kb/lexicon.py`, `kb/rules_engine.py`, `kb/ontology.py`, `knowledge/ontology/metaltech.owl` (generado, validado con HermiT) y 237 pruebas nuevas. `pytest`: 276 OK sin omitidas, `ruff` limpio.
+- **Siguiente tarea:** Fase 3 – generador de datos sintéticos (`data/generator.py`) usando `valor_final`/`valor_nominal` de `kb/base.py`, `planta` de `assets.yaml` y las firmas de `failure_modes.yaml`; ficha de datos en `data/README.md`. En paralelo puede hacerse la revisión del Revisor (V4) sobre D-041 a D-044.
+- **Bloqueos:** ninguno. Abiertos: normas de pago sin texto oficial (ERR-001), umbrales sin segunda fuente (ERR-003), DOIs sin verificar (ERR-005).
 - **Pendiente por confirmar:**
   - definición exacta de RA/R1–R6 con el docente;
   - fecha de entrega;
   - acceso institucional a normas ISO/IEC para verificar D-003, D-004, D-012 y D-030;
-  - reparto de roles del equipo y push del commit inicial al remoto `luisldra/proyecto_ing_conocimiento`;
-  - instalar o no un JDK 17 (ERR-008).
+  - reparto de roles del equipo y push de los commits al remoto `luisldra/proyecto_ing_conocimiento`.
 
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-05] Fase 2 – Ontología, motor de reglas y léxico (agente: Datos/ML + Backend)
+- Hecho:
+  - `kb/base.py`: carga única de los YAML (`cargar_base()`), índices y utilidades `valor_nominal` / `valor_final`.
+  - `kb/lexicon.py`: normaliza el texto (minúsculas, sin tildes) y reconoce las 10 expresiones y sus variantes; devuelve síntoma percibido y modos candidatos filtrados por activo (`fc_max` ≤ 0.6). Coincidencia difusa opcional (por defecto desactivada porque confunde "bomba" con "banda").
+  - `kb/rules_engine.py`: fusificación por niveles (alerta, crítico, cola baja, en rango y tendencia vs. línea base), rampa opcional `margen_suave`, encadenamiento hacia adelante, FC de la premisa = mínimo, combinación MYCIN, **traza** con valor real y umbral por premisa, reglas parciales, datos faltantes, salida en texto y JSON, y CLI (`python -m metaltech.kb.rules_engine`).
+  - `kb/ontology.py`: genera `metaltech.owl` con Owlready2 (22 clases: 14 superiores, 2 subclases de síntoma y 6 de activo; 18 propiedades de objeto y 24 de datos; clases disjuntas y propiedades funcionales). Individuos: 16 unidades, 37 componentes, 168 sensores, 60 variables, 63 síntomas, 31 modos, 127 causas, 108 acciones, 48 reglas, 10 expresiones, 41 filas FMEA, 10 técnicos y 3 turnos. Consultas (síntomas, causas, acciones, componentes y reglas por modo y activo; diagnóstico diferencial; sensores; `detalle_modo`; `grafo`), guardado y carga, `validar_estructura()` y `validar_con_hermit()`.
+  - `knowledge/ontology/metaltech.owl` (499 KB) y `knowledge/ontology/README.md` (clases, propiedades y consultas, para Protégé y el documento).
+  - `scripts/instalar_jdk.py`: JDK 17 Temurin portable en `.tools/jdk17`, con verificación SHA-256 (no modifica el sistema). Con él HermiT corre en unos 5 s.
+  - `assets.yaml`: sección `planta` (3 turnos; 8 electromecánicos y 2 instrumentistas, anonimizados) para la ontología y la Fase 3.
+  - Tests nuevos: `test_lexicon.py` (50), `test_rules_engine.py` (163) y `test_ontology.py` (24, tres con HermiT). Cubren las 48 reglas (caso positivo, falta de una premisa y operación normal en los 6 activos), el final de las 41 firmas del simulador, los escenarios del plan, MYCIN y el ida y vuelta del OWL. El `.owl` versionado se compara con lo que generan los YAML.
+  - `README.md`, `AGENTS.md`, `.gitignore` y `conftest.py` actualizados.
+- Resultados de verificación:
+  - Sobre el valor final de las 41 firmas, el modo correcto está entre las conclusiones en 41/41 casos y es el principal en 39/41. Los dos fallos son ambigüedades reales (compresor: `fuga_aire_red` 0.75 contra `falla_valvula_admision` 0.70; prensa: `contaminacion_aceite_hidraulico` 0.90 contra `valvula_hidraulica_pegada` 0.65). Es la referencia inicial de **M0** (solo reglas).
+  - Ninguna regla se dispara con la operación normal (punto medio y bordes nominales) en ningún activo.
+- Pendiente:
+  - Revisor: D-041 a D-044.
+  - Revisar con el docente si `FilaFMEA` (clase agregada al plan) es aceptable para el documento.
+  - Fase 3: el generador debe producir las observaciones de técnicos con `Lexico` y las 7 clases de eventos confusores.
+- Errores: ERR-008 (resuelto), ERR-011, ERR-012, ERR-013 (ver [ERRORES.md](ERRORES.md)).
+- Decisiones: D-043 (semántica del motor: nítido por defecto, una expresión sin síntomas medidos no diagnostica) y D-044 (ontología generada, `FilaFMEA`, validación en dos niveles). El JDK se instala en el proyecto y no en el sistema.
 
 ## [2026-11-05] Fase 1 – Cierre de huecos de cobertura y coherencia (agente: Revisor de conocimiento / QA)
 - Hecho:

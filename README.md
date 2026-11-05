@@ -22,7 +22,7 @@ Métricas: F1, precisión, recall, latencia, explicabilidad, reducción de falsa
 
 - Python 3.11 o superior (probado con 3.14).
 - Git.
-- **Opcional:** JDK 17 en el `PATH` para validar la ontología con el razonador HermiT. Sin Java las pruebas marcadas `java` se omiten (ver ERR-008).
+- **Opcional:** JDK 17 para validar la ontología con el razonador HermiT. En Windows x64 basta `python scripts/instalar_jdk.py`, que lo deja en `.tools/` sin tocar el sistema; en otro SO, ponga un JDK 17 en el `PATH`. Sin Java las pruebas marcadas `java` se omiten (ver ERR-008).
 
 ## Instalación
 
@@ -42,6 +42,14 @@ pytest                                              # pruebas
 ruff check .                                        # linter
 python -m metaltech.proceso                         # verifica MEMORIA <-> ERRORES
 
+# Base de conocimiento (Fase 2)
+python -m metaltech.kb.ontology                     # genera knowledge/ontology/metaltech.owl y valida
+python -m metaltech.kb.ontology --hermit            # + consistencia lógica con HermiT (Java)
+# diagnóstico por reglas con traza (síntomas, reglas disparadas, FC y valores reales)
+python -m metaltech.kb.rules_engine --activo bomba_centrifuga \
+  --valores '{"npsh_margen_ratio": 1.0, "vib_hf_rel": 4.2, "caudal_cv_pct": 8, "presion_descarga_pct": 88}' \
+  --texto "la bomba está golpeando"
+
 # Se habilitan en fases posteriores
 python -m metaltech.data.generator --config configs/assets.yaml
 python -m metaltech.models.train --config configs/train.yaml
@@ -53,9 +61,9 @@ streamlit run src/metaltech/dashboard/app.py
 
 ```
 configs/      assets.yaml, failure_modes.yaml, train.yaml
-knowledge/    ontology/, rules/, lexicon/, acquisition/ (decisiones, FMEA, matriz)
+knowledge/    ontology/ (metaltech.owl generado), rules/, lexicon/, acquisition/ (decisiones, FMEA, matriz)
 data/         synthetic/ (generado, no se versiona) y ficha de datos
-src/metaltech/  data, kb, models, hybrid, xai, metrics, api, dashboard
+src/metaltech/  data, kb (base, lexicon, rules_engine, ontology), models, hybrid, xai, metrics, api, dashboard
 tests/        pytest
 reports/      figures/, tables/, informes
 landing/      landing page estática

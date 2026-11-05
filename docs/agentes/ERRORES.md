@@ -8,8 +8,8 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 
 | Origen | Errores |
 |---|---|
-| entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008 |
-| código (bugs, lógica) | ERR-009 |
+| entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008, ERR-012, ERR-013 |
+| código (bugs, lógica) | ERR-009, ERR-011 |
 | datos (generador, fugas, desbalance) | – |
 | conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010 |
 | agente (supuestos falsos, malas decisiones del agente) | ERR-004 |
@@ -21,6 +21,8 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Nunca se inventa un DOI: si no se verifica, se cita la URL de la página oficial (ERR-005).
 - Antes de asumir una versión de Python o una dependencia del plan, verificar la disponibilidad real en el equipo (ERR-007, ERR-008).
 - Los verificadores automáticos deben ignorar plantillas y comentarios de los documentos que revisan (ERR-009).
+- La validación estructural en Python no sustituye al razonador: HermiT encontró una inconsistencia que ningún chequeo propio veía (ERR-011).
+- Las APIs y los servidores rechazan el User-Agent por defecto de `urllib` (ERR-012); en Windows, owlready2 no resuelve `file:///` con espacios (ERR-013).
 - Una regla solo sirve si la firma del simulador puede activarla: la coherencia umbral ↔ firma ↔ regla se comprueba con un test, no a ojo (ERR-010).
 
 ---
@@ -38,6 +40,36 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-013 – owlready2 no carga ontologías por URI `file:///` con espacios (Windows)
+- Fecha: 2026-11-05
+- Fase/archivo: Fase 2, `src/metaltech/kb/ontology.py` (`Ontologia.cargar`)
+- Origen: entorno
+- Síntoma: `OSError: [Errno 22] Invalid argument: '/C:/Users/.../Ing Conocimiento/.../metaltech.owl'` al hacer `get_ontology(ruta.as_uri()).load()`.
+- Causa raíz: owlready2 convierte el URI en una ruta con barra inicial inválida en Windows, y la ruta del proyecto tiene espacios.
+- Solución: se abre el archivo y se pasa como `load(fileobj=f)` con el IRI fijo de la ontología.
+- Prevención: el test `test_guardar_y_cargar_conserva_todo` cubre el ida y vuelta con una ruta temporal; no usar `as_uri()` con owlready2.
+- Estado: resuelto
+
+### ERR-012 – HTTP 403 al descargar el JDK con `urllib`
+- Fecha: 2026-11-05
+- Fase/archivo: Fase 2, `scripts/instalar_jdk.py`
+- Origen: entorno
+- Síntoma: `urllib.error.HTTPError: HTTP Error 403: Forbidden` al consultar la API de Adoptium; `curl` sí funcionaba.
+- Causa raíz: el servidor rechaza el User-Agent por defecto de `urllib` (`Python-urllib/3.x`).
+- Solución: el script envía `User-Agent: metaltech-setup/1.0`, reutiliza un zip ya descargado si su SHA-256 coincide y verifica el hash antes de extraer.
+- Prevención: usar un User-Agent propio en toda descarga programática; no enviar datos del usuario en él.
+- Estado: resuelto
+
+### ERR-011 – HermiT declaró inconsistente la primera versión de la ontología
+- Fecha: 2026-11-05
+- Fase/archivo: Fase 2, `src/metaltech/kb/ontology.py` (propiedad `umbral`)
+- Origen: código
+- Síntoma: `OwlReadyInconsistentOntologyError` al ejecutar `python -m metaltech.kb.ontology --hermit`, con `validar_estructura()` en verde.
+- Causa raíz: `umbral` se declaró funcional y `umbralAlerta`, `umbralCritico` y `umbralAlertaBaja` como subpropiedades. Una variable con alerta 130 y crítico 155 tenía entonces dos valores de una propiedad funcional.
+- Solución: `umbral` pasa a no funcional; las tres subpropiedades siguen siendo funcionales.
+- Prevención: `tests/test_ontology.py` incluye `test_hermit_ontologia_consistente` y dos pruebas negativas (individuo en clases disjuntas y propiedad funcional con dos valores). No declarar funcional una superpropiedad con varias subpropiedades.
+- Estado: resuelto
 
 ### ERR-010 – Firmas de falla que no alcanzaban el umbral de sus propias reglas
 - Fecha: 2026-11-05
@@ -65,9 +97,9 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Origen: entorno
 - Síntoma: `java: command not found`; `owlready2.sync_reasoner()` fallaría con `OwlReadyJavaError`.
 - Causa raíz: el equipo no tiene JDK; HermiT (razonador de owlready2) lo necesita.
-- Solución: pendiente. Las pruebas marcadas `@pytest.mark.java` se omiten sin Java (`tests/conftest.py`). Opciones: instalar JDK 17 (p. ej. `winget install EclipseAdoptium.Temurin.17.JDK`) o validar la consistencia con un chequeo propio en Python.
-- Prevención: documentado en README; la Fase 2 no debe depender de Java para sus pruebas principales.
-- Estado: abierto
+- Solución: `scripts/instalar_jdk.py` descarga Eclipse Temurin 17 en `.tools/jdk17` (ignorado por git, SHA-256 verificado, sin modificar el sistema) y `buscar_java()` lo usa si no hay Java en el PATH. Las pruebas marcadas `@pytest.mark.java` se omiten si no hay ninguno (`tests/conftest.py`). Solo Windows x64; en otro SO, instalar un JDK 17 y ponerlo en el PATH.
+- Prevención: documentado en README; la validación estructural de la ontología no depende de Java.
+- Estado: resuelto (2026-11-05)
 
 ### ERR-007 – El Python del equipo (3.14) no coincide con el del plan (3.11)
 - Fecha: 2026-11-05

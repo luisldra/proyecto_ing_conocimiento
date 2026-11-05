@@ -1,0 +1,33 @@
+# Entornos y caché de Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Datos generados (se regeneran con el generador; los grandes no se versionan)
+data/synthetic/*
+!data/synthetic/.gitkeep
+
+# Modelos entrenados y artefactos pesados
+models_store/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+
+# Salidas de reportes regenerables (las tablas finales sí se versionan en reports/tables)
+reports/figures/tmp/
+landing/data.json.bak
+
+# Documentos de trabajo y sistema
+*.log
+.DS_Store
+Thumbs.db
+~$*
+.env
+.claude/settings.local.json

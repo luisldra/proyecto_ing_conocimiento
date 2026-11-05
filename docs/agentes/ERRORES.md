@@ -8,10 +8,10 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 
 | Origen | Errores |
 |---|---|
-| entorno (instalación, SO, dependencias) | ERR-002, ERR-006 |
-| código (bugs, lógica) | – |
+| entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008 |
+| código (bugs, lógica) | ERR-009 |
 | datos (generador, fugas, desbalance) | – |
-| conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005 |
+| conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010 |
 | agente (supuestos falsos, malas decisiones del agente) | ERR-004 |
 
 ## Lecciones aprendidas
@@ -19,6 +19,9 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Todo umbral sin segunda fuente se marca como **supuesto** con confianza baja en `decisiones.md`; no se presenta como dato (ERR-003).
 - Hay que correr una verificación cruzada de IDs entre los YAML antes de cerrar cualquier cambio en la base de conocimiento (ERR-004).
 - Nunca se inventa un DOI: si no se verifica, se cita la URL de la página oficial (ERR-005).
+- Antes de asumir una versión de Python o una dependencia del plan, verificar la disponibilidad real en el equipo (ERR-007, ERR-008).
+- Los verificadores automáticos deben ignorar plantillas y comentarios de los documentos que revisan (ERR-009).
+- Una regla solo sirve si la firma del simulador puede activarla: la coherencia umbral ↔ firma ↔ regla se comprueba con un test, no a ojo (ERR-010).
 
 ---
 
@@ -36,6 +39,46 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Estado: resuelto | abierto
 -->
 
+### ERR-010 – Firmas de falla que no alcanzaban el umbral de sus propias reglas
+- Fecha: 2026-11-05
+- Fase/archivo: Fase 1, `configs/failure_modes.yaml` ↔ `configs/assets.yaml` ↔ `rules.yaml`
+- Origen: conocimiento
+- Síntoma: al cruzar los valores finales de cada firma con los umbrales de los síntomas, 10 combinaciones modo/variable no los activaban (p. ej. R04, R09, R12, R18, R28, R35: el motor con desgaste de rodamiento terminaba a 75 °C con alerta en 90 °C). Además, 5 modos de la FMEA no tenían regla, la FMEA de desalineación del compresor usaba variables que el compresor no define y 6 componentes no coincidían entre modo, FMEA y activo.
+- Causa raíz: la Fase 1 validó solo IDs y NPR (ERR-004); no comparó los valores numéricos de las firmas con los umbrales. D-010 fijaba +8–15 °C, que es el comienzo de la etapa tardía y no el valor al momento de la falla.
+- Solución: D-042 (firmas corregidas, variables y componentes agregados, reglas R41–R45) y D-041 (modo `holgura_mecanica`, reglas R46–R48). Se tocaron las firmas y no los umbrales, que se apoyan en normas.
+- Prevención: `tests/test_conocimiento.py` verifica referencias, cobertura modo ↔ FMEA ↔ regla, componentes y que cada firma active los síntomas de su FMEA y de sus reglas. Debe pasar antes de cerrar cualquier cambio en `knowledge/` o `configs/`.
+- Estado: resuelto
+
+### ERR-009 – El verificador de proceso contó la plantilla de ERRORES.md como un error duplicado
+- Fecha: 2026-11-05
+- Fase/archivo: Fase 0, `src/metaltech/proceso.py`
+- Origen: código
+- Síntoma: `test_memoria_y_errores_consistentes` falló con "ERR duplicados: ['ERR-001']".
+- Causa raíz: la plantilla comentada (`<!-- ### ERR-001 – Título corto ... -->`) coincidía con la expresión regular de entradas.
+- Solución: se eliminan los comentarios HTML antes de analizar ERRORES.md.
+- Prevención: el test cubre este caso con el archivo real; los verificadores ignoran plantillas.
+- Estado: resuelto
+
+### ERR-008 – Java (JDK) no instalado: HermiT no disponible
+- Fecha: 2026-11-05
+- Fase/archivo: Fase 0 (entorno) / Fase 2, `kb/ontology.py`
+- Origen: entorno
+- Síntoma: `java: command not found`; `owlready2.sync_reasoner()` fallaría con `OwlReadyJavaError`.
+- Causa raíz: el equipo no tiene JDK; HermiT (razonador de owlready2) lo necesita.
+- Solución: pendiente. Las pruebas marcadas `@pytest.mark.java` se omiten sin Java (`tests/conftest.py`). Opciones: instalar JDK 17 (p. ej. `winget install EclipseAdoptium.Temurin.17.JDK`) o validar la consistencia con un chequeo propio en Python.
+- Prevención: documentado en README; la Fase 2 no debe depender de Java para sus pruebas principales.
+- Estado: abierto
+
+### ERR-007 – El Python del equipo (3.14) no coincide con el del plan (3.11)
+- Fecha: 2026-11-05
+- Fase/archivo: Fase 0, entorno virtual
+- Origen: entorno
+- Síntoma: `AGENTS.md` y el plan indicaban Python 3.11; el único intérprete instalado es 3.14.7.
+- Causa raíz: el plan se redactó sin verificar la versión instalada (ya anticipado en ERR-006).
+- Solución: se verificó que torch 2.15 (CPU), pandas, scikit-learn, pyarrow, shap, captum, streamlit y owlready2 (desde código fuente) se instalan en 3.14; todas las pruebas de importación pasan. Se adopta `requires-python >= 3.11` y se actualizó `AGENTS.md`.
+- Prevención: `requirements.txt` usa cotas mínimas; si algún compañero usa 3.11 debe correr `pytest` tras instalar. Si una dependencia falla en 3.14, crear el entorno con 3.12.
+- Estado: resuelto
+
 ### ERR-006 – PyYAML no instalado en el entorno
 - Fecha: 2026-10-29
 - Fase/archivo: Fase 1, verificación de los YAML de `knowledge/` y `configs/`
@@ -44,7 +87,7 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Causa raíz: el Python 3.12 del sistema no tiene dependencias del proyecto; todavía no existe `requirements.txt` (Fase 0 pendiente).
 - Solución: se instaló PyYAML **solo en el scratchpad temporal del agente** (`pip --target`), sin tocar el entorno del sistema ni el repositorio.
 - Prevención: incluir `pyyaml` en `requirements.txt`; el Python declarado en AGENTS.md es 3.11 y el instalado es 3.12, lo que debe revisarse al crear el entorno virtual.
-- Estado: resuelto (temporal)
+- Estado: resuelto (`requirements.txt` creado y entorno `.venv` con pyyaml instalado en la Fase 0)
 
 ### ERR-005 – DOIs no verificables en algunas referencias
 - Fecha: 2026-10-29
@@ -80,7 +123,8 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
   - umbrales en g de impacto (D-028);
   - factores 2×/4× de alta frecuencia (D-010);
   - caída de presión en retención y nivel de tanque (D-022);
-  - coeficiente de variación de caudal (D-013).
+  - coeficiente de variación de caudal (D-013);
+  - curtosis de la holgura mecánica (D-041) y magnitudes de las firmas corregidas (D-042), que se calibran contra los datos en la Fase 3.
 - Causa raíz: no hay datos abiertos ni normas accesibles para esos valores en prensas, compresores, bandas y CNC.
 - Solución: se registran como **supuestos con confianza baja** y se justifican por la física de la falla.
 - Prevención: el Revisor debe intentar una segunda fuente para cada uno; si no la encuentra, el documento final los declara en *Limitaciones*. Además, conviene un análisis de sensibilidad de M0 a esos umbrales.

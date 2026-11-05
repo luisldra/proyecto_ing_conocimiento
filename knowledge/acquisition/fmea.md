@@ -1,6 +1,6 @@
 # FMEA – Metal Tech
 
-> Versión legible de [fmea.yaml](fmea.yaml), que es la fuente máquina-legible; ambas tienen el mismo contenido. Autor: agente Investigador, Fase 1 (2026-10-29). Las decisiones D-NNN están en [decisiones.md](decisiones.md).
+> Versión legible de [fmea.yaml](fmea.yaml), que es la fuente máquina-legible; ambas tienen el mismo contenido. Autor: agente Investigador, Fase 1 (2026-10-29); 2026-11-05: se agrega `holgura_mecanica` (D-041). Las decisiones D-NNN están en [decisiones.md](decisiones.md).
 
 ## Escalas (D-035)
 
@@ -26,6 +26,7 @@ NPR = S × O × D. Los valores S/O/D son juicio documentado del agente a partir 
 | eje acople | `desalineacion_eje` | `vibracion_alerta`, `vibracion_creciente`, `vibracion_2x_elevada`, `vibracion_axial_alta` | montaje incorrecto, pata coja, dilatacion termica, asentamiento de base | alineacion laser, corregir pata coja, reapriete anclajes | 6 | 6 | 3 | **108** | D-003, D-004, D-011 |
 | ventilacion | `sobrecalentamiento_ventilacion` | `temp_devanado_alta`, `corriente_en_rango` | rejillas aletas sucias, ventilador danado, temperatura ambiente alta, operacion a baja velocidad con variador | limpiar carcasa y rejillas, verificar ventilador, ventilacion forzada si baja velocidad | 7 | 5 | 3 | **105** | D-005, D-033 |
 | carga accionada | `sobrecarga_mecanica` | `sobrecorriente`, `corriente_alta`, `temp_devanado_alta` | atasco de la maquina accionada, freno arrastrando, proceso fuera de diseno | verificar carga, comparar con corriente de placa y fs, ajustar proteccion | 7 | 5 | 3 | **105** | D-005, D-007 |
+| base anclajes | `holgura_mecanica` | `vibracion_alerta`, `vibracion_impulsiva`, `vibracion_2x_elevada` | tornilleria de anclaje floja, base o soldaduras agrietadas, grout degradado, holgura en alojamiento de rodamiento, pata coja | reapriete con torque, reparar base o regrout, calzar pata coja, reemplazar rodamiento o acople con ajuste estrecho, analisis de vibracion post correccion | 6 | 4 | 4 | **96** | D-011, D-041 |
 | rotor | `desbalanceo_rotor` | `vibracion_alerta`, `vibracion_creciente`, `vibracion_1x_dominante` | acumulacion de suciedad, perdida de masa ventilador, barras de rotor danadas | limpieza, balanceo en sitio | 6 | 4 | 3 | **72** | D-003, D-011 |
 
 ## Bomba centrífuga (`bomba_centrifuga`)
@@ -36,6 +37,7 @@ NPR = S × O × D. Los valores S/O/D son juicio documentado del agente a partir 
 | impulsor | `cavitacion` | `margen_npsh_bajo`, `margen_npsh_insuficiente`, `vibracion_hf_alta`, `caudal_inestable`, `presion_descarga_baja`, `golpeteo_percibido` | nivel bajo en succion, filtro succion obstruido, temperatura liquido alta, operacion lejos del bep | restablecer npsha, limpiar filtro succion, reducir caudal, inspeccionar erosion impulsor | 8 | 5 | 4 | **160** | D-012, D-013 |
 | rodamientos | `desgaste_rodamiento` | `vibracion_impulsiva`, `vibracion_hf_alta`, `temp_rodamiento_alta` | fatiga, contaminacion del aceite, sobrecarga axial por operacion fuera bep | analisis envolvente, cambio de rodamientos, revisar lubricante | 8 | 5 | 4 | **160** | D-009, D-010 |
 | carcasa succion | `obstruccion_bomba` | `caudal_bajo`, `corriente_baja`, `presion_descarga_baja` | objetos extranos, incrustaciones, canastilla sucia, valvula parcialmente cerrada | limpiar canastilla e impulsor, verificar valvulas | 6 | 5 | 4 | **120** | D-014 |
+| base anclajes | `holgura_mecanica` | `vibracion_alerta`, `vibracion_impulsiva`, `vibracion_2x_elevada` | tornilleria de anclaje floja, base o soldaduras agrietadas, grout degradado, holgura en alojamiento de rodamiento, pata coja | reapriete con torque, reparar base o regrout, calzar pata coja, reemplazar rodamiento o acople con ajuste estrecho, analisis de vibracion post correccion | 6 | 4 | 4 | **96** | D-011, D-041 |
 | eje acople | `desalineacion_eje` | `vibracion_creciente`, `vibracion_2x_elevada`, `vibracion_axial_alta` | esfuerzos de tuberia, montaje, dilatacion termica | alineacion laser, revisar soportes de tuberia | 6 | 5 | 3 | **90** | D-004, D-011 |
 | impulsor | `desbalanceo_rotor` | `vibracion_alerta`, `vibracion_1x_dominante` | erosion por cavitacion, incrustaciones en impulsor | balanceo del impulsor, reemplazo del impulsor | 5 | 3 | 3 | **45** | D-003, D-011 |
 
@@ -48,6 +50,7 @@ NPR = S × O × D. Los valores S/O/D son juicio documentado del agente a partir 
 | valvula admision | `falla_valvula_admision` | `presion_descarga_baja`, `corriente_baja` | solenoide de control, barniz en el piston, filtro de aire obstruido | revisar apertura en carga, limpiar o reparar valvula, cambiar filtro de aire | 6 | 4 | 4 | **96** | D-017 |
 | separador aceite | `obstruccion_separador` | `dp_separador_alto`, `presion_descarga_baja` | fin de vida del elemento, aceite degradado o barnizado | cambiar elemento separador, cambiar aceite | 6 | 5 | 3 | **90** | D-017, D-018 |
 | enfriador aceite | `sobrecalentamiento_compresor` | `temp_descarga_alta`, `temp_descarga_critica`, `corriente_en_rango`, `calor_percibido` | enfriador sucio, nivel de aceite bajo, aceite degradado, valvula termostatica, ventilacion de sala deficiente | limpiar enfriador, reponer o cambiar aceite, verificar termostatica, mejorar ventilacion | 8 | 5 | 2 | **80** | D-016 |
+| base anclajes | `holgura_mecanica` | `vibracion_alerta`, `vibracion_impulsiva`, `vibracion_2x_elevada` | tornilleria de anclaje floja, base o soldaduras agrietadas, grout degradado, holgura en alojamiento de rodamiento, pata coja | reapriete con torque, reparar base o regrout, calzar pata coja, reemplazar rodamiento o acople con ajuste estrecho, analisis de vibracion post correccion | 6 | 3 | 4 | **72** | D-011, D-041 |
 | elemento tornillo | `desalineacion_eje` | `vibracion_alerta`, `vibracion_2x_elevada`, `vibracion_axial_alta` | montaje del acople, desgaste del acople | alineacion, cambio de elemento elastico | 6 | 3 | 3 | **54** | D-011 |
 
 ## Prensa hidráulica (`prensa_hidraulica`)

@@ -1,6 +1,7 @@
 # =============================================================================
 # Metal Tech – Reglas SI-ENTONCES con factores de certeza (MYCIN)
 # Agente Investigador, Fase 1 (2026-10-29). Borrador para revisión del Revisor.
+# R41–R48 agregadas el 2026-11-05 para cerrar huecos de cobertura (D-041, D-042).
 #
 # Semántica (D-034):
 #   - "si" es una conjunción: todas las premisas deben estar activas.
@@ -344,3 +345,72 @@
   fc: 0.65
   accion: "Revisar el enfriador del husillo, la lubricación de rodamientos (aceite-aire/grasa) y la precarga; hacer ciclo de calentamiento."
   fuentes: [D-010, D-029]
+
+# ------------------- cierre de huecos de cobertura (2026-11-05) --------------------
+# Reglas R41–R48 para los modos de la FMEA que no tenían regla y para el nuevo modo
+# holgura_mecanica (D-041, D-042). Misma semántica y política de FC que arriba.
+- id: R41
+  activo: bomba_centrifuga
+  si: [vibracion_alerta, vibracion_1x_dominante]
+  entonces: desbalanceo_rotor
+  fc: 0.7
+  accion: "Inspeccionar el impulsor por erosión de cavitación o incrustaciones; balancear o reemplazar el impulsor. Descartar antes la desalineación y la holgura."
+  fuentes: [D-003, D-011]
+
+- id: R42
+  activo: compresor_tornillo
+  si: [vibracion_alerta, vibracion_2x_elevada, vibracion_axial_alta]
+  entonces: desalineacion_eje
+  fc: 0.7
+  accion: "Verificar la alineación motor-elemento tornillo y el estado del elemento elástico del acople; realinear con láser."
+  fuentes: [D-003, D-011]
+
+- id: R43
+  activo: banda_transportadora
+  si: [vibracion_impulsiva, temp_rodamiento_alta]
+  entonces: desgaste_rodamiento
+  fc: 0.65
+  accion: "Medir con estetoscopio o análisis de envolvente en el tambor motriz; revisar la lubricación y planificar el cambio del rodamiento del tambor."
+  fuentes: [D-009, D-010]
+
+- id: R44
+  activo: banda_transportadora
+  si: [sobrecorriente]
+  entonces: sobrecarga_mecanica
+  fc: 0.7
+  accion: "Despejar atascos de material, verificar la carga de piezas sobre la banda y el estado del motorreductor; comparar con la corriente de placa."
+  fuentes: [D-007, D-024]
+
+- id: R45
+  activo: centro_cnc
+  si: [vibracion_impulsiva, vibracion_hf_alta, temp_husillo_alta]
+  entonces: desgaste_rodamiento
+  fc: 0.65
+  accion: "Análisis de envolvente en el cabezal; revisar historial de colisiones y la lubricación; planificar la reconstrucción del husillo."
+  fuentes: [D-010, D-029]
+
+# holgura_mecanica: sin premisas negadas; se separa de desalineación (axial), desbalanceo (1X)
+# y rodamiento (alta frecuencia) porque la firma del simulador mantiene esas variables nominales.
+- id: R46
+  activo: motor_electrico
+  si: [vibracion_alerta, vibracion_impulsiva, vibracion_2x_elevada]
+  entonces: holgura_mecanica
+  fc: 0.6
+  accion: "Revisar torque de tornillería de anclaje, pata coja, grietas en base o soldaduras y holgura en el alojamiento del rodamiento; verificar con medición de fase."
+  fuentes: [D-011, D-041]
+
+- id: R47
+  activo: bomba_centrifuga
+  si: [vibracion_alerta, vibracion_impulsiva, vibracion_2x_elevada]
+  entonces: holgura_mecanica
+  fc: 0.6
+  accion: "Revisar anclaje de la bancada, grout y soportes de tubería; verificar ajuste del rodamiento y del acople antes de intervenir el impulsor."
+  fuentes: [D-011, D-041]
+
+- id: R48
+  activo: compresor_tornillo
+  si: [vibracion_alerta, vibracion_impulsiva, vibracion_2x_elevada]
+  entonces: holgura_mecanica
+  fc: 0.6
+  accion: "Revisar los soportes antivibratorios y el anclaje del paquete compresor; verificar ajustes del acople y del elemento tornillo con el fabricante."
+  fuentes: [D-011, D-041]

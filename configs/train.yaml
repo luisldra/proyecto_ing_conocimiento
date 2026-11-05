@@ -1,0 +1,63 @@
+# =============================================================================
+# Metal Tech – Hiperparámetros de datos, modelos y evaluación
+# Valores iniciales de la Fase 0; se ajustan en las Fases 3–5 y cada cambio
+# relevante se registra en docs/agentes/MEMORIA.md.
+# =============================================================================
+
+version: 1
+
+semillas: [42, 43, 44, 45, 46]   # varias semillas para intervalos de confianza
+semilla_principal: 42
+
+datos:
+  muestreo_min: 10               # coincide con configs/assets.yaml
+  meses: 12                      # duración simulada por unidad
+  ventana_pasos: 36              # T = 6 h de historia
+  paso_ventana: 6                # desplazamiento entre ventanas (1 h)
+  horizonte_h: 24                # H: falla en las próximas 24 h
+  particion:                     # temporal y por unidad (sin fuga de información)
+    train: 0.60
+    val: 0.20
+    test: 0.20
+  ruido:
+    sensor_faltante_prob: 0.002
+    pico_espurio_prob: 0.001
+
+modelos:
+  mlp:
+    ocultas: [128, 64]
+    dropout: 0.2
+  cnn1d:
+    canales: [32, 64]
+    kernel: 5
+    dropout: 0.2
+  lstm:
+    ocultas: 64
+    capas: 2
+    dropout: 0.2
+
+entrenamiento:
+  epocas: 60
+  batch: 256
+  lr: 0.001
+  weight_decay: 0.0001
+  perdida: focal                 # focal | ce_ponderada
+  focal_gamma: 2.0
+  early_stopping_paciencia: 8
+  calibracion: temperature_scaling
+
+fusion:                          # M3: score = alfa * p_DL + (1 - alfa) * FC_reglas
+  alfa_grid: [0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
+  umbral_alerta: 0.5
+  veto_reglas_fc_min: 0.3        # una alerta del DL sin respaldo de reglas por debajo de este FC se degrada
+
+evaluacion:
+  bootstrap_iter: 1000
+  latencia_solicitudes: 1000
+  latencia_objetivo_p95_ms: 200
+
+rutas:
+  datos: data/synthetic
+  checkpoints: checkpoints
+  tablas: reports/tables
+  figuras: reports/figures

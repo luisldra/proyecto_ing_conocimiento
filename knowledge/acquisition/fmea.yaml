@@ -1,6 +1,7 @@
 # =============================================================================
 # Metal Tech – FMEA (versión máquina-legible). Tabla legible en fmea.md.
 # Escalas S/O/D 1–10 y NPR = S*O*D según D-035. Agente Investigador, 2026-10-29.
+# 2026-11-05: se agrega holgura_mecanica en motor, bomba y compresor (D-041).
 # IDs de síntomas: configs/assets.yaml; modos de falla: configs/failure_modes.yaml.
 # =============================================================================
 version: 1
@@ -57,6 +58,16 @@ motor_electrico:
     deteccion: 3
     npr: 108
     fuentes: [D-003, D-004, D-011]
+  - componente: base_anclajes
+    modo_falla: holgura_mecanica
+    sintomas: [vibracion_alerta, vibracion_impulsiva, vibracion_2x_elevada]
+    causas: [tornilleria_de_anclaje_floja, base_o_soldaduras_agrietadas, grout_degradado, holgura_en_alojamiento_de_rodamiento, pata_coja]
+    acciones: [reapriete_con_torque, reparar_base_o_regrout, calzar_pata_coja, reemplazar_rodamiento_o_acople_con_ajuste_estrecho, analisis_de_vibracion_post_correccion]
+    severidad: 6
+    ocurrencia: 4
+    deteccion: 4
+    npr: 96
+    fuentes: [D-011, D-041]
   - componente: rotor
     modo_falla: desbalanceo_rotor
     sintomas: [vibracion_alerta, vibracion_creciente, vibracion_1x_dominante]
@@ -139,6 +150,16 @@ bomba_centrifuga:
     deteccion: 4
     npr: 160
     fuentes: [D-009, D-010]
+  - componente: base_anclajes
+    modo_falla: holgura_mecanica
+    sintomas: [vibracion_alerta, vibracion_impulsiva, vibracion_2x_elevada]
+    causas: [tornilleria_de_anclaje_floja, base_o_soldaduras_agrietadas, grout_degradado, holgura_en_alojamiento_de_rodamiento, pata_coja]
+    acciones: [reapriete_con_torque, reparar_base_o_regrout, calzar_pata_coja, reemplazar_rodamiento_o_acople_con_ajuste_estrecho, analisis_de_vibracion_post_correccion]
+    severidad: 6
+    ocurrencia: 4
+    deteccion: 4
+    npr: 96
+    fuentes: [D-011, D-041]
   - componente: eje_acople
     modo_falla: desalineacion_eje
     sintomas: [vibracion_creciente, vibracion_2x_elevada, vibracion_axial_alta]
@@ -211,6 +232,16 @@ compresor_tornillo:
     deteccion: 5
     npr: 135
     fuentes: [D-010]
+  - componente: base_anclajes
+    modo_falla: holgura_mecanica
+    sintomas: [vibracion_alerta, vibracion_impulsiva, vibracion_2x_elevada]
+    causas: [tornilleria_de_anclaje_floja, base_o_soldaduras_agrietadas, grout_degradado, holgura_en_alojamiento_de_rodamiento, pata_coja]
+    acciones: [reapriete_con_torque, reparar_base_o_regrout, calzar_pata_coja, reemplazar_rodamiento_o_acople_con_ajuste_estrecho, analisis_de_vibracion_post_correccion]
+    severidad: 6
+    ocurrencia: 3
+    deteccion: 4
+    npr: 72
+    fuentes: [D-011, D-041]
   - componente: elemento_tornillo
     modo_falla: desalineacion_eje
     sintomas: [vibracion_alerta, vibracion_2x_elevada, vibracion_axial_alta]

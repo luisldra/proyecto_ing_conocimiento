@@ -19,7 +19,7 @@
 |---|---|
 | V1 | Triangulación: ≥ 2 fuentes concordantes o 1 norma |
 | V2 | Resolución de conflictos por el valor más conservador, registrada en la D-NNN |
-| V3 | Coherencia cruzada automática entre YAML: IDs de síntomas, modos y activos, y NPR = S·O·D (script temporal del agente; los tests formales llegan en la Fase 2) |
+| V3 | Coherencia cruzada automática entre YAML: IDs de síntomas, modos y activos, NPR = S·O·D, cobertura modo ↔ FMEA ↔ regla y firma ↔ umbrales (`tests/test_conocimiento.py`, desde 2026-11-05) |
 | V4 | Revisión cruzada por el agente Revisor (pendiente) |
 | V5 | Confirmación con datasets públicos (pendiente, en la Fase 3) |
 
@@ -59,6 +59,7 @@
 | 30 | Lei et al. (2018); Jardine et al. (2006) | T2 | Proceso de pronóstico de extremo a extremo; formas de degradación | Declarativo | V1 | D-001, D-037 |
 | 31 | Kusiak (2024); Cummins et al. (2024); Matzka (2020) | T2 | XAI en manufactura; XAI federada; explicaciones vinculadas al dominio | Declarativo | V1 | D-039 |
 | 32 | Física de la falla (curva de potencia, fricción, viscosidad, Montsinger) | T5 | Direcciones de cambio cuando no hay fuente numérica | Heurístico | Sin V1: confianza baja | D-007, D-014, D-023, D-025 |
+| 33 | Fluke (2025); Acoem (s. f.-b) | T3 | Holgura mecánica: armónicos 2X/3X de la velocidad de giro, impactos, fase inestable, causas y acciones | Declarativo + procedimental | V1 parcial (2 guías de fabricantes de instrumentos, sin norma); la curtosis es supuesto | D-041 |
 
 ## Distribución por tipo de conocimiento
 

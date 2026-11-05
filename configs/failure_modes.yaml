@@ -17,6 +17,15 @@
 #              cambiar (p. ej. la temperatura de rodamiento solo sube al final).
 #   duracion_h: [min, max] duración típica de la degradación hasta la falla.
 #   sintomas:  síntomas esperados (IDs del catálogo de assets.yaml).
+#   componente: componente genérico del modo; si un activo lo llama distinto, se declara en
+#              componentes_por_activo: {activo: componente}.
+#
+# Convenciones de coherencia (D-042; verificadas por tests/test_conocimiento.py):
+#   - La firma es compartida entre los activos del modo: una variable que el activo no define
+#     se ignora (p. ej. temp_husillo_c en un motor).
+#   - Para cada activo, la firma debe alcanzar el umbral de TODOS los síntomas medidos de su
+#     fila FMEA y de las premisas de sus reglas. El valor final se calcula como indica "cambio".
+#   - La temperatura de rodamiento alcanza el nivel de disparo al momento de la falla (D-042).
 # =============================================================================
 
 version: 1
@@ -54,12 +63,13 @@ modos_falla:
     nombre: Desgaste/defecto localizado de rodamiento (pista o elemento rodante)
     activos: [motor_electrico, bomba_centrifuga, compresor_tornillo, banda_transportadora, centro_cnc]
     componente: rodamientos
+    componentes_por_activo: {centro_cnc: rodamientos_husillo}
     firma:
       - {variable: vib_hf_rel, direccion: "+", cambio: {tipo: factor, valor: 6.0}, forma: exponencial, retardo_frac: 0.0}
       - {variable: vib_curtosis, direccion: "+", cambio: {tipo: valor, valor: 8.0}, forma: exponencial, retardo_frac: 0.1}
       - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 5.0}, forma: exponencial, retardo_frac: 0.5}
-      - {variable: temp_rodamiento_c, direccion: "+", cambio: {tipo: delta, valor: 15}, forma: exponencial, retardo_frac: 0.7}
-      - {variable: temp_husillo_c, direccion: "+", cambio: {tipo: delta, valor: 15}, forma: exponencial, retardo_frac: 0.7}
+      - {variable: temp_rodamiento_c, direccion: "+", cambio: {tipo: delta, valor: 35}, forma: exponencial, retardo_frac: 0.7}   # 15 -> 35 (D-042)
+      - {variable: temp_husillo_c, direccion: "+", cambio: {tipo: delta, valor: 25}, forma: exponencial, retardo_frac: 0.7}      # 15 -> 25 (D-042)
     degradacion: {forma: exponencial, duracion_h: [168, 1440]}
     calibracion: "Forma exponencial tardía como en NASA IMS (falla de pista externa en test 2) y CWRU para firmas de impacto (D-036)."
     sintomas: [vibracion_impulsiva, vibracion_hf_alta, vibracion_hf_critica, temp_rodamiento_alta]
@@ -69,6 +79,7 @@ modos_falla:
     nombre: Desalineación de ejes/acople
     activos: [motor_electrico, bomba_centrifuga, compresor_tornillo]
     componente: eje_acople
+    componentes_por_activo: {compresor_tornillo: elemento_tornillo}
     firma:
       - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 4.0}, forma: lineal, retardo_frac: 0.0}
       - {variable: vib_2x_1x_ratio, direccion: "+", cambio: {tipo: valor, valor: 0.9}, forma: lineal, retardo_frac: 0.0}
@@ -82,12 +93,26 @@ modos_falla:
     nombre: Desbalanceo de rotor/impulsor
     activos: [motor_electrico, bomba_centrifuga]
     componente: rotor
+    componentes_por_activo: {bomba_centrifuga: impulsor}
     firma:
       - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 4.0}, forma: lineal, retardo_frac: 0.0}
       - {variable: vib_1x_frac, direccion: "+", cambio: {tipo: valor, valor: 0.9}, forma: lineal, retardo_frac: 0.0}
     degradacion: {forma: lineal, duracion_h: [720, 2160]}
     sintomas: [vibracion_alerta, vibracion_creciente, vibracion_1x_dominante]
     fuentes: [D-003, D-011]
+
+  holgura_mecanica:
+    nombre: Holgura mecánica (anclajes flojos, base degradada, ajuste de rodamiento o acople suelto)
+    activos: [motor_electrico, bomba_centrifuga, compresor_tornillo]
+    componente: base_anclajes
+    firma:
+      - {variable: vib_curtosis, direccion: "+", cambio: {tipo: valor, valor: 5.0}, forma: lineal, retardo_frac: 0.0}
+      - {variable: vib_2x_1x_ratio, direccion: "+", cambio: {tipo: valor, valor: 0.8}, forma: lineal, retardo_frac: 0.0}
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 4.0}, forma: lineal, retardo_frac: 0.2}
+    degradacion: {forma: lineal, duracion_h: [72, 720]}
+    calibracion: "Se mantienen en nivel nominal vib_axial_radial_ratio, vib_1x_frac y vib_hf_rel para separar la holgura de la desalineación, el desbalanceo y el desgaste de rodamiento (las reglas no admiten premisas negadas; D-041)."
+    sintomas: [vibracion_alerta, vibracion_impulsiva, vibracion_2x_elevada]
+    fuentes: [D-011, D-041]
 
   degradacion_aislamiento:
     nombre: Degradación térmica del aislamiento del devanado
@@ -96,7 +121,7 @@ modos_falla:
     firma:
       - {variable: temp_devanado_c, direccion: "+", cambio: {tipo: delta, valor: 50}, forma: exponencial, retardo_frac: 0.0}
       - {variable: desbalance_corriente_pct, direccion: "+", cambio: {tipo: valor, valor: 8}, forma: exponencial, retardo_frac: 0.3}
-      - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 8}, forma: exponencial, retardo_frac: 0.5}
+      - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 30}, forma: exponencial, retardo_frac: 0.5}   # 8 -> 30 (D-042)
     degradacion: {forma: exponencial, duracion_h: [720, 4320]}
     sintomas: [temp_devanado_alta, desbalance_corriente_alto, olor_quemado_percibido]
     fuentes: [D-005, D-006, D-032]
@@ -107,7 +132,7 @@ modos_falla:
     componente: contactor
     firma:
       - {variable: desbalance_corriente_pct, direccion: "+", cambio: {tipo: valor, valor: 25}, forma: intermitente, retardo_frac: 0.0}
-      - {variable: temp_devanado_c, direccion: "+", cambio: {tipo: delta, valor: 35}, forma: intermitente, retardo_frac: 0.2}
+      - {variable: temp_devanado_c, direccion: "+", cambio: {tipo: delta, valor: 50}, forma: intermitente, retardo_frac: 0.2}   # 35 -> 50 (D-042)
       - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 15}, forma: intermitente, retardo_frac: 0.2}
     degradacion: {forma: intermitente, duracion_h: [24, 336]}
     sintomas: [desbalance_corriente_critico, temp_devanado_alta]
@@ -121,7 +146,7 @@ modos_falla:
       - {variable: disparos_variador_24h, direccion: "+", cambio: {tipo: valor, valor: 5}, forma: intermitente, retardo_frac: 0.0}
       - {variable: thd_tension_pct, direccion: "+", cambio: {tipo: valor, valor: 10}, forma: lineal, retardo_frac: 0.0}
       - {variable: tension_bus_dc_pct, direccion: "+", cambio: {tipo: valor, valor: 118}, forma: intermitente, retardo_frac: 0.3}
-      - {variable: temp_variador_c, direccion: "+", cambio: {tipo: delta, valor: 25}, forma: lineal, retardo_frac: 0.2}
+      - {variable: temp_variador_c, direccion: "+", cambio: {tipo: delta, valor: 30}, forma: lineal, retardo_frac: 0.2}   # 25 -> 30 (D-042)
     degradacion: {forma: intermitente, duracion_h: [24, 336]}
     sintomas: [disparos_intermitentes, disparos_frecuentes, distorsion_armonica_alta, corriente_en_rango]
     fuentes: [D-030]
@@ -130,9 +155,10 @@ modos_falla:
     nombre: Sobrecarga mecánica / paro por sobrecorriente
     activos: [motor_electrico, banda_transportadora]
     componente: carga_accionada
+    componentes_por_activo: {banda_transportadora: motorreductor}
     firma:
       - {variable: corriente_pct, direccion: "+", cambio: {tipo: valor, valor: 125}, forma: escalon, retardo_frac: 0.0}
-      - {variable: temp_devanado_c, direccion: "+", cambio: {tipo: delta, valor: 40}, forma: lineal, retardo_frac: 0.0}
+      - {variable: temp_devanado_c, direccion: "+", cambio: {tipo: delta, valor: 50}, forma: lineal, retardo_frac: 0.0}   # 40 -> 50 (D-042)
       - {variable: disparos_variador_24h, direccion: "+", cambio: {tipo: valor, valor: 2}, forma: intermitente, retardo_frac: 0.5}
     degradacion: {forma: escalon, duracion_h: [1, 24]}
     sintomas: [sobrecorriente, corriente_alta, temp_devanado_alta]
@@ -248,7 +274,7 @@ modos_falla:
     firma:
       - {variable: caida_presion_bar_min, direccion: "+", cambio: {tipo: valor, valor: 12}, forma: exponencial, retardo_frac: 0.0}
       - {variable: tiempo_ciclo_pct, direccion: "+", cambio: {tipo: valor, valor: 122}, forma: exponencial, retardo_frac: 0.2}
-      - {variable: temp_aceite_c, direccion: "+", cambio: {tipo: delta, valor: 10}, forma: exponencial, retardo_frac: 0.3}
+      - {variable: temp_aceite_c, direccion: "+", cambio: {tipo: delta, valor: 15}, forma: exponencial, retardo_frac: 0.3}   # 10 -> 15 (D-042)
     degradacion: {forma: exponencial, duracion_h: [336, 2160]}
     sintomas: [caida_presion_retencion, tiempo_ciclo_alto, temp_aceite_alta]
     fuentes: [D-020, D-022]
@@ -271,7 +297,7 @@ modos_falla:
     firma:
       - {variable: presion_sistema_pct, direccion: "+", cambio: {tipo: valor, valor: 118}, forma: intermitente, retardo_frac: 0.0}
       - {variable: tiempo_ciclo_pct, direccion: "+", cambio: {tipo: valor, valor: 118}, forma: intermitente, retardo_frac: 0.0}
-      - {variable: iso4406_14um_codigo, direccion: "+", cambio: {tipo: delta, valor: 2}, forma: lineal, retardo_frac: 0.0}
+      - {variable: iso4406_14um_codigo, direccion: "+", cambio: {tipo: delta, valor: 3}, forma: lineal, retardo_frac: 0.0}   # 2 -> 3 (D-042)
       - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 10}, forma: intermitente, retardo_frac: 0.2}
     degradacion: {forma: intermitente, duracion_h: [24, 336]}
     sintomas: [presion_sistema_alta, tiempo_ciclo_alto, aceite_contaminado, prensa_dura_percibida]
@@ -295,7 +321,7 @@ modos_falla:
     componente: banda_empalme
     firma:
       - {variable: desvio_lateral_mm, direccion: "+", cambio: {tipo: valor, valor: 60}, forma: lineal, retardo_frac: 0.0}
-      - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 12}, forma: lineal, retardo_frac: 0.4}
+      - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 33}, forma: lineal, retardo_frac: 0.4}   # 12 -> 33 (D-042)
     degradacion: {forma: lineal, duracion_h: [24, 336]}
     sintomas: [desvio_banda, corriente_alta]
     fuentes: [D-024]
@@ -331,7 +357,7 @@ modos_falla:
     firma:
       - {variable: vib_curtosis, direccion: "+", cambio: {tipo: valor, valor: 6.5}, forma: exponencial, retardo_frac: 0.0}
       - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 3.0}, forma: exponencial, retardo_frac: 0.4}
-      - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 18}, forma: exponencial, retardo_frac: 0.5}
+      - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 35}, forma: exponencial, retardo_frac: 0.5}   # 18 -> 35 (D-042)
       - {variable: desvio_lateral_mm, direccion: "+", cambio: {tipo: valor, valor: 20}, forma: lineal, retardo_frac: 0.6}
     degradacion: {forma: exponencial, duracion_h: [168, 1440]}
     sintomas: [vibracion_impulsiva, corriente_alta, cascabeleo_percibido]

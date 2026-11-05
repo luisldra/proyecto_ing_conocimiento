@@ -3,6 +3,8 @@
 # Fuente única de verdad (junto con knowledge/). Cada umbral cita su decisión
 # D-NNN en knowledge/acquisition/decisiones.md.
 # Generado por: agente Investigador, Fase 1 (2026-10-29).
+# Cierre de huecos (2026-11-05, D-041/D-042): componente base_anclajes y carga_accionada;
+# variables vib_2x_1x_ratio y vib_axial_radial_ratio en compresor_tornillo.
 #
 # Convenciones:
 #   direccion: alta  -> el síntoma aparece cuando valor >= umbral
@@ -28,7 +30,7 @@ activos:
     velocidad_rpm: 1780
     clase_aislamiento: F     # 155 °C, con calentamiento de clase B (D-005)
     soporte: rigido          # D-003
-    componentes: [estator_devanado, rotor, rodamientos, eje_acople, ventilacion, contactor, variador]
+    componentes: [estator_devanado, rotor, rodamientos, eje_acople, ventilacion, contactor, variador, carga_accionada, base_anclajes]
     variables:
       vib_rms_mm_s:        {unidad: mm/s RMS, direccion: alta, nominal: [0.5, 1.4], alerta: 2.8, critico: 4.5, fuentes: [D-003]}
       vib_hf_rel:          {unidad: adimensional, direccion: alta, nominal: [0.8, 1.2], alerta: 2.0, critico: 4.0, fuentes: [D-010]}
@@ -51,7 +53,7 @@ activos:
     potencia_kw: 22
     velocidad_rpm: 3550
     soporte: rigido
-    componentes: [impulsor, carcasa_succion, sello_mecanico, rodamientos, eje_acople]
+    componentes: [impulsor, carcasa_succion, sello_mecanico, rodamientos, eje_acople, base_anclajes]
     variables:
       vib_rms_mm_s:        {unidad: mm/s RMS, direccion: alta, nominal: [0.5, 1.4], alerta: 2.8, critico: 4.5, fuentes: [D-003]}
       vib_hf_rel:          {unidad: adimensional, direccion: alta, nominal: [0.8, 1.2], alerta: 2.0, critico: 4.0, fuentes: [D-010, D-013]}
@@ -73,11 +75,13 @@ activos:
     potencia_kw: 55
     presion_consigna_bar: 7.5
     soporte: rigido
-    componentes: [elemento_tornillo, valvula_admision, separador_aceite, enfriador_aceite, rodamientos, red_distribucion]
+    componentes: [elemento_tornillo, valvula_admision, separador_aceite, enfriador_aceite, rodamientos, red_distribucion, base_anclajes]
     variables:
       vib_rms_mm_s:        {unidad: mm/s RMS, direccion: alta, nominal: [0.5, 1.4], alerta: 2.8, critico: 4.5, fuentes: [D-003]}
       vib_hf_rel:          {unidad: adimensional, direccion: alta, nominal: [0.8, 1.2], alerta: 2.0, critico: 4.0, fuentes: [D-010]}
       vib_curtosis:        {unidad: adimensional, direccion: alta, nominal: [2.5, 3.5], alerta: 4.0, critico: 6.0, fuentes: [D-010]}
+      vib_2x_1x_ratio:     {unidad: adimensional, direccion: alta, nominal: [0.1, 0.3], alerta: 0.5, critico: 1.0, fuentes: [D-011, D-042]}
+      vib_axial_radial_ratio: {unidad: adimensional, direccion: alta, nominal: [0.1, 0.3], alerta: 0.5, critico: 0.75, fuentes: [D-011, D-042]}
       temp_descarga_c:     {unidad: °C, direccion: alta, nominal: [75, 95], alerta: 100, critico: 110, fuentes: [D-016]}
       presion_descarga_pct: {unidad: "% de la consigna", direccion: baja, nominal: [97, 103], alerta: 93, critico: 85, fuentes: [D-017]}
       dp_separador_bar:    {unidad: bar, direccion: alta, nominal: [0.1, 0.4], alerta: 0.7, critico: 1.0, fuentes: [D-018]}

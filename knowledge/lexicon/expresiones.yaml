@@ -95,9 +95,10 @@
   modos_falla_candidatos:
     - {id: desgaste_rodamiento, fc_max: 0.5}
     - {id: falla_rodillo, fc_max: 0.4}
+    - {id: holgura_mecanica, fc_max: 0.4}
     - {id: cavitacion, fc_max: 0.3}
-  decisiones: [D-038, D-010, D-026, D-013]
-  nota: "La holgura mecánica no está modelada como modo de falla propio (hueco registrado)."
+  decisiones: [D-038, D-010, D-026, D-013, D-041]
+  nota: "La holgura mecánica se modela como modo propio desde D-041 (motor, bomba y compresor)."
 
 - id: EXP05
   expresion: "la prensa está dura"

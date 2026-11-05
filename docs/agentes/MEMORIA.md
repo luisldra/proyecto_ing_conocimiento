@@ -3,28 +3,53 @@
 > Protocolo y formato: [AGENTS.md](../../AGENTS.md) · Errores: [ERRORES.md](ERRORES.md) · Plan: [PLAN.md](../PLAN.md)
 
 ## Estado actual
-- **Fase en curso:** Fase 1 – Adquisición del conocimiento (borrador terminado, en revisión).
-- **Última tarea:** el agente Investigador construyó la base de conocimiento:
-  - 40 decisiones;
-  - 30 modos de falla;
-  - 38 filas FMEA;
-  - 40 reglas;
-  - 10 expresiones;
-  - 63 síntomas;
-  - 6 datasets de referencia.
-- **Siguiente tarea:** revisión cruzada del agente **Revisor de conocimiento** sobre `knowledge/` y `configs/`:
-  - respaldo ≥ 2 fuentes o 1 norma;
-  - contradicciones y huecos;
-  - decisiones de confianza baja (ver ERR-003).
-- **Bloqueos:** ninguno. Las normas de pago no se leyeron en su texto oficial (ERR-001).
+- **Fase en curso:** Fase 0 cerrada (salvo reparto de roles y publicación en GitHub); Fase 1 con los huecos de cobertura cerrados, a la espera de la revisión del Revisor.
+- **Última tarea:** cierre de huecos de la Fase 1 (D-041, D-042, ERR-010). La base de conocimiento queda con 31 modos de falla, 41 filas FMEA, 48 reglas (R01–R48), 10 expresiones y 63 síntomas. `pytest`: 39 pruebas OK, `ruff` limpio.
+- **Siguiente tarea:** Fase 2 – ontología (`kb/ontology.py`), motor de reglas (`kb/rules_engine.py`) y léxico (`kb/lexicon.py`) con sus tests. La revisión cruzada del agente **Revisor de conocimiento** sigue pendiente y puede hacerse en paralelo.
+- **Bloqueos:** ninguno. Abiertos: normas de pago sin texto oficial (ERR-001), umbrales sin segunda fuente (ERR-003), Java no instalado para HermiT (ERR-008).
 - **Pendiente por confirmar:**
   - definición exacta de RA/R1–R6 con el docente;
   - fecha de entrega;
-  - acceso institucional a normas ISO/IEC para verificar D-003, D-004, D-012 y D-030.
+  - acceso institucional a normas ISO/IEC para verificar D-003, D-004, D-012 y D-030;
+  - reparto de roles del equipo y push del commit inicial al remoto `luisldra/proyecto_ing_conocimiento`;
+  - instalar o no un JDK 17 (ERR-008).
 
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-05] Fase 1 – Cierre de huecos de cobertura y coherencia (agente: Revisor de conocimiento / QA)
+- Hecho:
+  - Nuevo test `tests/test_conocimiento.py` (13 pruebas): referencias entre YAML, cobertura modo ↔ FMEA ↔ regla, componentes, trazabilidad regla → decisión y que cada firma active los síntomas medidos de su FMEA y de sus reglas. Reveló huecos que el chequeo anterior no veía (ERR-010).
+  - Reglas **R41–R45** para los 5 modos de la FMEA sin regla (bomba/desbalanceo, compresor/desalineación, banda/rodamiento, banda/sobrecarga, CNC/rodamiento). Registradas en D-042.
+  - Modo nuevo **`holgura_mecanica`** (motor, bomba, compresor) con reglas R46–R48, 3 filas FMEA, firma y candidato en EXP04. Registrado en D-041, con dos fuentes nuevas (Fluke, 2025; Acoem, s. f.-b).
+  - `assets.yaml`: variables `vib_2x_1x_ratio` y `vib_axial_radial_ratio` en el compresor; componentes `carga_accionada` y `base_anclajes`.
+  - `failure_modes.yaml`: `componentes_por_activo` para los componentes que cambian de nombre entre activos, y 10 firmas corregidas para que alcancen los umbrales (tabla en D-042). Los umbrales no se tocaron.
+  - Corrección de D-010 (el aumento de 8–15 °C es el inicio de la etapa tardía, no el valor al fallar).
+  - `fmea.yaml`/`fmea.md`, `rules.yaml`, `expresiones.yaml` y `matriz_adquisicion.md` actualizados.
+- Pendiente:
+  - Revisión cruzada del Revisor (V4) sobre todo lo anterior; D-041 y D-042 incluidas.
+  - Las magnitudes de las firmas corregidas y la curtosis de la holgura son supuestos que se calibran en la Fase 3.
+  - La lubricación deficiente fuera del motor sigue subsumida en `desgaste_rodamiento`.
+  - Instalar JDK 17 (ERR-008), reparto de roles y push a GitHub.
+- Errores: ERR-010 (resuelto). ERR-003 ampliado con los nuevos supuestos.
+- Decisiones: D-041 (holgura mecánica, confianza media) y D-042 (cierre de huecos, confianza media; magnitudes de firma baja). Las firmas se ajustaron y los umbrales normativos no.
+
+## [2026-11-05] Fase 0 – Infraestructura del repositorio (agente: QA/Documentación)
+- Hecho:
+  - Revisión de contexto: los YAML de Fase 1 son consistentes (referencias de síntomas, modos y activos; NPR = S·O·D). Se confirmaron 5 modos FMEA sin regla y variables de firma ausentes en algunos activos.
+  - `.venv` con Python 3.14.7; instaladas torch 2.15 (CPU), pandas, scikit-learn, pyarrow, shap, captum, owlready2, FastAPI, Streamlit, pyvis, plotly, ruff y pytest.
+  - Creados `requirements.txt`, `pyproject.toml` (ruff + pytest + paquete editable), `.gitignore`, `README.md`, `data/README.md` (declaración de datos sintéticos) y `configs/train.yaml` (ventana 36 pasos, H = 24 h, partición 60/20/20, 5 semillas, fusión M3).
+  - Esqueleto `src/metaltech/{data,kb,models,hybrid,xai,metrics,api,dashboard}` y carpetas con `.gitkeep`.
+  - `src/metaltech/proceso.py`: verifica que todo ERR citado en MEMORIA exista en ERRORES.
+  - `tests/`: 26 pruebas (importaciones, subpaquetes, carga de YAML, coherencia de `train.yaml`, proceso). `ruff check .` sin observaciones.
+  - `AGENTS.md`: versión de Python y comandos actualizados.
+- Pendiente:
+  - Reparto de roles del equipo y push al remoto de GitHub (requiere confirmación del usuario).
+  - Decidir sobre JDK 17 (ERR-008).
+  - Huecos de la Fase 1 (5 reglas faltantes, variables de firma ausentes, modo de holgura mecánica).
+- Errores: ERR-007, ERR-008, ERR-009 (ver [ERRORES.md](ERRORES.md)); ERR-006 queda resuelto.
+- Decisiones: se usa Python 3.14 (el único instalado) con `requires-python >= 3.11`; `requirements.txt` fija cotas mínimas y no versiones exactas.
 
 ## [2026-10-29] Fase 1 – Adquisición del conocimiento por revisión documental (agente: Investigador)
 - Hecho:

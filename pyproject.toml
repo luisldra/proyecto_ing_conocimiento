@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "metaltech"
+version = "0.1.0"
+description = "Mantenimiento predictivo explicable (Deep Learning + base de conocimiento) para la planta ficticia Metal Tech"
+readme = "README.md"
+requires-python = ">=3.11"
+# Las dependencias se instalan desde requirements.txt (fuente única).
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "java: requiere JDK instalado (razonador HermiT de owlready2)",
+    "lento: pruebas que entrenan modelos o generan datos grandes",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "W"]
+ignore = ["E501"]  # nombres de dominio en español y tablas largas

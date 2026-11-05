@@ -82,7 +82,7 @@ Nunca dar por terminada una tarea sin el registro en MEMORIA. Nunca ocultar un e
 
 ## 7. Convenciones
 
-- **Lenguaje:** Python 3.11. El código usa nombres del dominio en español (`modo_falla`, `sintoma`, `regla`) y nombres técnicos en inglés cuando son estándar (`train`, `forward`).
+- **Lenguaje:** Python ≥ 3.11 (el entorno del equipo usa 3.14; ver ERR-007). El código usa nombres del dominio en español (`modo_falla`, `sintoma`, `regla`) y nombres técnicos en inglés cuando son estándar (`train`, `forward`).
 - **Estilo:** ruff y type hints en funciones públicas. Docstrings breves.
 - **Fuente única de verdad del conocimiento:** los YAML de `knowledge/` y `configs/`. La ontología `.owl` se **genera** desde ellos y no se edita a mano sin reflejar el cambio en los YAML.
 - **Reproducibilidad:** semillas fijas en `configs/train.yaml`. Todo experimento debe poder regenerarse por comando.
@@ -93,8 +93,12 @@ Nunca dar por terminada una tarea sin el registro en MEMORIA. Nunca ocultar un e
 ### Comandos (se completan a medida que existan)
 
 ```bash
-pip install -r requirements.txt
+python -m venv .venv && source .venv/Scripts/activate   # PowerShell: .venv\Scripts\Activate.ps1
+pip install -r requirements.txt && pip install -e . --no-deps
 pytest
+ruff check .
+python -m metaltech.proceso          # verifica enlaces MEMORIA <-> ERRORES
+# --- se habilitan en fases posteriores ---
 python -m metaltech.data.generator --config configs/assets.yaml
 python -m metaltech.models.train --config configs/train.yaml
 uvicorn metaltech.api.main:app --reload

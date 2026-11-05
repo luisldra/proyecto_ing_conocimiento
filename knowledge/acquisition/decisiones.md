@@ -1,6 +1,6 @@
 # Registro de decisiones de conocimiento (ADR) – Metal Tech
 
-> **Autor:** agente Investigador, Fase 1 · **Fecha:** 2026-10-29 · **Estado:** borrador, pendiente de la revisión cruzada del agente Revisor.
+> **Autor:** agente Investigador, Fase 1 · **Fecha:** 2026-10-29 (D-041 y D-042: 2026-11-05) · **Estado:** borrador, pendiente de la revisión cruzada del agente Revisor.
 > **Técnica:** revisión documental asistida por agente (búsqueda web y lectura de fuentes). No hubo entrevistas ni participación de personas.
 > **Archivos que dependen de este registro:** [`configs/assets.yaml`](../../configs/assets.yaml), [`configs/failure_modes.yaml`](../../configs/failure_modes.yaml), [`knowledge/rules/rules.yaml`](../rules/rules.yaml), [`knowledge/lexicon/expresiones.yaml`](../lexicon/expresiones.yaml), [`fmea.yaml`](fmea.yaml) / [`fmea.md`](fmea.md), [`matriz_adquisicion.md`](matriz_adquisicion.md), [`datasets_referencia.md`](datasets_referencia.md).
 
@@ -58,6 +58,8 @@
 | D-038 | Método de formalización del léxico | media |
 | D-039 | Rol de la base de conocimiento en la explicabilidad | media |
 | D-040 | Variables relativas (`_pct`, `_rel`) en lugar de absolutas | media |
+| D-041 | Holgura mecánica (modo nuevo) | media |
+| D-042 | Cierre de huecos: cobertura de reglas, variables y firmas coherentes | media |
 
 ---
 
@@ -167,7 +169,7 @@
   - TECO-Westinghouse da una alarma de 90–110 °C y un disparo de 95–120 °C.
   - Un manual de motores Siemens da 95/105 °C para antifricción.
   - Se toma el **extremo inferior** (90/95), que es el más conservador.
-- **Fuentes:** TECO-Westinghouse (2008), con contenido leído a través del extracto del buscador porque el PDF no se pudo leer; Siemens (s. f.); Acoem (s. f.), según la cual la temperatura sube en las etapas tardías.
+- **Fuentes:** TECO-Westinghouse (2008), con contenido leído a través del extracto del buscador porque el PDF no se pudo leer; Siemens (s. f.); Acoem (s. f.-a), según la cual la temperatura sube en las etapas tardías.
 - **Confianza:** media.
 
 ## D-009 – Temperatura de rodamientos de bomba y tambor de banda
@@ -186,12 +188,13 @@
      - (4) vibración global alta y temperatura muy alta.
   2. **Curtosis:** ≈ 3 en una señal sana (gaussiana). **Alerta ≥ 4** y **crítico ≥ 6** (impactos).
   3. **Energía de alta frecuencia o envolvente** relativa a la línea base: **alerta 2×**, **crítico 4×**.
-  4. La temperatura del rodamiento sube **8–15 °C** sobre la línea base solo en la etapa tardía, por eso `retardo_frac = 0.7` en el simulador.
+  4. La temperatura del rodamiento sube **8–15 °C** sobre la línea base al comienzo de la etapa tardía, por eso `retardo_frac = 0.7` en el simulador.
+   - **Corrección 2026-11-05 (D-042):** hasta el momento de la falla (etapa 4, "temperatura muy alta") el aumento supera esos 8–15 °C. La firma termina en +35 °C (rodamiento) y +25 °C (husillo), de modo que alcanza el nivel de disparo y activa `temp_rodamiento_alta` / `temp_husillo_alta`. Con +15 °C la firma nunca llegaba a la alerta de 90 °C (motor) ni de 82 °C (bomba).
 - **Alternativas:** umbrales absolutos en gE de envolvente, que dependen del sensor y de la máquina.
 - **Conflictos:**
   - La banda de la etapa 1 difiere entre fuentes: 20–60 kHz (Acoem) frente a 250–350 kHz (UE Systems). No afecta al simulador, que usa una variable relativa.
   - Las relaciones 2×/4× **no** salen de una norma: son práctica de la industria. Ese punto tiene confianza baja.
-- **Fuentes:** Randall y Antoni (2011); Dyer y Stewart (1978), que proponen la curtosis para detectar daño de rodamientos; Acoem (s. f.); UE Systems (s. f.); Smith y Randall (2015).
+- **Fuentes:** Randall y Antoni (2011); Dyer y Stewart (1978), que proponen la curtosis para detectar daño de rodamientos; Acoem (s. f.-a); UE Systems (s. f.); Smith y Randall (2015).
 - **Confianza:** media en general; baja para los factores 2×/4×.
 
 ## D-011 – Firmas espectrales de desbalanceo y desalineación
@@ -407,7 +410,7 @@
 - **Decisión:**
   - **Ventilación obstruida:** el devanado se calienta aunque la corriente es normal (`corriente_en_rango`). El exceso de temperatura no viene de la carga sino de la falta de refrigeración.
   - **Lubricación:** el rodamiento se calienta y la energía de alta frecuencia sube, por la fricción metal-metal, con el devanado normal.
-- **Fuentes:** IEC (2022), sobre la refrigeración IC y el calentamiento; Bonnett y Soukup (1992); TECO-Westinghouse (2008); Acoem (s. f.).
+- **Fuentes:** IEC (2022), sobre la refrigeración IC y el calentamiento; Bonnett y Soukup (1992); TECO-Westinghouse (2008); Acoem (s. f.-a).
 - **Confianza:** media.
 
 ## D-034 – Factores de certeza (MYCIN)
@@ -489,6 +492,60 @@
 - **Fuentes:** ISO (2018), sobre líneas base y alarmas por cambio; Randall (2011).
 - **Confianza:** media.
 
+## D-041 – Holgura mecánica (modo de falla nuevo)
+- **Contexto:** "esto está cascabeleando" (EXP04) puede ser un rodamiento, un rodillo o una **holgura** de componentes. La Fase 1 la dejó como hueco: no tenía modo propio, de modo que el motor, la bomba y el compresor no tenían forma de explicar un traqueteo sin falla de rodamiento.
+- **Decisión:**
+  - Se agrega `holgura_mecanica` para `motor_electrico`, `bomba_centrifuga` y `compresor_tornillo` (componente `base_anclajes`). No se incluye la banda ni el CNC: no tienen la razón 2X/1X y su holgura se confunde con rodillos o con el husillo.
+  - **Firma:** vibración impulsiva (curtosis ≥ 4), componente 2X ≥ 50 % de 1X y vibración global en zona C. Según las fuentes, la holgura aparece como una serie de armónicos de la velocidad de giro (2X, 3X o más) que cambian de forma impredecible con la carga, con impactos en la forma de onda y fase inestable. Una amplitud de 2X y 3X superior al 50 % de 1X indica mayor severidad.
+  - **Separación de otras fallas** (las reglas son conjunciones y no admiten premisas negadas): la firma del simulador mantiene en nivel nominal la razón axial/radial (distingue la desalineación), la fracción 1X (distingue el desbalanceo) y la energía de alta frecuencia (distingue el rodamiento). Si en datos reales dos reglas disparan a la vez, la combinación MYCIN y la fusión M3 resuelven la ambigüedad.
+  - **Acciones:** reapriete con torque, reparación de base o regrout, calzar pata coja, reemplazo de rodamiento o acople con ajuste estrecho y medición de vibración posterior a la corrección.
+  - **Reglas:** R46–R48 con FC 0.6, el extremo inferior de la política, porque la firma es heurística.
+  - **FMEA:** S = 6, D = 4 y O = 4 (motor y bomba) o 3 (compresor); NPR de 96, 96 y 72.
+- **Alternativas:** subsumirla en `desalineacion_eje` (se pierde la acción de reapriete y el diagnóstico diferencial); modelar subarmónicos 0.5X (la variable no existe en el simulador y subiría la complejidad).
+- **Conflictos:**
+  - Las fuentes distinguen tipos de holgura (de rotor, estructural y de ajuste del eje con subarmónicos 0.5X, 1.5X…). Se modela un solo modo, genérico.
+  - Ninguna fuente consultada da la curtosis de la holgura. Que la curtosis suba se infiere de los impactos de la forma de onda; el valor de 5.0 en la firma es un supuesto.
+- **Fuentes:** Fluke (2025), sobre armónicos, impactos, fase inestable, causas y acciones; Acoem (s. f.-b), sobre los tipos de holgura y los armónicos y subarmónicos asociados; D-011, para la razón 2X/1X.
+- **Confianza:** media para la firma cualitativa; baja para la curtosis y los umbrales numéricos. Las dos fuentes son guías de fabricantes de instrumentos, no normas.
+
+## D-042 – Cierre de huecos de cobertura y coherencia firma ↔ reglas
+- **Contexto:** al comenzar la Fase 2 se verificó, de forma cruzada y con un test, que las reglas pueden dispararse con las firmas del simulador. Se encontraron tres tipos de huecos: modos de la FMEA sin regla, variables ausentes en algunos activos y firmas cuyo valor final no alcanzaba el umbral de los síntomas de sus propias reglas (ERR-010).
+- **Decisión:**
+  1. **Reglas nuevas R41–R45** para los cinco modos de la FMEA que no tenían regla:
+
+     | Regla | Activo | Modo | Premisas | FC |
+     |---|---|---|---|---|
+     | R41 | bomba | `desbalanceo_rotor` | vibración en alerta + 1X dominante | 0.70 |
+     | R42 | compresor | `desalineacion_eje` | vibración en alerta + 2X elevada + axial alta | 0.70 |
+     | R43 | banda | `desgaste_rodamiento` | vibración impulsiva + temperatura de rodamiento alta | 0.65 |
+     | R44 | banda | `sobrecarga_mecanica` | sobrecorriente | 0.70 |
+     | R45 | CNC | `desgaste_rodamiento` | impulsiva + alta frecuencia + temperatura de husillo alta | 0.65 |
+
+     Los FC siguen la política de D-034: la banda y el CNC quedan en 0.65 porque el umbral del tambor y del husillo se extrapola (D-009, D-029).
+  2. **Variables nuevas** en `compresor_tornillo`: `vib_2x_1x_ratio` y `vib_axial_radial_ratio`, con los mismos umbrales que motor y bomba (D-011). Sin ellas, la fila FMEA de desalineación del compresor no podía medirse.
+  3. **Componentes:** se agregan `carga_accionada` (motor) y `base_anclajes` (motor, bomba y compresor) a `assets.yaml`. Los modos pueden declarar `componentes_por_activo` cuando un activo llama distinto al componente: CNC → `rodamientos_husillo`, compresor → `elemento_tornillo`, bomba → `impulsor`, banda → `motorreductor`.
+  4. **Firmas corregidas** para que el valor final alcance los umbrales de sus síntomas:
+
+     | Modo | Variable | Antes | Ahora | Valor final (antes → ahora) | Umbral |
+     |---|---|---|---|---|---|
+     | `desgaste_rodamiento` | `temp_rodamiento_c` | +15 | +35 | motor 75 → 95; bomba 71.5 → 91.5 | 90 / 82 |
+     | `desgaste_rodamiento` | `temp_husillo_c` | +15 | +25 | 47.5 → 57.5 | 50 |
+     | `falla_contactor` | `temp_devanado_c` | +35 | +50 | 120 → 135 | 130 |
+     | `sobrecarga_mecanica` | `temp_devanado_c` | +40 | +50 | 125 → 135 | 130 |
+     | `degradacion_aislamiento` | `corriente_pct` | +8 | +30 | 85.5 → 107.5 | 105 |
+     | `falla_variador` | `temp_variador_c` | +25 | +30 | 72.5 → 77.5 | 75 |
+     | `fuga_interna_cilindro` | `temp_aceite_c` | +10 | +15 | 57.5 → 62.5 | 60 |
+     | `valvula_hidraulica_pegada` | `iso4406_14um_codigo` | +2 | +3 | 13.5 → 14.5 | 14 |
+     | `desalineacion_banda` | `corriente_pct` | +12 | +33 | 79.5 → 100.5 | 100 |
+     | `falla_rodillo` | `corriente_pct` | +18 | +35 | 85.5 → 102.5 | 100 |
+
+     En nueve de los diez casos se eligió el cambio mínimo que cruza el umbral con un margen pequeño; `temp_rodamiento_c` se fijó en el nivel de disparo, que es donde termina un rodamiento al fallar (D-010). Los umbrales de `assets.yaml` no se tocaron, porque se apoyan en normas y fuentes (D-003 a D-030). Las magnitudes de la firma son supuestos de calibración y, a diferencia de los umbrales, se revisarán contra los datos sintéticos en la Fase 3.
+  5. **Convención:** una variable de la firma que el activo no define se ignora (la firma es compartida entre activos). Para cada activo, la firma debe alcanzar los síntomas medidos de su fila FMEA y de las premisas de sus reglas. Lo verifica `tests/test_conocimiento.py`.
+- **Alternativas:** subir los umbrales de alerta en lugar de las firmas (se descarta: contradice las normas citadas); eliminar las filas FMEA sin regla (se descarta: pierden el diagnóstico de esos modos).
+- **Hueco que sigue abierto:** la lubricación deficiente fuera del motor se subsume en `desgaste_rodamiento` (ERR-004).
+- **Fuentes:** D-003, D-007, D-009, D-010, D-011, D-021, D-022, D-024, D-029, D-030 y D-032 (las decisiones que ya respaldaban las reglas y umbrales afectados).
+- **Confianza:** media para las reglas; baja para las magnitudes de las firmas (calibración del simulador).
+
 ---
 
 ## Resumen de conflictos registrados
@@ -507,6 +564,7 @@
 | Base de la regla de 10 °C del aceite | 40 / 60 / 75 °C | solo cualitativa | D-020 |
 | Limpieza ISO 4406 | 18/16/13 (Parker, verificado) vs. 17/15/12 (no verificado) | 18/16/13 | D-021 |
 | Año del dataset IMS | 2006 (artículo de Qiu) vs. 2007 (repositorio) | se citan ambos | D-036 |
+| Aumento de temperatura de rodamiento al fallar | +8–15 °C (D-010) vs. umbrales de alerta 82–90 °C | +35 °C al momento de la falla | D-042 |
 
 ---
 
@@ -515,7 +573,8 @@
 > Nota: las normas (ISO, IEC, NEMA, HI, IEEE, AIAG-VDA) son de pago y no se leyó su texto completo. Sus valores se tomaron de las fuentes secundarias indicadas en cada decisión. Las fuentes marcadas "[consultada de memoria]" son obras de referencia ampliamente conocidas que el agente no pudo abrir en línea; deben verificarse antes del documento final.
 
 - A Marine Blog. (2017, 10 de agosto). *NPSH – How much is enough? (theory and exam)*. https://amarineblog.com/2017/08/10/npsh-how-much-is-enough/
-- Acoem. (s. f.). *Do you know the 4 stages of bearing failure?* https://www.acoem.com/en/blog/do-you-know-the-4-stages-of-bearing-failure/
+- Acoem. (s. f.-a). *Do you know the 4 stages of bearing failure?* https://www.acoem.com/en/blog/do-you-know-the-4-stages-of-bearing-failure/
+- Acoem. (s. f.-b). *3 types of mechanical looseness: What you need to know*. https://www.acoem.com/en/?p=1172
 - AIAG & VDA. (2019). *Failure mode and effects analysis – FMEA handbook* (1.ª ed.). Automotive Industry Action Group. [consultada de memoria]
 - Air Compressor Services. (s. f.). *D185 high discharge temperature: What it means and what usually causes it*. https://aircompressorservices.com/blogs/blog/d185-high-discharge-temperature
 - ALL-TEST Pro. (s. f.). *Eliminate voltage unbalance*. https://alltestpro.com/eliminate-voltage-unbalance/
@@ -537,6 +596,7 @@
 - Fabrico. (s. f.-c). *Hydraulic cylinder drift troubleshooting*. https://www.fabrico.io/ro/blog/hydraulic-cylinder-drift-troubleshooting/
 - Fabrico. (s. f.-d). *Conveyor belt mistracking causes and fixes*. https://www.fabrico.io/blog/conveyor-belt-mistracking-causes-and-fixes/
 - Fabrico. (s. f.-e). *VFD overcurrent fault troubleshooting*. https://www.fabrico.io/es/blog/vfd-overcurrent-fault-troubleshooting/
+- Fluke. (2025, 18 de agosto). *Mechanical looseness: What it is and how to detect it*. https://www.fluke.com/en-au/learn/blog/predictive-maintenance/mechanical-looseness-what-it-is-how-to-detect
 - FridayParts. (s. f.). *How to check if a hydraulic cylinder is leaking internally*. https://www.fridayparts.com/blog/how-to-check-if-a-hydraulic-cylinder-is-leaking-internally
 - Google Patents. (2022). *US11415124B2 – Apparatus and method for detecting occurrence of cavitation*. https://patents.google.com/patent/US11415124
 - Hydraulic Institute. (2017). *ANSI/HI 9.6.1-2017 Rotodynamic pumps guideline for NPSH margin*. https://law.resource.org/pub/us/cfr/ibr/inc/ansi/ansi.hi.9.6.1.2017.pdf

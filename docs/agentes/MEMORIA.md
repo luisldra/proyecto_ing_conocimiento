@@ -16,6 +16,12 @@
 
 ## Bitácora (más reciente arriba)
 
+## [2026-11-08] Fases 3 y 4 – Documento de avances (agente: Documentación)
+- Hecho: `docs/AVANCES_FASES_3_Y_4.md`, con el recorrido de las fases, resultados, límites y guía de todos los archivos. Conteos verificados contra el repositorio.
+- Pendiente: nada de este documento; actualizarlo al cerrar la Fase 5.
+- Errores: ninguno.
+- Decisiones: ninguna.
+
 ## [2026-11-08] Fase 4 – Correcciones decididas por el equipo y reentrenamiento (agente: Datos/ML)
 - Hecho:
   - Ventanas grises y métricas de aviso temprano (D-054).

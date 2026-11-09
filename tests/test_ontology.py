@@ -50,8 +50,8 @@ def test_validacion_estructural_sin_problemas(onto):
 def test_conteos_coinciden_con_los_yaml(onto):
     c = onto.conteos()
     assert c["ModoFalla"] == len(BASE.modos) == 31
-    assert c["Regla"] == len(BASE.reglas) == 48
-    assert c["Sintoma"] == len(BASE.sintomas) == 63
+    assert c["Regla"] == len(BASE.reglas) == 55
+    assert c["Sintoma"] == len(BASE.sintomas) == 67
     assert c["ExpresionColoquial"] == len(BASE.lexico) == 10
     assert c["FilaFMEA"] == sum(len(v) for v in BASE.fmea.values()) == 41
     assert c["Activo"] == sum(a["unidades"] for a in BASE.activos.values())
@@ -194,7 +194,7 @@ def test_cli_genera_el_owl(tmp_path, capsys):
 
 
 def test_generar_escribe_el_archivo(tmp_path):
-    assert generar(tmp_path / "g.owl").conteos()["Regla"] == 48
+    assert generar(tmp_path / "g.owl").conteos()["Regla"] == 55
 
 
 # ----------------------------------------------------------------------------------------

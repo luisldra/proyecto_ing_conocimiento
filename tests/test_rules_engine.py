@@ -258,6 +258,47 @@ def test_precision_top1_de_las_reglas_sobre_las_firmas():
     assert aciertos / len(CASOS_FIN) >= 0.6, f"top-1 = {aciertos}/{len(CASOS_FIN)}"
 
 
+@pytest.mark.parametrize(("activo", "modo"), CASOS_FIN, ids=[f"{a}-{m}" for a, m in CASOS_FIN])
+def test_el_final_de_cada_falla_tiene_ese_modo_como_principal(activo, modo):
+    """D-045: las premisas ``en_rango`` separan los modos que antes empataban o se cruzaban."""
+    d = MOTOR.diagnosticar(activo, _fin_de_degradacion(activo, modo), nominales(activo))
+    assert d.principal is not None and d.principal.modo == modo, (
+        f"{activo}/{modo}: concluyó {[(c.modo, round(c.fc, 2)) for c in d.conclusiones]}"
+    )
+
+
+@pytest.mark.parametrize(("activo", "modo"), CASOS_FIN, ids=[f"{a}-{m}" for a, m in CASOS_FIN])
+@pytest.mark.parametrize("t", [0.85, 0.90, 0.95])
+def test_la_trayectoria_final_no_cruza_a_otro_modo(activo, modo, t):
+    """Tramo final (interpolación lineal): D-045 solo admite cruces antes de 0.83.
+
+    Sin conclusión no hay cruce: varias reglas se disparan recién al llegar a su umbral.
+    """
+    base = nominales(activo)
+    fin = _fin_de_degradacion(activo, modo)
+    valores = {v: base[v] + t * (fin[v] - base[v]) for v in base}
+    d = MOTOR.diagnosticar(activo, valores, base)
+    assert d.principal is None or d.principal.modo == modo, (
+        f"{activo}/{modo} en t={t}: concluyó {[(c.modo, round(c.fc, 2)) for c in d.conclusiones]}"
+    )
+
+
+@pytest.mark.parametrize(
+    "regla", [r for r in REGLAS if any(BASE.sintomas[s].get("nivel") == "en_rango" for s in r["si"])],
+    ids=lambda r: r["id"],
+)
+def test_la_premisa_en_rango_bloquea_la_regla_fuera_de_rango(regla):
+    """Una premisa ``en_rango`` deja de cumplirse cuando su variable alcanza la alerta."""
+    valores, base, percibidos = caso_positivo(regla)
+    cfg = BASE.activos[regla["activo"]]["variables"]
+    for s in (s for s in regla["si"] if BASE.sintomas[s].get("nivel") == "en_rango"):
+        variable = BASE.sintomas[s]["variable"]
+        d = MOTOR.diagnosticar(
+            regla["activo"], {**valores, variable: cfg[variable]["alerta"]}, base, percibidos
+        )
+        assert regla["id"] not in [r.id for r in d.reglas_disparadas]
+
+
 # ----------------------------------------------------------------------------------------
 # Escenarios del plan
 # ----------------------------------------------------------------------------------------
@@ -290,12 +331,14 @@ def test_la_expresion_sola_no_basta_para_diagnosticar():
     assert d.candidatos_lexico and "golpeteo_percibido" in d.sintomas
 
 
-def test_rodamiento_del_motor_combina_r03_y_r04():
+def test_rodamiento_del_motor_r03_y_r04_no_se_combinan():
+    """D-045: R03 exige temperatura en rango; con el rodamiento caliente solo queda R04."""
     vals = {**nominales("motor_electrico"), "vib_curtosis": 8.0, "vib_hf_rel": 6.0,
             "temp_rodamiento_c": 95}
     d = MOTOR.diagnosticar("motor_electrico", vals)
     assert d.principal.modo == "desgaste_rodamiento"
-    assert d.fc_de("desgaste_rodamiento") == pytest.approx(0.975)
+    assert d.principal.reglas == ["R04"]
+    assert d.fc_de("desgaste_rodamiento") == pytest.approx(0.85)
 
 
 def test_prensa_dura_con_presion_alta():

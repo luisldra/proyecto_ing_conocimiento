@@ -3,19 +3,59 @@
 > Protocolo y formato: [AGENTS.md](../../AGENTS.md) · Errores: [ERRORES.md](ERRORES.md) · Plan: [PLAN.md](../PLAN.md)
 
 ## Estado actual
-- **Fase en curso:** Fase 2 terminada (ontología, motor de reglas y léxico). Fases 0 y 1 cerradas; la revisión cruzada del Revisor sigue pendiente.
-- **Última tarea:** Fase 2 completa (D-043, D-044, ERR-011 a ERR-013). `kb/base.py`, `kb/lexicon.py`, `kb/rules_engine.py`, `kb/ontology.py`, `knowledge/ontology/metaltech.owl` (generado, validado con HermiT) y 237 pruebas nuevas. `pytest`: 276 OK sin omitidas, `ruff` limpio.
-- **Siguiente tarea:** Fase 3 – generador de datos sintéticos (`data/generator.py`) usando `valor_final`/`valor_nominal` de `kb/base.py`, `planta` de `assets.yaml` y las firmas de `failure_modes.yaml`; ficha de datos en `data/README.md`. En paralelo puede hacerse la revisión del Revisor (V4) sobre D-041 a D-044.
-- **Bloqueos:** ninguno. Abiertos: normas de pago sin texto oficial (ERR-001), umbrales sin segunda fuente (ERR-003), DOIs sin verificar (ERR-005).
+- **Fase en curso:** Fases 0, 1 y 2 hechas, revisión cruzada aplicada y repositorio resincronizado. Lista para la Fase 3.
+- **Última tarea:** resincronización tras la revisión: `metaltech.owl` regenerado y pruebas ajustadas. `pytest`: 464 OK; `ruff` limpio. La base queda en 48 decisiones, 55 reglas, 67 síntomas, 31 modos, 41 filas FMEA y 7 datasets ([revision.md](../../knowledge/acquisition/revision.md)).
+- **Siguiente tarea:** Fase 3 – generador de datos sintéticos (`data/generator.py`) usando `valor_final`/`valor_nominal` de `kb/base.py`, `planta` de `assets.yaml` y las firmas de `failure_modes.yaml`. Usar el máximo de la ventana para eventos de segundos, revisar las firmas de D-042 y tener en cuenta la detección tardía de M0 (ver la entrada del 2026-11-08).
+- **Bloqueos:** ninguno. Abiertos: normas sin texto oficial (ERR-001), supuestos sin fuente (ERR-003), ISO 20816-3:2026 e ISO 10816-7 sin revisar (ERR-015).
 - **Pendiente por confirmar:**
   - definición exacta de RA/R1–R6 con el docente;
   - fecha de entrega;
-  - acceso institucional a normas ISO/IEC para verificar D-003, D-004, D-012 y D-030;
+  - acceso institucional a ISO 20816-3:2026, ISO 10816-7 e IEEE 519;
   - reparto de roles del equipo y push de los commits al remoto `luisldra/proyecto_ing_conocimiento`.
 
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-08] Fase 2 – Resincronización tras la revisión cruzada (agente: QA)
+- Hecho:
+  - `.venv` con Python 3.12.10 y JDK 17 portable en este equipo.
+  - `knowledge/ontology/metaltech.owl` regenerado desde los YAML (55 reglas, 67 síntomas).
+  - `tests/test_ontology.py` actualizado a los nuevos conteos; prueba de R03/R04 reescrita (ya no se combinan, FC 0.85).
+  - Pruebas nuevas en `tests/test_rules_engine.py`: modo principal en las 41 firmas, sin cruces de modo en t = 0.85–0.95 y bloqueo de las premisas `en_rango` fuera de rango.
+  - Verificación: `pytest` 464 OK sin omitidas, incluidas `test_entorno.py` y HermiT; `ruff` limpio; `metaltech.proceso` OK.
+- Pendiente:
+  - Push al remoto, que requiere confirmación del usuario.
+  - Hallazgo para la Fase 3: con interpolación lineal, 7 de 41 firmas solo logran su diagnóstico correcto en t ≥ 0.85, y `motor_electrico/falla_lubricacion_rodamiento` únicamente en t = 1.0. M0 detecta tarde esos modos; es una línea base honesta, pero conviene revisar esas firmas al calibrar el simulador.
+- Errores: ERR-019 (resuelto).
+- Decisiones: ninguna de conocimiento. Se usa Python 3.12 en este equipo, dentro de `requires-python >= 3.11`.
+
+## [2026-11-05] Fase 1 – Revisión cruzada de la base de conocimiento (agente: Revisor de conocimiento)
+- Hecho:
+  - Revisión sobre el commit 33594a5, con hallazgos en `knowledge/acquisition/revision.md` (H-01 a H-38).
+  - Verificadas contra fuentes D-003, D-004, D-012 y D-030, y una muestra de 14 decisiones más. ANSI/HI 9.6.1-2017 se leyó en su texto completo.
+  - Buscada una segunda fuente para todos los supuestos de ERR-003.
+  - Revisadas R41–R48, las 10 firmas de D-042, D-041, D-043 y D-044.
+  - Valores corregidos:
+    - `dp_separador_bar`, alerta 0.7 → 0.55 bar (D-018);
+    - `fuga_sello_ml_h`, nominal 0–2 → 0–1, alerta 5 → 3 y crítico 20 → 9 ml/h (D-015);
+    - `tension_bus_dc_pct`, crítico 130 → 125 % (D-030);
+    - firma de `cavitacion`, `npsh_margen_ratio` 1.0 → 0.9 (D-012).
+  - Reglas: premisas `en_rango` en seis reglas (D-045), FC bajados en 11 (D-046) y R49–R55 nuevas (D-047). Síntomas de 63 a 67, con campo `uso` en siete.
+  - EXP08 queda solo en motor. EXP06 y EXP07 corregidas.
+  - Dataset UCI de sistemas hidráulicos evaluado y agregado (D-048).
+  - Referencias en APA 7: DOIs verificados, nombres completos de autores corporativos y lista reordenada.
+- Resultados de verificación:
+  - Script temporal: IDs, síntomas por activo, modo ↔ FMEA ↔ regla, D-NNN, NPR y orden de umbrales sin errores; ninguna regla se dispara en operación normal y todas se pueden disparar.
+  - El modo correcto es el principal en 41 de 41 firmas. En la trayectoria solo queda un cruce breve en `falla_valvula_admision`.
+  - No hay `.venv` en este equipo: `pytest` se corrió con dependencias en el scratchpad y sin `test_entorno.py`. Antes de los cambios pasaban todas. Después falla `test_rodamiento_del_motor_combina_r03_y_r04`, y en `test_ontology.py` fallan las que dependen de los conteos y del `.owl`. Son fallas esperadas (ver Pendiente).
+- Pendiente:
+  - Regenerar `metaltech.owl` y ajustar `tests/test_ontology.py` y `tests/test_rules_engine.py` (tabla en `revision.md`).
+  - Agregar a `tests/test_conocimiento.py` las pruebas de modo principal y de trayectoria.
+  - Conseguir ISO 20816-3:2026 e ISO 10816-7.
+  - Fase 3: máximo de ventana para eventos de segundos; revisar las firmas de D-042.
+- Errores: ERR-014, ERR-015, ERR-016, ERR-017, ERR-018 (ver [ERRORES.md](ERRORES.md)). Actualizados: ERR-001 y ERR-003 (siguen abiertos), ERR-002 y ERR-005 (resueltos).
+- Decisiones: D-045 (discriminadores `en_rango`), D-046 (FC ajustados a la política), D-047 (reglas para síntomas sin uso y campo `uso`) y D-048 (dataset UCI hidráulico). Confianza de D-003 bajada: ISO 20816-3 no cubre compresores de tornillo ni lista bombas.
 
 ## [2026-11-05] Fase 2 – Ontología, motor de reglas y léxico (agente: Datos/ML + Backend)
 - Hecho:

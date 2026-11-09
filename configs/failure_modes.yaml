@@ -170,7 +170,7 @@ modos_falla:
     activos: [bomba_centrifuga]
     componente: impulsor
     firma:
-      - {variable: npsh_margen_ratio, direccion: "-", cambio: {tipo: valor, valor: 1.0}, forma: sigmoide, retardo_frac: 0.0}
+      - {variable: npsh_margen_ratio, direccion: "-", cambio: {tipo: valor, valor: 0.9}, forma: sigmoide, retardo_frac: 0.0}   # 1.0 -> 0.9 (D-012)
       - {variable: vib_hf_rel, direccion: "+", cambio: {tipo: factor, valor: 4.0}, forma: sigmoide, retardo_frac: 0.2}
       - {variable: caudal_cv_pct, direccion: "+", cambio: {tipo: valor, valor: 8}, forma: sigmoide, retardo_frac: 0.2}
       - {variable: presion_descarga_pct, direccion: "-", cambio: {tipo: valor, valor: 88}, forma: sigmoide, retardo_frac: 0.5}

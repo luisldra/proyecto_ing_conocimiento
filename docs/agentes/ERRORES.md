@@ -11,8 +11,8 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 | entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008, ERR-012, ERR-013 |
 | código (bugs, lógica) | ERR-009, ERR-011 |
 | datos (generador, fugas, desbalance) | – |
-| conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010 |
-| agente (supuestos falsos, malas decisiones del agente) | ERR-004 |
+| conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010, ERR-014, ERR-015, ERR-016, ERR-017 |
+| agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019 |
 
 ## Lecciones aprendidas
 - Las normas ISO, IEC, NEMA, HI e IEEE son de pago: hay que citar la fuente secundaria que da el valor y marcar la confianza (ERR-001).
@@ -24,6 +24,12 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - La validación estructural en Python no sustituye al razonador: HermiT encontró una inconsistencia que ningún chequeo propio veía (ERR-011).
 - Las APIs y los servidores rechazan el User-Agent por defecto de `urllib` (ERR-012); en Windows, owlready2 no resuelve `file:///` con espacios (ERR-013).
 - Una regla solo sirve si la firma del simulador puede activarla: la coherencia umbral ↔ firma ↔ regla se comprueba con un test, no a ojo (ERR-010).
+- Una cita no está verificada hasta que se abre la fuente y se encuentra el dato: un título prometedor no basta (ERR-014).
+- Antes de aplicar una norma, hay que leer su alcance: el valor puede ser correcto y la máquina estar excluida (ERR-015).
+- Un umbral crítico debe compararse con el punto donde el equipo real se protege: si queda por encima, el síntoma nunca se ve (ERR-016).
+- Comprobar solo el final de la degradación no basta; hay que mirar qué reglas se disparan juntas y si su evidencia es independiente (ERR-017).
+- Antes de editar tras una tarea larga, hay que comprobar `git log` y releer: el repositorio pudo cambiar (ERR-018).
+- "Sin conclusión" y "conclusión equivocada" son resultados distintos: una prueba debe afirmar exactamente lo que dice la decisión que protege (ERR-019).
 
 ---
 
@@ -40,6 +46,73 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-019 – Pruebas nuevas de trayectoria mal planteadas
+- Fecha: 2026-11-08
+- Fase/archivo: Fase 2, `tests/test_rules_engine.py`
+- Origen: agente
+- Síntoma: primero `KeyError: 'nivel'` al recolectar las pruebas; después, 9 fallos con `concluyó []` en t = 0.85–0.95.
+- Causa raíz: se asumió que todo síntoma tiene `nivel` (los percibidos no) y que el modo correcto ya debía ser el principal en el tramo final, cuando D-045 solo descarta cruces hacia otro modo. Varias reglas se disparan recién al llegar a su umbral.
+- Solución: uso de `.get("nivel")`; la prueba pasa a afirmar que, si hay conclusión, es el modo correcto.
+- Prevención: leer la decisión que la prueba protege y distinguir "sin conclusión" de "conclusión equivocada".
+- Estado: resuelto
+
+### ERR-018 – El Revisor trabajó un tiempo sobre una copia desactualizada
+- Fecha: 2026-11-05
+- Fase/archivo: revisión cruzada, `knowledge/` y `configs/`
+- Origen: agente
+- Síntoma: el verificador contó 48 reglas, 31 modos y 44 decisiones, cuando la lectura inicial mostraba 40, 30 y 40.
+- Causa raíz: los commits b60c27d y 33594a5 llegaron por pull después de la lectura inicial, y el Revisor no comprobó el estado del repositorio durante la tarea.
+- Solución: no se había editado nada. Se releyó el diff completo, se revisaron R41–R48 en lugar de rehacerlas y la numeración siguió desde D-045 y ERR-014.
+- Prevención: comprobar `git log -1` y `git status` justo antes de la primera edición. Las ediciones se aplicaron con reemplazos exactos que fallan si el texto cambió.
+- Estado: resuelto
+
+### ERR-017 – Reglas que chocaban sin que nada las distinguiera
+- Fecha: 2026-11-05
+- Fase/archivo: Fases 1 y 2, `knowledge/rules/rules.yaml`, D-043
+- Origen: conocimiento
+- Síntoma: R02 pedía relubricar mientras R04 lo desaconsejaba; R03 se sumaba a R04 como evidencia independiente (0.975); `falla_valvula_admision` y `valvula_hidraulica_pegada` salían diagnosticadas como otra falla, y R40 empataba con R45.
+- Causa raíz: la validación solo pedía que el modo correcto apareciera entre las conclusiones. D-043 llamó "ambigüedades reales" a casos que los datos medidos sí separaban.
+- Solución: D-045: cuatro síntomas `en_rango` y una premisa en R01, R02, R03, R22, R27 y R40. El modo correcto es el principal en 41 de 41 firmas.
+- Prevención: agregar a `tests/test_conocimiento.py` el modo principal por firma y la trayectoria de degradación, no solo el valor final.
+- Estado: resuelto en los YAML; la prueba sigue pendiente (rol QA)
+
+### ERR-016 – Crítico del bus DC por encima del disparo real del variador
+- Fecha: 2026-11-05
+- Fase/archivo: Fase 1, `configs/assets.yaml` (`tension_bus_dc_pct`), D-030
+- Origen: conocimiento
+- Síntoma: el crítico era 130 %, pero un variador de clase 480 V dispara cerca de 820 VDC, ≈ 127 % de un bus de 648 V.
+- Causa raíz: valor puesto sin fuente (ERR-003) y sin compararlo con el punto de disparo.
+- Solución: crítico de 130 % a 125 %. Sigue con confianza baja: la fuente leída es un solo sitio.
+- Prevención: contrastar cada umbral crítico con la protección real del equipo.
+- Estado: resuelto (con reserva)
+
+### ERR-015 – Norma aplicada a máquinas fuera de su alcance
+- Fecha: 2026-11-05
+- Fase/archivo: Fase 1, D-003 (ISO 20816-3)
+- Origen: conocimiento
+- Síntoma: D-003 tenía confianza alta para bomba y compresor, pero la norma excluye los compresores de tornillo y no lista las bombas.
+- Causa raíz: la Fase 1 tomó las zonas de blogs sin leer el alcance de la norma, que sí está publicado en fichas de organismos nacionales.
+- Solución: valores iguales, declarados como proxy en bomba, compresor, prensa y CNC; confianza media en motor y banda y baja en el resto. Además, ISO 20816-3:2026 reemplazó a la edición de 2022.
+- Prevención: leer el alcance antes de usar una norma. Conseguir ISO 10816-7 e ISO 20816-3:2026.
+- Estado: abierto (faltan esas dos normas)
+
+### ERR-014 – Citas que no dicen lo que se les atribuía
+- Fecha: 2026-11-05
+- Fase/archivo: Fase 1 y D-041, `knowledge/acquisition/decisiones.md`
+- Origen: conocimiento
+- Síntoma: al abrir las fuentes, varias no sostenían el dato citado:
+  - Air Compressor Services y Atlas Copco no dan los valores de D-016, y el rango "77–93 °C" no se pudo confirmar;
+  - la patente de D-013 es de Yokogawa, no de Ebara;
+  - Inspenet solo dice "> 1 kHz", no "1–20 kHz";
+  - la hoja Parker es de una válvula VMY, no D1FB/D3FB;
+  - Machinery Lubrication no menciona calor (D-022);
+  - la regla del 50 % de D-041 no está en Fluke ni en Acoem;
+  - HI no da "1.3 para mayor energía" ni "2 a más de 4" (D-012).
+- Causa raíz: se citó a partir de extractos del buscador o de la memoria, sin comprobar el texto.
+- Solución: fuentes reemplazadas o texto corregido en cada D-NNN; la hoja de hallazgos está en `revision.md`. Ningún umbral cambió por esta causa.
+- Prevención: una fuente se marca como leída solo si se abrió y se halló el dato. Las que no se pudieron abrir quedan declaradas.
+- Estado: resuelto
 
 ### ERR-013 – owlready2 no carga ontologías por URI `file:///` con espacios (Windows)
 - Fecha: 2026-11-05
@@ -129,7 +202,8 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Causa raíz: la búsqueda no devolvió los metadatos completos y el agente no debe inventar DOIs.
 - Solución: Matzka (2020) se cita con la URL de IEEE Xplore; Dyer y Stewart (1978) sin DOI y con la marca "[consultada de memoria; DOI no verificado]"; el estudio de PMC se cita por título y URL con la marca "[autores y revista no verificados]".
 - Prevención: antes del documento APA final, el agente de Documentación verifica estos registros en Crossref o en la base de la biblioteca.
-- Estado: abierto
+- Actualización 2026-11-05 (Revisor): verificados en Crossref, DataCite y Open Library. Matzka (2020): 10.1109/AI4I49448.2020.00023. Dyer y Stewart (1978): 10.1115/1.3453905. PMC12251610: Lai et al. (2025), *Sensors, 25*(13), 3880. También se confirmaron IEEE MRWG (1985), Randall (2011) y los demás libros citados de memoria, cuyo contenido sigue sin leerse.
+- Estado: resuelto
 
 ### ERR-004 – Modo de falla asignado a activos sin fila FMEA
 - Fecha: 2026-10-29
@@ -160,7 +234,11 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Causa raíz: no hay datos abiertos ni normas accesibles para esos valores en prensas, compresores, bandas y CNC.
 - Solución: se registran como **supuestos con confianza baja** y se justifican por la física de la falla.
 - Prevención: el Revisor debe intentar una segunda fuente para cada uno; si no la encuentra, el documento final los declara en *Limitaciones*. Además, conviene un análisis de sensibilidad de M0 a esos umbrales.
-- Estado: abierto
+- Actualización 2026-11-05 (Revisor): se buscó segunda fuente para todos.
+  - Con fuente leída: 2×/4× y curtosis de 4 (D-010), orden de magnitud y crítico de la fuga (D-015, ahora 3/9 ml/h) y crítico del separador (D-018).
+  - Corregidos, con una sola fuente: alerta del separador, ahora 0.55 bar (D-018), y crítico del bus DC, ahora 125 % (D-030).
+  - Sin fuente, siguen como supuesto: D-013 (coeficiente de variación), D-022, D-023, D-024, D-025, D-028, D-029, el disipador y el conteo de disparos (D-030), la curtosis de 6 y las magnitudes de D-041 y D-042.
+- Estado: abierto (se reduce a los supuestos listados, que van a *Limitaciones*)
 
 ### ERR-002 – PDF técnico no legible (TECO-Westinghouse)
 - Fecha: 2026-10-29
@@ -170,7 +248,8 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Causa raíz: PDF generado desde Excel con contenido en imágenes JPEG.
 - Solución: se usaron los valores del extracto del buscador (alarma 90–110 °C y disparo 95–120 °C para rodamientos antifricción), contrastados con un manual Siemens. La referencia queda marcada.
 - Prevención: si hace falta, leer el PDF con OCR (skill de PDF) o buscar otra fuente.
-- Estado: resuelto (con reserva)
+- Actualización 2026-11-05 (Revisor): el diagnóstico era incorrecto: las imágenes son solo logos y la tabla es texto. `pdftotext` la extrae sin OCR. Confirma admisible 80–90 °C, alarma 90–110 °C y disparo 95–120 °C. Cuando WebFetch falle con un PDF, hay que descargarlo y extraer el texto antes de declararlo ilegible.
+- Estado: resuelto
 
 ### ERR-001 – Normas de pago sin acceso al texto oficial
 - Fecha: 2026-10-29
@@ -180,4 +259,9 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Causa raíz: son normas de pago.
 - Solución: los valores se tomaron de fuentes secundarias que las citan (Fabrico, Oxmaint, ALL-TEST Pro, Pumps & Systems, entre otras) o del conocimiento previo del agente. Cada caso queda declarado en la D-NNN. El criterio del 25 % de ISO 20816-1 (D-004) y el límite de THD de IEEE 519 vienen de memoria.
 - Prevención: verificar contra el texto oficial si la universidad tiene acceso (biblioteca o ICONTEC); priorizar D-003, D-004, D-012 y D-030.
-- Estado: abierto
+- Actualización 2026-11-05 (Revisor):
+  - D-012: ANSI/HI 9.6.1-2017 **leída** en law.resource.org.
+  - D-003: alcance leído en la ficha de INN; las zonas siguen vistas por citas (ERR-015).
+  - D-004: 25 % confirmado en dos fuentes secundarias; la muestra pública de ISO 20816-1 acaba antes de la cláusula 6.3.3.
+  - D-030: tabla de IEEE 519 confirmada en una fuente secundaria leída.
+- Estado: abierto (solo se leyó una norma; las demás siguen vistas por citas)

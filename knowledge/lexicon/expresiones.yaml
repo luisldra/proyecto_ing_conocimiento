@@ -134,7 +134,7 @@
     En un compresor de tornillo lubricado, el aceite retira el calor de la
     compresión. Si el enfriador está sucio, el aceite está bajo o degradado, la
     termostática falla o el separador está obstruido, la temperatura de
-    descarga sube por encima de su rango normal (aprox. 77–93 °C).
+    descarga sube por encima de su rango normal (aprox. 75–100 °C, D-016).
   sintomas_formales: [temp_descarga_alta, dp_separador_alto, carga_compresor_alta]
   variables:
     - {variable: temp_descarga_c, cambio: aumenta}
@@ -156,7 +156,7 @@
     El técnico oye un ruido áspero, cuando la falla de rodamiento ya está en
     las etapas 3–4. En ese punto la vibración global, la curtosis y la energía
     de alta frecuencia son altas, y la temperatura del rodamiento sube 8–15 °C
-    sobre su línea base.
+    sobre su línea base al entrar en la etapa tardía y sigue hasta el disparo (D-042).
   sintomas_formales: [vibracion_impulsiva, vibracion_hf_critica, vibracion_alerta, temp_rodamiento_alta]
   variables:
     - {variable: vib_curtosis, cambio: aumenta}
@@ -172,7 +172,7 @@
   expresion: "el variador está disparando por nada"
   variantes: ["se dispara solo", "salta el variador sin razón"]
   sintoma_percibido: disparo_sin_causa_percibido
-  activos: [motor_electrico, banda_transportadora, bomba_centrifuga]
+  activos: [motor_electrico]   # el variador es componente del motor (D-002); revisión 2026-11-05
   fisica: >
     El variador dispara aunque no hay una sobrecarga evidente. Las causas
     típicas son transitorios de sobrecorriente por rampas cortas, datos de

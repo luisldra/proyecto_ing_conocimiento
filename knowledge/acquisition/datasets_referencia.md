@@ -13,6 +13,7 @@
 | NASA C-MAPSS | Simulación de turbofán, vida completa | Estructura de vida completa / RUL | Degradación genérica, RUL | Libre, NASA |
 | MIMII | Audio de máquinas, 16 kHz, 8 canales | Bomba, válvulas, ventiladores, rieles | Síntomas percibidos (sonido) | CC BY 4.0, Zenodo 3384388 |
 | SKAB | Series multivariadas de una bomba de circulación | Bomba centrífuga | `cavitacion`, `desbalanceo_rotor`, `obstruccion_bomba` | Libre, GitHub waico/SKAB |
+| UCI Condition Monitoring of Hydraulic Systems | Multisensor de banco hidráulico real, ciclos de 60 s | Prensa hidráulica | `sobrecalentamiento_aceite_hidraulico`, `valvula_hidraulica_pegada`; parcial para `fuga_interna_cilindro` | CC BY 4.0, UCI id 447 |
 
 ---
 
@@ -109,17 +110,46 @@
 
 ---
 
+## 7. Condition Monitoring of Hydraulic Systems (UCI)
+- **Origen:** Helwig et al. (2015a, 2015b). Evaluado por el agente Revisor el 2026-11-05 (D-048). Se leyó la ficha de UCI; del artículo solo se confirmaron los metadatos.
+- **Banco:** circuito hidráulico de trabajo más un circuito secundario de enfriamiento y filtrado. Repite ciclos de carga constantes de 60 s mientras se varía la condición de cuatro componentes.
+- **Variables (2205 ciclos):**
+  - presión PS1–PS6 (bar, 100 Hz);
+  - potencia del motor EPS1 (W, 100 Hz);
+  - caudal FS1–FS2 (l/min, 10 Hz);
+  - temperatura TS1–TS4 (°C, 1 Hz);
+  - vibración VS1 (mm/s, 1 Hz);
+  - eficiencia y potencia de enfriamiento CE y CP, y factor de eficiencia SE (1 Hz).
+- **Etiquetas por ciclo:**
+  - enfriador: 3 %, 20 % o 100 %;
+  - válvula: 100 %, 90 %, 80 % o 73 % (retardo de conmutación creciente);
+  - fuga interna de la bomba: ninguna, débil o severa;
+  - acumulador: 130, 115, 100 o 90 bar;
+  - indicador de estabilidad del ciclo.
+- **Cómo nos sirve:**
+  - Es el único dataset abierto hallado con variables de nuestra prensa: presión, temperatura, potencia (proxy de corriente) y vibración en mm/s.
+  - Puede calibrar la **relación entre variables** y la forma temporal de `sobrecalentamiento_aceite_hidraulico` y `valvula_hidraulica_pegada`.
+  - Es candidato a **validación externa** de las reglas de la prensa en trabajo futuro.
+- **Limitaciones:**
+  - Es un banco de pruebas, no una prensa, y sus ciclos son de carga constante.
+  - La fuga es de la bomba, no del cilindro, así que `fuga_interna_cilindro` solo se calibra en parte.
+  - No cubre `fuga_hidraulica_externa` ni `contaminacion_aceite_hidraulico`: no hay nivel de tanque ni conteo de partículas.
+  - Sus condiciones son niveles discretos, no trayectorias de degradación hasta la falla.
+  - No aporta umbrales de alarma: sirve para forma y rango (D-048).
+
+---
+
 ## Correspondencia con variables del simulador
 
-| Variable Metal Tech | AI4I | CWRU | IMS | C-MAPSS | MIMII | SKAB |
-|---|---|---|---|---|---|---|
-| `vib_rms_mm_s`, `vib_hf_rel`, `vib_curtosis` | – | ✔ | ✔ | – | (audio) | ✔ (RMS en g) |
-| `temp_*` | ✔ (aire/proceso) | – | – | ✔ | – | ✔ |
-| `corriente_pct` | (par×vel.) | – | – | – | – | ✔ |
-| `presion_*`, `caudal_*` | – | – | – | ✔ (presiones) | – | ✔ |
-| `desgaste_herramienta_min` | ✔ | – | – | – | – | – |
-| Síntomas percibidos | – | – | – | – | ✔ | – |
+| Variable Metal Tech | AI4I | CWRU | IMS | C-MAPSS | MIMII | SKAB | UCI hidráulico |
+|---|---|---|---|---|---|---|---|
+| `vib_rms_mm_s`, `vib_hf_rel`, `vib_curtosis` | – | ✔ | ✔ | – | (audio) | ✔ (RMS en g) | ✔ (solo mm/s, 1 Hz) |
+| `temp_*` | ✔ (aire/proceso) | – | – | ✔ | – | ✔ | ✔ |
+| `corriente_pct` | (par×vel.) | – | – | – | – | ✔ | (potencia del motor) |
+| `presion_*`, `caudal_*` | – | – | – | ✔ (presiones) | – | ✔ | ✔ |
+| `desgaste_herramienta_min` | ✔ | – | – | – | – | – | – |
+| Síntomas percibidos | – | – | – | – | ✔ | – | – |
 
 ## Huecos
-- Ningún dataset público abierto encontrado cubre **prensas hidráulicas**, **compresores de tornillo** ni **bandas transportadoras** con las variables del enunciado. Sus firmas se basan solo en literatura técnica (D-016 a D-026) y tienen confianza menor.
-- Una búsqueda posterior podría evaluar el dataset UCI "Condition monitoring of hydraulic systems" (Helwig et al., 2015) para la prensa. **No se verificó en esta fase** y no se cita como fuente.
+- Ningún dataset público abierto encontrado cubre **compresores de tornillo** ni **bandas transportadoras** con las variables del enunciado. Sus firmas se basan solo en literatura técnica (D-016 a D-026) y tienen confianza menor.
+- La prensa queda cubierta solo en parte por el dataset UCI de sistemas hidráulicos (sección 7, D-048).

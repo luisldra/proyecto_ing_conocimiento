@@ -15,7 +15,7 @@ datos:
   ventana_pasos: 36              # T = 6 h de historia
   paso_ventana: 6                # desplazamiento entre ventanas (1 h)
   horizonte_h: 24                # H: falla en las próximas 24 h
-  particion:                     # temporal y por unidad (sin fuga de información)
+  particion:                     # temporal con purga, sin fuga de información (D-050)
     train: 0.60
     val: 0.20
     test: 0.20
@@ -55,6 +55,7 @@ entrenamiento:
   weight_decay: 0.0001
   perdida: focal                 # focal | ce_ponderada
   focal_gamma: 2.0
+  negativos_por_positivo: 10     # submuestreo de ventanas normales, solo en entrenamiento (D-053)
   early_stopping_paciencia: 8
   calibracion: temperature_scaling
 

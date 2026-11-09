@@ -70,6 +70,7 @@
 | D-050 | Supuestos y límites del simulador | baja en valores, media en estructura |
 | D-051 | Umbrales de vibración para bombas (ISO 10816-7 vía Europump) | media |
 | D-052 | Dificultad del simulador calibrada con datos públicos | media |
+| D-053 | Ventanas y entrenamiento de los modelos | media |
 
 ---
 
@@ -729,6 +730,16 @@
 - **Regla:** ningún valor se ajustó mirando resultados de M1–M3 (D-050).
 - **Fuentes:** D-023, D-036, D-050; datasets AI4I 2020 y SKAB.
 - **Confianza:** media en la estructura; baja en los parámetros marcados como supuesto.
+
+## D-053 – Ventanas y entrenamiento de los modelos
+- **Decisión:**
+  - Un modelo por tipo de activo, porque los sensores y modos difieren. Entradas: solo sensores, con imputación hacia atrás en el tiempo y normalización calculada solo con entrenamiento.
+  - Ventana de 6 h cada hora, y además una ventana en cada instante de falla, para que las fallas de un paso no caigan entre dos ventanas. La etiqueta es la más reciente desde la ventana anterior. Se descartan ventanas que crucen particiones o reparaciones.
+  - Solo en entrenamiento se conservan 10 ventanas normales por cada ventana con falla; validación y test quedan intactos.
+  - Pérdida focal con pesos por raíz de la frecuencia. Arquitectura elegida por F1 macro de **validación**; test no decide nada. Calibración por temperatura en validación.
+- **Limitación:** una sola semilla (42) en esta fase; test tiene entre 12 y 29 episodios por activo y clases con solo 5 a 125 ventanas. Los intervalos de confianza con 5 semillas quedan para la Fase 7.
+- **Fuentes:** D-049, D-050; configuración en `configs/train.yaml`.
+- **Confianza:** media.
 
 ---
 

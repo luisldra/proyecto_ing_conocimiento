@@ -1,0 +1,9 @@
+,normal,cavitacion,desalineacion_eje,desbalanceo_rotor,desgaste_rodamiento,desgaste_sello_mecanico,holgura_mecanica,obstruccion_bomba
+normal,14245,5,2,0,25,36,34,75
+cavitacion,23,13,0,0,0,0,0,0
+desalineacion_eje,75,0,0,0,0,0,0,0
+desbalanceo_rotor,0,0,0,0,0,0,0,0
+desgaste_rodamiento,0,0,0,0,25,0,0,0
+desgaste_sello_mecanico,36,0,0,0,0,39,0,0
+holgura_mecanica,7,0,0,0,0,0,68,0
+obstruccion_bomba,46,0,0,0,0,0,0,79

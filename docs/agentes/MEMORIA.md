@@ -3,9 +3,9 @@
 > Protocolo y formato: [AGENTS.md](../../AGENTS.md) · Errores: [ERRORES.md](ERRORES.md) · Plan: [PLAN.md](../PLAN.md)
 
 ## Estado actual
-- **Fase en curso:** Fase 3 terminada (simulador calibrado). Lista para la Fase 4.
-- **Última tarea:** dificultad del simulador y umbrales de bombas (D-051, D-052). La base queda en 52 decisiones, 55 reglas, 68 síntomas, 31 modos, 41 filas FMEA y 7 datasets. `pytest`: 515 OK; `ruff` limpio.
-- **Siguiente tarea:** Fase 4 – `data/features.py` y modelos (MLP, CNN1D, LSTM). Descartar filas `purga` y `reparacion`; no usar `estado`, `modo_activo`, `t_degradacion`, `horas_a_falla` ni `confusor` como entradas.
+- **Fase en curso:** Fase 4 terminada (modelos entrenados con semilla 42).
+- **Última tarea:** ventanas, MLP, CNN1D, LSTM, entrenamiento y métricas (D-053). F1 macro medio en test de los modelos elegidos: 0.599; `pytest` y `ruff` limpios.
+- **Siguiente tarea:** decidir cómo tratar los avisos tempranos en etiquetas y métricas (ERR-023); después, Fase 5 (fusión M0–M3).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Pendiente por confirmar:**
   - definición exacta de RA/R1–R6 con el docente;
@@ -15,6 +15,17 @@
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-08] Fase 4 – Modelos de Deep Learning (agente: Datos/ML)
+- Hecho:
+  - `data/features.py`, `models/{mlp,cnn1d,lstm,train,evaluate}.py` y `tests/test_modelos.py`. 18 entrenamientos (3 arquitecturas por 6 activos).
+  - Resultados en `reports/tables/modelos_*`; pesos en `checkpoints/` (no se versionan). Elegidos por validación: motor LSTM, bomba MLP, compresor MLP, prensa CNN1D, banda MLP, CNC CNN1D.
+- Resultados en test (modelos elegidos, media por activo): F1 macro 0.599, precisión 0.537, recall 0.844. Las arquitecturas no se separan con claridad. `bomba_centrifuga/desalineacion_eje` queda con F1 0.
+- Pendiente:
+  - Decidir el tratamiento de los avisos tempranos (ERR-023).
+  - 5 semillas e intervalos de confianza en la Fase 7.
+- Errores: ERR-023 (abierto).
+- Decisiones: D-053.
 
 ## [2026-11-08] Fase 3 – Dificultad del simulador y umbrales de bombas (agente: Datos/ML)
 - Hecho:

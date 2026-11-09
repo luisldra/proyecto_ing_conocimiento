@@ -10,7 +10,7 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 |---|---|
 | entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008, ERR-012, ERR-013 |
 | código (bugs, lógica) | ERR-009, ERR-011 |
-| datos (generador, fugas, desbalance) | ERR-020 |
+| datos (generador, fugas, desbalance) | ERR-020, ERR-023 |
 | conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010, ERR-014, ERR-015, ERR-016, ERR-017 |
 | agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019, ERR-021, ERR-022 |
 
@@ -46,6 +46,16 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-023 – La métrica de falsa alarma mezcla avisos tempranos con alarmas reales
+- Fecha: 2026-11-08
+- Fase/archivo: Fase 4, `src/metaltech/models/evaluate.py`, etiquetas de D-049
+- Origen: datos
+- Síntoma: `falsa_alarma` da 5.74 % en test (modelos elegidos), pero el 99.1 % de esas 4379 alarmas ocurre con una degradación en curso y en el 98.8 % de ellas el modo es el correcto. En equipo sano la tasa es 0.11 % (39 de 35 494 ventanas).
+- Causa raíz: las ventanas de degradación a más de H = 24 h de la falla se etiquetan `normal`. Un aviso correcto y temprano cuenta como falsa alarma y baja la precisión y el F1.
+- Solución: pendiente de decisión del equipo antes de la Fase 5.
+- Prevención: separar el estado real del equipo de la etiqueta al medir alarmas.
+- Estado: abierto
 
 ### ERR-022 – Script de cambios aplicado a medias por finales de línea
 - Fecha: 2026-11-08

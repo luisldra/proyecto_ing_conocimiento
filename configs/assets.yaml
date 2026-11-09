@@ -64,7 +64,7 @@ activos:
     soporte: rigido
     componentes: [impulsor, carcasa_succion, sello_mecanico, rodamientos, eje_acople, base_anclajes]
     variables:
-      vib_rms_mm_s:        {unidad: mm/s RMS, direccion: alta, nominal: [0.5, 1.4], alerta: 2.8, critico: 4.5, fuentes: [D-003]}
+      vib_rms_mm_s:        {unidad: mm/s RMS, direccion: alta, nominal: [0.5, 1.4], alerta: 5.1, critico: 8.5, fuentes: [D-051]}
       vib_hf_rel:          {unidad: adimensional, direccion: alta, nominal: [0.8, 1.2], alerta: 2.0, critico: 4.0, fuentes: [D-010, D-013]}
       vib_curtosis:        {unidad: adimensional, direccion: alta, nominal: [2.5, 3.5], alerta: 4.0, critico: 6.0, fuentes: [D-010]}
       vib_1x_frac:         {unidad: fraccion, direccion: alta, nominal: [0.3, 0.6], alerta: 0.8, critico: 0.9, fuentes: [D-011]}
@@ -206,6 +206,7 @@ sintomas:
   presion_sistema_alta:      {tipo: medido, variable: presion_sistema_pct, nivel: alerta, descripcion: "Presión de trabajo >= 110 % de la receta"}
   presion_sistema_baja:      {tipo: medido, variable: presion_sistema_pct, nivel: alerta_baja, descripcion: "Presión de trabajo <= 90 % de la receta"}
   presion_sistema_en_rango:  {tipo: medido, variable: presion_sistema_pct, nivel: en_rango, descripcion: "Presión de trabajo entre 90 % y 110 % de la receta (D-045)"}
+  tiempo_ciclo_en_rango:  {tipo: medido, variable: tiempo_ciclo_pct, nivel: en_rango, descripcion: "Tiempo de ciclo por debajo del 110 % de la receta (D-052)"}
   caida_presion_retencion:   {tipo: medido, variable: caida_presion_bar_min, nivel: alerta, descripcion: "Caída de presión en retención >= 5 bar/min"}
   nivel_tanque_bajo:         {tipo: medido, variable: nivel_tanque_pct, nivel: alerta, descripcion: "Nivel de tanque <= 85 %"}
   tiempo_ciclo_alto:         {tipo: medido, variable: tiempo_ciclo_pct, nivel: alerta, descripcion: "Tiempo de ciclo >= 110 % de la receta"}

@@ -693,28 +693,28 @@
 <owl:NamedIndividual rdf:about="#unidad_motor_electrico_1">
   <rdf:type rdf:resource="#MotorElectrico"/>
   <tieneComponente rdf:resource="#comp_motor_electrico__rodamientos"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__carga_accionada"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__rotor"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__estator_devanado"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__eje_acople"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__contactor"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__variador"/>
   <tieneComponente rdf:resource="#comp_motor_electrico__base_anclajes"/>
   <tieneComponente rdf:resource="#comp_motor_electrico__ventilacion"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__corriente_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__temp_devanado_c"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__estator_devanado"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__rotor"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__eje_acople"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__variador"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__carga_accionada"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__contactor"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__vib_axial_radial_ratio"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__vib_curtosis"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__vib_1x_frac"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__temp_variador_c"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__tension_bus_dc_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__vib_rms_mm_s"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__vib_hf_rel"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__vib_2x_1x_ratio"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__thd_tension_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__disparos_variador_24h"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__desbalance_corriente_pct"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__temp_rodamiento_c"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__vib_1x_frac"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__vib_curtosis"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__temp_devanado_c"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__vib_hf_rel"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__desbalance_corriente_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__vib_2x_1x_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__corriente_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__tension_bus_dc_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__disparos_variador_24h"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__vib_rms_mm_s"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_1__temp_variador_c"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico_1</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor electrico 1</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
@@ -821,27 +821,27 @@
 <owl:NamedIndividual rdf:about="#unidad_motor_electrico_2">
   <rdf:type rdf:resource="#MotorElectrico"/>
   <tieneComponente rdf:resource="#comp_motor_electrico__rodamientos"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__carga_accionada"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__rotor"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__estator_devanado"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__eje_acople"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__contactor"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__variador"/>
   <tieneComponente rdf:resource="#comp_motor_electrico__base_anclajes"/>
   <tieneComponente rdf:resource="#comp_motor_electrico__ventilacion"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__vib_2x_1x_ratio"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__disparos_variador_24h"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__estator_devanado"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__rotor"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__eje_acople"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__variador"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__carga_accionada"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__contactor"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__temp_variador_c"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__desbalance_corriente_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__thd_tension_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__temp_rodamiento_c"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__vib_rms_mm_s"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__vib_axial_radial_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__vib_2x_1x_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__desbalance_corriente_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__tension_bus_dc_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__thd_tension_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__vib_hf_rel"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__disparos_variador_24h"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__vib_rms_mm_s"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__temp_devanado_c"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__vib_curtosis"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__corriente_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__vib_hf_rel"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__temp_devanado_c"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__tension_bus_dc_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__temp_rodamiento_c"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_2__vib_1x_frac"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico_2</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor electrico 2</nombre>
@@ -949,28 +949,28 @@
 <owl:NamedIndividual rdf:about="#unidad_motor_electrico_3">
   <rdf:type rdf:resource="#MotorElectrico"/>
   <tieneComponente rdf:resource="#comp_motor_electrico__rodamientos"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__carga_accionada"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__rotor"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__estator_devanado"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__eje_acople"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__contactor"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__variador"/>
   <tieneComponente rdf:resource="#comp_motor_electrico__base_anclajes"/>
   <tieneComponente rdf:resource="#comp_motor_electrico__ventilacion"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__disparos_variador_24h"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__vib_hf_rel"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__vib_1x_frac"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__vib_curtosis"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__estator_devanado"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__rotor"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__eje_acople"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__variador"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__carga_accionada"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__contactor"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__tension_bus_dc_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__temp_variador_c"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__desbalance_corriente_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__vib_axial_radial_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__vib_curtosis"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__temp_devanado_c"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__vib_2x_1x_ratio"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__temp_rodamiento_c"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__temp_variador_c"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__temp_devanado_c"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__vib_1x_frac"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__disparos_variador_24h"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__thd_tension_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__vib_rms_mm_s"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__tension_bus_dc_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__vib_axial_radial_ratio"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__corriente_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__vib_hf_rel"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_3__vib_rms_mm_s"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico_3</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor electrico 3</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
@@ -1077,28 +1077,28 @@
 <owl:NamedIndividual rdf:about="#unidad_motor_electrico_4">
   <rdf:type rdf:resource="#MotorElectrico"/>
   <tieneComponente rdf:resource="#comp_motor_electrico__rodamientos"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__carga_accionada"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__rotor"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__estator_devanado"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__eje_acople"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__contactor"/>
-  <tieneComponente rdf:resource="#comp_motor_electrico__variador"/>
   <tieneComponente rdf:resource="#comp_motor_electrico__base_anclajes"/>
   <tieneComponente rdf:resource="#comp_motor_electrico__ventilacion"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__disparos_variador_24h"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__vib_curtosis"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__tension_bus_dc_pct"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__estator_devanado"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__rotor"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__eje_acople"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__variador"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__carga_accionada"/>
+  <tieneComponente rdf:resource="#comp_motor_electrico__contactor"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__temp_devanado_c"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__temp_variador_c"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__desbalance_corriente_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__vib_1x_frac"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__vib_hf_rel"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__vib_2x_1x_ratio"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__vib_rms_mm_s"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__vib_axial_radial_ratio"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__temp_rodamiento_c"/>
-  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__corriente_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__vib_axial_radial_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__temp_variador_c"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__vib_curtosis"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__vib_rms_mm_s"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__desbalance_corriente_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__disparos_variador_24h"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__tension_bus_dc_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__vib_1x_frac"/>
   <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__thd_tension_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__vib_hf_rel"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__corriente_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_motor_electrico_4__vib_2x_1x_ratio"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico_4</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor electrico 4</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
@@ -1253,9 +1253,9 @@
   <direccion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">alta</direccion>
   <nominalMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.5</nominalMin>
   <nominalMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.4</nominalMax>
-  <umbralAlerta rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.8</umbralAlerta>
-  <umbralCritico rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.5</umbralCritico>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
+  <umbralAlerta rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.1</umbralAlerta>
+  <umbralCritico rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.5</umbralCritico>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-051</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#var_bomba_centrifuga__vib_hf_rel">
@@ -1269,8 +1269,8 @@
   <nominalMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.2</nominalMax>
   <umbralAlerta rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.0</umbralAlerta>
   <umbralCritico rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.0</umbralCritico>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-013</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#var_bomba_centrifuga__vib_curtosis">
@@ -1412,8 +1412,8 @@
   <nominalMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">103.0</nominalMax>
   <umbralAlerta rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">95.0</umbralAlerta>
   <umbralCritico rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">90.0</umbralCritico>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-012</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-013</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-012</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#var_bomba_centrifuga__fuga_sello_ml_h">
@@ -1432,25 +1432,25 @@
 
 <owl:NamedIndividual rdf:about="#unidad_bomba_centrifuga_1">
   <rdf:type rdf:resource="#BombaCentrifuga"/>
-  <tieneComponente rdf:resource="#comp_bomba_centrifuga__impulsor"/>
   <tieneComponente rdf:resource="#comp_bomba_centrifuga__eje_acople"/>
-  <tieneComponente rdf:resource="#comp_bomba_centrifuga__sello_mecanico"/>
   <tieneComponente rdf:resource="#comp_bomba_centrifuga__carcasa_succion"/>
   <tieneComponente rdf:resource="#comp_bomba_centrifuga__base_anclajes"/>
   <tieneComponente rdf:resource="#comp_bomba_centrifuga__rodamientos"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__vib_rms_mm_s"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__vib_2x_1x_ratio"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__caudal_cv_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__presion_descarga_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__corriente_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__vib_curtosis"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__vib_axial_radial_ratio"/>
+  <tieneComponente rdf:resource="#comp_bomba_centrifuga__sello_mecanico"/>
+  <tieneComponente rdf:resource="#comp_bomba_centrifuga__impulsor"/>
   <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__vib_hf_rel"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__npsh_margen_ratio"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__temp_rodamiento_c"/>
   <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__caudal_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__vib_1x_frac"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__caudal_cv_pct"/>
   <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__fuga_sello_ml_h"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__corriente_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__temp_rodamiento_c"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__vib_1x_frac"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__vib_axial_radial_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__vib_rms_mm_s"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__npsh_margen_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__vib_curtosis"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__presion_descarga_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_1__vib_2x_1x_ratio"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga_1</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba centrifuga 1</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
@@ -1549,25 +1549,25 @@
 
 <owl:NamedIndividual rdf:about="#unidad_bomba_centrifuga_2">
   <rdf:type rdf:resource="#BombaCentrifuga"/>
-  <tieneComponente rdf:resource="#comp_bomba_centrifuga__impulsor"/>
   <tieneComponente rdf:resource="#comp_bomba_centrifuga__eje_acople"/>
-  <tieneComponente rdf:resource="#comp_bomba_centrifuga__sello_mecanico"/>
   <tieneComponente rdf:resource="#comp_bomba_centrifuga__carcasa_succion"/>
   <tieneComponente rdf:resource="#comp_bomba_centrifuga__base_anclajes"/>
   <tieneComponente rdf:resource="#comp_bomba_centrifuga__rodamientos"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__vib_1x_frac"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__caudal_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__corriente_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__vib_rms_mm_s"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__npsh_margen_ratio"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__vib_axial_radial_ratio"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__temp_rodamiento_c"/>
+  <tieneComponente rdf:resource="#comp_bomba_centrifuga__sello_mecanico"/>
+  <tieneComponente rdf:resource="#comp_bomba_centrifuga__impulsor"/>
   <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__vib_curtosis"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__vib_hf_rel"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__caudal_cv_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__vib_rms_mm_s"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__vib_axial_radial_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__vib_1x_frac"/>
   <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__presion_descarga_pct"/>
   <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__vib_2x_1x_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__corriente_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__vib_hf_rel"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__temp_rodamiento_c"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__caudal_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__caudal_cv_pct"/>
   <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__fuga_sello_ml_h"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_2__npsh_margen_ratio"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga_2</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba centrifuga 2</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
@@ -1666,25 +1666,25 @@
 
 <owl:NamedIndividual rdf:about="#unidad_bomba_centrifuga_3">
   <rdf:type rdf:resource="#BombaCentrifuga"/>
-  <tieneComponente rdf:resource="#comp_bomba_centrifuga__impulsor"/>
   <tieneComponente rdf:resource="#comp_bomba_centrifuga__eje_acople"/>
-  <tieneComponente rdf:resource="#comp_bomba_centrifuga__sello_mecanico"/>
   <tieneComponente rdf:resource="#comp_bomba_centrifuga__carcasa_succion"/>
   <tieneComponente rdf:resource="#comp_bomba_centrifuga__base_anclajes"/>
   <tieneComponente rdf:resource="#comp_bomba_centrifuga__rodamientos"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__vib_hf_rel"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__vib_curtosis"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__npsh_margen_ratio"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__temp_rodamiento_c"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__presion_descarga_pct"/>
+  <tieneComponente rdf:resource="#comp_bomba_centrifuga__sello_mecanico"/>
+  <tieneComponente rdf:resource="#comp_bomba_centrifuga__impulsor"/>
   <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__caudal_cv_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__vib_rms_mm_s"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__fuga_sello_ml_h"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__vib_1x_frac"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__corriente_pct"/>
   <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__vib_axial_radial_ratio"/>
-  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__vib_2x_1x_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__fuga_sello_ml_h"/>
   <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__caudal_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__npsh_margen_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__vib_2x_1x_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__vib_1x_frac"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__vib_curtosis"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__vib_rms_mm_s"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__corriente_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__temp_rodamiento_c"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__vib_hf_rel"/>
+  <monitoreadoPor rdf:resource="#sensor_bomba_centrifuga_3__presion_descarga_pct"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga_3</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba centrifuga 3</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
@@ -1976,23 +1976,23 @@
 
 <owl:NamedIndividual rdf:about="#unidad_compresor_tornillo_1">
   <rdf:type rdf:resource="#CompresorTornillo"/>
-  <tieneComponente rdf:resource="#comp_compresor_tornillo__elemento_tornillo"/>
-  <tieneComponente rdf:resource="#comp_compresor_tornillo__rodamientos"/>
-  <tieneComponente rdf:resource="#comp_compresor_tornillo__red_distribucion"/>
-  <tieneComponente rdf:resource="#comp_compresor_tornillo__valvula_admision"/>
-  <tieneComponente rdf:resource="#comp_compresor_tornillo__separador_aceite"/>
-  <tieneComponente rdf:resource="#comp_compresor_tornillo__enfriador_aceite"/>
   <tieneComponente rdf:resource="#comp_compresor_tornillo__base_anclajes"/>
+  <tieneComponente rdf:resource="#comp_compresor_tornillo__enfriador_aceite"/>
+  <tieneComponente rdf:resource="#comp_compresor_tornillo__rodamientos"/>
+  <tieneComponente rdf:resource="#comp_compresor_tornillo__separador_aceite"/>
+  <tieneComponente rdf:resource="#comp_compresor_tornillo__elemento_tornillo"/>
+  <tieneComponente rdf:resource="#comp_compresor_tornillo__valvula_admision"/>
+  <tieneComponente rdf:resource="#comp_compresor_tornillo__red_distribucion"/>
+  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_1__presion_descarga_pct"/>
   <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_1__carga_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_1__vib_hf_rel"/>
+  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_1__dp_separador_bar"/>
   <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_1__vib_curtosis"/>
+  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_1__vib_axial_radial_ratio"/>
   <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_1__temp_descarga_c"/>
   <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_1__vib_2x_1x_ratio"/>
   <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_1__corriente_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_1__dp_separador_bar"/>
-  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_1__vib_axial_radial_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_1__vib_hf_rel"/>
   <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_1__vib_rms_mm_s"/>
-  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_1__presion_descarga_pct"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo_1</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor tornillo 1</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
@@ -2070,23 +2070,23 @@
 
 <owl:NamedIndividual rdf:about="#unidad_compresor_tornillo_2">
   <rdf:type rdf:resource="#CompresorTornillo"/>
-  <tieneComponente rdf:resource="#comp_compresor_tornillo__elemento_tornillo"/>
-  <tieneComponente rdf:resource="#comp_compresor_tornillo__rodamientos"/>
-  <tieneComponente rdf:resource="#comp_compresor_tornillo__red_distribucion"/>
-  <tieneComponente rdf:resource="#comp_compresor_tornillo__valvula_admision"/>
-  <tieneComponente rdf:resource="#comp_compresor_tornillo__separador_aceite"/>
-  <tieneComponente rdf:resource="#comp_compresor_tornillo__enfriador_aceite"/>
   <tieneComponente rdf:resource="#comp_compresor_tornillo__base_anclajes"/>
-  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__temp_descarga_c"/>
+  <tieneComponente rdf:resource="#comp_compresor_tornillo__enfriador_aceite"/>
+  <tieneComponente rdf:resource="#comp_compresor_tornillo__rodamientos"/>
+  <tieneComponente rdf:resource="#comp_compresor_tornillo__separador_aceite"/>
+  <tieneComponente rdf:resource="#comp_compresor_tornillo__elemento_tornillo"/>
+  <tieneComponente rdf:resource="#comp_compresor_tornillo__valvula_admision"/>
+  <tieneComponente rdf:resource="#comp_compresor_tornillo__red_distribucion"/>
   <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__corriente_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__vib_hf_rel"/>
-  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__vib_2x_1x_ratio"/>
-  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__dp_separador_bar"/>
-  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__vib_axial_radial_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__vib_curtosis"/>
   <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__presion_descarga_pct"/>
   <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__vib_rms_mm_s"/>
-  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__vib_curtosis"/>
+  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__vib_hf_rel"/>
+  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__dp_separador_bar"/>
   <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__carga_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__vib_2x_1x_ratio"/>
+  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__temp_descarga_c"/>
+  <monitoreadoPor rdf:resource="#sensor_compresor_tornillo_2__vib_axial_radial_ratio"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo_2</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor tornillo 2</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
@@ -2216,8 +2216,8 @@
   <umbralAlerta rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">110.0</umbralAlerta>
   <umbralCritico rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">120.0</umbralCritico>
   <umbralAlertaBaja rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">90.0</umbralAlertaBaja>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-022</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-023</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-022</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#var_prensa_hidraulica__temp_aceite_c">
@@ -2274,8 +2274,8 @@
   <nominalMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">103.0</nominalMax>
   <umbralAlerta rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">110.0</umbralAlerta>
   <umbralCritico rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">120.0</umbralCritico>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-022</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-023</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-022</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#var_prensa_hidraulica__iso4406_14um_codigo">
@@ -2323,20 +2323,20 @@
 
 <owl:NamedIndividual rdf:about="#unidad_prensa_hidraulica_1">
   <rdf:type rdf:resource="#PrensaHidraulica"/>
-  <tieneComponente rdf:resource="#comp_prensa_hidraulica__bomba_hidraulica"/>
-  <tieneComponente rdf:resource="#comp_prensa_hidraulica__cilindro_principal"/>
-  <tieneComponente rdf:resource="#comp_prensa_hidraulica__valvula_direccional_proporcional"/>
-  <tieneComponente rdf:resource="#comp_prensa_hidraulica__tanque_filtros"/>
   <tieneComponente rdf:resource="#comp_prensa_hidraulica__sellos"/>
+  <tieneComponente rdf:resource="#comp_prensa_hidraulica__tanque_filtros"/>
+  <tieneComponente rdf:resource="#comp_prensa_hidraulica__cilindro_principal"/>
   <tieneComponente rdf:resource="#comp_prensa_hidraulica__enfriador"/>
-  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_1__corriente_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_1__caida_presion_bar_min"/>
+  <tieneComponente rdf:resource="#comp_prensa_hidraulica__bomba_hidraulica"/>
+  <tieneComponente rdf:resource="#comp_prensa_hidraulica__valvula_direccional_proporcional"/>
   <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_1__presion_sistema_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_1__vib_rms_mm_s"/>
-  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_1__nivel_tanque_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_1__caida_presion_bar_min"/>
   <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_1__iso4406_14um_codigo"/>
-  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_1__temp_aceite_c"/>
+  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_1__nivel_tanque_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_1__vib_rms_mm_s"/>
   <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_1__tiempo_ciclo_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_1__temp_aceite_c"/>
+  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_1__corriente_pct"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prensa_hidraulica_1</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prensa hidraulica 1</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prensa_hidraulica</tipoActivo>
@@ -2400,20 +2400,20 @@
 
 <owl:NamedIndividual rdf:about="#unidad_prensa_hidraulica_2">
   <rdf:type rdf:resource="#PrensaHidraulica"/>
-  <tieneComponente rdf:resource="#comp_prensa_hidraulica__bomba_hidraulica"/>
-  <tieneComponente rdf:resource="#comp_prensa_hidraulica__cilindro_principal"/>
-  <tieneComponente rdf:resource="#comp_prensa_hidraulica__valvula_direccional_proporcional"/>
-  <tieneComponente rdf:resource="#comp_prensa_hidraulica__tanque_filtros"/>
   <tieneComponente rdf:resource="#comp_prensa_hidraulica__sellos"/>
+  <tieneComponente rdf:resource="#comp_prensa_hidraulica__tanque_filtros"/>
+  <tieneComponente rdf:resource="#comp_prensa_hidraulica__cilindro_principal"/>
   <tieneComponente rdf:resource="#comp_prensa_hidraulica__enfriador"/>
-  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_2__corriente_pct"/>
+  <tieneComponente rdf:resource="#comp_prensa_hidraulica__bomba_hidraulica"/>
+  <tieneComponente rdf:resource="#comp_prensa_hidraulica__valvula_direccional_proporcional"/>
   <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_2__iso4406_14um_codigo"/>
-  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_2__nivel_tanque_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_2__vib_rms_mm_s"/>
-  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_2__temp_aceite_c"/>
-  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_2__tiempo_ciclo_pct"/>
   <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_2__presion_sistema_pct"/>
   <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_2__caida_presion_bar_min"/>
+  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_2__corriente_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_2__tiempo_ciclo_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_2__vib_rms_mm_s"/>
+  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_2__temp_aceite_c"/>
+  <monitoreadoPor rdf:resource="#sensor_prensa_hidraulica_2__nivel_tanque_pct"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prensa_hidraulica_2</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prensa hidraulica 2</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prensa_hidraulica</tipoActivo>
@@ -2564,8 +2564,8 @@
   <umbralAlerta rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100.0</umbralAlerta>
   <umbralCritico rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">115.0</umbralCritico>
   <umbralAlertaBaja rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">30.0</umbralAlertaBaja>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-007</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-024</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-007</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#var_banda_transportadora__vib_rms_mm_s">
@@ -2593,8 +2593,8 @@
   <nominalMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.5</nominalMax>
   <umbralAlerta rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.0</umbralAlerta>
   <umbralCritico rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">6.0</umbralCritico>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-026</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#var_banda_transportadora__temp_rodamiento_c">
@@ -2614,16 +2614,16 @@
 <owl:NamedIndividual rdf:about="#unidad_banda_transportadora_1">
   <rdf:type rdf:resource="#BandaTransportadora"/>
   <tieneComponente rdf:resource="#comp_banda_transportadora__motorreductor"/>
+  <tieneComponente rdf:resource="#comp_banda_transportadora__banda_empalme"/>
   <tieneComponente rdf:resource="#comp_banda_transportadora__tambor_motriz"/>
   <tieneComponente rdf:resource="#comp_banda_transportadora__rodillos_portantes"/>
   <tieneComponente rdf:resource="#comp_banda_transportadora__rodamientos"/>
-  <tieneComponente rdf:resource="#comp_banda_transportadora__banda_empalme"/>
   <monitoreadoPor rdf:resource="#sensor_banda_transportadora_1__temp_rodamiento_c"/>
+  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_1__deslizamiento_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_1__velocidad_banda_pct"/>
   <monitoreadoPor rdf:resource="#sensor_banda_transportadora_1__vib_rms_mm_s"/>
   <monitoreadoPor rdf:resource="#sensor_banda_transportadora_1__desvio_lateral_mm"/>
-  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_1__deslizamiento_pct"/>
   <monitoreadoPor rdf:resource="#sensor_banda_transportadora_1__corriente_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_1__velocidad_banda_pct"/>
   <monitoreadoPor rdf:resource="#sensor_banda_transportadora_1__vib_curtosis"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora_1</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda transportadora 1</nombre>
@@ -2682,17 +2682,17 @@
 <owl:NamedIndividual rdf:about="#unidad_banda_transportadora_2">
   <rdf:type rdf:resource="#BandaTransportadora"/>
   <tieneComponente rdf:resource="#comp_banda_transportadora__motorreductor"/>
+  <tieneComponente rdf:resource="#comp_banda_transportadora__banda_empalme"/>
   <tieneComponente rdf:resource="#comp_banda_transportadora__tambor_motriz"/>
   <tieneComponente rdf:resource="#comp_banda_transportadora__rodillos_portantes"/>
   <tieneComponente rdf:resource="#comp_banda_transportadora__rodamientos"/>
-  <tieneComponente rdf:resource="#comp_banda_transportadora__banda_empalme"/>
-  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_2__vib_rms_mm_s"/>
-  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_2__desvio_lateral_mm"/>
   <monitoreadoPor rdf:resource="#sensor_banda_transportadora_2__velocidad_banda_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_2__vib_curtosis"/>
+  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_2__vib_rms_mm_s"/>
   <monitoreadoPor rdf:resource="#sensor_banda_transportadora_2__temp_rodamiento_c"/>
-  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_2__deslizamiento_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_2__desvio_lateral_mm"/>
   <monitoreadoPor rdf:resource="#sensor_banda_transportadora_2__corriente_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_2__deslizamiento_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_2__vib_curtosis"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora_2</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda transportadora 2</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
@@ -2750,17 +2750,17 @@
 <owl:NamedIndividual rdf:about="#unidad_banda_transportadora_3">
   <rdf:type rdf:resource="#BandaTransportadora"/>
   <tieneComponente rdf:resource="#comp_banda_transportadora__motorreductor"/>
+  <tieneComponente rdf:resource="#comp_banda_transportadora__banda_empalme"/>
   <tieneComponente rdf:resource="#comp_banda_transportadora__tambor_motriz"/>
   <tieneComponente rdf:resource="#comp_banda_transportadora__rodillos_portantes"/>
   <tieneComponente rdf:resource="#comp_banda_transportadora__rodamientos"/>
-  <tieneComponente rdf:resource="#comp_banda_transportadora__banda_empalme"/>
-  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_3__velocidad_banda_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_3__vib_rms_mm_s"/>
   <monitoreadoPor rdf:resource="#sensor_banda_transportadora_3__temp_rodamiento_c"/>
   <monitoreadoPor rdf:resource="#sensor_banda_transportadora_3__corriente_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_3__deslizamiento_pct"/>
   <monitoreadoPor rdf:resource="#sensor_banda_transportadora_3__vib_curtosis"/>
+  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_3__velocidad_banda_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_3__deslizamiento_pct"/>
   <monitoreadoPor rdf:resource="#sensor_banda_transportadora_3__desvio_lateral_mm"/>
+  <monitoreadoPor rdf:resource="#sensor_banda_transportadora_3__vib_rms_mm_s"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora_3</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda transportadora 3</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
@@ -2855,8 +2855,8 @@
   <umbralAlerta rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.2</umbralAlerta>
   <umbralCritico rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.4</umbralCritico>
   <umbralAlertaBaja rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.5</umbralAlertaBaja>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-027</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-028</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-027</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#var_centro_cnc__carga_husillo_cv_pct">
@@ -2884,8 +2884,8 @@
   <nominalMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.4</nominalMax>
   <umbralAlerta rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.8</umbralAlerta>
   <umbralCritico rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.5</umbralCritico>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-029</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#var_centro_cnc__vib_hf_rel">
@@ -2961,18 +2961,18 @@
 
 <owl:NamedIndividual rdf:about="#unidad_centro_cnc_1">
   <rdf:type rdf:resource="#CentroCnc"/>
+  <tieneComponente rdf:resource="#comp_centro_cnc__ejes_avance"/>
   <tieneComponente rdf:resource="#comp_centro_cnc__husillo"/>
   <tieneComponente rdf:resource="#comp_centro_cnc__rodamientos_husillo"/>
   <tieneComponente rdf:resource="#comp_centro_cnc__herramienta"/>
-  <tieneComponente rdf:resource="#comp_centro_cnc__ejes_avance"/>
-  <monitoreadoPor rdf:resource="#sensor_centro_cnc_1__carga_husillo_cv_pct"/>
-  <monitoreadoPor rdf:resource="#sensor_centro_cnc_1__carga_husillo_rel"/>
-  <monitoreadoPor rdf:resource="#sensor_centro_cnc_1__vib_curtosis"/>
-  <monitoreadoPor rdf:resource="#sensor_centro_cnc_1__vib_hf_rel"/>
   <monitoreadoPor rdf:resource="#sensor_centro_cnc_1__vib_pico_g"/>
-  <monitoreadoPor rdf:resource="#sensor_centro_cnc_1__temp_husillo_c"/>
   <monitoreadoPor rdf:resource="#sensor_centro_cnc_1__vib_rms_mm_s"/>
+  <monitoreadoPor rdf:resource="#sensor_centro_cnc_1__carga_husillo_rel"/>
   <monitoreadoPor rdf:resource="#sensor_centro_cnc_1__desgaste_herramienta_min"/>
+  <monitoreadoPor rdf:resource="#sensor_centro_cnc_1__vib_hf_rel"/>
+  <monitoreadoPor rdf:resource="#sensor_centro_cnc_1__temp_husillo_c"/>
+  <monitoreadoPor rdf:resource="#sensor_centro_cnc_1__carga_husillo_cv_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_centro_cnc_1__vib_curtosis"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">centro_cnc_1</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">centro cnc 1</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">centro_cnc</tipoActivo>
@@ -3036,18 +3036,18 @@
 
 <owl:NamedIndividual rdf:about="#unidad_centro_cnc_2">
   <rdf:type rdf:resource="#CentroCnc"/>
+  <tieneComponente rdf:resource="#comp_centro_cnc__ejes_avance"/>
   <tieneComponente rdf:resource="#comp_centro_cnc__husillo"/>
   <tieneComponente rdf:resource="#comp_centro_cnc__rodamientos_husillo"/>
   <tieneComponente rdf:resource="#comp_centro_cnc__herramienta"/>
-  <tieneComponente rdf:resource="#comp_centro_cnc__ejes_avance"/>
+  <monitoreadoPor rdf:resource="#sensor_centro_cnc_2__carga_husillo_cv_pct"/>
   <monitoreadoPor rdf:resource="#sensor_centro_cnc_2__vib_pico_g"/>
-  <monitoreadoPor rdf:resource="#sensor_centro_cnc_2__desgaste_herramienta_min"/>
-  <monitoreadoPor rdf:resource="#sensor_centro_cnc_2__vib_rms_mm_s"/>
-  <monitoreadoPor rdf:resource="#sensor_centro_cnc_2__temp_husillo_c"/>
-  <monitoreadoPor rdf:resource="#sensor_centro_cnc_2__carga_husillo_rel"/>
   <monitoreadoPor rdf:resource="#sensor_centro_cnc_2__vib_curtosis"/>
   <monitoreadoPor rdf:resource="#sensor_centro_cnc_2__vib_hf_rel"/>
-  <monitoreadoPor rdf:resource="#sensor_centro_cnc_2__carga_husillo_cv_pct"/>
+  <monitoreadoPor rdf:resource="#sensor_centro_cnc_2__temp_husillo_c"/>
+  <monitoreadoPor rdf:resource="#sensor_centro_cnc_2__desgaste_herramienta_min"/>
+  <monitoreadoPor rdf:resource="#sensor_centro_cnc_2__carga_husillo_rel"/>
+  <monitoreadoPor rdf:resource="#sensor_centro_cnc_2__vib_rms_mm_s"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">centro_cnc_2</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">centro cnc 2</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">centro_cnc</tipoActivo>
@@ -3111,12 +3111,12 @@
 
 <owl:NamedIndividual rdf:about="#sintoma_vibracion_alerta">
   <rdf:type rdf:resource="#SintomaMedido"/>
-  <sobreVariable rdf:resource="#var_prensa_hidraulica__vib_rms_mm_s"/>
-  <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_rms_mm_s"/>
+  <sobreVariable rdf:resource="#var_motor_electrico__vib_rms_mm_s"/>
   <sobreVariable rdf:resource="#var_banda_transportadora__vib_rms_mm_s"/>
   <sobreVariable rdf:resource="#var_compresor_tornillo__vib_rms_mm_s"/>
-  <sobreVariable rdf:resource="#var_motor_electrico__vib_rms_mm_s"/>
+  <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_rms_mm_s"/>
   <sobreVariable rdf:resource="#var_centro_cnc__vib_rms_mm_s"/>
+  <sobreVariable rdf:resource="#var_prensa_hidraulica__vib_rms_mm_s"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_alerta</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_alerta</nombre>
   <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Velocidad RMS en zona C (ISO 20816-3)</descripcion>
@@ -3126,12 +3126,12 @@
 
 <owl:NamedIndividual rdf:about="#sintoma_vibracion_critica">
   <rdf:type rdf:resource="#SintomaMedido"/>
-  <sobreVariable rdf:resource="#var_prensa_hidraulica__vib_rms_mm_s"/>
-  <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_rms_mm_s"/>
+  <sobreVariable rdf:resource="#var_motor_electrico__vib_rms_mm_s"/>
   <sobreVariable rdf:resource="#var_banda_transportadora__vib_rms_mm_s"/>
   <sobreVariable rdf:resource="#var_compresor_tornillo__vib_rms_mm_s"/>
-  <sobreVariable rdf:resource="#var_motor_electrico__vib_rms_mm_s"/>
+  <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_rms_mm_s"/>
   <sobreVariable rdf:resource="#var_centro_cnc__vib_rms_mm_s"/>
+  <sobreVariable rdf:resource="#var_prensa_hidraulica__vib_rms_mm_s"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_critica</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_critica</nombre>
   <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Velocidad RMS en zona D (ISO 20816-3)</descripcion>
@@ -3141,12 +3141,12 @@
 
 <owl:NamedIndividual rdf:about="#sintoma_vibracion_creciente">
   <rdf:type rdf:resource="#SintomaMedido"/>
-  <sobreVariable rdf:resource="#var_prensa_hidraulica__vib_rms_mm_s"/>
-  <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_rms_mm_s"/>
+  <sobreVariable rdf:resource="#var_motor_electrico__vib_rms_mm_s"/>
   <sobreVariable rdf:resource="#var_banda_transportadora__vib_rms_mm_s"/>
   <sobreVariable rdf:resource="#var_compresor_tornillo__vib_rms_mm_s"/>
-  <sobreVariable rdf:resource="#var_motor_electrico__vib_rms_mm_s"/>
+  <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_rms_mm_s"/>
   <sobreVariable rdf:resource="#var_centro_cnc__vib_rms_mm_s"/>
+  <sobreVariable rdf:resource="#var_prensa_hidraulica__vib_rms_mm_s"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_creciente</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_creciente</nombre>
   <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Aumento respecto a línea base &gt;= 25 % del límite B/C (ISO 20816-1)</descripcion>
@@ -3156,10 +3156,10 @@
 
 <owl:NamedIndividual rdf:about="#sintoma_vibracion_hf_alta">
   <rdf:type rdf:resource="#SintomaMedido"/>
-  <sobreVariable rdf:resource="#var_compresor_tornillo__vib_hf_rel"/>
   <sobreVariable rdf:resource="#var_centro_cnc__vib_hf_rel"/>
-  <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_hf_rel"/>
   <sobreVariable rdf:resource="#var_motor_electrico__vib_hf_rel"/>
+  <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_hf_rel"/>
+  <sobreVariable rdf:resource="#var_compresor_tornillo__vib_hf_rel"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_hf_alta</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_hf_alta</nombre>
   <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Energía de alta frecuencia/envolvente &gt;= 2x línea base</descripcion>
@@ -3169,10 +3169,10 @@
 
 <owl:NamedIndividual rdf:about="#sintoma_vibracion_hf_critica">
   <rdf:type rdf:resource="#SintomaMedido"/>
-  <sobreVariable rdf:resource="#var_compresor_tornillo__vib_hf_rel"/>
   <sobreVariable rdf:resource="#var_centro_cnc__vib_hf_rel"/>
-  <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_hf_rel"/>
   <sobreVariable rdf:resource="#var_motor_electrico__vib_hf_rel"/>
+  <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_hf_rel"/>
+  <sobreVariable rdf:resource="#var_compresor_tornillo__vib_hf_rel"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_hf_critica</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_hf_critica</nombre>
   <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Energía de alta frecuencia/envolvente &gt;= 4x línea base</descripcion>
@@ -3182,11 +3182,11 @@
 
 <owl:NamedIndividual rdf:about="#sintoma_vibracion_impulsiva">
   <rdf:type rdf:resource="#SintomaMedido"/>
-  <sobreVariable rdf:resource="#var_compresor_tornillo__vib_curtosis"/>
   <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_curtosis"/>
   <sobreVariable rdf:resource="#var_banda_transportadora__vib_curtosis"/>
-  <sobreVariable rdf:resource="#var_motor_electrico__vib_curtosis"/>
   <sobreVariable rdf:resource="#var_centro_cnc__vib_curtosis"/>
+  <sobreVariable rdf:resource="#var_compresor_tornillo__vib_curtosis"/>
+  <sobreVariable rdf:resource="#var_motor_electrico__vib_curtosis"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_impulsiva</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_impulsiva</nombre>
   <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Curtosis &gt;= 4 (impactos periódicos)</descripcion>
@@ -3196,11 +3196,11 @@
 
 <owl:NamedIndividual rdf:about="#sintoma_curtosis_en_rango">
   <rdf:type rdf:resource="#SintomaMedido"/>
-  <sobreVariable rdf:resource="#var_compresor_tornillo__vib_curtosis"/>
   <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_curtosis"/>
   <sobreVariable rdf:resource="#var_banda_transportadora__vib_curtosis"/>
-  <sobreVariable rdf:resource="#var_motor_electrico__vib_curtosis"/>
   <sobreVariable rdf:resource="#var_centro_cnc__vib_curtosis"/>
+  <sobreVariable rdf:resource="#var_compresor_tornillo__vib_curtosis"/>
+  <sobreVariable rdf:resource="#var_motor_electrico__vib_curtosis"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">curtosis_en_rango</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">curtosis_en_rango</nombre>
   <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Curtosis &lt; 4: sin impactos (D-045)</descripcion>
@@ -3221,8 +3221,8 @@
 
 <owl:NamedIndividual rdf:about="#sintoma_vibracion_2x_elevada">
   <rdf:type rdf:resource="#SintomaMedido"/>
-  <sobreVariable rdf:resource="#var_motor_electrico__vib_2x_1x_ratio"/>
   <sobreVariable rdf:resource="#var_compresor_tornillo__vib_2x_1x_ratio"/>
+  <sobreVariable rdf:resource="#var_motor_electrico__vib_2x_1x_ratio"/>
   <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_2x_1x_ratio"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_2x_elevada</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_2x_elevada</nombre>
@@ -3233,8 +3233,8 @@
 
 <owl:NamedIndividual rdf:about="#sintoma_vibracion_axial_alta">
   <rdf:type rdf:resource="#SintomaMedido"/>
-  <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_axial_radial_ratio"/>
   <sobreVariable rdf:resource="#var_motor_electrico__vib_axial_radial_ratio"/>
+  <sobreVariable rdf:resource="#var_bomba_centrifuga__vib_axial_radial_ratio"/>
   <sobreVariable rdf:resource="#var_compresor_tornillo__vib_axial_radial_ratio"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_axial_alta</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_axial_alta</nombre>
@@ -3381,11 +3381,11 @@
 
 <owl:NamedIndividual rdf:about="#sintoma_corriente_alta">
   <rdf:type rdf:resource="#SintomaMedido"/>
-  <sobreVariable rdf:resource="#var_prensa_hidraulica__corriente_pct"/>
-  <sobreVariable rdf:resource="#var_banda_transportadora__corriente_pct"/>
   <sobreVariable rdf:resource="#var_motor_electrico__corriente_pct"/>
   <sobreVariable rdf:resource="#var_bomba_centrifuga__corriente_pct"/>
   <sobreVariable rdf:resource="#var_compresor_tornillo__corriente_pct"/>
+  <sobreVariable rdf:resource="#var_banda_transportadora__corriente_pct"/>
+  <sobreVariable rdf:resource="#var_prensa_hidraulica__corriente_pct"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">corriente_alta</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">corriente_alta</nombre>
   <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Corriente por encima del umbral de alerta del activo</descripcion>
@@ -3395,11 +3395,11 @@
 
 <owl:NamedIndividual rdf:about="#sintoma_sobrecorriente">
   <rdf:type rdf:resource="#SintomaMedido"/>
-  <sobreVariable rdf:resource="#var_prensa_hidraulica__corriente_pct"/>
-  <sobreVariable rdf:resource="#var_banda_transportadora__corriente_pct"/>
   <sobreVariable rdf:resource="#var_motor_electrico__corriente_pct"/>
   <sobreVariable rdf:resource="#var_bomba_centrifuga__corriente_pct"/>
   <sobreVariable rdf:resource="#var_compresor_tornillo__corriente_pct"/>
+  <sobreVariable rdf:resource="#var_banda_transportadora__corriente_pct"/>
+  <sobreVariable rdf:resource="#var_prensa_hidraulica__corriente_pct"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sobrecorriente</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sobrecorriente</nombre>
   <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Corriente &gt;= 115 % In (factor de servicio 1.15)</descripcion>
@@ -3409,11 +3409,11 @@
 
 <owl:NamedIndividual rdf:about="#sintoma_corriente_baja">
   <rdf:type rdf:resource="#SintomaMedido"/>
-  <sobreVariable rdf:resource="#var_prensa_hidraulica__corriente_pct"/>
-  <sobreVariable rdf:resource="#var_banda_transportadora__corriente_pct"/>
   <sobreVariable rdf:resource="#var_motor_electrico__corriente_pct"/>
   <sobreVariable rdf:resource="#var_bomba_centrifuga__corriente_pct"/>
   <sobreVariable rdf:resource="#var_compresor_tornillo__corriente_pct"/>
+  <sobreVariable rdf:resource="#var_banda_transportadora__corriente_pct"/>
+  <sobreVariable rdf:resource="#var_prensa_hidraulica__corriente_pct"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">corriente_baja</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">corriente_baja</nombre>
   <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Corriente por debajo de la subcarga del activo</descripcion>
@@ -3423,11 +3423,11 @@
 
 <owl:NamedIndividual rdf:about="#sintoma_corriente_en_rango">
   <rdf:type rdf:resource="#SintomaMedido"/>
-  <sobreVariable rdf:resource="#var_prensa_hidraulica__corriente_pct"/>
-  <sobreVariable rdf:resource="#var_banda_transportadora__corriente_pct"/>
   <sobreVariable rdf:resource="#var_motor_electrico__corriente_pct"/>
   <sobreVariable rdf:resource="#var_bomba_centrifuga__corriente_pct"/>
   <sobreVariable rdf:resource="#var_compresor_tornillo__corriente_pct"/>
+  <sobreVariable rdf:resource="#var_banda_transportadora__corriente_pct"/>
+  <sobreVariable rdf:resource="#var_prensa_hidraulica__corriente_pct"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">corriente_en_rango</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">corriente_en_rango</nombre>
   <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Corriente entre alerta_baja y alerta (carga normal)</descripcion>
@@ -3547,8 +3547,8 @@
 
 <owl:NamedIndividual rdf:about="#sintoma_presion_descarga_baja">
   <rdf:type rdf:resource="#SintomaMedido"/>
-  <sobreVariable rdf:resource="#var_bomba_centrifuga__presion_descarga_pct"/>
   <sobreVariable rdf:resource="#var_compresor_tornillo__presion_descarga_pct"/>
+  <sobreVariable rdf:resource="#var_bomba_centrifuga__presion_descarga_pct"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">presion_descarga_baja</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">presion_descarga_baja</nombre>
   <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Presión de descarga bajo la consigna/nominal (umbral del activo)</descripcion>
@@ -3613,6 +3613,16 @@
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">presion_sistema_en_rango</nombre>
   <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Presión de trabajo entre 90 % y 110 % de la receta (D-045)</descripcion>
   <variableId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">presion_sistema_pct</variableId>
+  <nivel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">en_rango</nivel>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#sintoma_tiempo_ciclo_en_rango">
+  <rdf:type rdf:resource="#SintomaMedido"/>
+  <sobreVariable rdf:resource="#var_prensa_hidraulica__tiempo_ciclo_pct"/>
+  <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">tiempo_ciclo_en_rango</identificador>
+  <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">tiempo_ciclo_en_rango</nombre>
+  <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tiempo de ciclo por debajo del 110 % de la receta (D-052)</descripcion>
+  <variableId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">tiempo_ciclo_pct</variableId>
   <nivel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">en_rango</nivel>
 </owl:NamedIndividual>
 
@@ -3823,40 +3833,40 @@
   <manifiesta rdf:resource="#sintoma_corriente_en_rango"/>
   <manifiesta rdf:resource="#sintoma_temp_devanado_alta"/>
   <causadoPor rdf:resource="#causa_rejillas_aletas_sucias"/>
-  <causadoPor rdf:resource="#causa_temperatura_ambiente_alta"/>
-  <causadoPor rdf:resource="#causa_operacion_a_baja_velocidad_con_variador"/>
   <causadoPor rdf:resource="#causa_ventilador_danado"/>
-  <mitigadoPor rdf:resource="#accion_limpiar_carcasa_y_rejillas"/>
+  <causadoPor rdf:resource="#causa_operacion_a_baja_velocidad_con_variador"/>
+  <causadoPor rdf:resource="#causa_temperatura_ambiente_alta"/>
   <mitigadoPor rdf:resource="#accion_ventilacion_forzada_si_baja_velocidad"/>
   <mitigadoPor rdf:resource="#accion_verificar_ventilador"/>
+  <mitigadoPor rdf:resource="#accion_limpiar_carcasa_y_rejillas"/>
   <afectaComponente rdf:resource="#comp_motor_electrico__ventilacion"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sobrecalentamiento_ventilacion</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sobrecalentamiento por ventilación obstruida</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
   <formaDegradacion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">lineal</formaDegradacion>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-005</fuente>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-037</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-033</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-037</fuente>
   <severidad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</severidad>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#modo_falla_lubricacion_rodamiento">
   <rdf:type rdf:resource="#ModoFalla"/>
-  <manifiesta rdf:resource="#sintoma_temp_rodamiento_alta"/>
   <manifiesta rdf:resource="#sintoma_vibracion_hf_alta"/>
+  <manifiesta rdf:resource="#sintoma_temp_rodamiento_alta"/>
   <causadoPor rdf:resource="#causa_exceso_de_grasa"/>
   <causadoPor rdf:resource="#causa_falta_de_grasa"/>
   <causadoPor rdf:resource="#causa_grasa_incompatible_o_degradada"/>
-  <mitigadoPor rdf:resource="#accion_vigilar_tendencia_24h"/>
-  <mitigadoPor rdf:resource="#accion_corregir_cantidad_e_intervalo"/>
   <mitigadoPor rdf:resource="#accion_relubricar_segun_plan"/>
+  <mitigadoPor rdf:resource="#accion_corregir_cantidad_e_intervalo"/>
+  <mitigadoPor rdf:resource="#accion_vigilar_tendencia_24h"/>
   <afectaComponente rdf:resource="#comp_motor_electrico__rodamientos"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">falla_lubricacion_rodamiento</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lubricación deficiente de rodamientos (falta, exceso o grasa degradada)</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
   <formaDegradacion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">lineal</formaDegradacion>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-008</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-033</fuente>
   <severidad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</severidad>
 </owl:NamedIndividual>
@@ -3864,80 +3874,80 @@
 <owl:NamedIndividual rdf:about="#modo_desgaste_rodamiento">
   <rdf:type rdf:resource="#ModoFalla"/>
   <manifiesta rdf:resource="#sintoma_temp_husillo_alta"/>
-  <manifiesta rdf:resource="#sintoma_vibracion_impulsiva"/>
   <manifiesta rdf:resource="#sintoma_temp_rodamiento_alta"/>
   <manifiesta rdf:resource="#sintoma_vibracion_hf_critica"/>
   <manifiesta rdf:resource="#sintoma_vibracion_hf_alta"/>
-  <causadoPor rdf:resource="#causa_colisiones_previas"/>
+  <manifiesta rdf:resource="#sintoma_vibracion_impulsiva"/>
   <causadoPor rdf:resource="#causa_sobrecarga_por_desalineacion"/>
-  <causadoPor rdf:resource="#causa_contaminacion_por_refrigerante"/>
-  <causadoPor rdf:resource="#causa_dilucion_o_degradacion_del_aceite"/>
-  <causadoPor rdf:resource="#causa_fatiga"/>
-  <causadoPor rdf:resource="#causa_corrientes_por_rodamiento_variador"/>
+  <causadoPor rdf:resource="#causa_contaminacion"/>
   <causadoPor rdf:resource="#causa_sobrecarga_axial_por_operacion_fuera_bep"/>
   <causadoPor rdf:resource="#causa_contaminacion_del_aceite"/>
-  <causadoPor rdf:resource="#causa_contaminacion"/>
+  <causadoPor rdf:resource="#causa_dilucion_o_degradacion_del_aceite"/>
+  <causadoPor rdf:resource="#causa_contaminacion_por_refrigerante"/>
+  <causadoPor rdf:resource="#causa_corrientes_por_rodamiento_variador"/>
+  <causadoPor rdf:resource="#causa_colisiones_previas"/>
   <causadoPor rdf:resource="#causa_contaminacion_lubricante"/>
-  <mitigadoPor rdf:resource="#accion_revisar_lubricante"/>
+  <causadoPor rdf:resource="#causa_fatiga"/>
   <mitigadoPor rdf:resource="#accion_analisis_envolvente"/>
-  <mitigadoPor rdf:resource="#accion_reconstruccion_del_husillo"/>
-  <mitigadoPor rdf:resource="#accion_overhaul_del_elemento"/>
-  <mitigadoPor rdf:resource="#accion_planificar_cambio_rodamiento"/>
-  <mitigadoPor rdf:resource="#accion_cambio_de_rodamientos"/>
-  <mitigadoPor rdf:resource="#accion_cambio_de_rodamiento_del_tambor"/>
   <mitigadoPor rdf:resource="#accion_analisis_de_aceite"/>
+  <mitigadoPor rdf:resource="#accion_planificar_cambio_rodamiento"/>
   <mitigadoPor rdf:resource="#accion_aislar_rodamiento_o_escobilla_a_tierra"/>
+  <mitigadoPor rdf:resource="#accion_cambio_de_rodamiento_del_tambor"/>
+  <mitigadoPor rdf:resource="#accion_reconstruccion_del_husillo"/>
+  <mitigadoPor rdf:resource="#accion_cambio_de_rodamientos"/>
+  <mitigadoPor rdf:resource="#accion_overhaul_del_elemento"/>
+  <mitigadoPor rdf:resource="#accion_revisar_lubricante"/>
   <afectaComponente rdf:resource="#comp_motor_electrico__rodamientos"/>
   <afectaComponente rdf:resource="#comp_compresor_tornillo__rodamientos"/>
+  <afectaComponente rdf:resource="#comp_centro_cnc__rodamientos_husillo"/>
   <afectaComponente rdf:resource="#comp_banda_transportadora__rodamientos"/>
   <afectaComponente rdf:resource="#comp_bomba_centrifuga__rodamientos"/>
-  <afectaComponente rdf:resource="#comp_centro_cnc__rodamientos_husillo"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">desgaste_rodamiento</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Desgaste/defecto localizado de rodamiento (pista o elemento rodante)</nombre>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">centro_cnc</tipoActivo>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
   <formaDegradacion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">exponencial</formaDegradacion>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-037</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-036</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-037</fuente>
   <severidad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</severidad>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#modo_desalineacion_eje">
   <rdf:type rdf:resource="#ModoFalla"/>
-  <manifiesta rdf:resource="#sintoma_vibracion_axial_alta"/>
-  <manifiesta rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <manifiesta rdf:resource="#sintoma_vibracion_alerta"/>
   <manifiesta rdf:resource="#sintoma_vibracion_creciente"/>
-  <causadoPor rdf:resource="#causa_asentamiento_de_base"/>
-  <causadoPor rdf:resource="#causa_dilatacion_termica"/>
-  <causadoPor rdf:resource="#causa_desgaste_del_acople"/>
-  <causadoPor rdf:resource="#causa_montaje_del_acople"/>
-  <causadoPor rdf:resource="#causa_pata_coja"/>
+  <manifiesta rdf:resource="#sintoma_vibracion_axial_alta"/>
+  <manifiesta rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <causadoPor rdf:resource="#causa_montaje"/>
+  <causadoPor rdf:resource="#causa_desgaste_del_acople"/>
   <causadoPor rdf:resource="#causa_montaje_incorrecto"/>
   <causadoPor rdf:resource="#causa_esfuerzos_de_tuberia"/>
+  <causadoPor rdf:resource="#causa_pata_coja"/>
+  <causadoPor rdf:resource="#causa_dilatacion_termica"/>
+  <causadoPor rdf:resource="#causa_montaje_del_acople"/>
+  <causadoPor rdf:resource="#causa_asentamiento_de_base"/>
   <mitigadoPor rdf:resource="#accion_corregir_pata_coja"/>
-  <mitigadoPor rdf:resource="#accion_revisar_soportes_de_tuberia"/>
-  <mitigadoPor rdf:resource="#accion_alineacion"/>
   <mitigadoPor rdf:resource="#accion_reapriete_anclajes"/>
-  <mitigadoPor rdf:resource="#accion_alineacion_laser"/>
+  <mitigadoPor rdf:resource="#accion_alineacion"/>
   <mitigadoPor rdf:resource="#accion_cambio_de_elemento_elastico"/>
+  <mitigadoPor rdf:resource="#accion_revisar_soportes_de_tuberia"/>
+  <mitigadoPor rdf:resource="#accion_alineacion_laser"/>
   <afectaComponente rdf:resource="#comp_compresor_tornillo__elemento_tornillo"/>
-  <afectaComponente rdf:resource="#comp_bomba_centrifuga__eje_acople"/>
   <afectaComponente rdf:resource="#comp_motor_electrico__eje_acople"/>
+  <afectaComponente rdf:resource="#comp_bomba_centrifuga__eje_acople"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">desalineacion_eje</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Desalineación de ejes/acople</nombre>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
   <formaDegradacion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">lineal</formaDegradacion>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-004</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
   <severidad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</severidad>
 </owl:NamedIndividual>
 
@@ -3946,78 +3956,78 @@
   <manifiesta rdf:resource="#sintoma_vibracion_alerta"/>
   <manifiesta rdf:resource="#sintoma_vibracion_creciente"/>
   <manifiesta rdf:resource="#sintoma_vibracion_1x_dominante"/>
-  <causadoPor rdf:resource="#causa_acumulacion_de_suciedad"/>
-  <causadoPor rdf:resource="#causa_incrustaciones_en_impulsor"/>
-  <causadoPor rdf:resource="#causa_barras_de_rotor_danadas"/>
   <causadoPor rdf:resource="#causa_erosion_por_cavitacion"/>
   <causadoPor rdf:resource="#causa_perdida_de_masa_ventilador"/>
+  <causadoPor rdf:resource="#causa_incrustaciones_en_impulsor"/>
+  <causadoPor rdf:resource="#causa_acumulacion_de_suciedad"/>
+  <causadoPor rdf:resource="#causa_barras_de_rotor_danadas"/>
   <mitigadoPor rdf:resource="#accion_balanceo_del_impulsor"/>
+  <mitigadoPor rdf:resource="#accion_balanceo_en_sitio"/>
   <mitigadoPor rdf:resource="#accion_limpieza"/>
   <mitigadoPor rdf:resource="#accion_reemplazo_del_impulsor"/>
-  <mitigadoPor rdf:resource="#accion_balanceo_en_sitio"/>
-  <afectaComponente rdf:resource="#comp_bomba_centrifuga__impulsor"/>
   <afectaComponente rdf:resource="#comp_motor_electrico__rotor"/>
+  <afectaComponente rdf:resource="#comp_bomba_centrifuga__impulsor"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">desbalanceo_rotor</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Desbalanceo de rotor/impulsor</nombre>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
   <formaDegradacion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">lineal</formaDegradacion>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
   <severidad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</severidad>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#modo_holgura_mecanica">
   <rdf:type rdf:resource="#ModoFalla"/>
-  <manifiesta rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <manifiesta rdf:resource="#sintoma_vibracion_alerta"/>
   <manifiesta rdf:resource="#sintoma_vibracion_impulsiva"/>
+  <manifiesta rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <causadoPor rdf:resource="#causa_holgura_en_alojamiento_de_rodamiento"/>
-  <causadoPor rdf:resource="#causa_base_o_soldaduras_agrietadas"/>
   <causadoPor rdf:resource="#causa_tornilleria_de_anclaje_floja"/>
+  <causadoPor rdf:resource="#causa_base_o_soldaduras_agrietadas"/>
   <causadoPor rdf:resource="#causa_grout_degradado"/>
   <causadoPor rdf:resource="#causa_pata_coja"/>
-  <mitigadoPor rdf:resource="#accion_reapriete_con_torque"/>
   <mitigadoPor rdf:resource="#accion_reparar_base_o_regrout"/>
-  <mitigadoPor rdf:resource="#accion_reemplazar_rodamiento_o_acople_con_ajuste_estrecho"/>
-  <mitigadoPor rdf:resource="#accion_analisis_de_vibracion_post_correccion"/>
   <mitigadoPor rdf:resource="#accion_calzar_pata_coja"/>
-  <afectaComponente rdf:resource="#comp_motor_electrico__base_anclajes"/>
-  <afectaComponente rdf:resource="#comp_bomba_centrifuga__base_anclajes"/>
+  <mitigadoPor rdf:resource="#accion_analisis_de_vibracion_post_correccion"/>
+  <mitigadoPor rdf:resource="#accion_reapriete_con_torque"/>
+  <mitigadoPor rdf:resource="#accion_reemplazar_rodamiento_o_acople_con_ajuste_estrecho"/>
   <afectaComponente rdf:resource="#comp_compresor_tornillo__base_anclajes"/>
+  <afectaComponente rdf:resource="#comp_bomba_centrifuga__base_anclajes"/>
+  <afectaComponente rdf:resource="#comp_motor_electrico__base_anclajes"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">holgura_mecanica</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Holgura mecánica (anclajes flojos, base degradada, ajuste de rodamiento o acople suelto)</nombre>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
   <formaDegradacion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">lineal</formaDegradacion>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-041</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
   <severidad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</severidad>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#modo_degradacion_aislamiento">
   <rdf:type rdf:resource="#ModoFalla"/>
-  <manifiesta rdf:resource="#sintoma_corriente_alta"/>
   <manifiesta rdf:resource="#sintoma_desbalance_corriente_alto"/>
-  <manifiesta rdf:resource="#sintoma_temp_devanado_alta"/>
+  <manifiesta rdf:resource="#sintoma_corriente_alta"/>
   <manifiesta rdf:resource="#sintoma_olor_quemado_percibido"/>
-  <causadoPor rdf:resource="#causa_perdida_de_fase"/>
-  <causadoPor rdf:resource="#causa_humedad_contaminacion"/>
+  <manifiesta rdf:resource="#sintoma_temp_devanado_alta"/>
   <causadoPor rdf:resource="#causa_sobrecarga_sostenida"/>
+  <causadoPor rdf:resource="#causa_humedad_contaminacion"/>
   <causadoPor rdf:resource="#causa_picos_dv_dt_variador"/>
+  <causadoPor rdf:resource="#causa_perdida_de_fase"/>
   <causadoPor rdf:resource="#causa_ventilacion_obstruida"/>
-  <mitigadoPor rdf:resource="#accion_rebobinado_o_reemplazo"/>
   <mitigadoPor rdf:resource="#accion_prueba_surge"/>
-  <mitigadoPor rdf:resource="#accion_prueba_megohmetro_e_indice_polarizacion"/>
   <mitigadoPor rdf:resource="#accion_reducir_carga"/>
+  <mitigadoPor rdf:resource="#accion_rebobinado_o_reemplazo"/>
+  <mitigadoPor rdf:resource="#accion_prueba_megohmetro_e_indice_polarizacion"/>
   <afectaComponente rdf:resource="#comp_motor_electrico__estator_devanado"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">degradacion_aislamiento</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Degradación térmica del aislamiento del devanado</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
   <formaDegradacion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">exponencial</formaDegradacion>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-005</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-006</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-005</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-032</fuente>
   <severidad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</severidad>
 </owl:NamedIndividual>
@@ -4026,9 +4036,9 @@
   <rdf:type rdf:resource="#ModoFalla"/>
   <manifiesta rdf:resource="#sintoma_desbalance_corriente_critico"/>
   <manifiesta rdf:resource="#sintoma_temp_devanado_alta"/>
+  <causadoPor rdf:resource="#causa_fin_de_vida_electrica"/>
   <causadoPor rdf:resource="#causa_bornes_flojos"/>
   <causadoPor rdf:resource="#causa_bobina_debil"/>
-  <causadoPor rdf:resource="#causa_fin_de_vida_electrica"/>
   <causadoPor rdf:resource="#causa_contactos_picados"/>
   <mitigadoPor rdf:resource="#accion_inspeccion_termografica_tablero"/>
   <mitigadoPor rdf:resource="#accion_cambio_de_contactos_o_contactor"/>
@@ -4038,30 +4048,30 @@
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Falla de contactor (contactos picados/abiertos, pérdida de fase)</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
   <formaDegradacion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">intermitente</formaDegradacion>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-031</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-006</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-031</fuente>
   <severidad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</severidad>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#modo_falla_variador">
   <rdf:type rdf:resource="#ModoFalla"/>
-  <manifiesta rdf:resource="#sintoma_disparos_frecuentes"/>
   <manifiesta rdf:resource="#sintoma_temp_variador_alta"/>
-  <manifiesta rdf:resource="#sintoma_distorsion_armonica_alta"/>
-  <manifiesta rdf:resource="#sintoma_corriente_en_rango"/>
-  <manifiesta rdf:resource="#sintoma_disparos_intermitentes"/>
   <manifiesta rdf:resource="#sintoma_tension_bus_dc_alta"/>
+  <manifiesta rdf:resource="#sintoma_corriente_en_rango"/>
+  <manifiesta rdf:resource="#sintoma_distorsion_armonica_alta"/>
+  <manifiesta rdf:resource="#sintoma_disparos_intermitentes"/>
+  <manifiesta rdf:resource="#sintoma_disparos_frecuentes"/>
   <causadoPor rdf:resource="#causa_datos_de_motor_erroneos"/>
-  <causadoPor rdf:resource="#causa_regeneracion_sin_resistencia_de_frenado"/>
   <causadoPor rdf:resource="#causa_cable_largo_sin_reactancia"/>
   <causadoPor rdf:resource="#causa_rampas_muy_cortas"/>
+  <causadoPor rdf:resource="#causa_regeneracion_sin_resistencia_de_frenado"/>
   <causadoPor rdf:resource="#causa_ventilador_del_variador"/>
   <causadoPor rdf:resource="#causa_condensadores_bus_envejecidos"/>
-  <mitigadoPor rdf:resource="#accion_ajustar_rampas_y_parametros"/>
+  <mitigadoPor rdf:resource="#accion_mantenimiento_ventiladores"/>
   <mitigadoPor rdf:resource="#accion_reactancia_o_filtro"/>
   <mitigadoPor rdf:resource="#accion_leer_registro_de_fallas"/>
   <mitigadoPor rdf:resource="#accion_resistencia_de_frenado"/>
-  <mitigadoPor rdf:resource="#accion_mantenimiento_ventiladores"/>
+  <mitigadoPor rdf:resource="#accion_ajustar_rampas_y_parametros"/>
   <afectaComponente rdf:resource="#comp_motor_electrico__variador"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">falla_variador</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Falla de variador (disparos intermitentes, armónicos, bus DC, sobretemperatura)</nombre>
@@ -4077,14 +4087,14 @@
   <manifiesta rdf:resource="#sintoma_sobrecorriente"/>
   <manifiesta rdf:resource="#sintoma_temp_devanado_alta"/>
   <causadoPor rdf:resource="#causa_freno_arrastrando"/>
-  <causadoPor rdf:resource="#causa_proceso_fuera_de_diseno"/>
   <causadoPor rdf:resource="#causa_sobrecarga_de_piezas"/>
-  <causadoPor rdf:resource="#causa_atasco_de_la_maquina_accionada"/>
   <causadoPor rdf:resource="#causa_atasco_de_material"/>
-  <mitigadoPor rdf:resource="#accion_comparar_con_corriente_de_placa_y_fs"/>
+  <causadoPor rdf:resource="#causa_atasco_de_la_maquina_accionada"/>
+  <causadoPor rdf:resource="#causa_proceso_fuera_de_diseno"/>
   <mitigadoPor rdf:resource="#accion_verificar_carga"/>
-  <mitigadoPor rdf:resource="#accion_ajustar_proteccion"/>
+  <mitigadoPor rdf:resource="#accion_comparar_con_corriente_de_placa_y_fs"/>
   <mitigadoPor rdf:resource="#accion_despejar_atasco"/>
+  <mitigadoPor rdf:resource="#accion_ajustar_proteccion"/>
   <afectaComponente rdf:resource="#comp_banda_transportadora__motorreductor"/>
   <afectaComponente rdf:resource="#comp_motor_electrico__carga_accionada"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sobrecarga_mecanica</identificador>
@@ -4092,8 +4102,8 @@
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
   <formaDegradacion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">escalon</formaDegradacion>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-007</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-005</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-007</fuente>
   <severidad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</severidad>
 </owl:NamedIndividual>
 
@@ -4101,26 +4111,26 @@
   <rdf:type rdf:resource="#ModoFalla"/>
   <manifiesta rdf:resource="#sintoma_presion_descarga_baja"/>
   <manifiesta rdf:resource="#sintoma_golpeteo_percibido"/>
-  <manifiesta rdf:resource="#sintoma_caudal_inestable"/>
   <manifiesta rdf:resource="#sintoma_margen_npsh_bajo"/>
-  <manifiesta rdf:resource="#sintoma_vibracion_hf_alta"/>
   <manifiesta rdf:resource="#sintoma_margen_npsh_insuficiente"/>
+  <manifiesta rdf:resource="#sintoma_vibracion_hf_alta"/>
+  <manifiesta rdf:resource="#sintoma_caudal_inestable"/>
+  <causadoPor rdf:resource="#causa_operacion_lejos_del_bep"/>
   <causadoPor rdf:resource="#causa_filtro_succion_obstruido"/>
   <causadoPor rdf:resource="#causa_nivel_bajo_en_succion"/>
   <causadoPor rdf:resource="#causa_temperatura_liquido_alta"/>
-  <causadoPor rdf:resource="#causa_operacion_lejos_del_bep"/>
-  <mitigadoPor rdf:resource="#accion_restablecer_npsha"/>
-  <mitigadoPor rdf:resource="#accion_reducir_caudal"/>
-  <mitigadoPor rdf:resource="#accion_limpiar_filtro_succion"/>
   <mitigadoPor rdf:resource="#accion_inspeccionar_erosion_impulsor"/>
+  <mitigadoPor rdf:resource="#accion_restablecer_npsha"/>
+  <mitigadoPor rdf:resource="#accion_limpiar_filtro_succion"/>
+  <mitigadoPor rdf:resource="#accion_reducir_caudal"/>
   <afectaComponente rdf:resource="#comp_bomba_centrifuga__impulsor"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cavitacion</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cavitación por NPSH disponible insuficiente</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
   <formaDegradacion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sigmoide</formaDegradacion>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-012</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-013</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-036</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-012</fuente>
   <severidad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</severidad>
 </owl:NamedIndividual>
 
@@ -4129,12 +4139,12 @@
   <manifiesta rdf:resource="#sintoma_presion_descarga_baja"/>
   <manifiesta rdf:resource="#sintoma_caudal_bajo"/>
   <manifiesta rdf:resource="#sintoma_corriente_baja"/>
-  <causadoPor rdf:resource="#causa_canastilla_sucia"/>
   <causadoPor rdf:resource="#causa_valvula_parcialmente_cerrada"/>
-  <causadoPor rdf:resource="#causa_objetos_extranos"/>
+  <causadoPor rdf:resource="#causa_canastilla_sucia"/>
   <causadoPor rdf:resource="#causa_incrustaciones"/>
-  <mitigadoPor rdf:resource="#accion_limpiar_canastilla_e_impulsor"/>
+  <causadoPor rdf:resource="#causa_objetos_extranos"/>
   <mitigadoPor rdf:resource="#accion_verificar_valvulas"/>
+  <mitigadoPor rdf:resource="#accion_limpiar_canastilla_e_impulsor"/>
   <afectaComponente rdf:resource="#comp_bomba_centrifuga__carcasa_succion"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">obstruccion_bomba</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Obstrucción de succión/impulsor (filtro, canastilla, incrustaciones)</nombre>
@@ -4147,13 +4157,13 @@
 <owl:NamedIndividual rdf:about="#modo_desgaste_sello_mecanico">
   <rdf:type rdf:resource="#ModoFalla"/>
   <manifiesta rdf:resource="#sintoma_fuga_sello"/>
-  <causadoPor rdf:resource="#causa_vibracion_excesiva"/>
   <causadoPor rdf:resource="#causa_plan_de_lavado_inadecuado"/>
-  <causadoPor rdf:resource="#causa_abrasivos"/>
   <causadoPor rdf:resource="#causa_operacion_en_seco"/>
-  <mitigadoPor rdf:resource="#accion_revisar_plan_de_lavado"/>
+  <causadoPor rdf:resource="#causa_abrasivos"/>
+  <causadoPor rdf:resource="#causa_vibracion_excesiva"/>
   <mitigadoPor rdf:resource="#accion_cambio_de_sello"/>
   <mitigadoPor rdf:resource="#accion_corregir_vibracion_y_alineacion"/>
+  <mitigadoPor rdf:resource="#accion_revisar_plan_de_lavado"/>
   <afectaComponente rdf:resource="#comp_bomba_centrifuga__sello_mecanico"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">desgaste_sello_mecanico</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Desgaste de sello mecánico (caras, elastómeros)</nombre>
@@ -4165,19 +4175,19 @@
 
 <owl:NamedIndividual rdf:about="#modo_sobrecalentamiento_compresor">
   <rdf:type rdf:resource="#ModoFalla"/>
-  <manifiesta rdf:resource="#sintoma_calor_percibido"/>
-  <manifiesta rdf:resource="#sintoma_temp_descarga_critica"/>
-  <manifiesta rdf:resource="#sintoma_corriente_en_rango"/>
   <manifiesta rdf:resource="#sintoma_temp_descarga_alta"/>
+  <manifiesta rdf:resource="#sintoma_corriente_en_rango"/>
+  <manifiesta rdf:resource="#sintoma_temp_descarga_critica"/>
+  <manifiesta rdf:resource="#sintoma_calor_percibido"/>
+  <causadoPor rdf:resource="#causa_valvula_termostatica"/>
   <causadoPor rdf:resource="#causa_aceite_degradado"/>
-  <causadoPor rdf:resource="#causa_ventilacion_de_sala_deficiente"/>
   <causadoPor rdf:resource="#causa_nivel_de_aceite_bajo"/>
   <causadoPor rdf:resource="#causa_enfriador_sucio"/>
-  <causadoPor rdf:resource="#causa_valvula_termostatica"/>
-  <mitigadoPor rdf:resource="#accion_mejorar_ventilacion"/>
-  <mitigadoPor rdf:resource="#accion_verificar_termostatica"/>
-  <mitigadoPor rdf:resource="#accion_reponer_o_cambiar_aceite"/>
+  <causadoPor rdf:resource="#causa_ventilacion_de_sala_deficiente"/>
   <mitigadoPor rdf:resource="#accion_limpiar_enfriador"/>
+  <mitigadoPor rdf:resource="#accion_verificar_termostatica"/>
+  <mitigadoPor rdf:resource="#accion_mejorar_ventilacion"/>
+  <mitigadoPor rdf:resource="#accion_reponer_o_cambiar_aceite"/>
   <afectaComponente rdf:resource="#comp_compresor_tornillo__enfriador_aceite"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sobrecalentamiento_compresor</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sobrecalentamiento (enfriador sucio, aceite bajo/degradado, termostática)</nombre>
@@ -4189,10 +4199,10 @@
 
 <owl:NamedIndividual rdf:about="#modo_obstruccion_separador">
   <rdf:type rdf:resource="#ModoFalla"/>
-  <manifiesta rdf:resource="#sintoma_dp_separador_alto"/>
   <manifiesta rdf:resource="#sintoma_presion_descarga_baja"/>
-  <causadoPor rdf:resource="#causa_aceite_degradado_o_barnizado"/>
+  <manifiesta rdf:resource="#sintoma_dp_separador_alto"/>
   <causadoPor rdf:resource="#causa_fin_de_vida_del_elemento"/>
+  <causadoPor rdf:resource="#causa_aceite_degradado_o_barnizado"/>
   <mitigadoPor rdf:resource="#accion_cambiar_elemento_separador"/>
   <mitigadoPor rdf:resource="#accion_cambiar_aceite"/>
   <afectaComponente rdf:resource="#comp_compresor_tornillo__separador_aceite"/>
@@ -4200,21 +4210,21 @@
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Saturación/obstrucción del elemento separador de aceite</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
   <formaDegradacion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">lineal</formaDegradacion>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-018</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-017</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-018</fuente>
   <severidad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</severidad>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#modo_fuga_aire_red">
   <rdf:type rdf:resource="#ModoFalla"/>
-  <manifiesta rdf:resource="#sintoma_presion_descarga_baja"/>
   <manifiesta rdf:resource="#sintoma_carga_compresor_alta"/>
+  <manifiesta rdf:resource="#sintoma_presion_descarga_baja"/>
+  <causadoPor rdf:resource="#causa_herramientas_y_acoples_desgastados"/>
   <causadoPor rdf:resource="#causa_purgadores_abiertos"/>
   <causadoPor rdf:resource="#causa_racores_y_mangueras"/>
-  <causadoPor rdf:resource="#causa_herramientas_y_acoples_desgastados"/>
-  <mitigadoPor rdf:resource="#accion_deteccion_ultrasonica_de_fugas"/>
-  <mitigadoPor rdf:resource="#accion_prueba_de_aislamiento"/>
   <mitigadoPor rdf:resource="#accion_programa_de_fugas"/>
+  <mitigadoPor rdf:resource="#accion_prueba_de_aislamiento"/>
+  <mitigadoPor rdf:resource="#accion_deteccion_ultrasonica_de_fugas"/>
   <afectaComponente rdf:resource="#comp_compresor_tornillo__red_distribucion"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fuga_aire_red</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fugas en la red de aire comprimido (pérdida de presión por demanda)</nombre>
@@ -4229,12 +4239,12 @@
   <rdf:type rdf:resource="#ModoFalla"/>
   <manifiesta rdf:resource="#sintoma_presion_descarga_baja"/>
   <manifiesta rdf:resource="#sintoma_corriente_baja"/>
+  <causadoPor rdf:resource="#causa_solenoide_de_control"/>
   <causadoPor rdf:resource="#causa_barniz_en_el_piston"/>
   <causadoPor rdf:resource="#causa_filtro_de_aire_obstruido"/>
-  <causadoPor rdf:resource="#causa_solenoide_de_control"/>
-  <mitigadoPor rdf:resource="#accion_cambiar_filtro_de_aire"/>
   <mitigadoPor rdf:resource="#accion_limpiar_o_reparar_valvula"/>
   <mitigadoPor rdf:resource="#accion_revisar_apertura_en_carga"/>
+  <mitigadoPor rdf:resource="#accion_cambiar_filtro_de_aire"/>
   <afectaComponente rdf:resource="#comp_compresor_tornillo__valvula_admision"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">falla_valvula_admision</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Válvula de admisión que no abre por completo (solenoide, barniz)</nombre>
@@ -4246,15 +4256,15 @@
 
 <owl:NamedIndividual rdf:about="#modo_fuga_hidraulica_externa">
   <rdf:type rdf:resource="#ModoFalla"/>
-  <manifiesta rdf:resource="#sintoma_nivel_tanque_bajo"/>
   <manifiesta rdf:resource="#sintoma_presion_sistema_baja"/>
-  <causadoPor rdf:resource="#causa_racor_flojo"/>
-  <causadoPor rdf:resource="#causa_manguera_danada"/>
+  <manifiesta rdf:resource="#sintoma_nivel_tanque_bajo"/>
   <causadoPor rdf:resource="#causa_sello_de_vastago_desgastado"/>
   <causadoPor rdf:resource="#causa_temperatura_excesiva"/>
-  <mitigadoPor rdf:resource="#accion_reemplazo_de_manguera_o_sello"/>
-  <mitigadoPor rdf:resource="#accion_bloqueo_y_aislamiento_de_energia"/>
+  <causadoPor rdf:resource="#causa_racor_flojo"/>
+  <causadoPor rdf:resource="#causa_manguera_danada"/>
   <mitigadoPor rdf:resource="#accion_reponer_aceite_filtrado"/>
+  <mitigadoPor rdf:resource="#accion_bloqueo_y_aislamiento_de_energia"/>
+  <mitigadoPor rdf:resource="#accion_reemplazo_de_manguera_o_sello"/>
   <afectaComponente rdf:resource="#comp_prensa_hidraulica__sellos"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fuga_hidraulica_externa</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fuga hidráulica externa (manguera, racor, sello de vástago)</nombre>
@@ -4266,35 +4276,35 @@
 
 <owl:NamedIndividual rdf:about="#modo_fuga_interna_cilindro">
   <rdf:type rdf:resource="#ModoFalla"/>
+  <manifiesta rdf:resource="#sintoma_caida_presion_retencion"/>
   <manifiesta rdf:resource="#sintoma_tiempo_ciclo_alto"/>
   <manifiesta rdf:resource="#sintoma_temp_aceite_alta"/>
-  <manifiesta rdf:resource="#sintoma_caida_presion_retencion"/>
-  <causadoPor rdf:resource="#causa_rayado_de_camisa"/>
   <causadoPor rdf:resource="#causa_contaminacion"/>
+  <causadoPor rdf:resource="#causa_rayado_de_camisa"/>
   <causadoPor rdf:resource="#causa_sello_de_piston_desgastado"/>
+  <mitigadoPor rdf:resource="#accion_reemplazo_de_sellos"/>
   <mitigadoPor rdf:resource="#accion_prueba_de_bypass_fin_de_carrera"/>
   <mitigadoPor rdf:resource="#accion_aislar_valvulas"/>
-  <mitigadoPor rdf:resource="#accion_reemplazo_de_sellos"/>
   <afectaComponente rdf:resource="#comp_prensa_hidraulica__cilindro_principal"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fuga_interna_cilindro</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fuga interna (bypass del sello del pistón o de la válvula)</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prensa_hidraulica</tipoActivo>
   <formaDegradacion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">exponencial</formaDegradacion>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-022</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-020</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-022</fuente>
   <severidad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</severidad>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#modo_contaminacion_aceite_hidraulico">
   <rdf:type rdf:resource="#ModoFalla"/>
   <manifiesta rdf:resource="#sintoma_aceite_contaminado"/>
+  <causadoPor rdf:resource="#causa_ingreso_por_sellos"/>
+  <causadoPor rdf:resource="#causa_filtro_saturado_o_bypass"/>
   <causadoPor rdf:resource="#causa_respiradero_sin_filtro"/>
   <causadoPor rdf:resource="#causa_aceite_nuevo_sin_filtrar"/>
-  <causadoPor rdf:resource="#causa_filtro_saturado_o_bypass"/>
-  <causadoPor rdf:resource="#causa_ingreso_por_sellos"/>
+  <mitigadoPor rdf:resource="#accion_filtrado_en_rinon"/>
   <mitigadoPor rdf:resource="#accion_conteo_de_particulas_iso4406"/>
   <mitigadoPor rdf:resource="#accion_cambio_de_filtros"/>
-  <mitigadoPor rdf:resource="#accion_filtrado_en_rinon"/>
   <afectaComponente rdf:resource="#comp_prensa_hidraulica__tanque_filtros"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">contaminacion_aceite_hidraulico</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Contaminación por partículas del aceite hidráulico</nombre>
@@ -4306,18 +4316,18 @@
 
 <owl:NamedIndividual rdf:about="#modo_valvula_hidraulica_pegada">
   <rdf:type rdf:resource="#ModoFalla"/>
-  <manifiesta rdf:resource="#sintoma_tiempo_ciclo_alto"/>
-  <manifiesta rdf:resource="#sintoma_prensa_dura_percibida"/>
   <manifiesta rdf:resource="#sintoma_aceite_contaminado"/>
   <manifiesta rdf:resource="#sintoma_presion_sistema_alta"/>
+  <manifiesta rdf:resource="#sintoma_tiempo_ciclo_alto"/>
+  <manifiesta rdf:resource="#sintoma_prensa_dura_percibida"/>
   <causadoPor rdf:resource="#causa_bobina_debil"/>
-  <causadoPor rdf:resource="#causa_aceite_frio"/>
   <causadoPor rdf:resource="#causa_particulas_en_carrete"/>
+  <causadoPor rdf:resource="#causa_aceite_frio"/>
   <causadoPor rdf:resource="#causa_barniz"/>
+  <mitigadoPor rdf:resource="#accion_limpiar_o_reemplazar_valvula"/>
   <mitigadoPor rdf:resource="#accion_filtrar_aceite"/>
   <mitigadoPor rdf:resource="#accion_verificar_respuesta_bobina_vs_posicion"/>
   <mitigadoPor rdf:resource="#accion_calentar_aceite_antes_de_producir"/>
-  <mitigadoPor rdf:resource="#accion_limpiar_o_reemplazar_valvula"/>
   <afectaComponente rdf:resource="#comp_prensa_hidraulica__valvula_direccional_proporcional"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">valvula_hidraulica_pegada</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Válvula direccional/proporcional pegada o lenta ("prensa dura")</nombre>
@@ -4332,12 +4342,12 @@
   <rdf:type rdf:resource="#ModoFalla"/>
   <manifiesta rdf:resource="#sintoma_temp_aceite_critica"/>
   <manifiesta rdf:resource="#sintoma_temp_aceite_alta"/>
+  <causadoPor rdf:resource="#causa_enfriador_sucio_o_sin_agua"/>
   <causadoPor rdf:resource="#causa_fugas_internas"/>
   <causadoPor rdf:resource="#causa_valvula_de_alivio_descargando"/>
-  <causadoPor rdf:resource="#causa_enfriador_sucio_o_sin_agua"/>
-  <mitigadoPor rdf:resource="#accion_ajustar_alivio"/>
   <mitigadoPor rdf:resource="#accion_limpiar_enfriador"/>
   <mitigadoPor rdf:resource="#accion_buscar_fugas_internas"/>
+  <mitigadoPor rdf:resource="#accion_ajustar_alivio"/>
   <afectaComponente rdf:resource="#comp_prensa_hidraulica__enfriador"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sobrecalentamiento_aceite_hidraulico</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sobrecalentamiento del aceite hidráulico (enfriador, alivio, fugas)</nombre>
@@ -4350,17 +4360,17 @@
 <owl:NamedIndividual rdf:about="#modo_desalineacion_banda">
   <rdf:type rdf:resource="#ModoFalla"/>
   <manifiesta rdf:resource="#sintoma_corriente_alta"/>
-  <manifiesta rdf:resource="#sintoma_banda_corrida_percibida"/>
   <manifiesta rdf:resource="#sintoma_desvio_banda"/>
-  <causadoPor rdf:resource="#causa_carga_descentrada"/>
+  <manifiesta rdf:resource="#sintoma_banda_corrida_percibida"/>
   <causadoPor rdf:resource="#causa_acumulacion_de_material"/>
   <causadoPor rdf:resource="#causa_rodillo_trabado"/>
   <causadoPor rdf:resource="#causa_empalme_no_escuadrado"/>
   <causadoPor rdf:resource="#causa_tambores_o_rodillos_fuera_de_escuadra"/>
-  <mitigadoPor rdf:resource="#accion_rehacer_empalme"/>
+  <causadoPor rdf:resource="#causa_carga_descentrada"/>
   <mitigadoPor rdf:resource="#accion_alinear_tambores_y_rodillos"/>
-  <mitigadoPor rdf:resource="#accion_centrar_carga"/>
   <mitigadoPor rdf:resource="#accion_rodillos_autoalineantes"/>
+  <mitigadoPor rdf:resource="#accion_rehacer_empalme"/>
+  <mitigadoPor rdf:resource="#accion_centrar_carga"/>
   <afectaComponente rdf:resource="#comp_banda_transportadora__banda_empalme"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">desalineacion_banda</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Corrimiento (desalineación) de la banda</nombre>
@@ -4374,11 +4384,11 @@
   <rdf:type rdf:resource="#ModoFalla"/>
   <manifiesta rdf:resource="#sintoma_deslizamiento_alto"/>
   <causadoPor rdf:resource="#causa_sobrecarga"/>
+  <causadoPor rdf:resource="#causa_recubrimiento_de_tambor_gastado"/>
   <causadoPor rdf:resource="#causa_tension_insuficiente"/>
   <causadoPor rdf:resource="#causa_agua_o_material_entre_banda_y_tambor"/>
-  <causadoPor rdf:resource="#causa_recubrimiento_de_tambor_gastado"/>
-  <mitigadoPor rdf:resource="#accion_ajustar_tension"/>
   <mitigadoPor rdf:resource="#accion_limpiar"/>
+  <mitigadoPor rdf:resource="#accion_ajustar_tension"/>
   <mitigadoPor rdf:resource="#accion_recubrir_tambor"/>
   <afectaComponente rdf:resource="#comp_banda_transportadora__tambor_motriz"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">deslizamiento_banda</identificador>
@@ -4395,11 +4405,11 @@
   <manifiesta rdf:resource="#sintoma_corriente_baja"/>
   <causadoPor rdf:resource="#causa_desgaste_de_bordes_por_corrimiento"/>
   <causadoPor rdf:resource="#causa_empalme_deteriorado"/>
-  <causadoPor rdf:resource="#causa_objeto_atrapado"/>
   <causadoPor rdf:resource="#causa_sobretension"/>
-  <mitigadoPor rdf:resource="#accion_paro_y_bloqueo"/>
+  <causadoPor rdf:resource="#causa_objeto_atrapado"/>
   <mitigadoPor rdf:resource="#accion_inspeccion_periodica_de_empalmes"/>
   <mitigadoPor rdf:resource="#accion_reemplazar_o_reempalmar"/>
+  <mitigadoPor rdf:resource="#accion_paro_y_bloqueo"/>
   <afectaComponente rdf:resource="#comp_banda_transportadora__banda_empalme"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rotura_banda</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rotura de banda o de empalme</nombre>
@@ -4417,49 +4427,49 @@
   <causadoPor rdf:resource="#causa_rodillo_trabado_por_material"/>
   <causadoPor rdf:resource="#causa_rodamiento_del_rodillo_danado"/>
   <causadoPor rdf:resource="#causa_sellos_del_rodillo"/>
-  <mitigadoPor rdf:resource="#accion_reemplazo_de_rodillos"/>
   <mitigadoPor rdf:resource="#accion_inspeccion_termografica_o_acustica"/>
+  <mitigadoPor rdf:resource="#accion_reemplazo_de_rodillos"/>
   <afectaComponente rdf:resource="#comp_banda_transportadora__rodillos_portantes"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">falla_rodillo</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rodillo trabado o con rodamiento dañado ("cascabeleo en la línea")</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
   <formaDegradacion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">exponencial</formaDegradacion>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-024</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-026</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-024</fuente>
   <severidad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</severidad>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#modo_desgaste_herramienta">
   <rdf:type rdf:resource="#ModoFalla"/>
-  <manifiesta rdf:resource="#sintoma_desgaste_herramienta_limite"/>
-  <manifiesta rdf:resource="#sintoma_carga_husillo_alta"/>
   <manifiesta rdf:resource="#sintoma_desgaste_herramienta_alto"/>
+  <manifiesta rdf:resource="#sintoma_carga_husillo_alta"/>
+  <manifiesta rdf:resource="#sintoma_desgaste_herramienta_limite"/>
+  <causadoPor rdf:resource="#causa_vida_util_alcanzada"/>
   <causadoPor rdf:resource="#causa_parametros_de_corte_agresivos"/>
   <causadoPor rdf:resource="#causa_refrigerante_insuficiente"/>
-  <causadoPor rdf:resource="#causa_vida_util_alcanzada"/>
-  <mitigadoPor rdf:resource="#accion_revisar_parametros_de_corte"/>
   <mitigadoPor rdf:resource="#accion_cambio_de_herramienta"/>
+  <mitigadoPor rdf:resource="#accion_revisar_parametros_de_corte"/>
   <afectaComponente rdf:resource="#comp_centro_cnc__herramienta"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">desgaste_herramienta</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Desgaste progresivo de herramienta (flanco)</nombre>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">centro_cnc</tipoActivo>
   <formaDegradacion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">lineal</formaDegradacion>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-027</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-036</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-027</fuente>
   <severidad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</severidad>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#modo_rotura_herramienta">
   <rdf:type rdf:resource="#ModoFalla"/>
-  <manifiesta rdf:resource="#sintoma_carga_husillo_caida_subita"/>
   <manifiesta rdf:resource="#sintoma_impacto_vibracion"/>
+  <manifiesta rdf:resource="#sintoma_carga_husillo_caida_subita"/>
   <causadoPor rdf:resource="#causa_evacuacion_de_viruta_deficiente"/>
-  <causadoPor rdf:resource="#causa_desgaste_no_detectado"/>
   <causadoPor rdf:resource="#causa_inclusion_dura_en_material"/>
   <causadoPor rdf:resource="#causa_chatter"/>
-  <mitigadoPor rdf:resource="#accion_inspeccion_con_palpador"/>
+  <causadoPor rdf:resource="#causa_desgaste_no_detectado"/>
   <mitigadoPor rdf:resource="#accion_paro_de_avance"/>
   <mitigadoPor rdf:resource="#accion_revisar_pieza"/>
+  <mitigadoPor rdf:resource="#accion_inspeccion_con_palpador"/>
   <afectaComponente rdf:resource="#comp_centro_cnc__herramienta"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rotura_herramienta</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rotura/astillado de herramienta</nombre>
@@ -4474,11 +4484,11 @@
   <manifiesta rdf:resource="#sintoma_impacto_vibracion"/>
   <manifiesta rdf:resource="#sintoma_carga_husillo_critica"/>
   <causadoPor rdf:resource="#causa_offset_de_herramienta_erroneo"/>
-  <causadoPor rdf:resource="#causa_error_de_programa"/>
   <causadoPor rdf:resource="#causa_sujecion_de_pieza"/>
-  <mitigadoPor rdf:resource="#accion_paro_inmediato"/>
-  <mitigadoPor rdf:resource="#accion_simulacion_de_programa"/>
+  <causadoPor rdf:resource="#causa_error_de_programa"/>
   <mitigadoPor rdf:resource="#accion_verificar_runout_y_rodamientos"/>
+  <mitigadoPor rdf:resource="#accion_simulacion_de_programa"/>
+  <mitigadoPor rdf:resource="#accion_paro_inmediato"/>
   <afectaComponente rdf:resource="#comp_centro_cnc__husillo"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">colision_husillo</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Golpe/colisión de husillo o herramienta (error de programa/offset)</nombre>
@@ -4497,8 +4507,8 @@
   <causadoPor rdf:resource="#causa_voladizo_largo"/>
   <causadoPor rdf:resource="#causa_profundidad_de_corte_excesiva"/>
   <mitigadoPor rdf:resource="#accion_acortar_voladizo"/>
-  <mitigadoPor rdf:resource="#accion_ajustar_rpm_a_lobulo_estable"/>
   <mitigadoPor rdf:resource="#accion_reducir_profundidad"/>
+  <mitigadoPor rdf:resource="#accion_ajustar_rpm_a_lobulo_estable"/>
   <afectaComponente rdf:resource="#comp_centro_cnc__husillo"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vibracion_chatter</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vibración regenerativa (chatter)</nombre>
@@ -4512,12 +4522,12 @@
   <rdf:type rdf:resource="#ModoFalla"/>
   <manifiesta rdf:resource="#sintoma_vibracion_hf_alta"/>
   <manifiesta rdf:resource="#sintoma_temp_husillo_alta"/>
-  <causadoPor rdf:resource="#causa_falla_del_enfriador"/>
-  <causadoPor rdf:resource="#causa_lubricacion_aceite_aire_deficiente"/>
   <causadoPor rdf:resource="#causa_precarga_excesiva"/>
-  <mitigadoPor rdf:resource="#accion_revisar_enfriador"/>
-  <mitigadoPor rdf:resource="#accion_revisar_lubricacion"/>
+  <causadoPor rdf:resource="#causa_lubricacion_aceite_aire_deficiente"/>
+  <causadoPor rdf:resource="#causa_falla_del_enfriador"/>
   <mitigadoPor rdf:resource="#accion_ciclo_de_calentamiento"/>
+  <mitigadoPor rdf:resource="#accion_revisar_lubricacion"/>
+  <mitigadoPor rdf:resource="#accion_revisar_enfriador"/>
   <afectaComponente rdf:resource="#comp_centro_cnc__rodamientos_husillo"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sobrecalentamiento_husillo</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sobrecalentamiento de husillo (refrigeración, lubricación, precarga)</nombre>
@@ -4532,10 +4542,10 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_degradacion_aislamiento"/>
   <componenteDeFila rdf:resource="#comp_motor_electrico__estator_devanado"/>
-  <sintomaDeFila rdf:resource="#sintoma_corriente_alta"/>
   <sintomaDeFila rdf:resource="#sintoma_desbalance_corriente_alto"/>
-  <sintomaDeFila rdf:resource="#sintoma_temp_devanado_alta"/>
+  <sintomaDeFila rdf:resource="#sintoma_corriente_alta"/>
   <sintomaDeFila rdf:resource="#sintoma_olor_quemado_percibido"/>
+  <sintomaDeFila rdf:resource="#sintoma_temp_devanado_alta"/>
   <causaDeFila rdf:resource="#causa_sobrecarga_sostenida"/>
   <causaDeFila rdf:resource="#causa_perdida_de_fase"/>
   <causaDeFila rdf:resource="#causa_ventilacion_obstruida"/>
@@ -4552,8 +4562,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">180</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-005</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-006</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-005</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-032</fuente>
 </owl:NamedIndividual>
 
@@ -4681,10 +4691,10 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_desgaste_rodamiento"/>
   <componenteDeFila rdf:resource="#comp_motor_electrico__rodamientos"/>
-  <sintomaDeFila rdf:resource="#sintoma_temp_rodamiento_alta"/>
-  <sintomaDeFila rdf:resource="#sintoma_vibracion_hf_critica"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_hf_alta"/>
+  <sintomaDeFila rdf:resource="#sintoma_temp_rodamiento_alta"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_impulsiva"/>
+  <sintomaDeFila rdf:resource="#sintoma_vibracion_hf_critica"/>
   <causaDeFila rdf:resource="#causa_fatiga"/>
   <causaDeFila rdf:resource="#causa_contaminacion_lubricante"/>
   <causaDeFila rdf:resource="#causa_sobrecarga_por_desalineacion"/>
@@ -4749,8 +4759,8 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_falla_lubricacion_rodamiento"/>
   <componenteDeFila rdf:resource="#comp_motor_electrico__rodamientos"/>
-  <sintomaDeFila rdf:resource="#sintoma_temp_rodamiento_alta"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_hf_alta"/>
+  <sintomaDeFila rdf:resource="#sintoma_temp_rodamiento_alta"/>
   <causaDeFila rdf:resource="#causa_falta_de_grasa"/>
   <causaDeFila rdf:resource="#causa_exceso_de_grasa"/>
   <causaDeFila rdf:resource="#causa_grasa_incompatible_o_degradada"/>
@@ -4764,8 +4774,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">210</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-008</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-033</fuente>
 </owl:NamedIndividual>
 
@@ -4809,10 +4819,10 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_desalineacion_eje"/>
   <componenteDeFila rdf:resource="#comp_motor_electrico__eje_acople"/>
-  <sintomaDeFila rdf:resource="#sintoma_vibracion_axial_alta"/>
-  <sintomaDeFila rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_alerta"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_creciente"/>
+  <sintomaDeFila rdf:resource="#sintoma_vibracion_axial_alta"/>
+  <sintomaDeFila rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <causaDeFila rdf:resource="#causa_montaje_incorrecto"/>
   <causaDeFila rdf:resource="#causa_pata_coja"/>
   <causaDeFila rdf:resource="#causa_dilatacion_termica"/>
@@ -4827,9 +4837,9 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">108</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-004</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#causa_montaje_incorrecto">
@@ -4878,9 +4888,9 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_holgura_mecanica"/>
   <componenteDeFila rdf:resource="#comp_motor_electrico__base_anclajes"/>
-  <sintomaDeFila rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_alerta"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_impulsiva"/>
+  <sintomaDeFila rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <causaDeFila rdf:resource="#causa_tornilleria_de_anclaje_floja"/>
   <causaDeFila rdf:resource="#causa_base_o_soldaduras_agrietadas"/>
   <causaDeFila rdf:resource="#causa_grout_degradado"/>
@@ -4898,8 +4908,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">96</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-041</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#causa_tornilleria_de_anclaje_floja">
@@ -4975,8 +4985,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">72</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#causa_acumulacion_de_suciedad">
@@ -5029,8 +5039,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">140</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-031</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-006</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-031</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#causa_contactos_picados">
@@ -5079,11 +5089,11 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_falla_variador"/>
   <componenteDeFila rdf:resource="#comp_motor_electrico__variador"/>
-  <sintomaDeFila rdf:resource="#sintoma_disparos_frecuentes"/>
   <sintomaDeFila rdf:resource="#sintoma_temp_variador_alta"/>
+  <sintomaDeFila rdf:resource="#sintoma_tension_bus_dc_alta"/>
   <sintomaDeFila rdf:resource="#sintoma_distorsion_armonica_alta"/>
   <sintomaDeFila rdf:resource="#sintoma_disparos_intermitentes"/>
-  <sintomaDeFila rdf:resource="#sintoma_tension_bus_dc_alta"/>
+  <sintomaDeFila rdf:resource="#sintoma_disparos_frecuentes"/>
   <causaDeFila rdf:resource="#causa_rampas_muy_cortas"/>
   <causaDeFila rdf:resource="#causa_datos_de_motor_erroneos"/>
   <causaDeFila rdf:resource="#causa_cable_largo_sin_reactancia"/>
@@ -5191,8 +5201,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">105</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-007</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-005</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-007</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#causa_atasco_de_la_maquina_accionada">
@@ -5237,10 +5247,10 @@
   <componenteDeFila rdf:resource="#comp_bomba_centrifuga__impulsor"/>
   <sintomaDeFila rdf:resource="#sintoma_presion_descarga_baja"/>
   <sintomaDeFila rdf:resource="#sintoma_golpeteo_percibido"/>
-  <sintomaDeFila rdf:resource="#sintoma_caudal_inestable"/>
   <sintomaDeFila rdf:resource="#sintoma_margen_npsh_bajo"/>
-  <sintomaDeFila rdf:resource="#sintoma_vibracion_hf_alta"/>
   <sintomaDeFila rdf:resource="#sintoma_margen_npsh_insuficiente"/>
+  <sintomaDeFila rdf:resource="#sintoma_vibracion_hf_alta"/>
+  <sintomaDeFila rdf:resource="#sintoma_caudal_inestable"/>
   <causaDeFila rdf:resource="#causa_nivel_bajo_en_succion"/>
   <causaDeFila rdf:resource="#causa_filtro_succion_obstruido"/>
   <causaDeFila rdf:resource="#causa_temperatura_liquido_alta"/>
@@ -5256,8 +5266,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">160</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-012</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-013</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-012</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#causa_nivel_bajo_en_succion">
@@ -5435,8 +5445,8 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_desgaste_rodamiento"/>
   <componenteDeFila rdf:resource="#comp_bomba_centrifuga__rodamientos"/>
-  <sintomaDeFila rdf:resource="#sintoma_temp_rodamiento_alta"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_hf_alta"/>
+  <sintomaDeFila rdf:resource="#sintoma_temp_rodamiento_alta"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_impulsiva"/>
   <causaDeFila rdf:resource="#causa_fatiga"/>
   <causaDeFila rdf:resource="#causa_contaminacion_del_aceite"/>
@@ -5451,8 +5461,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">160</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-009</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-009</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#causa_contaminacion_del_aceite">
@@ -5483,9 +5493,9 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_holgura_mecanica"/>
   <componenteDeFila rdf:resource="#comp_bomba_centrifuga__base_anclajes"/>
-  <sintomaDeFila rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_alerta"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_impulsiva"/>
+  <sintomaDeFila rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <causaDeFila rdf:resource="#causa_tornilleria_de_anclaje_floja"/>
   <causaDeFila rdf:resource="#causa_base_o_soldaduras_agrietadas"/>
   <causaDeFila rdf:resource="#causa_grout_degradado"/>
@@ -5503,8 +5513,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">96</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-041</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#fmea_bomba_centrifuga__desalineacion_eje">
@@ -5512,8 +5522,8 @@
   <modoDeFila rdf:resource="#modo_desalineacion_eje"/>
   <componenteDeFila rdf:resource="#comp_bomba_centrifuga__eje_acople"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_2x_elevada"/>
-  <sintomaDeFila rdf:resource="#sintoma_vibracion_axial_alta"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_creciente"/>
+  <sintomaDeFila rdf:resource="#sintoma_vibracion_axial_alta"/>
   <causaDeFila rdf:resource="#causa_esfuerzos_de_tuberia"/>
   <causaDeFila rdf:resource="#causa_montaje"/>
   <causaDeFila rdf:resource="#causa_dilatacion_termica"/>
@@ -5526,8 +5536,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">90</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-004</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#causa_esfuerzos_de_tuberia">
@@ -5565,8 +5575,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">45</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#causa_erosion_por_cavitacion">
@@ -5597,10 +5607,10 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_sobrecalentamiento_compresor"/>
   <componenteDeFila rdf:resource="#comp_compresor_tornillo__enfriador_aceite"/>
-  <sintomaDeFila rdf:resource="#sintoma_calor_percibido"/>
-  <sintomaDeFila rdf:resource="#sintoma_temp_descarga_critica"/>
-  <sintomaDeFila rdf:resource="#sintoma_corriente_en_rango"/>
   <sintomaDeFila rdf:resource="#sintoma_temp_descarga_alta"/>
+  <sintomaDeFila rdf:resource="#sintoma_corriente_en_rango"/>
+  <sintomaDeFila rdf:resource="#sintoma_temp_descarga_critica"/>
+  <sintomaDeFila rdf:resource="#sintoma_calor_percibido"/>
   <causaDeFila rdf:resource="#causa_enfriador_sucio"/>
   <causaDeFila rdf:resource="#causa_nivel_de_aceite_bajo"/>
   <causaDeFila rdf:resource="#causa_aceite_degradado"/>
@@ -5678,8 +5688,8 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_obstruccion_separador"/>
   <componenteDeFila rdf:resource="#comp_compresor_tornillo__separador_aceite"/>
-  <sintomaDeFila rdf:resource="#sintoma_dp_separador_alto"/>
   <sintomaDeFila rdf:resource="#sintoma_presion_descarga_baja"/>
+  <sintomaDeFila rdf:resource="#sintoma_dp_separador_alto"/>
   <causaDeFila rdf:resource="#causa_fin_de_vida_del_elemento"/>
   <causaDeFila rdf:resource="#causa_aceite_degradado_o_barnizado"/>
   <accionDeFila rdf:resource="#accion_cambiar_elemento_separador"/>
@@ -5691,8 +5701,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">90</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-018</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-017</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-018</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#causa_fin_de_vida_del_elemento">
@@ -5723,8 +5733,8 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_fuga_aire_red"/>
   <componenteDeFila rdf:resource="#comp_compresor_tornillo__red_distribucion"/>
-  <sintomaDeFila rdf:resource="#sintoma_presion_descarga_baja"/>
   <sintomaDeFila rdf:resource="#sintoma_carga_compresor_alta"/>
+  <sintomaDeFila rdf:resource="#sintoma_presion_descarga_baja"/>
   <causaDeFila rdf:resource="#causa_racores_y_mangueras"/>
   <causaDeFila rdf:resource="#causa_purgadores_abiertos"/>
   <causaDeFila rdf:resource="#causa_herramientas_y_acoples_desgastados"/>
@@ -5879,9 +5889,9 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_holgura_mecanica"/>
   <componenteDeFila rdf:resource="#comp_compresor_tornillo__base_anclajes"/>
-  <sintomaDeFila rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_alerta"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_impulsiva"/>
+  <sintomaDeFila rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <causaDeFila rdf:resource="#causa_tornilleria_de_anclaje_floja"/>
   <causaDeFila rdf:resource="#causa_base_o_soldaduras_agrietadas"/>
   <causaDeFila rdf:resource="#causa_grout_degradado"/>
@@ -5899,17 +5909,17 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">72</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-041</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#fmea_compresor_tornillo__desalineacion_eje">
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_desalineacion_eje"/>
   <componenteDeFila rdf:resource="#comp_compresor_tornillo__elemento_tornillo"/>
+  <sintomaDeFila rdf:resource="#sintoma_vibracion_alerta"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_axial_alta"/>
-  <sintomaDeFila rdf:resource="#sintoma_vibracion_alerta"/>
   <causaDeFila rdf:resource="#causa_montaje_del_acople"/>
   <causaDeFila rdf:resource="#causa_desgaste_del_acople"/>
   <accionDeFila rdf:resource="#accion_alineacion"/>
@@ -5952,8 +5962,8 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_fuga_hidraulica_externa"/>
   <componenteDeFila rdf:resource="#comp_prensa_hidraulica__sellos"/>
-  <sintomaDeFila rdf:resource="#sintoma_nivel_tanque_bajo"/>
   <sintomaDeFila rdf:resource="#sintoma_presion_sistema_baja"/>
+  <sintomaDeFila rdf:resource="#sintoma_nivel_tanque_bajo"/>
   <causaDeFila rdf:resource="#causa_manguera_danada"/>
   <causaDeFila rdf:resource="#causa_racor_flojo"/>
   <causaDeFila rdf:resource="#causa_sello_de_vastago_desgastado"/>
@@ -5968,8 +5978,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">144</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-022</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-020</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-022</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#causa_manguera_danada">
@@ -6018,9 +6028,9 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_fuga_interna_cilindro"/>
   <componenteDeFila rdf:resource="#comp_prensa_hidraulica__cilindro_principal"/>
+  <sintomaDeFila rdf:resource="#sintoma_caida_presion_retencion"/>
   <sintomaDeFila rdf:resource="#sintoma_tiempo_ciclo_alto"/>
   <sintomaDeFila rdf:resource="#sintoma_temp_aceite_alta"/>
-  <sintomaDeFila rdf:resource="#sintoma_caida_presion_retencion"/>
   <causaDeFila rdf:resource="#causa_sello_de_piston_desgastado"/>
   <causaDeFila rdf:resource="#causa_rayado_de_camisa"/>
   <causaDeFila rdf:resource="#causa_contaminacion"/>
@@ -6141,10 +6151,10 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_valvula_hidraulica_pegada"/>
   <componenteDeFila rdf:resource="#comp_prensa_hidraulica__valvula_direccional_proporcional"/>
-  <sintomaDeFila rdf:resource="#sintoma_tiempo_ciclo_alto"/>
-  <sintomaDeFila rdf:resource="#sintoma_prensa_dura_percibida"/>
   <sintomaDeFila rdf:resource="#sintoma_aceite_contaminado"/>
   <sintomaDeFila rdf:resource="#sintoma_presion_sistema_alta"/>
+  <sintomaDeFila rdf:resource="#sintoma_tiempo_ciclo_alto"/>
+  <sintomaDeFila rdf:resource="#sintoma_prensa_dura_percibida"/>
   <causaDeFila rdf:resource="#causa_barniz"/>
   <causaDeFila rdf:resource="#causa_particulas_en_carrete"/>
   <causaDeFila rdf:resource="#causa_bobina_debil"/>
@@ -6263,8 +6273,8 @@
   <modoDeFila rdf:resource="#modo_desalineacion_banda"/>
   <componenteDeFila rdf:resource="#comp_banda_transportadora__banda_empalme"/>
   <sintomaDeFila rdf:resource="#sintoma_corriente_alta"/>
-  <sintomaDeFila rdf:resource="#sintoma_banda_corrida_percibida"/>
   <sintomaDeFila rdf:resource="#sintoma_desvio_banda"/>
+  <sintomaDeFila rdf:resource="#sintoma_banda_corrida_percibida"/>
   <causaDeFila rdf:resource="#causa_tambores_o_rodillos_fuera_de_escuadra"/>
   <causaDeFila rdf:resource="#causa_empalme_no_escuadrado"/>
   <causaDeFila rdf:resource="#causa_rodillo_trabado"/>
@@ -6486,8 +6496,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">210</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-024</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-026</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-024</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#causa_rodamiento_del_rodillo_danado">
@@ -6588,9 +6598,9 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_desgaste_herramienta"/>
   <componenteDeFila rdf:resource="#comp_centro_cnc__herramienta"/>
-  <sintomaDeFila rdf:resource="#sintoma_desgaste_herramienta_limite"/>
-  <sintomaDeFila rdf:resource="#sintoma_carga_husillo_alta"/>
   <sintomaDeFila rdf:resource="#sintoma_desgaste_herramienta_alto"/>
+  <sintomaDeFila rdf:resource="#sintoma_carga_husillo_alta"/>
+  <sintomaDeFila rdf:resource="#sintoma_desgaste_herramienta_limite"/>
   <causaDeFila rdf:resource="#causa_vida_util_alcanzada"/>
   <causaDeFila rdf:resource="#causa_parametros_de_corte_agresivos"/>
   <causaDeFila rdf:resource="#causa_refrigerante_insuficiente"/>
@@ -6603,8 +6613,8 @@
   <ocurrencia rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</ocurrencia>
   <deteccion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</deteccion>
   <npr rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">135</npr>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-027</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-036</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-027</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#causa_vida_util_alcanzada">
@@ -6641,8 +6651,8 @@
   <rdf:type rdf:resource="#FilaFMEA"/>
   <modoDeFila rdf:resource="#modo_rotura_herramienta"/>
   <componenteDeFila rdf:resource="#comp_centro_cnc__herramienta"/>
-  <sintomaDeFila rdf:resource="#sintoma_carga_husillo_caida_subita"/>
   <sintomaDeFila rdf:resource="#sintoma_impacto_vibracion"/>
+  <sintomaDeFila rdf:resource="#sintoma_carga_husillo_caida_subita"/>
   <causaDeFila rdf:resource="#causa_desgaste_no_detectado"/>
   <causaDeFila rdf:resource="#causa_chatter"/>
   <causaDeFila rdf:resource="#causa_inclusion_dura_en_material"/>
@@ -6883,8 +6893,8 @@
   <modoDeFila rdf:resource="#modo_desgaste_rodamiento"/>
   <componenteDeFila rdf:resource="#comp_centro_cnc__rodamientos_husillo"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_hf_alta"/>
-  <sintomaDeFila rdf:resource="#sintoma_temp_husillo_alta"/>
   <sintomaDeFila rdf:resource="#sintoma_vibracion_impulsiva"/>
+  <sintomaDeFila rdf:resource="#sintoma_temp_husillo_alta"/>
   <causaDeFila rdf:resource="#causa_fatiga"/>
   <causaDeFila rdf:resource="#causa_colisiones_previas"/>
   <causaDeFila rdf:resource="#causa_contaminacion_por_refrigerante"/>
@@ -6929,24 +6939,24 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Inspeccionar y limpiar rejillas, aletas y ventilador; verificar temperatura ambiente y sentido de giro del ventilador.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-005</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-045</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-005</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-033</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R02">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_falla_lubricacion_rodamiento"/>
-  <tienePremisa rdf:resource="#sintoma_temp_rodamiento_alta"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_hf_alta"/>
+  <tienePremisa rdf:resource="#sintoma_temp_rodamiento_alta"/>
   <tienePremisa rdf:resource="#sintoma_curtosis_en_rango"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R02</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R02</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Revisar plan de relubricación (cantidad, tipo e intervalo de grasa); relubricar y vigilar la tendencia de alta frecuencia y temperatura 24 h.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-008</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-045</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-033</fuente>
 </owl:NamedIndividual>
@@ -6955,8 +6965,8 @@
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_desgaste_rodamiento"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_hf_alta"/>
-  <tienePremisa rdf:resource="#sintoma_vibracion_impulsiva"/>
   <tienePremisa rdf:resource="#sintoma_temp_rodamiento_en_rango"/>
+  <tienePremisa rdf:resource="#sintoma_vibracion_impulsiva"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R03</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R03</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.75</fcRegla>
@@ -6970,16 +6980,16 @@
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_desgaste_rodamiento"/>
   <tienePremisa rdf:resource="#sintoma_temp_rodamiento_alta"/>
-  <tienePremisa rdf:resource="#sintoma_vibracion_hf_critica"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_impulsiva"/>
+  <tienePremisa rdf:resource="#sintoma_vibracion_hf_critica"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R04</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R04</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.85</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Etapa avanzada de falla de rodamiento: planificar parada inmediata y reemplazo; no relubricar como solución.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-008</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R05">
@@ -6992,23 +7002,23 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.75</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Verificar suciedad o pérdida de masa en rotor/ventilador; balancear en sitio según grado de calidad del rotor.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R06">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_desalineacion_eje"/>
+  <tienePremisa rdf:resource="#sintoma_vibracion_alerta"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_axial_alta"/>
-  <tienePremisa rdf:resource="#sintoma_vibracion_alerta"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R06</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R06</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.8</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Verificar alineación del acople con láser/relojes; revisar pata coja y tornillería de anclaje.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R07">
@@ -7021,23 +7031,23 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Medir resistencia de aislamiento (megóhmetro) e índice de polarización; revisar la tensión de alimentación por fase.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-005</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-006</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-005</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-032</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R08">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_degradacion_aislamiento"/>
-  <tienePremisa rdf:resource="#sintoma_temp_devanado_alta"/>
   <tienePremisa rdf:resource="#sintoma_olor_quemado_percibido"/>
+  <tienePremisa rdf:resource="#sintoma_temp_devanado_alta"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R08</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R08</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.8</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sacar de servicio de forma controlada; prueba de aislamiento y de surge antes de volver a energizar.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-032</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R09">
@@ -7050,15 +7060,15 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.75</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Inspeccionar contactos del contactor (picado, soldadura), bornes flojos y fusibles; descartar pérdida de fase.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-031</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-006</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-031</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R10">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_falla_variador"/>
-  <tienePremisa rdf:resource="#sintoma_corriente_en_rango"/>
   <tienePremisa rdf:resource="#sintoma_disparos_intermitentes"/>
+  <tienePremisa rdf:resource="#sintoma_corriente_en_rango"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R10</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R10</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6</fcRegla>
@@ -7070,8 +7080,8 @@
 <owl:NamedIndividual rdf:about="#regla_R11">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_falla_variador"/>
-  <tienePremisa rdf:resource="#sintoma_distorsion_armonica_alta"/>
   <tienePremisa rdf:resource="#sintoma_disparos_frecuentes"/>
+  <tienePremisa rdf:resource="#sintoma_distorsion_armonica_alta"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R11</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R11</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.75</fcRegla>
@@ -7090,23 +7100,23 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.8</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Verificar carga accionada (atascos, freno, acople); comparar con la corriente de placa y el factor de servicio; reducir carga.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-007</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-005</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-007</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R13">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_cavitacion"/>
-  <tienePremisa rdf:resource="#sintoma_caudal_inestable"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_hf_alta"/>
   <tienePremisa rdf:resource="#sintoma_margen_npsh_bajo"/>
+  <tienePremisa rdf:resource="#sintoma_caudal_inestable"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R13</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R13</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.85</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Revisar NPSH disponible: nivel del depósito, válvula y filtro de succión, temperatura del líquido; evitar operar lejos del BEP.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-012</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-013</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-012</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R14">
@@ -7119,8 +7129,8 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.9</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cavitación desarrollada (caída de altura): reducir caudal o aumentar presión de succión de inmediato; inspeccionar el impulsor por erosión.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-012</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-013</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-012</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R15">
@@ -7133,8 +7143,8 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.75</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Confirmar con medición de presión de succión y vibración de alta frecuencia; revisar el filtro de succión.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-013</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R16">
@@ -7159,45 +7169,45 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Inspeccionar el sello mecánico y su plan de lavado; programar el cambio; revisar vibración y alineación como causas de desgaste.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-015</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R18">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_desgaste_rodamiento"/>
-  <tienePremisa rdf:resource="#sintoma_temp_rodamiento_alta"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_hf_alta"/>
+  <tienePremisa rdf:resource="#sintoma_temp_rodamiento_alta"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_impulsiva"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R18</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R18</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.85</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Confirmar con espectro de envolvente; revisar nivel/estado del lubricante; planificar el cambio de rodamientos.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-009</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-009</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R19">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_desalineacion_eje"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_2x_elevada"/>
-  <tienePremisa rdf:resource="#sintoma_vibracion_axial_alta"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_creciente"/>
+  <tienePremisa rdf:resource="#sintoma_vibracion_axial_alta"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R19</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R19</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Verificar alineación motor-bomba y esfuerzos de tubería sobre la carcasa.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-004</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R20">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_sobrecalentamiento_compresor"/>
-  <tienePremisa rdf:resource="#sintoma_corriente_en_rango"/>
   <tienePremisa rdf:resource="#sintoma_temp_descarga_alta"/>
+  <tienePremisa rdf:resource="#sintoma_corriente_en_rango"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R20</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R20</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7</fcRegla>
@@ -7209,31 +7219,31 @@
 <owl:NamedIndividual rdf:about="#regla_R21">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_obstruccion_separador"/>
-  <tienePremisa rdf:resource="#sintoma_dp_separador_alto"/>
   <tienePremisa rdf:resource="#sintoma_presion_descarga_baja"/>
+  <tienePremisa rdf:resource="#sintoma_dp_separador_alto"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R21</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R21</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.8</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reemplazar el elemento separador de aceite según el diferencial del fabricante; revisar el arrastre de aceite.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-018</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-017</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-018</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R22">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_fuga_aire_red"/>
   <tienePremisa rdf:resource="#sintoma_presion_descarga_baja"/>
-  <tienePremisa rdf:resource="#sintoma_corriente_en_rango"/>
   <tienePremisa rdf:resource="#sintoma_carga_compresor_alta"/>
+  <tienePremisa rdf:resource="#sintoma_corriente_en_rango"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R22</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R22</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.75</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Prueba de aislamiento (compresor contra red) y detección ultrasónica de fugas; reparar fugas y revisar nuevos consumos.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-019</fuente>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-017</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-045</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-017</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R23">
@@ -7265,22 +7275,22 @@
 <owl:NamedIndividual rdf:about="#regla_R25">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_fuga_hidraulica_externa"/>
-  <tienePremisa rdf:resource="#sintoma_nivel_tanque_bajo"/>
   <tienePremisa rdf:resource="#sintoma_presion_sistema_baja"/>
+  <tienePremisa rdf:resource="#sintoma_nivel_tanque_bajo"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R25</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R25</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.75</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Inspección visual de mangueras, racores y sellos de vástago; bloquear y aislar energía antes de intervenir; reponer aceite filtrado.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prensa_hidraulica</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-022</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R26">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_fuga_interna_cilindro"/>
-  <tienePremisa rdf:resource="#sintoma_tiempo_ciclo_alto"/>
   <tienePremisa rdf:resource="#sintoma_caida_presion_retencion"/>
+  <tienePremisa rdf:resource="#sintoma_tiempo_ciclo_alto"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R26</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R26</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.75</fcRegla>
@@ -7293,23 +7303,25 @@
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_contaminacion_aceite_hidraulico"/>
   <tienePremisa rdf:resource="#sintoma_aceite_contaminado"/>
+  <tienePremisa rdf:resource="#sintoma_tiempo_ciclo_en_rango"/>
   <tienePremisa rdf:resource="#sintoma_presion_sistema_en_rango"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R27</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R27</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.8</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cambiar filtros, filtrar el aceite en circuito (riñón) hasta el código objetivo; buscar la fuente de ingreso (respiradero, sellos).</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prensa_hidraulica</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-021</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-045</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-052</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R28">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_valvula_hidraulica_pegada"/>
-  <tienePremisa rdf:resource="#sintoma_tiempo_ciclo_alto"/>
   <tienePremisa rdf:resource="#sintoma_aceite_contaminado"/>
   <tienePremisa rdf:resource="#sintoma_presion_sistema_alta"/>
+  <tienePremisa rdf:resource="#sintoma_tiempo_ciclo_alto"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R28</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R28</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.65</fcRegla>
@@ -7322,15 +7334,15 @@
 <owl:NamedIndividual rdf:about="#regla_R29">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_valvula_hidraulica_pegada"/>
-  <tienePremisa rdf:resource="#sintoma_prensa_dura_percibida"/>
   <tienePremisa rdf:resource="#sintoma_presion_sistema_alta"/>
+  <tienePremisa rdf:resource="#sintoma_prensa_dura_percibida"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R29</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R29</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Confirmar tiempos de ciclo y presión registrados; descartar aceite frío (calentar a temperatura de servicio) antes de intervenir la válvula.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prensa_hidraulica</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-023</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R30">
@@ -7342,8 +7354,8 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.8</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Revisar enfriador (caudal de agua, aletas), válvula de alivio descargando de forma continua y fugas internas.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prensa_hidraulica</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-020</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R31">
@@ -7355,8 +7367,8 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Revisar escuadra de tambores y rodillos, empalme, rodillos trabados y carga centrada; ajustar con rodillos autoalineantes.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-024</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R32">
@@ -7368,8 +7380,8 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.65</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Verificar tensión de la banda (contrapeso/tensor), recubrimiento del tambor motriz y presencia de material o agua entre banda y tambor.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-025</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R33">
@@ -7382,8 +7394,8 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.8</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Detener y bloquear la línea; inspeccionar banda y empalme; revisar interruptores de desalineación y de velocidad cero.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-025</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R34">
@@ -7396,8 +7408,8 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Recorrer la línea e identificar rodillos trabados o con rodamiento dañado (termografía/estetoscopio); reemplazarlos.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-026</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R35">
@@ -7410,36 +7422,36 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Inspeccionar rodillos que no giran (actúan como barra de fricción) y su efecto en el arrastre del motor.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-024</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-026</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-024</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R36">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_desgaste_herramienta"/>
-  <tienePremisa rdf:resource="#sintoma_carga_husillo_alta"/>
   <tienePremisa rdf:resource="#sintoma_desgaste_herramienta_alto"/>
+  <tienePremisa rdf:resource="#sintoma_carga_husillo_alta"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R36</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R36</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.8</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cambiar la herramienta o el inserto; verificar acabado y medidas de la última pieza.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">centro_cnc</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-027</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R37">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_rotura_herramienta"/>
-  <tienePremisa rdf:resource="#sintoma_carga_husillo_caida_subita"/>
   <tienePremisa rdf:resource="#sintoma_impacto_vibracion"/>
+  <tienePremisa rdf:resource="#sintoma_carga_husillo_caida_subita"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R37</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R37</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.75</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Detener el programa (paro de avance), inspeccionar la herramienta y la pieza; medir la herramienta con el palpador.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">centro_cnc</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-028</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R38">
@@ -7452,8 +7464,8 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.8</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Paro inmediato; verificar el programa/offsets; inspeccionar runout del husillo y rodamientos antes de reanudar.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">centro_cnc</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-028</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-046</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R39">
@@ -7472,9 +7484,9 @@
 <owl:NamedIndividual rdf:about="#regla_R40">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_sobrecalentamiento_husillo"/>
-  <tienePremisa rdf:resource="#sintoma_curtosis_en_rango"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_hf_alta"/>
   <tienePremisa rdf:resource="#sintoma_temp_husillo_alta"/>
+  <tienePremisa rdf:resource="#sintoma_curtosis_en_rango"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R40</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R40</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.65</fcRegla>
@@ -7495,23 +7507,23 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Inspeccionar el impulsor por erosión de cavitación o incrustaciones; balancear o reemplazar el impulsor. Descartar antes la desalineación y la holgura.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R42">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_desalineacion_eje"/>
+  <tienePremisa rdf:resource="#sintoma_vibracion_alerta"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_axial_alta"/>
-  <tienePremisa rdf:resource="#sintoma_vibracion_alerta"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R42</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R42</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Verificar la alineación motor-elemento tornillo y el estado del elemento elástico del acople; realinear con láser.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-003</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R43">
@@ -7524,8 +7536,8 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.65</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Medir con estetoscopio o análisis de envolvente en el tambor motriz; revisar la lubricación y planificar el cambio del rodamiento del tambor.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-009</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-009</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R44">
@@ -7537,16 +7549,16 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Despejar atascos de material, verificar la carga de piezas sobre la banda y el estado del motorreductor; comparar con la corriente de placa.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-007</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-024</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-007</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R45">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_desgaste_rodamiento"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_hf_alta"/>
-  <tienePremisa rdf:resource="#sintoma_temp_husillo_alta"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_impulsiva"/>
+  <tienePremisa rdf:resource="#sintoma_temp_husillo_alta"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R45</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R45</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.65</fcRegla>
@@ -7559,46 +7571,46 @@
 <owl:NamedIndividual rdf:about="#regla_R46">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_holgura_mecanica"/>
-  <tienePremisa rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_alerta"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_impulsiva"/>
+  <tienePremisa rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R46</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R46</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Revisar torque de tornillería de anclaje, pata coja, grietas en base o soldaduras y holgura en el alojamiento del rodamiento; verificar con medición de fase.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-041</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R47">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_holgura_mecanica"/>
-  <tienePremisa rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_alerta"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_impulsiva"/>
+  <tienePremisa rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R47</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R47</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Revisar anclaje de la bancada, grout y soportes de tubería; verificar ajuste del rodamiento y del acople antes de intervenir el impulsor.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-041</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R48">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_holgura_mecanica"/>
-  <tienePremisa rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_alerta"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_impulsiva"/>
+  <tienePremisa rdf:resource="#sintoma_vibracion_2x_elevada"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R48</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R48</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Revisar los soportes antivibratorios y el anclaje del paquete compresor; verificar ajustes del acople y del elemento tornillo con el fabricante.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-041</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-011</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R49">
@@ -7632,8 +7644,8 @@
 <owl:NamedIndividual rdf:about="#regla_R51">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_falla_lubricacion_rodamiento"/>
-  <tienePremisa rdf:resource="#sintoma_ruido_agudo_percibido"/>
   <tienePremisa rdf:resource="#sintoma_vibracion_hf_alta"/>
+  <tienePremisa rdf:resource="#sintoma_ruido_agudo_percibido"/>
   <tienePremisa rdf:resource="#sintoma_curtosis_en_rango"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R51</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R51</nombre>
@@ -7641,8 +7653,8 @@
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Confirmar con la tendencia de alta frecuencia y la temperatura del rodamiento; relubricar según el plan y vigilar 24 h.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-047</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R52">
@@ -7656,8 +7668,8 @@
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Confirmar con análisis de envolvente y programar el cambio de rodamiento; no relubricar como solución.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-010</fuente>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-047</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R53">
@@ -7670,16 +7682,16 @@
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Leer el registro de fallas para relacionar la observación con un código concreto antes de cambiar parámetros.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-047</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-030</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#regla_R54">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_desalineacion_banda"/>
-  <tienePremisa rdf:resource="#sintoma_banda_corrida_percibida"/>
   <tienePremisa rdf:resource="#sintoma_corriente_alta"/>
+  <tienePremisa rdf:resource="#sintoma_banda_corrida_percibida"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R54</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R54</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6</fcRegla>
@@ -7693,46 +7705,46 @@
 <owl:NamedIndividual rdf:about="#regla_R55">
   <rdf:type rdf:resource="#Regla"/>
   <concluye rdf:resource="#modo_sobrecalentamiento_compresor"/>
-  <tienePremisa rdf:resource="#sintoma_calor_percibido"/>
   <tienePremisa rdf:resource="#sintoma_temp_descarga_alta"/>
+  <tienePremisa rdf:resource="#sintoma_calor_percibido"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R55</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">R55</nombre>
   <fcRegla rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7</fcRegla>
   <accionRecomendada rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Verificar nivel de aceite, limpieza del enfriador y válvula termostática antes del paro por alta temperatura.</accionRecomendada>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-016</fuente>
-  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
   <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-047</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-038</fuente>
+  <fuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D-016</fuente>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#exp_EXP01">
   <rdf:type rdf:resource="#ExpresionColoquial"/>
-  <refiereA rdf:resource="#sintoma_distorsion_armonica_alta"/>
   <refiereA rdf:resource="#sintoma_vibracion_hf_alta"/>
   <refiereA rdf:resource="#sintoma_ruido_agudo_percibido"/>
-  <sugiereModo rdf:resource="#modo_falla_lubricacion_rodamiento"/>
+  <refiereA rdf:resource="#sintoma_distorsion_armonica_alta"/>
   <sugiereModo rdf:resource="#modo_desgaste_rodamiento"/>
+  <sugiereModo rdf:resource="#modo_falla_lubricacion_rodamiento"/>
   <sugiereModo rdf:resource="#modo_falla_variador"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EXP01</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">el motor está cantando</nombre>
   <expresionTexto rdf:datatype="http://www.w3.org/2001/XMLSchema#string">el motor está cantando</expresionTexto>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#exp_EXP02">
   <rdf:type rdf:resource="#ExpresionColoquial"/>
-  <refiereA rdf:resource="#sintoma_desbalance_corriente_alto"/>
-  <refiereA rdf:resource="#sintoma_temp_devanado_alta"/>
-  <refiereA rdf:resource="#sintoma_deslizamiento_alto"/>
-  <refiereA rdf:resource="#sintoma_corriente_alta"/>
   <refiereA rdf:resource="#sintoma_olor_quemado_percibido"/>
-  <sugiereModo rdf:resource="#modo_sobrecarga_mecanica"/>
-  <sugiereModo rdf:resource="#modo_deslizamiento_banda"/>
-  <sugiereModo rdf:resource="#modo_sobrecalentamiento_ventilacion"/>
+  <refiereA rdf:resource="#sintoma_temp_devanado_alta"/>
+  <refiereA rdf:resource="#sintoma_desbalance_corriente_alto"/>
+  <refiereA rdf:resource="#sintoma_corriente_alta"/>
+  <refiereA rdf:resource="#sintoma_deslizamiento_alto"/>
   <sugiereModo rdf:resource="#modo_degradacion_aislamiento"/>
+  <sugiereModo rdf:resource="#modo_sobrecalentamiento_ventilacion"/>
   <sugiereModo rdf:resource="#modo_falla_contactor"/>
+  <sugiereModo rdf:resource="#modo_deslizamiento_banda"/>
+  <sugiereModo rdf:resource="#modo_sobrecarga_mecanica"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EXP02</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">huele a quemado</nombre>
   <expresionTexto rdf:datatype="http://www.w3.org/2001/XMLSchema#string">huele a quemado</expresionTexto>
@@ -7744,12 +7756,12 @@
   <rdf:type rdf:resource="#ExpresionColoquial"/>
   <refiereA rdf:resource="#sintoma_presion_descarga_baja"/>
   <refiereA rdf:resource="#sintoma_golpeteo_percibido"/>
-  <refiereA rdf:resource="#sintoma_caudal_inestable"/>
   <refiereA rdf:resource="#sintoma_margen_npsh_bajo"/>
   <refiereA rdf:resource="#sintoma_vibracion_hf_alta"/>
-  <sugiereModo rdf:resource="#modo_obstruccion_bomba"/>
+  <refiereA rdf:resource="#sintoma_caudal_inestable"/>
   <sugiereModo rdf:resource="#modo_cavitacion"/>
   <sugiereModo rdf:resource="#modo_desgaste_rodamiento"/>
+  <sugiereModo rdf:resource="#modo_obstruccion_bomba"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EXP03</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">la bomba está golpeando</nombre>
   <expresionTexto rdf:datatype="http://www.w3.org/2001/XMLSchema#string">la bomba está golpeando</expresionTexto>
@@ -7764,27 +7776,27 @@
   <refiereA rdf:resource="#sintoma_vibracion_impulsiva"/>
   <sugiereModo rdf:resource="#modo_holgura_mecanica"/>
   <sugiereModo rdf:resource="#modo_cavitacion"/>
-  <sugiereModo rdf:resource="#modo_falla_rodillo"/>
   <sugiereModo rdf:resource="#modo_desgaste_rodamiento"/>
+  <sugiereModo rdf:resource="#modo_falla_rodillo"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EXP04</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">esto está cascabeleando</nombre>
   <expresionTexto rdf:datatype="http://www.w3.org/2001/XMLSchema#string">esto está cascabeleando</expresionTexto>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#exp_EXP05">
   <rdf:type rdf:resource="#ExpresionColoquial"/>
-  <refiereA rdf:resource="#sintoma_prensa_dura_percibida"/>
   <refiereA rdf:resource="#sintoma_tiempo_ciclo_alto"/>
-  <refiereA rdf:resource="#sintoma_aceite_contaminado"/>
+  <refiereA rdf:resource="#sintoma_prensa_dura_percibida"/>
   <refiereA rdf:resource="#sintoma_temp_aceite_baja"/>
+  <refiereA rdf:resource="#sintoma_aceite_contaminado"/>
   <refiereA rdf:resource="#sintoma_presion_sistema_alta"/>
-  <sugiereModo rdf:resource="#modo_valvula_hidraulica_pegada"/>
   <sugiereModo rdf:resource="#modo_fuga_interna_cilindro"/>
   <sugiereModo rdf:resource="#modo_contaminacion_aceite_hidraulico"/>
+  <sugiereModo rdf:resource="#modo_valvula_hidraulica_pegada"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EXP05</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">la prensa está dura</nombre>
   <expresionTexto rdf:datatype="http://www.w3.org/2001/XMLSchema#string">la prensa está dura</expresionTexto>
@@ -7793,12 +7805,12 @@
 
 <owl:NamedIndividual rdf:about="#exp_EXP06">
   <rdf:type rdf:resource="#ExpresionColoquial"/>
-  <refiereA rdf:resource="#sintoma_calor_percibido"/>
-  <refiereA rdf:resource="#sintoma_dp_separador_alto"/>
   <refiereA rdf:resource="#sintoma_carga_compresor_alta"/>
   <refiereA rdf:resource="#sintoma_temp_descarga_alta"/>
-  <sugiereModo rdf:resource="#modo_sobrecalentamiento_compresor"/>
+  <refiereA rdf:resource="#sintoma_calor_percibido"/>
+  <refiereA rdf:resource="#sintoma_dp_separador_alto"/>
   <sugiereModo rdf:resource="#modo_obstruccion_separador"/>
+  <sugiereModo rdf:resource="#modo_sobrecalentamiento_compresor"/>
   <sugiereModo rdf:resource="#modo_fuga_aire_red"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EXP06</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">el compresor está trabajando caliente</nombre>
@@ -7809,34 +7821,34 @@
 <owl:NamedIndividual rdf:about="#exp_EXP07">
   <rdf:type rdf:resource="#ExpresionColoquial"/>
   <refiereA rdf:resource="#sintoma_rodamiento_terminal_percibido"/>
-  <refiereA rdf:resource="#sintoma_vibracion_impulsiva"/>
   <refiereA rdf:resource="#sintoma_temp_rodamiento_alta"/>
   <refiereA rdf:resource="#sintoma_vibracion_hf_critica"/>
   <refiereA rdf:resource="#sintoma_vibracion_alerta"/>
+  <refiereA rdf:resource="#sintoma_vibracion_impulsiva"/>
   <sugiereModo rdf:resource="#modo_falla_lubricacion_rodamiento"/>
   <sugiereModo rdf:resource="#modo_desgaste_rodamiento"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EXP07</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ese rodamiento ya se va</nombre>
   <expresionTexto rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ese rodamiento ya se va</expresionTexto>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">centro_cnc</tipoActivo>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">motor_electrico</tipoActivo>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">compresor_tornillo</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#exp_EXP08">
   <rdf:type rdf:resource="#ExpresionColoquial"/>
-  <refiereA rdf:resource="#sintoma_disparo_sin_causa_percibido"/>
   <refiereA rdf:resource="#sintoma_temp_variador_alta"/>
-  <refiereA rdf:resource="#sintoma_distorsion_armonica_alta"/>
-  <refiereA rdf:resource="#sintoma_corriente_en_rango"/>
-  <refiereA rdf:resource="#sintoma_disparos_intermitentes"/>
   <refiereA rdf:resource="#sintoma_tension_bus_dc_alta"/>
+  <refiereA rdf:resource="#sintoma_disparo_sin_causa_percibido"/>
+  <refiereA rdf:resource="#sintoma_corriente_en_rango"/>
+  <refiereA rdf:resource="#sintoma_distorsion_armonica_alta"/>
+  <refiereA rdf:resource="#sintoma_disparos_intermitentes"/>
   <sugiereModo rdf:resource="#modo_degradacion_aislamiento"/>
   <sugiereModo rdf:resource="#modo_falla_contactor"/>
-  <sugiereModo rdf:resource="#modo_sobrecarga_mecanica"/>
   <sugiereModo rdf:resource="#modo_falla_variador"/>
+  <sugiereModo rdf:resource="#modo_sobrecarga_mecanica"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EXP08</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">el variador está disparando por nada</nombre>
   <expresionTexto rdf:datatype="http://www.w3.org/2001/XMLSchema#string">el variador está disparando por nada</expresionTexto>
@@ -7845,9 +7857,9 @@
 
 <owl:NamedIndividual rdf:about="#exp_EXP09">
   <rdf:type rdf:resource="#ExpresionColoquial"/>
-  <refiereA rdf:resource="#sintoma_banda_corrida_percibida"/>
   <refiereA rdf:resource="#sintoma_corriente_alta"/>
   <refiereA rdf:resource="#sintoma_desvio_banda"/>
+  <refiereA rdf:resource="#sintoma_banda_corrida_percibida"/>
   <sugiereModo rdf:resource="#modo_desalineacion_banda"/>
   <sugiereModo rdf:resource="#modo_falla_rodillo"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EXP09</identificador>
@@ -7859,17 +7871,17 @@
 <owl:NamedIndividual rdf:about="#exp_EXP10">
   <rdf:type rdf:resource="#ExpresionColoquial"/>
   <refiereA rdf:resource="#sintoma_corriente_alta"/>
-  <refiereA rdf:resource="#sintoma_caudal_inestable"/>
   <refiereA rdf:resource="#sintoma_cascabeleo_percibido"/>
+  <refiereA rdf:resource="#sintoma_caudal_inestable"/>
   <refiereA rdf:resource="#sintoma_vibracion_impulsiva"/>
   <sugiereModo rdf:resource="#modo_rotura_banda"/>
-  <sugiereModo rdf:resource="#modo_falla_rodillo"/>
   <sugiereModo rdf:resource="#modo_cavitacion"/>
+  <sugiereModo rdf:resource="#modo_falla_rodillo"/>
   <identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EXP10</identificador>
   <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hay cascabeleo en la línea</nombre>
   <expresionTexto rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hay cascabeleo en la línea</expresionTexto>
-  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
   <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">banda_transportadora</tipoActivo>
+  <tipoActivo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bomba_centrifuga</tipoActivo>
 </owl:NamedIndividual>
 
 <owl:AllDisjointClasses>

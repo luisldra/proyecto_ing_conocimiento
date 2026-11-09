@@ -92,4 +92,6 @@ def valor_final(variable: dict[str, Any], cambio: dict[str, Any]) -> float:
         return nominal + v
     if tipo == "factor":
         return nominal * v
+    if tipo == "frac_alerta":
+        return variable["alerta"] * v
     raise ValueError(f"tipo de cambio desconocido: {tipo}")

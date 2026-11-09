@@ -11,7 +11,7 @@ semilla_principal: 42
 
 datos:
   muestreo_min: 10               # coincide con configs/assets.yaml
-  meses: 12                      # duración simulada por unidad
+  meses: 36                      # duración por unidad (D-050: con 12 no caben episodios suficientes)
   ventana_pasos: 36              # T = 6 h de historia
   paso_ventana: 6                # desplazamiento entre ventanas (1 h)
   horizonte_h: 24                # H: falla en las próximas 24 h
@@ -22,6 +22,18 @@ datos:
   ruido:
     sensor_faltante_prob: 0.002
     pico_espurio_prob: 0.001
+  simulador:                     # supuestos del generador (D-050)
+    inicio: "2024-01-01"
+    hueco_sano_h: [48, 360]      # mínimo y media (exponencial) de operación sana entre episodios
+    reparacion_h: [8, 72]        # unidad fuera de servicio tras cada falla
+    severidad: [0.8, 1.15]       # multiplica el cambio de la firma; dispersión como AI4I (D-052)
+    prob_firma_omitida: 0.2      # variable de la firma que no se manifiesta; SKAB (D-052)
+    excursiones_por_semana: 0.5
+    deriva_sensor_frac: 0.15     # de la media banda nominal, por cada 180 días entre calibraciones
+    ruido_medicion_frac: 0.02    # desviación relativa a la media banda nominal
+    observaciones_por_episodio: 1.5
+    observaciones_falsas_mes: 1.0
+    penalizacion_noche: 0.75     # factor sobre el acierto del técnico en turno de noche
 
 modelos:
   mlp:

@@ -1,0 +1,30 @@
+{
+  "filas": 2524608,
+  "positivas_pct": 2.31,
+  "episodios": 525,
+  "episodios_por_particion": {
+    "train": 290,
+    "test": 123,
+    "val": 110,
+    "purga": 2
+  },
+  "min_episodios_por_modo_activo": 6,
+  "m0_detectado_pct_por_tarea": {
+    "deteccion": 76.6,
+    "prediccion": 81.8
+  },
+  "m0_anticipacion_mediana_h": {
+    "deteccion": 0.0,
+    "prediccion": 60.0
+  },
+  "episodios_con_cruce_pct": 4.4,
+  "falsas_alarmas_pct_medio": {
+    "con_confusor": 1.43,
+    "sin_confusor": 0.0
+  },
+  "acierto_tecnicos_pct_por_turno": {
+    "manana": 88.6,
+    "noche": 79.3,
+    "tarde": 82.8
+  }
+}

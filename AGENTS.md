@@ -102,7 +102,9 @@ python -m metaltech.kb.ontology      # regenera knowledge/ontology/metaltech.owl
 python scripts/instalar_jdk.py       # JDK portable para HermiT (una vez, Windows x64)
 python -m metaltech.kb.rules_engine --activo bomba_centrifuga --valores '{...}' --texto "..."
 # --- se habilitan en fases posteriores ---
-python -m metaltech.data.generator --config configs/assets.yaml
+python -m metaltech.data.generator   # data/synthetic/ (--config configs/train.yaml)
+python -m metaltech.data.calibracion # reports/tables/calibracion_*
+python scripts/contrastar_datasets.py # contraste con AI4I 2020 y SKAB
 python -m metaltech.models.train --config configs/train.yaml
 uvicorn metaltech.api.main:app --reload
 streamlit run src/metaltech/dashboard/app.py

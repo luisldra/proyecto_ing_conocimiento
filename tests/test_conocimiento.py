@@ -41,7 +41,8 @@ def _valor_final(variable, cambio):
     """Valor de la variable al final de la degradación (ver encabezado de failure_modes.yaml)."""
     nominal = sum(variable["nominal"]) / 2
     return {"valor": cambio["valor"], "delta": nominal + cambio["valor"],
-            "factor": nominal * cambio["valor"]}[cambio["tipo"]]
+            "factor": nominal * cambio["valor"],
+            "frac_alerta": variable["alerta"] * cambio["valor"]}[cambio["tipo"]]
 
 
 def _se_activa(variable, nivel, valor):

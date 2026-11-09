@@ -10,12 +10,18 @@
 #              tipo factor -> nominal_medio * valor
 #              tipo delta  -> nominal_medio + valor (en la unidad de la variable)
 #              tipo valor  -> valor absoluto objetivo
+#              tipo frac_alerta -> umbral de alerta del activo * valor (D-051)
 #   forma:     lineal | exponencial | escalon | intermitente | sigmoide
 #              exponencial: x(t) = x0 + (xf - x0) * (exp(k*t/T) - 1)/(exp(k) - 1), k≈4 (D-037)
 #              intermitente: picos/eventos con tasa creciente hacia el final
 #   retardo_frac: fracción de la degradación antes de que la variable empiece a
 #              cambiar (p. ej. la temperatura de rodamiento solo sube al final).
 #   duracion_h: [min, max] duración típica de la degradación hasta la falla.
+#   tarea:     prediccion (por defecto; se etiqueta H horas antes de la falla) | deteccion
+#              (forma escalon o duracion mínima menor que H; se etiqueta desde que la firma es
+#              observable; D-049).
+#   escalon_en: inicio (la condición anómala dura todo el episodio) | final (ocurre en el
+#              instante de la falla, tras los precursores; D-049).
 #   sintomas:  síntomas esperados (IDs del catálogo de assets.yaml).
 #   componente: componente genérico del modo; si un activo lo llama distinto, se declara en
 #              componentes_por_activo: {activo: componente}.
@@ -52,7 +58,7 @@ modos_falla:
     activos: [motor_electrico]   # en otros activos se subsume en desgaste_rodamiento (hueco registrado)
     componente: rodamientos
     firma:
-      - {variable: temp_rodamiento_c, direccion: "+", cambio: {tipo: delta, valor: 30}, forma: lineal, retardo_frac: 0.0}
+      - {variable: temp_rodamiento_c, direccion: "+", cambio: {tipo: delta, valor: 35}, forma: lineal, retardo_frac: 0.0}   # 30 -> 35 (D-049)
       - {variable: vib_hf_rel, direccion: "+", cambio: {tipo: factor, valor: 3.0}, forma: lineal, retardo_frac: 0.0}
       - {variable: vib_curtosis, direccion: "+", cambio: {tipo: delta, valor: 0.5}, forma: lineal, retardo_frac: 0.5}
     degradacion: {forma: lineal, duracion_h: [72, 336]}
@@ -67,7 +73,7 @@ modos_falla:
     firma:
       - {variable: vib_hf_rel, direccion: "+", cambio: {tipo: factor, valor: 6.0}, forma: exponencial, retardo_frac: 0.0}
       - {variable: vib_curtosis, direccion: "+", cambio: {tipo: valor, valor: 8.0}, forma: exponencial, retardo_frac: 0.1}
-      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 5.0}, forma: exponencial, retardo_frac: 0.5}
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: frac_alerta, valor: 1.79}, forma: exponencial, retardo_frac: 0.5}   # 5.0 mm/s con alerta 2.8 (D-051)
       - {variable: temp_rodamiento_c, direccion: "+", cambio: {tipo: delta, valor: 35}, forma: exponencial, retardo_frac: 0.7}   # 15 -> 35 (D-042)
       - {variable: temp_husillo_c, direccion: "+", cambio: {tipo: delta, valor: 25}, forma: exponencial, retardo_frac: 0.7}      # 15 -> 25 (D-042)
     degradacion: {forma: exponencial, duracion_h: [168, 1440]}
@@ -81,7 +87,7 @@ modos_falla:
     componente: eje_acople
     componentes_por_activo: {compresor_tornillo: elemento_tornillo}
     firma:
-      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 4.0}, forma: lineal, retardo_frac: 0.0}
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: frac_alerta, valor: 1.43}, forma: lineal, retardo_frac: 0.0}   # 4.0 mm/s con alerta 2.8 (D-051)
       - {variable: vib_2x_1x_ratio, direccion: "+", cambio: {tipo: valor, valor: 0.9}, forma: lineal, retardo_frac: 0.0}
       - {variable: vib_axial_radial_ratio, direccion: "+", cambio: {tipo: valor, valor: 0.7}, forma: lineal, retardo_frac: 0.0}
       - {variable: temp_rodamiento_c, direccion: "+", cambio: {tipo: delta, valor: 8}, forma: lineal, retardo_frac: 0.5}
@@ -95,7 +101,7 @@ modos_falla:
     componente: rotor
     componentes_por_activo: {bomba_centrifuga: impulsor}
     firma:
-      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 4.0}, forma: lineal, retardo_frac: 0.0}
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: frac_alerta, valor: 1.43}, forma: lineal, retardo_frac: 0.0}   # 4.0 mm/s con alerta 2.8 (D-051)
       - {variable: vib_1x_frac, direccion: "+", cambio: {tipo: valor, valor: 0.9}, forma: lineal, retardo_frac: 0.0}
     degradacion: {forma: lineal, duracion_h: [720, 2160]}
     sintomas: [vibracion_alerta, vibracion_creciente, vibracion_1x_dominante]
@@ -108,7 +114,7 @@ modos_falla:
     firma:
       - {variable: vib_curtosis, direccion: "+", cambio: {tipo: valor, valor: 5.0}, forma: lineal, retardo_frac: 0.0}
       - {variable: vib_2x_1x_ratio, direccion: "+", cambio: {tipo: valor, valor: 0.8}, forma: lineal, retardo_frac: 0.0}
-      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 4.0}, forma: lineal, retardo_frac: 0.2}
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: frac_alerta, valor: 1.43}, forma: lineal, retardo_frac: 0.2}   # 4.0 mm/s con alerta 2.8 (D-051)
     degradacion: {forma: lineal, duracion_h: [72, 720]}
     calibracion: "Se mantienen en nivel nominal vib_axial_radial_ratio, vib_1x_frac y vib_hf_rel para separar la holgura de la desalineación, el desbalanceo y el desgaste de rodamiento (las reglas no admiten premisas negadas; D-041)."
     sintomas: [vibracion_alerta, vibracion_impulsiva, vibracion_2x_elevada]
@@ -160,7 +166,7 @@ modos_falla:
       - {variable: corriente_pct, direccion: "+", cambio: {tipo: valor, valor: 125}, forma: escalon, retardo_frac: 0.0}
       - {variable: temp_devanado_c, direccion: "+", cambio: {tipo: delta, valor: 50}, forma: lineal, retardo_frac: 0.0}   # 40 -> 50 (D-042)
       - {variable: disparos_variador_24h, direccion: "+", cambio: {tipo: valor, valor: 2}, forma: intermitente, retardo_frac: 0.5}
-    degradacion: {forma: escalon, duracion_h: [1, 24]}
+    degradacion: {forma: escalon, duracion_h: [1, 24], tarea: deteccion, escalon_en: inicio}
     sintomas: [sobrecorriente, corriente_alta, temp_devanado_alta]
     fuentes: [D-005, D-007]
 
@@ -174,8 +180,8 @@ modos_falla:
       - {variable: vib_hf_rel, direccion: "+", cambio: {tipo: factor, valor: 4.0}, forma: sigmoide, retardo_frac: 0.2}
       - {variable: caudal_cv_pct, direccion: "+", cambio: {tipo: valor, valor: 8}, forma: sigmoide, retardo_frac: 0.2}
       - {variable: presion_descarga_pct, direccion: "-", cambio: {tipo: valor, valor: 88}, forma: sigmoide, retardo_frac: 0.5}
-      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 3.5}, forma: sigmoide, retardo_frac: 0.3}
-    degradacion: {forma: sigmoide, duracion_h: [1, 48]}
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: frac_alerta, valor: 1.25}, forma: sigmoide, retardo_frac: 0.3}   # 3.5 mm/s con alerta 2.8 (D-051)
+    degradacion: {forma: sigmoide, duracion_h: [1, 48], tarea: deteccion}
     calibracion: "SKAB incluye cavitación inducida en bomba de circulación: usar sus registros para la forma temporal (D-036)."
     sintomas: [margen_npsh_bajo, margen_npsh_insuficiente, vibracion_hf_alta, caudal_inestable, presion_descarga_baja]
     fuentes: [D-012, D-013, D-036]
@@ -189,7 +195,7 @@ modos_falla:
       - {variable: corriente_pct, direccion: "-", cambio: {tipo: valor, valor: 70}, forma: lineal, retardo_frac: 0.0}
       - {variable: presion_descarga_pct, direccion: "-", cambio: {tipo: valor, valor: 92}, forma: lineal, retardo_frac: 0.3}
       - {variable: npsh_margen_ratio, direccion: "-", cambio: {tipo: valor, valor: 1.25}, forma: lineal, retardo_frac: 0.4}
-      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 2.5}, forma: lineal, retardo_frac: 0.5}
+      - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: frac_alerta, valor: 0.9}, forma: lineal, retardo_frac: 0.5}   # 2.5 mm/s con alerta 2.8 (D-051)
     degradacion: {forma: lineal, duracion_h: [24, 336]}
     sintomas: [caudal_bajo, corriente_baja, presion_descarga_baja]
     fuentes: [D-014]
@@ -250,7 +256,7 @@ modos_falla:
       - {variable: presion_descarga_pct, direccion: "-", cambio: {tipo: valor, valor: 82}, forma: intermitente, retardo_frac: 0.0}
       - {variable: corriente_pct, direccion: "-", cambio: {tipo: valor, valor: 45}, forma: intermitente, retardo_frac: 0.0}
       - {variable: carga_pct, direccion: "+", cambio: {tipo: valor, valor: 95}, forma: lineal, retardo_frac: 0.2}
-    degradacion: {forma: intermitente, duracion_h: [1, 72]}
+    degradacion: {forma: intermitente, duracion_h: [1, 72], tarea: deteccion}
     sintomas: [presion_descarga_baja, corriente_baja]
     fuentes: [D-017]
 
@@ -296,7 +302,7 @@ modos_falla:
     componente: valvula_direccional_proporcional
     firma:
       - {variable: presion_sistema_pct, direccion: "+", cambio: {tipo: valor, valor: 118}, forma: intermitente, retardo_frac: 0.0}
-      - {variable: tiempo_ciclo_pct, direccion: "+", cambio: {tipo: valor, valor: 118}, forma: intermitente, retardo_frac: 0.0}
+      - {variable: tiempo_ciclo_pct, direccion: "+", cambio: {tipo: valor, valor: 118}, forma: lineal, retardo_frac: 0.0}   # la válvula lenta alarga el ciclo de forma sostenida (D-052)
       - {variable: iso4406_14um_codigo, direccion: "+", cambio: {tipo: delta, valor: 3}, forma: lineal, retardo_frac: 0.0}   # 2 -> 3 (D-042)
       - {variable: corriente_pct, direccion: "+", cambio: {tipo: delta, valor: 10}, forma: intermitente, retardo_frac: 0.2}
     degradacion: {forma: intermitente, duracion_h: [24, 336]}
@@ -346,7 +352,7 @@ modos_falla:
       - {variable: velocidad_banda_pct, direccion: "-", cambio: {tipo: valor, valor: 0}, forma: escalon, retardo_frac: 0.0}
       - {variable: corriente_pct, direccion: "-", cambio: {tipo: valor, valor: 22}, forma: escalon, retardo_frac: 0.0}
       - {variable: vib_curtosis, direccion: "+", cambio: {tipo: valor, valor: 5}, forma: lineal, retardo_frac: 0.0, nota: "precursor opcional: golpe periódico del empalme dañado"}
-    degradacion: {forma: escalon, duracion_h: [0, 72]}
+    degradacion: {forma: escalon, duracion_h: [0, 72], tarea: deteccion, escalon_en: final}
     sintomas: [velocidad_banda_nula, corriente_baja]
     fuentes: [D-025]
 
@@ -373,7 +379,7 @@ modos_falla:
       - {variable: carga_husillo_rel, direccion: "+", cambio: {tipo: valor, valor: 1.35}, forma: exponencial, retardo_frac: 0.3}
       - {variable: vib_hf_rel, direccion: "+", cambio: {tipo: factor, valor: 1.6}, forma: exponencial, retardo_frac: 0.5}
       - {variable: temp_husillo_c, direccion: "+", cambio: {tipo: delta, valor: 4}, forma: lineal, retardo_frac: 0.5}
-    degradacion: {forma: lineal, duracion_h: [3.3, 4.0]}
+    degradacion: {forma: lineal, duracion_h: [3.3, 4.0], tarea: deteccion}
     calibracion: "Vida de herramienta 200–240 min como en AI4I 2020 (TWF); se reinicia al cambiar herramienta (D-036)."
     sintomas: [desgaste_herramienta_alto, desgaste_herramienta_limite, carga_husillo_alta]
     fuentes: [D-027, D-036]
@@ -386,7 +392,7 @@ modos_falla:
       - {variable: vib_pico_g, direccion: "+", cambio: {tipo: valor, valor: 8}, forma: escalon, retardo_frac: 0.0}
       - {variable: carga_husillo_rel, direccion: "-", cambio: {tipo: valor, valor: 0.35}, forma: escalon, retardo_frac: 0.0}
       - {variable: carga_husillo_cv_pct, direccion: "+", cambio: {tipo: valor, valor: 15}, forma: intermitente, retardo_frac: 0.0, nota: "precursor: vibración irregular en pasadas previas"}
-    degradacion: {forma: escalon, duracion_h: [0, 2]}
+    degradacion: {forma: escalon, duracion_h: [0, 2], tarea: deteccion, escalon_en: final}
     sintomas: [carga_husillo_caida_subita, impacto_vibracion]
     fuentes: [D-028]
 
@@ -398,7 +404,7 @@ modos_falla:
       - {variable: vib_pico_g, direccion: "+", cambio: {tipo: valor, valor: 15}, forma: escalon, retardo_frac: 0.0}
       - {variable: carga_husillo_rel, direccion: "+", cambio: {tipo: valor, valor: 1.8}, forma: escalon, retardo_frac: 0.0}
       - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 3.5}, forma: escalon, retardo_frac: 0.0, nota: "queda elevada después del golpe si hay daño de rodamientos/runout"}
-    degradacion: {forma: escalon, duracion_h: [0, 0]}
+    degradacion: {forma: escalon, duracion_h: [0, 0], tarea: deteccion, escalon_en: inicio}
     sintomas: [impacto_vibracion, carga_husillo_critica]
     fuentes: [D-028]
 
@@ -410,7 +416,7 @@ modos_falla:
       - {variable: carga_husillo_cv_pct, direccion: "+", cambio: {tipo: valor, valor: 18}, forma: escalon, retardo_frac: 0.0}
       - {variable: vib_hf_rel, direccion: "+", cambio: {tipo: factor, valor: 3.0}, forma: escalon, retardo_frac: 0.0}
       - {variable: vib_rms_mm_s, direccion: "+", cambio: {tipo: valor, valor: 3.2}, forma: escalon, retardo_frac: 0.0}
-    degradacion: {forma: escalon, duracion_h: [0.1, 2]}
+    degradacion: {forma: escalon, duracion_h: [0.1, 2], tarea: deteccion, escalon_en: inicio}
     sintomas: [carga_husillo_inestable, vibracion_hf_alta, vibracion_alerta]
     fuentes: [D-029]
 
@@ -438,3 +444,4 @@ confusores:
   golpe_de_ariete_valvula:  {activos: [bomba_centrifuga], efecto: "caudal_cv_pct ~ 6 durante una maniobra; npsh_margen_ratio normal"}
   sensor_faltante:          {activos: [todos], efecto: "NaN en una variable durante 1–6 h"}
   pico_espurio:             {activos: [todos], efecto: "un valor aislado > critico sin persistencia"}
+  excursion_operativa:      {activos: [todos], efecto: "una variable sube hacia o sobre la alerta durante 2–12 h por condiciones de operación (D-052)"}

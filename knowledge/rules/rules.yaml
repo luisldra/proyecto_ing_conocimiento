@@ -236,11 +236,11 @@
 
 - id: R27
   activo: prensa_hidraulica
-  si: [aceite_contaminado, presion_sistema_en_rango]
+  si: [aceite_contaminado, presion_sistema_en_rango, tiempo_ciclo_en_rango]
   entonces: contaminacion_aceite_hidraulico
   fc: 0.8
   accion: "Cambiar filtros, filtrar el aceite en circuito (riñón) hasta el código objetivo; buscar la fuente de ingreso (respiradero, sellos)."
-  fuentes: [D-021, D-045, D-046]
+  fuentes: [D-021, D-045, D-046, D-052]
 
 - id: R28
   activo: prensa_hidraulica

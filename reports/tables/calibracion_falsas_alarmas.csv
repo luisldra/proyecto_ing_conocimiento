@@ -1,0 +1,13 @@
+activo,grupo,muestras,alarma_pct
+motor_electrico,sin_confusor,1500,0.0
+motor_electrico,con_confusor,1500,0.47
+bomba_centrifuga,sin_confusor,1500,0.0
+bomba_centrifuga,con_confusor,1500,2.6
+compresor_tornillo,sin_confusor,1500,0.0
+compresor_tornillo,con_confusor,1500,0.33
+prensa_hidraulica,sin_confusor,1500,0.0
+prensa_hidraulica,con_confusor,1500,0.6
+banda_transportadora,sin_confusor,1500,0.0
+banda_transportadora,con_confusor,1500,4.6
+centro_cnc,sin_confusor,1500,0.0
+centro_cnc,con_confusor,1500,0.0

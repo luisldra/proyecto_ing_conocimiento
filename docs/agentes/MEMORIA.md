@@ -3,19 +3,45 @@
 > Protocolo y formato: [AGENTS.md](../../AGENTS.md) · Errores: [ERRORES.md](ERRORES.md) · Plan: [PLAN.md](../PLAN.md)
 
 ## Estado actual
-- **Fase en curso:** Fases 0, 1 y 2 hechas, revisión cruzada aplicada y repositorio resincronizado. Lista para la Fase 3.
-- **Última tarea:** resincronización tras la revisión: `metaltech.owl` regenerado y pruebas ajustadas. `pytest`: 464 OK; `ruff` limpio. La base queda en 48 decisiones, 55 reglas, 67 síntomas, 31 modos, 41 filas FMEA y 7 datasets ([revision.md](../../knowledge/acquisition/revision.md)).
-- **Siguiente tarea:** Fase 3 – generador de datos sintéticos (`data/generator.py`) usando `valor_final`/`valor_nominal` de `kb/base.py`, `planta` de `assets.yaml` y las firmas de `failure_modes.yaml`. Usar el máximo de la ventana para eventos de segundos, revisar las firmas de D-042 y tener en cuenta la detección tardía de M0 (ver la entrada del 2026-11-08).
-- **Bloqueos:** ninguno. Abiertos: normas sin texto oficial (ERR-001), supuestos sin fuente (ERR-003), ISO 20816-3:2026 e ISO 10816-7 sin revisar (ERR-015).
+- **Fase en curso:** Fase 3 terminada (simulador calibrado). Lista para la Fase 4.
+- **Última tarea:** dificultad del simulador y umbrales de bombas (D-051, D-052). La base queda en 52 decisiones, 55 reglas, 68 síntomas, 31 modos, 41 filas FMEA y 7 datasets. `pytest`: 515 OK; `ruff` limpio.
+- **Siguiente tarea:** Fase 4 – `data/features.py` y modelos (MLP, CNN1D, LSTM). Descartar filas `purga` y `reparacion`; no usar `estado`, `modo_activo`, `t_degradacion`, `horas_a_falla` ni `confusor` como entradas.
+- **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Pendiente por confirmar:**
   - definición exacta de RA/R1–R6 con el docente;
   - fecha de entrega;
-  - acceso institucional a ISO 20816-3:2026, ISO 10816-7 e IEEE 519;
-  - reparto de roles del equipo y push de los commits al remoto `luisldra/proyecto_ing_conocimiento`.
+  - reparto de roles entre los 4 integrantes: Alejandro, Luis David, Junio y David.
 
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-08] Fase 3 – Dificultad del simulador y umbrales de bombas (agente: Datos/ML)
+- Hecho:
+  - Bombas: vibración 2.8/4.5 → 5.1/8.5 mm/s (D-051); firmas compartidas con `tipo: frac_alerta`.
+  - Simulador (D-052): firmas incompletas, severidad 0.8–1.15, deriva de sensor, excursiones operativas y señal sana sin recorte.
+  - Válvula hidráulica: ciclo sostenido y R27 con `tiempo_ciclo_en_rango` (68 síntomas).
+  - `scripts/contrastar_datasets.py` y `reports/tables/contraste_datasets.csv` con AI4I 2020 y SKAB.
+  - Ontología regenerada; 515 pruebas OK.
+- Resultados: M0 detecta 81.8 % (predicción) y 76.6 % (detección); cruces en 4.4 % de episodios; alarmas en sano 0 % sin confusor y 1.43 % con confusor.
+- Pendiente:
+  - NASA IMS y UCI hidráulico sin contraste numérico.
+  - Diferencias aceptadas frente a datos públicos, listadas en `data/README.md`.
+  - Revisar la cobertura de `sensores de CNC` si en la Fase 4 hay clases con muy pocas muestras (mínimo actual: 6 episodios por par modo-activo).
+- Errores: ERR-020 (resuelto), ERR-022 (resuelto).
+- Decisiones: D-051 y D-052.
+
+## [2026-11-08] Fase 3 – Simulador y calibración inicial (agente: Datos/ML)
+- Hecho:
+  - `src/metaltech/data/generator.py`: señal por turno, 524 episodios sin solaparse, 7 confusores, faltantes, observaciones con sesgo por técnico y turno, partición temporal con purga. 36 meses, 16 unidades, 2.52 M filas, unos 25 s.
+  - `src/metaltech/data/calibracion.py` y tablas `reports/tables/calibracion_*`; `tests/test_generator.py`; ficha en `data/README.md`.
+  - Correcciones en `failure_modes.yaml` (D-049): 8 modos pasan a detección, `escalon_en` y lubricación 30 → 35 °C. `train.yaml`: 36 meses y parámetros del simulador (D-050).
+  - `knowledge/acquisition/normas_fuentes_externas.md`: consulta de normas por fuentes públicas (sin acceso institucional).
+- Resultados: 2.27 % de filas positivas; mínimo 5 episodios por par modo-activo; M0 detecta 100 % (predicción) y 98 % (detección); alarmas en sano 0 % sin confusor y 4.85 % con confusor; acierto de técnicos 87.6 % mañana, 85.5 % tarde y 78.9 % noche.
+- Pendiente:
+  - Dificultad del simulador, umbrales de bombas y contraste con datos públicos: resueltos en la entrada siguiente.
+- Errores: ERR-020 (resuelto después), ERR-021 (resuelto).
+- Decisiones: D-049 y D-050.
 
 ## [2026-11-08] Fase 2 – Resincronización tras la revisión cruzada (agente: QA)
 - Hecho:
@@ -25,8 +51,11 @@
   - Pruebas nuevas en `tests/test_rules_engine.py`: modo principal en las 41 firmas, sin cruces de modo en t = 0.85–0.95 y bloqueo de las premisas `en_rango` fuera de rango.
   - Verificación: `pytest` 464 OK sin omitidas, incluidas `test_entorno.py` y HermiT; `ruff` limpio; `metaltech.proceso` OK.
 - Pendiente:
-  - Push al remoto, que requiere confirmación del usuario.
-  - Hallazgo para la Fase 3: con interpolación lineal, 7 de 41 firmas solo logran su diagnóstico correcto en t ≥ 0.85, y `motor_electrico/falla_lubricacion_rodamiento` únicamente en t = 1.0. M0 detecta tarde esos modos; es una línea base honesta, pero conviene revisar esas firmas al calibrar el simulador.
+  - Hallazgo para la Fase 3, medido con las formas y retardos reales de `failure_modes.yaml` (sin ruido; sigmoide con k = 10 como supuesto, porque D-037 no fija k). Corrige la cifra inicial de 7 de 41, que interpolaba todo de forma lineal:
+    - De 30 casos evaluables, 16 tienen una anticipación mínima de M0 menor que H = 24 h. No hay cruces a otro modo.
+    - `motor_electrico/falla_lubricacion_rodamiento` solo se diagnostica en t = 1.0.
+    - `centro_cnc/desgaste_herramienta` dura 3.3–4 h, menos que H y que la ventana de 6 h; `bomba_centrifuga/cavitacion` dura 1–48 h.
+    - 11 casos con forma `escalon` o `intermitente` no se evaluaron: requieren definir su generador.
 - Errores: ERR-019 (resuelto).
 - Decisiones: ninguna de conocimiento. Se usa Python 3.12 en este equipo, dentro de `requires-python >= 3.11`.
 

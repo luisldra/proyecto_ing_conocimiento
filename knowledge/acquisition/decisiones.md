@@ -66,6 +66,10 @@
 | D-046 | Ajuste de los FC a la política de D-034 | media |
 | D-047 | Reglas para síntomas sin uso y campo `uso` del catálogo | media |
 | D-048 | Dataset UCI de sistemas hidráulicos para la prensa | media |
+| D-049 | Tarea de predicción o detección por modo de falla | media |
+| D-050 | Supuestos y límites del simulador | baja en valores, media en estructura |
+| D-051 | Umbrales de vibración para bombas (ISO 10816-7 vía Europump) | media |
+| D-052 | Dificultad del simulador calibrada con datos públicos | media |
 
 ---
 
@@ -96,6 +100,7 @@
 - **Confianza:** media.
 
 ## D-003 – Zonas de severidad de vibración (ISO 20816-3)
+- **Actualización:** para bombas rige D-051; ISO 20816-3 las excluye. Además, la edición 2026 reemplazó a la de 2022 y sus valores no están disponibles públicamente. Las prensas y máquinas herramienta no aparecen cubiertas ni excluidas en el alcance.
 - **Contexto:** se necesitan umbrales de velocidad de vibración (mm/s RMS) para máquinas industriales de 15–300 kW.
 - **Decisión:**
   - Se usa **ISO 20816-3, Grupo 2** (15–300 kW o motores con altura de eje de 160–315 mm), **soporte rígido**.
@@ -680,6 +685,51 @@
 - **Fuentes:** Helwig et al. (2015a, 2015b). La ficha de UCI se leyó; del artículo solo se confirmaron los metadatos en Crossref.
 - **Confianza:** media.
 
+## D-049 – Tarea de predicción o detección por modo de falla
+- **Contexto:** con H = 24 h y ventana de 6 h, varias fallas no se pueden predecir: el desgaste de herramienta dura 3.3–4 h, la cavitación 1–48 h, y un escalón no tiene precursor. El equipo eligió el horizonte por tipo de falla.
+- **Decisión:**
+  - `tarea: deteccion` si la forma es `escalon` o la duración mínima es menor que H: `sobrecarga_mecanica`, `cavitacion`, `falla_valvula_admision`, `rotura_banda`, `desgaste_herramienta`, `rotura_herramienta`, `colision_husillo` y `vibracion_chatter`. Los otros 23 modos son `prediccion`.
+  - Etiqueta de predicción: las últimas H horas antes de la falla. Etiqueta de detección: desde que la forma principal del modo alcanza el 10 % de su firma (umbral supuesto).
+  - `escalon_en: final` para las roturas, que ocurren tras precursores; `inicio` para sobrecarga, chatter y colisión, cuya condición dura el episodio.
+  - `falla_lubricacion_rodamiento`: temperatura de rodamiento delta 30 → 35 °C. Con 30 solo llegaba a 90 °C en el instante de la falla; con 35 alcanza el nivel de disparo de 95 °C, igual que los demás modos de rodamiento (D-008, D-042).
+- **Alternativas:** horizonte único de 24 h, descartado porque obliga a alargar artificialmente esas fallas o a evaluar lo imposible.
+- **Fuentes:** D-008, D-037, D-042. La división es una decisión de diseño; el 10 % es un supuesto.
+- **Confianza:** media.
+
+## D-050 – Supuestos y límites del simulador
+- **Decisión:**
+  - Interpretaciones que D-037 no fijaba: sigmoide con k = 10; intermitente como pulsos de 1 a 3 pasos con tasa creciente y amplitud de 60 a 100 % de la firma.
+  - Duraciones log-uniformes dentro de `duracion_h`; severidad de 0.95 a 1.15 por episodio, de modo que algunas fallas no alcanzan el umbral exacto.
+  - 36 meses por unidad: con 12 no caben episodios suficientes, porque un motor acumula cerca de 7500 h de degradación por ronda de modos.
+  - Una sola falla por unidad a la vez; es una simplificación.
+  - Partición temporal común con purga de ventana + horizonte antes de cada corte. No hay partición por unidad porque varios activos solo tienen 2 unidades; se aparta del plan.
+  - Regla contra el sesgo: **las firmas se calibran con M0 y con la física, nunca mirando el resultado de M3**.
+- **Pendiente:** contraste numérico de las formas con los datasets públicos (D-036); hasta ahora las formas se basan en lo descrito en la literatura.
+- **Fuentes:** D-036, D-037. Los parámetros son supuestos de diseño.
+- **Confianza:** baja en los valores numéricos; media en la estructura.
+
+## D-051 – Umbrales de vibración para bombas (ISO 10816-7 vía Europump)
+- **Contexto:** ISO 20816-3 excluye las bombas rotodinámicas, así que 2.8/4.5 mm/s era un proxy fuera de alcance (D-003). El equipo no tiene acceso a las normas; se consultaron por fuentes públicas ([normas_fuentes_externas.md](normas_fuentes_externas.md)).
+- **Decisión:** `bomba_centrifuga.vib_rms_mm_s`: alerta 2.8 → **5.1** y crítico 4.5 → **8.5** mm/s (Categoría II, ≤ 200 kW; la bomba es de 22 kW). Alerta = entrada a zona C y crítico = entrada a zona D, como en D-003. La tendencia queda en 0.25 × 5.1 = 1.275 mm/s por cálculo (D-004; confianza baja, el 25 % no se leyó en la parte 7).
+  - Las firmas de vibración compartidas pasan a `tipo: frac_alerta`, proporcionales a la alerta del activo. Los demás activos conservan sus valores.
+- **Alternativas:** Categoría I (4.0/6.6), reservada a servicio más crítico; mantener el proxy.
+- **Fuentes:** Europump (2013), fuente sectorial que resume ISO 10816-7. Las Tablas A.1 y A.2 oficiales no se leyeron.
+- **Confianza:** media.
+
+## D-052 – Dificultad del simulador calibrada con datos públicos
+- **Contexto:** la calibración inicial daba 100 % de detección a M0 y 0 % de alarmas en sano (ERR-020), por construcción.
+- **Decisión:** se contrastó con AI4I 2020 y SKAB ([contraste_datasets.csv](../../reports/tables/contraste_datasets.csv)) y se ajustó:
+  - Severidad 0.8–1.15: en AI4I la herramienta falla entre 198 y 253 min (mediana 214.5), una dispersión amplia alrededor del valor típico.
+  - Firma incompleta: cada variable salvo la primera se omite con probabilidad 0.2 y varía ±10 %. En SKAB, varias anomalías no mueven canales que cabría esperar.
+  - Señal sana sin recorte, centros por unidad más dispersos y deriva de sensor (15 % de la media banda cada 180 días; supuesto).
+  - Excursiones operativas (0.5 por semana; supuesto): una variable sube hacia la alerta sin haber falla.
+  - El ruido **no** se aumentó: la variación en sano de SKAB a 10 min (1–3 % en la mayoría de canales) es menor que la del simulador; SKAB es un banco estable.
+  - Válvula hidráulica: `tiempo_ciclo_pct` pasa a forma lineal, porque una válvula lenta alarga el ciclo de forma sostenida (D-023). R27 exige además `tiempo_ciclo_en_rango`, y así la contaminación no compite cuando el ciclo ya está alterado.
+- **Límites:** NASA IMS no se contrastó por su tamaño; SKAB es una sola bomba en banco y la ventana libre de anomalías da solo 17 muestras de 10 min.
+- **Regla:** ningún valor se ajustó mirando resultados de M1–M3 (D-050).
+- **Fuentes:** D-023, D-036, D-050; datasets AI4I 2020 y SKAB.
+- **Confianza:** media en la estructura; baja en los parámetros marcados como supuesto.
+
 ---
 
 ## Resumen de conflictos registrados
@@ -731,6 +781,7 @@
 - Cummins, L., Sommers, A., Ramezani, S. B., Mittal, S., Jabour, J., Seale, M., & Rahimi, S. (2024). *Explainable predictive maintenance: A survey of current methods, challenges and opportunities* [Preprint]. arXiv. https://doi.org/10.48550/arXiv.2401.07871
 - Dyer, D., & Stewart, R. M. (1978). Detection of rolling element bearing damage by statistical vibration analysis. *Journal of Mechanical Design, 100*(2), 229–235. https://doi.org/10.1115/1.3453905
 - Edmac. (s. f.). *Why is my air compressor overheating?* https://www.edmac.com/en/blog/post/why-is-my-air-compressor-overheating
+- Europump. (2013). *Pump vibration standards guidelines* (1.ª ed.). https://www.europump.net/files/Publications/Guides/Guidelines%200n%20Pump%20Vibration%20First%20edition%20Final%20July%202013.pdf
 - Evans, J. (s. f.). *Three-phase voltage variation & unbalance*. Pumps & Systems. https://www.pumpsandsystems.com/three-phase-voltage-variation-unbalance-last-two-parts
 - Fabrico. (s. f.-a). *Air compressor troubleshooting*. https://www.fabrico.io/blog/air-compressor-troubleshooting/
 - Fabrico. (s. f.-b). *Conveyor belt mistracking causes and fixes*. https://www.fabrico.io/blog/conveyor-belt-mistracking-causes-and-fixes/

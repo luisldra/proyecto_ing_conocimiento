@@ -51,7 +51,7 @@ def test_conteos_coinciden_con_los_yaml(onto):
     c = onto.conteos()
     assert c["ModoFalla"] == len(BASE.modos) == 31
     assert c["Regla"] == len(BASE.reglas) == 55
-    assert c["Sintoma"] == len(BASE.sintomas) == 67
+    assert c["Sintoma"] == len(BASE.sintomas) == 68
     assert c["ExpresionColoquial"] == len(BASE.lexico) == 10
     assert c["FilaFMEA"] == sum(len(v) for v in BASE.fmea.values()) == 41
     assert c["Activo"] == sum(a["unidades"] for a in BASE.activos.values())

@@ -34,3 +34,4 @@ Thumbs.db
 
 # JDK portable local (HermiT); se descarga con scripts/instalar_jdk.py
 .tools/
+data/external/

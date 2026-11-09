@@ -10,9 +10,9 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 |---|---|
 | entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008, ERR-012, ERR-013 |
 | código (bugs, lógica) | ERR-009, ERR-011 |
-| datos (generador, fugas, desbalance) | – |
+| datos (generador, fugas, desbalance) | ERR-020 |
 | conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010, ERR-014, ERR-015, ERR-016, ERR-017 |
-| agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019 |
+| agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019, ERR-021, ERR-022 |
 
 ## Lecciones aprendidas
 - Las normas ISO, IEC, NEMA, HI e IEEE son de pago: hay que citar la fuente secundaria que da el valor y marcar la confianza (ERR-001).
@@ -46,6 +46,36 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-022 – Script de cambios aplicado a medias por finales de línea
+- Fecha: 2026-11-08
+- Fase/archivo: Fase 3, script temporal sobre `configs/` y `decisiones.md`
+- Origen: agente
+- Síntoma: los YAML quedaron modificados y `decisiones.md` no; además, la descripción del síntoma `tiempo_ciclo_en_rango` se copió de otro.
+- Causa raíz: un patrón con `$` no coincide antes de `\r\n` en archivos de Windows y el script escribía archivo por archivo sin validar antes. La descripción se copió de la plantilla sin adaptarla.
+- Solución: se relanzó solo la parte pendiente, se corrigió el patrón y la descripción.
+- Prevención: en scripts de edición, validar todo antes de escribir, y no usar `$` en multilínea con archivos CRLF.
+- Estado: resuelto
+
+### ERR-021 – Cifra de anticipación calculada con interpolación lineal
+- Fecha: 2026-11-08
+- Fase/archivo: Fase 3, cálculo temporal fuera del repositorio
+- Origen: agente
+- Síntoma: se informó que 7 de 41 firmas se detectaban tarde; con las formas y retardos reales son 16 de 30 casos evaluables con menos de 24 h de anticipación mínima.
+- Causa raíz: el cálculo interpoló todo de forma lineal e ignoró `forma` y `retardo_frac`.
+- Solución: se recalculó con las formas reales y se corrigió MEMORIA; `data/calibracion.py` mide ahora sobre las series generadas.
+- Prevención: medir sobre el simulador real antes de dar cifras.
+- Estado: resuelto
+
+### ERR-020 – La calibración muestra un simulador demasiado fácil para las reglas
+- Fecha: 2026-11-08
+- Fase/archivo: Fase 3, `configs/failure_modes.yaml`, `src/metaltech/data/generator.py`
+- Origen: datos
+- Síntoma: M0 detecta el 100 % de las fallas de predicción y da 0 % de alarmas en operación sana sin confusores. Además, `valvula_hidraulica_pegada` cruza a otro modo en 14 de 14 episodios.
+- Causa raíz: las firmas se ajustaron para alcanzar los umbrales de las reglas (D-042) y la señal sana se recorta al rango nominal. En la válvula, entre pulsos la presión vuelve al rango y solo queda la evidencia de contaminación.
+- Solución: firmas incompletas, severidad variable, deriva, excursiones y señal sana sin recorte (D-052); válvula con ciclo sostenido y R27 con `tiempo_ciclo_en_rango`. M0 baja a 82 % (predicción) y 77 % (detección); los cruces de la válvula, de 14 a 3 de 14.
+- Prevención: no presentar el recall de M0 sobre datos sintéticos como desempeño real; calibrar la dificultad con la física y datos públicos, nunca con el resultado de M3 (D-050).
+- Estado: resuelto
 
 ### ERR-019 – Pruebas nuevas de trayectoria mal planteadas
 - Fecha: 2026-11-08

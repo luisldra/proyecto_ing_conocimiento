@@ -3,18 +3,37 @@
 > Protocolo y formato: [AGENTS.md](../../AGENTS.md) · Errores: [ERRORES.md](ERRORES.md) · Plan: [PLAN.md](../PLAN.md)
 
 ## Estado actual
-- **Fase en curso:** Fase 4 terminada (modelos entrenados con semilla 42).
-- **Última tarea:** ventanas, MLP, CNN1D, LSTM, entrenamiento y métricas (D-053). F1 macro medio en test de los modelos elegidos: 0.599; `pytest` y `ruff` limpios.
-- **Siguiente tarea:** decidir cómo tratar los avisos tempranos en etiquetas y métricas (ERR-023); después, Fase 5 (fusión M0–M3).
+- **Fase en curso:** Fase 4 terminada y corregida (D-054, D-055). El equipo revisa antes de abrir la Fase 5.
+- **Última tarea:** ventanas grises, confusores multivariable, 32 unidades con una reservada por tipo, ajustes con datos públicos, turnos rotativos y reentrenamiento. F1 macro medio: test 0.919, unidad no vista 0.930.
+- **Siguiente tarea:** Fase 5 (fusión M0–M3), cuando el equipo lo indique.
+- **Equipo:** Alejandro (conocimiento y QA), Luis David (datos y modelos), Junio (API y web demostrativa), David (documento APA, póster y landing).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Pendiente por confirmar:**
   - definición exacta de RA/R1–R6 con el docente;
   - fecha de entrega;
-  - reparto de roles entre los 4 integrantes: Alejandro, Luis David, Junio y David.
 
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-08] Fase 4 – Correcciones decididas por el equipo y reentrenamiento (agente: Datos/ML)
+- Hecho:
+  - Ventanas grises y métricas de aviso temprano (D-054).
+  - 11 confusores multivariable, 32 unidades con `test_unidad`, omisión de firma 0.4 y severidad propia de herramienta (D-055).
+  - Técnicos en turnos rotativos: separa persona y turno; los sensores no cambian (hash idéntico).
+  - Reentrenamiento de 18 modelos. Elegidos: motor MLP, bomba CNN1D, compresor MLP, prensa CNN1D, banda CNN1D, CNC LSTM.
+- Resultados (modelos elegidos, una semilla):
+  - F1 macro: test 0.919, unidad no vista 0.930.
+  - Falsa alarma en equipo sano: 0.08 % sin confusor y 2.12 % con confusor (test); 0.27 % y 2.28 % (unidad no vista).
+  - M0 detecta 67.5 % (predicción) y 55.5 % (detección), con 16.72 % de alarmas en confusores.
+  - `bomba_centrifuga/desalineacion_eje` sube de F1 0 a 0.71 (se confunde con desbalanceo; 2 episodios en test).
+  - Acierto de técnicos: 84.2 % mañana, 85.7 % tarde, 75.0 % noche.
+- Pendiente:
+  - Una consulta al docente sobre RA/R1–R6.
+  - La cavitación y otras clases siguen con poco soporte en test (Fase 7: 5 semillas).
+  - El F1 alto refleja que el modelo se evalúa con el mismo generador con que se entrena; es optimista.
+- Errores: ERR-023 (resuelto).
+- Decisiones: D-054 y D-055.
 
 ## [2026-11-08] Fase 4 – Modelos de Deep Learning (agente: Datos/ML)
 - Hecho:

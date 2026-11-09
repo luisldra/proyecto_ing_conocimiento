@@ -6,7 +6,7 @@ Solo los sensores entran al modelo: ``estado``, ``modo_activo``, ``t_degradacion
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 from pathlib import Path
 
 import numpy as np
@@ -16,7 +16,7 @@ from numpy.lib.stride_tricks import sliding_window_view
 from metaltech.data.generator import SIN_MODO
 from metaltech.kb.base import BaseConocimiento, cargar_base, valor_nominal
 
-PARTICIONES = ("train", "val", "test")
+PARTICIONES = ("train", "val", "test", "test_unidad")
 RECORTE_Z = 10.0
 NOMBRES_AGREGADOS = ("media", "rms", "curtosis", "pendiente", "maximo", "minimo", "ultimo")
 
@@ -30,12 +30,25 @@ class Ventanas:
     unidad: np.ndarray
     ts: np.ndarray
     particion: np.ndarray
+    gris: np.ndarray | None = None  # degradación en curso a más de H de la falla (D-054)
+    modo: np.ndarray | None = None  # índice del modo que se está degradando (0 si no hay)
+    horas_a_falla: np.ndarray | None = None
+
+    def __post_init__(self) -> None:
+        n = len(self.y)
+        self.gris = np.zeros(n, dtype=bool) if self.gris is None else self.gris
+        self.modo = np.zeros(n, dtype=np.int64) if self.modo is None else self.modo
+        self.horas_a_falla = np.full(n, np.nan) if self.horas_a_falla is None else self.horas_a_falla
 
     def __len__(self) -> int:
         return len(self.y)
 
     def subconjunto(self, mascara: np.ndarray) -> Ventanas:
-        return Ventanas(self.X[mascara], self.y[mascara], self.unidad[mascara], self.ts[mascara], self.particion[mascara])
+        return Ventanas(*(getattr(self, f.name)[mascara] for f in fields(self)))
+
+    def sin_grises(self) -> Ventanas:
+        """Ventanas con etiqueta inequívoca: las que se entrenan y puntúan."""
+        return self.subconjunto(~self.gris)
 
 
 @dataclass
@@ -85,9 +98,14 @@ def _ventanas_unidad(
         recientes = etiqueta[max(fin - paso + 1, 0) : fin + 1]
         positivas = recientes[recientes != SIN_MODO]
         y[k] = indices[positivas[-1] if positivas.size else SIN_MODO]
+    estado = df["estado"].astype(str).to_numpy()[fines]
+    modo_activo = df["modo_activo"].astype(str).to_numpy()[fines]
     return Ventanas(
         np.stack([x[f - ventana + 1 : f + 1] for f in fines]), y,
         df["unidad"].astype(str).to_numpy()[fines], df["ts"].to_numpy()[fines], particion[fines],
+        (estado == "degradacion") & (y == 0),
+        np.array([indices[m] for m in modo_activo], dtype=np.int64),
+        df["horas_a_falla"].to_numpy(dtype=np.float32)[fines],
     )
 
 
@@ -103,13 +121,13 @@ def construir_ventanas(
         v for _, g in df.groupby("unidad", observed=True, sort=True)
         if (v := _ventanas_unidad(g.reset_index(drop=True), variables, nominales, indices, ventana, paso)) is not None
     ]
-    union = Ventanas(*(np.concatenate([getattr(p, c) for p in partes]) for c in ("X", "y", "unidad", "ts", "particion")))
+    union = Ventanas(*(np.concatenate([getattr(p, f.name) for p in partes]) for f in fields(Ventanas)))
     return union, variables, clases
 
 
 def normalizar(ventanas: Ventanas) -> tuple[np.ndarray, np.ndarray]:
     """Media y desviación de cada variable, solo con ventanas de entrenamiento."""
-    x = ventanas.X[ventanas.particion == "train"]
+    x = ventanas.X[(ventanas.particion == "train") & ~ventanas.gris]
     media = x.mean(axis=(0, 1))
     desviacion = x.std(axis=(0, 1))
     return media, np.where(desviacion < 1e-6, 1.0, desviacion)

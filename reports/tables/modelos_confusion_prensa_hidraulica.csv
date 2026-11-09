@@ -1,7 +1,7 @@
 ,normal,contaminacion_aceite_hidraulico,fuga_hidraulica_externa,fuga_interna_cilindro,sobrecalentamiento_aceite_hidraulico,valvula_hidraulica_pegada
-normal,9120,108,180,154,134,3
-contaminacion_aceite_hidraulico,16,59,0,0,0,0
-fuga_hidraulica_externa,0,0,50,0,0,0
-fuga_interna_cilindro,0,0,0,50,0,0
-sobrecalentamiento_aceite_hidraulico,0,0,0,0,75,0
-valvula_hidraulica_pegada,8,0,0,0,0,42
+normal,6975,2,0,0,4,0
+contaminacion_aceite_hidraulico,0,150,0,0,0,0
+fuga_hidraulica_externa,3,0,172,0,0,0
+fuga_interna_cilindro,0,0,0,125,0,0
+sobrecalentamiento_aceite_hidraulico,12,0,0,0,113,0
+valvula_hidraulica_pegada,2,0,0,0,0,123

@@ -20,7 +20,7 @@ from metaltech.data.features import (
 )
 from metaltech.data.generator import ConfigSimulador, simular
 from metaltech.kb.base import RAIZ, cargar_base
-from metaltech.models.evaluate import metricas
+from metaltech.models.evaluate import aviso_temprano, metricas
 from metaltech.models.train import (
     ARQUITECTURAS,
     ajustar_temperatura,
@@ -64,7 +64,7 @@ def test_imputar_no_mira_el_futuro():
 
 def test_cada_ventana_cae_en_una_sola_particion(ventanas, serie):
     v, _, _ = ventanas
-    assert set(np.unique(v.particion)) == {"train", "val", "test"}
+    assert set(np.unique(v.particion)) == {"train", "val", "test", "test_unidad"}
     for unidad in np.unique(v.unidad):
         filas = serie[serie["unidad"] == unidad].set_index("ts")
         mascara = v.unidad == unidad
@@ -90,6 +90,27 @@ def test_los_fallos_de_un_solo_paso_quedan_representados(ventanas, serie):
     colisiones = int(((serie["estado"] == "falla") & (serie["modo_activo"] == "colision_husillo")).sum())
     assert colisiones > 0
     assert (v.y == clases.index("colision_husillo")).sum() >= 0.8 * colisiones
+
+
+def test_la_unidad_reservada_nunca_se_mezcla(ventanas):
+    v, _, _ = ventanas
+    reservadas = set(v.unidad[v.particion == "test_unidad"])
+    assert len(reservadas) == 1 and not reservadas & set(v.unidad[v.particion == "train"])
+
+
+def test_ventanas_grises_son_degradacion_lejos_de_la_falla(ventanas):
+    v, _, _ = ventanas
+    assert v.gris.any()
+    assert (v.y[v.gris] == 0).all() and (v.modo[v.gris] != 0).all()
+    assert (v.horas_a_falla[v.gris] > 0).all()
+    assert not v.sin_grises().gris.any()
+
+
+def test_aviso_temprano_cuenta_anticipacion_por_episodio():
+    ts = np.array(["2024-01-01T00:00", "2024-01-01T10:00", "2024-02-01T00:00"], dtype="datetime64[ns]")
+    horas = np.array([50.0, 40.0, 30.0])  # los dos primeros son el mismo episodio
+    a = aviso_temprano(np.array([1, 1, 0]), np.array([1, 1, 1]), horas, np.array(["u", "u", "u"]), ts)
+    assert a["aviso_episodios_pct"] == 50.0 and a["anticipacion_mediana_h"] == 50.0
 
 
 def test_normalizacion_usa_solo_entrenamiento():

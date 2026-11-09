@@ -128,7 +128,7 @@ def test_modos_por_activo(onto):
 
 
 def test_activos_componentes_y_sensores(onto):
-    assert onto.unidades("bomba_centrifuga") == [f"bomba_centrifuga_{k}" for k in (1, 2, 3)]
+    assert onto.unidades("bomba_centrifuga") == [f"bomba_centrifuga_{k}" for k in range(1, 7)]
     assert "impulsor" in onto.componentes_de_activo("bomba_centrifuga")
     sensores = onto.sensores_de_unidad("bomba_centrifuga_1")
     assert sensores["bomba_centrifuga_1__npsh_margen_ratio"] == "npsh_margen_ratio"

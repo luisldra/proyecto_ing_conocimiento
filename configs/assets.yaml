@@ -34,7 +34,7 @@ activos:
 
   motor_electrico:
     nombre: Motor eléctrico de inducción trifásico (con contactor y variador)
-    unidades: 4
+    unidades: 8
     potencia_kw: 30          # Grupo 2 de ISO 20816-3 (15–300 kW)
     velocidad_rpm: 1780
     clase_aislamiento: F     # 155 °C, con calentamiento de clase B (D-005)
@@ -58,7 +58,7 @@ activos:
 
   bomba_centrifuga:
     nombre: Bomba centrífuga de refrigerante/agua de proceso
-    unidades: 3
+    unidades: 6
     potencia_kw: 22
     velocidad_rpm: 3550
     soporte: rigido
@@ -80,7 +80,7 @@ activos:
 
   compresor_tornillo:
     nombre: Compresor de tornillo lubricado (aire de planta, consigna 7.5 bar)
-    unidades: 2
+    unidades: 4
     potencia_kw: 55
     presion_consigna_bar: 7.5
     soporte: rigido
@@ -99,7 +99,7 @@ activos:
 
   prensa_hidraulica:
     nombre: Prensa hidráulica de 200 t con unidad de potencia (bomba + motor)
-    unidades: 2
+    unidades: 4
     presion_nominal_bar: 200
     componentes: [cilindro_principal, sellos, valvula_direccional_proporcional, bomba_hidraulica, tanque_filtros, enfriador]
     variables:
@@ -114,7 +114,7 @@ activos:
 
   banda_transportadora:
     nombre: Banda transportadora de piezas (tambor motriz + motorreductor + rodillos)
-    unidades: 3
+    unidades: 6
     componentes: [banda_empalme, tambor_motriz, rodillos_portantes, motorreductor, rodamientos]
     variables:
       desvio_lateral_mm:   {unidad: mm, direccion: alta, nominal: [0, 10], alerta: 25, critico: 50, fuentes: [D-024]}
@@ -127,7 +127,7 @@ activos:
 
   centro_cnc:
     nombre: Centro de mecanizado CNC de 3 ejes (husillo 15 kW)
-    unidades: 2
+    unidades: 4
     potencia_kw: 15
     componentes: [herramienta, husillo, rodamientos_husillo, ejes_avance]
     variables:

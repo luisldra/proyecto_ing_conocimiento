@@ -111,7 +111,7 @@ def test_etiquetas_respetan_la_tarea(sim):
 
 
 def test_la_falla_mueve_la_mayoria_de_su_firma(sim):
-    """Hasta un 20 % de la firma puede omitirse, y la severidad varía (D-052)."""
+    """Hasta un 40 % de la firma puede omitirse, y la severidad varía (D-052, D-055)."""
     movidas, total = 0, 0
     for _, ep in sim.episodios.iterrows():
         df = sim.series[ep["activo"]]
@@ -130,7 +130,7 @@ def test_la_falla_mueve_la_mayoria_de_su_firma(sim):
                 continue
             total += 1
             movidas += bool(signo * (fila[v] - sanos[v].median()) > 0)
-    assert movidas / total >= 0.7, f"{movidas}/{total}"
+    assert movidas / total >= 0.55, f"{movidas}/{total}"
 
 
 def test_reparacion_sin_datos_de_sensores(sim):
@@ -153,6 +153,28 @@ def test_la_firma_de_vibracion_escala_con_la_alerta_del_activo():
     cambio = {"tipo": "frac_alerta", "valor": 1.43}
     assert valor_final(BASE.activos["bomba_centrifuga"]["variables"]["vib_rms_mm_s"], cambio) == pytest.approx(7.293)
     assert valor_final(BASE.activos["motor_electrico"]["variables"]["vib_rms_mm_s"], cambio) == pytest.approx(4.004)
+
+
+def test_confusores_multivariable_mueven_varias_variables(sim):
+    df = sim.series["centro_cnc"]
+    evento = df[df["confusor"] == "material_duro_cnc"]
+    sanos = df[(df["estado"] == "sano") & (df["confusor"] == "ninguno")]
+    assert len(evento) > 0
+    for v in ("carga_husillo_rel", "vib_hf_rel", "temp_husillo_c"):
+        assert evento[v].median() > sanos[v].median(), v
+
+
+def test_confusores_multivariable_estan_bien_definidos():
+    for nombre, c in BASE.confusores.items():
+        for a in c["activos"]:
+            assert set(c["efectos"]) <= set(BASE.activos[a]["variables"]), nombre
+
+
+def test_una_unidad_por_activo_queda_reservada(sim):
+    for activo, df in sim.series.items():
+        reservadas = df.loc[df["particion"] == "test_unidad", "unidad"].astype(str).unique()
+        assert list(reservadas) == [f"{activo}_{BASE.activos[activo]['unidades']:02d}"]
+        assert "train" not in set(df.loc[df["unidad"] == reservadas[0], "particion"].astype(str))
 
 
 def test_hay_confusores_y_datos_faltantes(sim):
@@ -179,6 +201,11 @@ def test_observaciones_las_reconoce_el_lexico(sim):
     assert len(sim.observaciones) > 0
     for _, o in sim.observaciones.iterrows():
         assert o["id_expresion"] in {c.id for c in lexico.identificar(o["texto"], o["activo"])}
+
+
+def test_tecnicos_rotan_de_turno(sim):
+    turnos = sim.observaciones.groupby("tecnico")["turno"].nunique()
+    assert (turnos >= 2).all()
 
 
 def test_observaciones_anonimizadas(sim):

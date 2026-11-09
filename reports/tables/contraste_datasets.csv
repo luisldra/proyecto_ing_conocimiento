@@ -1,8 +1,8 @@
 medida,referencia,publico,simulador
-"desgaste de herramienta al fallar, minimo (min)",AI4I 2020,198.0,213.3
-"desgaste de herramienta al fallar, mediana (min)",AI4I 2020,214.5,235.5
-"desgaste de herramienta al fallar, maximo (min)",AI4I 2020,253.0,264.7
-"variación en sano a 10 min, CV % (vib_rms_mm_s)",SKAB Accelerometer1RMS,2.03,9.52
-"variación en sano a 10 min, CV % (corriente_pct)",SKAB Current,1.11,2.86
-"variación en sano a 10 min, CV % (caudal_pct)",SKAB Volume Flow RateRMS,1.2,1.01
-canales que se mueven al menos 1 desviación en anomalía (%),"SKAB, 5 experimentos",33.3,"80 (por diseño, sin contar la primera variable)"
+"desgaste de herramienta al fallar, minimo (min)",AI4I 2020,198.0,189.0
+"desgaste de herramienta al fallar, mediana (min)",AI4I 2020,214.5,212.1
+"desgaste de herramienta al fallar, maximo (min)",AI4I 2020,253.0,240.5
+"variación en sano a 10 min, CV % (vib_rms_mm_s)",SKAB Accelerometer1RMS,2.03,9.67
+"variación en sano a 10 min, CV % (corriente_pct)",SKAB Current,1.11,2.89
+"variación en sano a 10 min, CV % (caudal_pct)",SKAB Volume Flow RateRMS,1.2,0.99
+canales que se mueven al menos 1 desviación en anomalía (%),"SKAB, 5 experimentos",33.3,"60 (por diseño, sin contar la primera variable)"

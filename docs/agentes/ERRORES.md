@@ -53,9 +53,9 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Origen: datos
 - Síntoma: `falsa_alarma` da 5.74 % en test (modelos elegidos), pero el 99.1 % de esas 4379 alarmas ocurre con una degradación en curso y en el 98.8 % de ellas el modo es el correcto. En equipo sano la tasa es 0.11 % (39 de 35 494 ventanas).
 - Causa raíz: las ventanas de degradación a más de H = 24 h de la falla se etiquetan `normal`. Un aviso correcto y temprano cuenta como falsa alarma y baja la precisión y el F1.
-- Solución: pendiente de decisión del equipo antes de la Fase 5.
+- Solución: ventanas grises fuera de entrenamiento y puntuación, falsa alarma solo con equipo sano y métricas aparte de aviso temprano (D-054). El F1 macro medio en test pasa de 0.599 a 0.919.
 - Prevención: separar el estado real del equipo de la etiqueta al medir alarmas.
-- Estado: abierto
+- Estado: resuelto
 
 ### ERR-022 – Script de cambios aplicado a medias por finales de línea
 - Fecha: 2026-11-08

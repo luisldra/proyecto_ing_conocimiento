@@ -68,6 +68,8 @@ docs/               PLAN.md, agentes/ (MEMORIA, ERRORES), documento_APA/, poster
 | **Documentación** | Documento APA 7, anexos, póster, guion de demo | `docs/` |
 | **QA** | Tests, verificación de trazabilidad y de enlaces de MEMORIA y ERRORES | `tests/`, scripts de verificación |
 
+**Responsables del equipo:** Alejandro (conocimiento y QA), Luis David (datos y modelos), Junio (API y web demostrativa) y David (documento APA, póster y landing).
+
 ## 6. Protocolo obligatorio de trabajo
 
 1. **Leer** este archivo, el bloque *Estado actual* de `MEMORIA.md` y el índice de `ERRORES.md`.

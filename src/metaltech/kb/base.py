@@ -40,6 +40,7 @@ class BaseConocimiento:
     lexico: list[dict[str, Any]]
     muestreo_min: int = 10
     reglas_por_id: dict[str, dict[str, Any]] = field(default_factory=dict)
+    confusores: dict[str, dict[str, Any]] = field(default_factory=dict)
 
     def variable(self, activo: str, variable: str) -> dict[str, Any]:
         """Configuración de una variable de un tipo de activo."""
@@ -60,11 +61,13 @@ def cargar_base() -> BaseConocimiento:
     assets = _leer(RUTA_ASSETS)
     fmea = {k: v for k, v in _leer(RUTA_FMEA).items() if isinstance(v, list)}
     reglas = _leer(RUTA_REGLAS)
+    modos = _leer(RUTA_MODOS)
     return BaseConocimiento(
         activos=assets["activos"],
         sintomas=assets["sintomas"],
         planta=assets.get("planta", {}),
-        modos=_leer(RUTA_MODOS)["modos_falla"],
+        modos=modos["modos_falla"],
+        confusores=modos.get("confusores_multivariable", {}),
         fmea=fmea,
         reglas=reglas,
         lexico=_leer(RUTA_LEXICO),

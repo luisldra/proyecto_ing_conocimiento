@@ -1,8 +1,8 @@
 ,normal,desalineacion_banda,desgaste_rodamiento,deslizamiento_banda,falla_rodillo,rotura_banda,sobrecarga_mecanica
-normal,13228,241,175,15,218,2,9
-desalineacion_banda,4,121,0,0,0,0,0
-desgaste_rodamiento,6,0,94,0,0,0,0
-deslizamiento_banda,35,0,0,65,0,0,0
-falla_rodillo,18,0,0,0,182,0,0
-rotura_banda,0,0,0,0,0,4,0
-sobrecarga_mecanica,0,0,0,0,0,0,16
+normal,14440,0,0,6,0,1,7
+desalineacion_banda,0,200,0,0,0,0,0
+desgaste_rodamiento,0,0,246,0,4,0,0
+deslizamiento_banda,2,0,0,198,0,0,0
+falla_rodillo,0,0,27,0,173,0,0
+rotura_banda,0,0,0,0,0,9,0
+sobrecarga_mecanica,0,0,0,0,0,0,96

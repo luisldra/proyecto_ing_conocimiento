@@ -1,8 +1,8 @@
 {
-  "motor_electrico": "lstm",
-  "bomba_centrifuga": "mlp",
+  "motor_electrico": "mlp",
+  "bomba_centrifuga": "cnn1d",
   "compresor_tornillo": "mlp",
   "prensa_hidraulica": "cnn1d",
-  "banda_transportadora": "mlp",
-  "centro_cnc": "cnn1d"
+  "banda_transportadora": "cnn1d",
+  "centro_cnc": "lstm"
 }

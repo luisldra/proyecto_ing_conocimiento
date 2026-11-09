@@ -31,7 +31,7 @@ from metaltech.data.features import (
 )
 from metaltech.kb.base import RAIZ, cargar_base
 from metaltech.models.cnn1d import CNN1D
-from metaltech.models.evaluate import matriz_confusion, metricas, metricas_por_clase
+from metaltech.models.evaluate import aviso_temprano, matriz_confusion, metricas, metricas_por_clase
 from metaltech.models.lstm import LSTM
 from metaltech.models.mlp import MLP
 
@@ -106,8 +106,8 @@ def entrenar(datos: DatosActivo, arquitectura: str, semilla: int, cfg: dict[str,
     torch.manual_seed(semilla)
     rng = np.random.default_rng(semilla)
     e = cfg["entrenamiento"]
-    train = balancear_entrenamiento(datos.particiones["train"], e["negativos_por_positivo"], rng)
-    val = datos.particiones["val"]
+    train = balancear_entrenamiento(datos.particiones["train"].sin_grises(), e["negativos_por_positivo"], rng)
+    val = datos.particiones["val"].sin_grises()
     x_train, y_train = entradas_de(arquitectura, train.X), torch.from_numpy(train.y)
     x_val, y_val = entradas_de(arquitectura, val.X), torch.from_numpy(val.y)
     modelo = crear_modelo(arquitectura, train.X.shape[2], train.X.shape[1], len(datos.clases), cfg)
@@ -165,18 +165,21 @@ def ejecutar(args: argparse.Namespace) -> pd.DataFrame:
             r = entrenar(datos, arquitectura, semilla, cfg)
             guardar_modelo(modelos / f"{activo}_{arquitectura}_s{semilla}.pt", datos, arquitectura, semilla, r)
             resultados[arquitectura] = r
-            for particion in ("val", "test"):
-                v = datos.particiones[particion]
-                proba = probabilidades(predecir_logits(r.modelo, entradas_de(arquitectura, v.X)), r.temperatura)
+            for particion in ("val", "test", "test_unidad"):
+                todas = datos.particiones[particion]
+                proba_todas = probabilidades(predecir_logits(r.modelo, entradas_de(arquitectura, todas.X)), r.temperatura)
+                g = todas.gris
+                aviso = aviso_temprano(proba_todas[g].argmax(1), todas.modo[g], todas.horas_a_falla[g], todas.unidad[g], todas.ts[g])
+                v, proba = todas.sin_grises(), proba_todas[~g]
                 filas.append({"activo": activo, "arquitectura": arquitectura, "semilla": semilla, "particion": particion,
-                              **metricas(v.y, proba), "epocas": r.epocas, "segundos": round(r.segundos, 1),
+                              **metricas(v.y, proba), **aviso, "epocas": r.epocas, "segundos": round(r.segundos, 1),
                               "temperatura": round(r.temperatura, 3)})
                 por_clase += [{"activo": activo, "arquitectura": arquitectura, "particion": particion, **c}
                               for c in metricas_por_clase(v.y, proba, datos.clases)]
             print(f"  {arquitectura}: f1_val={r.f1_val:.3f} epocas={r.epocas} {r.segundos:.0f}s", flush=True)
         mejor = max(resultados, key=lambda a: resultados[a].f1_val)
         seleccion[activo] = mejor
-        v = datos.particiones["test"]
+        v = datos.particiones["test"].sin_grises()
         proba = probabilidades(predecir_logits(resultados[mejor].modelo, entradas_de(mejor, v.X)), resultados[mejor].temperatura)
         pd.DataFrame(matriz_confusion(v.y, proba, datos.clases), index=datos.clases, columns=datos.clases).to_csv(
             tablas / f"modelos_confusion_{activo}.csv"

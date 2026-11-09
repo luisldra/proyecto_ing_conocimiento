@@ -1,30 +1,31 @@
 {
-  "filas": 2524608,
-  "positivas_pct": 2.31,
-  "episodios": 525,
+  "filas": 5049216,
+  "positivas_pct": 2.4,
+  "episodios": 1075,
   "episodios_por_particion": {
-    "train": 290,
-    "test": 123,
-    "val": 110,
+    "train": 497,
+    "test": 205,
+    "test_unidad": 200,
+    "val": 171,
     "purga": 2
   },
-  "min_episodios_por_modo_activo": 6,
+  "min_episodios_por_modo_activo": 13,
   "m0_detectado_pct_por_tarea": {
-    "deteccion": 76.6,
-    "prediccion": 81.8
+    "deteccion": 55.5,
+    "prediccion": 67.5
   },
   "m0_anticipacion_mediana_h": {
     "deteccion": 0.0,
-    "prediccion": 60.0
+    "prediccion": 60.5
   },
-  "episodios_con_cruce_pct": 4.4,
+  "episodios_con_cruce_pct": 11.3,
   "falsas_alarmas_pct_medio": {
-    "con_confusor": 1.43,
+    "con_confusor": 16.72,
     "sin_confusor": 0.0
   },
   "acierto_tecnicos_pct_por_turno": {
-    "manana": 88.6,
-    "noche": 79.3,
-    "tarde": 82.8
+    "manana": 84.2,
+    "noche": 75.0,
+    "tarde": 85.7
   }
 }

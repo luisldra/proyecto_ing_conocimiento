@@ -71,6 +71,8 @@
 | D-051 | Umbrales de vibración para bombas (ISO 10816-7 vía Europump) | media |
 | D-052 | Dificultad del simulador calibrada con datos públicos | media |
 | D-053 | Ventanas y entrenamiento de los modelos | media |
+| D-054 | Ventanas grises y métricas de aviso temprano | media |
+| D-055 | Confusores multivariable, más unidades y ajustes con datos públicos | media en estructura, baja en parámetros |
 
 ---
 
@@ -740,6 +742,25 @@
 - **Limitación:** una sola semilla (42) en esta fase; test tiene entre 12 y 29 episodios por activo y clases con solo 5 a 125 ventanas. Los intervalos de confianza con 5 semillas quedan para la Fase 7.
 - **Fuentes:** D-049, D-050; configuración en `configs/train.yaml`.
 - **Confianza:** media.
+
+## D-054 – Ventanas grises y métricas de aviso temprano
+- **Contexto:** las ventanas con degradación en curso a más de H de la falla estaban etiquetadas `normal`, y el 99.1 % de las "falsas alarmas" eran avisos tempranos correctos (ERR-023).
+- **Decisión (del equipo):**
+  - Esas ventanas son **grises**: no se entrenan ni entran al F1 ni a la falsa alarma.
+  - La falsa alarma se mide solo con equipo sano, incluidos los confusores.
+  - Sobre las ventanas grises se reporta aparte: porcentaje de ventanas y de episodios con aviso del modo correcto, y anticipación mediana en horas.
+- **Alternativas:** clase adicional de degradación; etiquetar toda la degradación como la falla; dejarlas como normales.
+- **Fuentes:** D-049, D-053.
+- **Confianza:** media.
+
+## D-055 – Confusores multivariable, más unidades y ajustes con datos públicos
+- **Decisión (del equipo):**
+  - **Confusores multivariable:** 11 condiciones de operación sin falla (carga alta sostenida, ambiente caluroso, punto de operación estrangulado, nivel bajo en succión, demanda sostenida de aire, lote pesado, sobrecarga temporal, desvío transitorio, material duro, programa agresivo) que mueven varias variables con subida y bajada graduales. Están en `failure_modes.yaml`; frecuencias y magnitudes son supuestos físicos y **no se iteraron mirando resultados**.
+  - **Unidades:** 16 → 32. La última unidad de cada tipo queda solo para evaluación (`test_unidad`), además del corte temporal: mide la generalización a una máquina no vista y corrige la desviación del plan registrada en D-050.
+  - **Omisión de firma:** 0.2 → 0.4, para acercarse a SKAB (33 % de canales con cambio de 1 desviación). Sigue siendo menos que lo observado (60 % esperado en el simulador).
+  - **Herramienta:** severidad propia 0.72–0.95, con falla cerca de 215 min como en AI4I; el valor 240 de la firma se conserva como referencia del nivel crítico.
+- **Fuentes:** D-036, D-050, D-052; AI4I 2020 y SKAB. Confusores: inferencia física.
+- **Confianza:** media en la estructura; baja en los parámetros.
 
 ---
 

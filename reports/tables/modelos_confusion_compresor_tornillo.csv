@@ -1,9 +1,9 @@
 ,normal,desalineacion_eje,desgaste_rodamiento,falla_valvula_admision,fuga_aire_red,holgura_mecanica,obstruccion_separador,sobrecalentamiento_compresor
-normal,8416,305,4,20,209,306,405,25
-desalineacion_eje,14,36,0,0,0,0,0,0
-desgaste_rodamiento,2,0,23,0,0,0,0,0
-falla_valvula_admision,2,0,0,3,0,0,0,0
-fuga_aire_red,3,0,0,0,72,0,0,0
-holgura_mecanica,0,0,0,0,0,50,0,0
-obstruccion_separador,0,0,0,0,0,0,50,0
-sobrecalentamiento_compresor,4,0,0,0,0,0,0,21
+normal,6467,8,0,52,1,0,0,10
+desalineacion_eje,0,50,0,0,0,0,0,0
+desgaste_rodamiento,0,0,50,0,0,0,0,0
+falla_valvula_admision,18,0,0,32,0,0,0,0
+fuga_aire_red,25,0,0,0,50,0,0,0
+holgura_mecanica,4,0,0,0,0,71,0,0
+obstruccion_separador,1,0,0,0,0,0,49,0
+sobrecalentamiento_compresor,0,0,0,0,0,0,0,50

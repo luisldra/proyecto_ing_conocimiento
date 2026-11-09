@@ -265,7 +265,7 @@ def _inyectar(
 ) -> None:
     n = ep.i1 - ep.i0 + 1
     t = np.arange(1, n + 1) / n
-    severidad, pulso = rng.uniform(*cfg.severidad), _pulsos(rng, t)
+    severidad, pulso = rng.uniform(*modo["degradacion"].get("severidad", cfg.severidad)), _pulsos(rng, t)
     escalon_en = modo["degradacion"].get("escalon_en", "inicio")
     propias = [f for f in modo["firma"] if f["variable"] in variables]
     for k, f in enumerate(propias):
@@ -296,6 +296,25 @@ def _eventos_por_semana(rng: np.random.Generator, n: int, por_semana: float) -> 
     return np.flatnonzero(rng.random(n) < por_semana / (7 * 24 * PASOS_POR_HORA))
 
 
+def _confusores_multivariable(
+    rng: np.random.Generator, activo: str, datos: dict[str, np.ndarray], confusor: np.ndarray,
+    definiciones: dict[str, dict[str, Any]],
+) -> None:
+    """Condiciones de operación que mueven varias variables con subida y bajada graduales."""
+    n = confusor.size
+    for nombre, c in sorted(definiciones.items()):
+        if activo not in c["activos"]:
+            continue
+        for i in _eventos_por_semana(rng, n, c["por_semana"]):
+            pasos = min(max(1, round(rng.uniform(*c["duracion_h"]) * PASOS_POR_HORA)), n - int(i))
+            confusor[i : i + pasos] = nombre
+            peso = np.minimum(1.0, np.minimum(np.arange(1, pasos + 1), np.arange(pasos, 0, -1)) / 3)
+            for v, efecto in c["efectos"].items():
+                tramo = datos[v][i : i + pasos]
+                objetivo = rng.uniform(*efecto["valor"]) if "valor" in efecto else tramo + rng.uniform(*efecto["delta"])
+                datos[v][i : i + pasos] = tramo + peso * (objetivo - tramo)
+
+
 def _confusores(
     rng: np.random.Generator,
     activo: str,
@@ -303,9 +322,11 @@ def _confusores(
     variables: dict[str, Any],
     indice: pd.DatetimeIndex,
     cfg: ConfigSimulador,
+    definiciones: dict[str, dict[str, Any]],
 ) -> np.ndarray:
     n = len(indice)
     confusor = np.full(n, "ninguno", dtype=object)
+    _confusores_multivariable(rng, activo, datos, confusor, definiciones)
     inicio_manana = np.flatnonzero((indice.hour == 6) & (indice.minute == 0))
     if activo == "prensa_hidraulica":
         for i in inicio_manana[rng.random(inicio_manana.size) < 0.15]:
@@ -381,7 +402,7 @@ def _simular_unidad(
             desde = ep.i0 + paso_observable(modo, t)
         etiqueta[desde : ep.i1 + 1] = ep.modo
 
-    confusor = _confusores(rng, activo, datos, variables, indice, cfg)
+    confusor = _confusores(rng, activo, datos, variables, indice, cfg, base.confusores)
     for v, c in variables.items():
         ruido = cfg.ruido_medicion_frac * (c["nominal"][1] - c["nominal"][0]) / 2
         x = np.maximum(datos[v] + rng.normal(0, ruido, n), 0.0)
@@ -414,10 +435,17 @@ def particionar(cfg: ConfigSimulador, n: int) -> np.ndarray:
 # ---------------------------------------------------------------------------------------
 # Observaciones de técnicos
 # ---------------------------------------------------------------------------------------
+def _cuadrilla(turno: str, indice: pd.DatetimeIndex, i: int) -> list[str]:
+    """Los grupos rotan de turno cada semana: así se separa el efecto de la persona y del turno."""
+    turnos, semana = list(TURNOS_TECNICOS), (indice[i] - indice[0]).days // 7
+    return TURNOS_TECNICOS[turnos[(turnos.index(turno) + semana) % len(turnos)]]
+
+
 def _tecnico_y_acierto(
-    rng: np.random.Generator, turno: str, acierto: dict[str, float], cfg: ConfigSimulador
+    rng: np.random.Generator, turno: str, acierto: dict[str, float], cfg: ConfigSimulador,
+    indice: pd.DatetimeIndex, i: int,
 ) -> tuple[str, float]:
-    tecnico = str(rng.choice(TURNOS_TECNICOS[turno]))
+    tecnico = str(rng.choice(_cuadrilla(turno, indice, i)))
     return tecnico, acierto[tecnico] * (cfg.penalizacion_noche if turno == "noche" else 1.0)
 
 
@@ -450,7 +478,7 @@ def _observaciones(
             continue
         for _ in range(rng.poisson(cfg.observaciones_por_episodio)):
             i = ep.i0 + int(rng.beta(4, 1.5) * (ep.i1 - ep.i0))  # se nota más cerca de la falla
-            tecnico, p = _tecnico_y_acierto(rng, str(turnos[i]), acierto, cfg)
+            tecnico, p = _tecnico_y_acierto(rng, str(turnos[i]), acierto, cfg, indice, i)
             lista = correctas if rng.random() < p else propias
             registrar(ep.unidad, ep.activo, i, ep.modo, lista[int(rng.integers(len(lista)))], tecnico)
 
@@ -466,7 +494,7 @@ def _observaciones(
             continue
         for _ in range(rng.poisson(cfg.observaciones_falsas_mes * cfg.meses)):
             i = int(rng.choice(libres))
-            tecnico = str(rng.choice(TURNOS_TECNICOS[str(turnos[i])]))
+            tecnico = str(rng.choice(_cuadrilla(str(turnos[i]), indice, i)))
             registrar(unidad, activo, i, SIN_MODO, propias[int(rng.integers(len(propias)))], tecnico)
     columnas = ["ts", "unidad", "activo", "turno", "tecnico", "id_expresion", "texto", "modo_real", "es_correcta"]
     return pd.DataFrame(filas, columns=columnas).sort_values(["ts", "unidad"]).reset_index(drop=True)
@@ -481,7 +509,7 @@ def simular(cfg: ConfigSimulador, semilla: int = 42, base: BaseConocimiento | No
     indice = pd.date_range(cfg.inicio, periods=cfg.pasos, freq=f"{cfg.muestreo_min}min")
     turnos = _turnos(indice)
     particion = particionar(cfg, cfg.pasos)
-    sim, episodios, unidades, numero = Simulacion(), [], {}, 0
+    sim, episodios, unidades, numero, particion_de = Simulacion(), [], {}, 0, {}
     for activo, datos in base.activos.items():
         marcos = []
         for k in range(1, datos["unidades"] + 1):
@@ -489,7 +517,9 @@ def simular(cfg: ConfigSimulador, semilla: int = 42, base: BaseConocimiento | No
             unidades[unidad] = activo
             df, eps = _simular_unidad(base, cfg, semilla, numero, unidad, activo, indice, turnos)
             numero += 1
-            df["particion"] = particion
+            # La última unidad de cada tipo nunca se entrena: mide la generalización (D-055).
+            particion_de[unidad] = np.full(cfg.pasos, "test_unidad", dtype=object) if k == datos["unidades"] else particion
+            df["particion"] = particion_de[unidad]
             marcos.append(df)
             episodios.extend(eps)
         marco = pd.concat(marcos, ignore_index=True)
@@ -501,7 +531,7 @@ def simular(cfg: ConfigSimulador, semilla: int = 42, base: BaseConocimiento | No
             "unidad": e.unidad, "activo": e.activo, "modo": e.modo,
             "tarea": tarea_de(base.modos[e.modo]), "inicio": indice[e.i0], "falla": indice[e.i1],
             "i0": e.i0, "i1": e.i1, "duracion_h": (e.i1 - e.i0 + 1) / PASOS_POR_HORA,
-            "particion": particion[e.i1],
+            "particion": particion_de[e.unidad][e.i1],
         } for e in episodios]
     )
     sim.observaciones = _observaciones(base, cfg, semilla, episodios, indice, turnos, unidades)

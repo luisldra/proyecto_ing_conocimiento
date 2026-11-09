@@ -27,7 +27,7 @@ datos:
     hueco_sano_h: [48, 360]      # mínimo y media (exponencial) de operación sana entre episodios
     reparacion_h: [8, 72]        # unidad fuera de servicio tras cada falla
     severidad: [0.8, 1.15]       # multiplica el cambio de la firma; dispersión como AI4I (D-052)
-    prob_firma_omitida: 0.2      # variable de la firma que no se manifiesta; SKAB (D-052)
+    prob_firma_omitida: 0.4      # variable de la firma que no se manifiesta; SKAB (D-052)
     excursiones_por_semana: 0.5
     deriva_sensor_frac: 0.15     # de la media banda nominal, por cada 180 días entre calibraciones
     ruido_medicion_frac: 0.02    # desviación relativa a la media banda nominal

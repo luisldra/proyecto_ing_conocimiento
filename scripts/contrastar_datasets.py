@@ -69,7 +69,7 @@ def contrastar() -> pd.DataFrame:
             total += 1
             movidos += abs(anomalo[canal].mean() - sano[canal].mean()) >= sano[canal].std()
     filas.append({"medida": "canales que se mueven al menos 1 desviación en anomalía (%)", "referencia": "SKAB, 5 experimentos",
-                  "publico": round(100 * movidos / total, 1), "simulador": "80 (por diseño, sin contar la primera variable)"})
+                  "publico": round(100 * movidos / total, 1), "simulador": "60 (por diseño, sin contar la primera variable)"})
     return pd.DataFrame(filas)
 
 

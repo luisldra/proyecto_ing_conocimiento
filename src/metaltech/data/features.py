@@ -18,7 +18,8 @@ from metaltech.kb.base import BaseConocimiento, cargar_base, valor_nominal
 
 PARTICIONES = ("train", "val", "test", "test_unidad")
 RECORTE_Z = 10.0
-NOMBRES_AGREGADOS = ("media", "rms", "curtosis", "pendiente", "maximo", "minimo", "ultimo")
+SIN_CONFUSOR = ("ninguno", "sensor_faltante")  # un dato faltante no imita una falla
+NOMBRES_AGREGADOS =("media", "rms", "curtosis", "pendiente", "maximo", "minimo", "ultimo")
 
 
 @dataclass
@@ -33,12 +34,18 @@ class Ventanas:
     gris: np.ndarray | None = None  # degradación en curso a más de H de la falla (D-054)
     modo: np.ndarray | None = None  # índice del modo que se está degradando (0 si no hay)
     horas_a_falla: np.ndarray | None = None
+    crudo: np.ndarray | None = None  # último paso sin normalizar [N, V]: entrada del motor de reglas
+    confusor: np.ndarray | None = None  # la ventana termina dentro de un evento que imita una falla
+    extra: np.ndarray | None = None  # entradas adicionales por ventana [N, K] (conocimiento en M2)
 
     def __post_init__(self) -> None:
         n = len(self.y)
         self.gris = np.zeros(n, dtype=bool) if self.gris is None else self.gris
         self.modo = np.zeros(n, dtype=np.int64) if self.modo is None else self.modo
         self.horas_a_falla = np.full(n, np.nan) if self.horas_a_falla is None else self.horas_a_falla
+        self.crudo = self.X[:, -1, :].copy() if self.crudo is None else self.crudo
+        self.confusor = np.zeros(n, dtype=bool) if self.confusor is None else self.confusor
+        self.extra = np.zeros((n, 0), dtype=np.float32) if self.extra is None else self.extra
 
     def __len__(self) -> int:
         return len(self.y)
@@ -106,6 +113,8 @@ def _ventanas_unidad(
         (estado == "degradacion") & (y == 0),
         np.array([indices[m] for m in modo_activo], dtype=np.int64),
         df["horas_a_falla"].to_numpy(dtype=np.float32)[fines],
+        x[fines],
+        ~df["confusor"].astype(str).isin(SIN_CONFUSOR).to_numpy()[fines],
     )
 
 

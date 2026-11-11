@@ -34,6 +34,17 @@ def metricas(y: np.ndarray, proba: np.ndarray) -> dict[str, float]:
     }
 
 
+def falsas_alarmas(y: np.ndarray, proba: np.ndarray, confusor: np.ndarray) -> dict[str, float]:
+    """Falsa alarma en equipo sano, separando las ventanas que terminan dentro de un confusor."""
+    alarma = proba.argmax(axis=1) != 0
+    sin, con = (y == 0) & ~confusor, (y == 0) & confusor
+    return {
+        "falsa_alarma_sin_confusor": float(alarma[sin].mean()) if sin.any() else float("nan"),
+        "falsa_alarma_con_confusor": float(alarma[con].mean()) if con.any() else float("nan"),
+        "ventanas_confusor": int(con.sum()),
+    }
+
+
 def aviso_temprano(
     pred: np.ndarray, modo: np.ndarray, horas_a_falla: np.ndarray, unidad: np.ndarray, ts: np.ndarray
 ) -> dict[str, float]:

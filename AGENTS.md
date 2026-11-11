@@ -108,6 +108,7 @@ python -m metaltech.data.generator   # data/synthetic/ (--config configs/train.y
 python -m metaltech.data.calibracion # reports/tables/calibracion_*
 python scripts/contrastar_datasets.py # contraste con AI4I 2020 y SKAB
 python -m metaltech.models.train --config configs/train.yaml
+python -m metaltech.hybrid.comparar  # M0 · M1 · M2 · M3 (reports/tables/comparacion_*)
 uvicorn metaltech.api.main:app --reload
 streamlit run src/metaltech/dashboard/app.py
 ```

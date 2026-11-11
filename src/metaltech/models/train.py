@@ -25,12 +25,14 @@ from torch.nn import functional as F
 
 from metaltech.data.features import (
     DatosActivo,
+    Ventanas,
     balancear_entrenamiento,
     cargar_activo,
     variables_agregadas,
 )
 from metaltech.kb.base import RAIZ, cargar_base
 from metaltech.models.cnn1d import CNN1D
+from metaltech.models.con_conocimiento import ConConocimiento
 from metaltech.models.evaluate import aviso_temprano, matriz_confusion, metricas, metricas_por_clase
 from metaltech.models.lstm import LSTM
 from metaltech.models.mlp import MLP
@@ -39,7 +41,15 @@ ARQUITECTURAS = ("mlp", "cnn1d", "lstm")
 LOTE_INFERENCIA = 4096
 
 
-def crear_modelo(arquitectura: str, variables: int, pasos: int, clases: int, cfg: dict[str, Any]) -> nn.Module:
+def crear_modelo(
+    arquitectura: str, variables: int, pasos: int, clases: int, cfg: dict[str, Any], extra: int = 0
+) -> nn.Module:
+    """Red de la Fase 4; con ``extra`` > 0 se le agrega la rama de conocimiento (M2)."""
+    red = _crear_red(arquitectura, variables, pasos, clases, cfg)
+    return ConConocimiento(red, clases, extra) if extra else red
+
+
+def _crear_red(arquitectura: str, variables: int, pasos: int, clases: int, cfg: dict[str, Any]) -> nn.Module:
     c = cfg["modelos"][arquitectura]
     if arquitectura == "mlp":
         entradas = variables_agregadas(np.zeros((1, pasos, variables), dtype=np.float32)).shape[1]
@@ -55,6 +65,12 @@ def entradas_de(arquitectura: str, X: np.ndarray) -> torch.Tensor:
     return torch.from_numpy(variables_agregadas(X) if arquitectura == "mlp" else X)
 
 
+def entradas(arquitectura: str, v: Ventanas) -> tuple[torch.Tensor, ...]:
+    """Tensores de entrada del modelo: sensores y, si hay, conocimiento."""
+    base = (entradas_de(arquitectura, v.X),)
+    return base + (torch.from_numpy(v.extra),) if v.extra.shape[1] else base
+
+
 def perdida_focal(logits: torch.Tensor, y: torch.Tensor, pesos: torch.Tensor, gamma: float) -> torch.Tensor:
     ce = F.cross_entropy(logits, y, reduction="none")
     return (pesos[y] * (1 - torch.exp(-ce)) ** gamma * ce).mean()
@@ -68,9 +84,11 @@ def pesos_de_clase(y: np.ndarray, clases: int) -> torch.Tensor:
 
 
 @torch.no_grad()
-def predecir_logits(modelo: nn.Module, x: torch.Tensor) -> torch.Tensor:
+def predecir_logits(modelo: nn.Module, x: torch.Tensor | tuple[torch.Tensor, ...]) -> torch.Tensor:
     modelo.eval()
-    return torch.cat([modelo(x[i : i + LOTE_INFERENCIA]) for i in range(0, len(x), LOTE_INFERENCIA)])
+    x = x if isinstance(x, tuple) else (x,)
+    n = len(x[0])
+    return torch.cat([modelo(*(t[i : i + LOTE_INFERENCIA] for t in x)) for i in range(0, n, LOTE_INFERENCIA)])
 
 
 def ajustar_temperatura(logits: torch.Tensor, y: torch.Tensor) -> float:
@@ -108,9 +126,9 @@ def entrenar(datos: DatosActivo, arquitectura: str, semilla: int, cfg: dict[str,
     e = cfg["entrenamiento"]
     train = balancear_entrenamiento(datos.particiones["train"].sin_grises(), e["negativos_por_positivo"], rng)
     val = datos.particiones["val"].sin_grises()
-    x_train, y_train = entradas_de(arquitectura, train.X), torch.from_numpy(train.y)
-    x_val, y_val = entradas_de(arquitectura, val.X), torch.from_numpy(val.y)
-    modelo = crear_modelo(arquitectura, train.X.shape[2], train.X.shape[1], len(datos.clases), cfg)
+    x_train, y_train = entradas(arquitectura, train), torch.from_numpy(train.y)
+    x_val, y_val = entradas(arquitectura, val), torch.from_numpy(val.y)
+    modelo = crear_modelo(arquitectura, train.X.shape[2], train.X.shape[1], len(datos.clases), cfg, train.extra.shape[1])
     optimizador = torch.optim.Adam(modelo.parameters(), lr=e["lr"], weight_decay=e["weight_decay"])
     pesos = pesos_de_clase(train.y, len(datos.clases))
 
@@ -119,11 +137,11 @@ def entrenar(datos: DatosActivo, arquitectura: str, semilla: int, cfg: dict[str,
     for epoca in range(1, e["epocas"] + 1):
         epocas_usadas = epoca
         modelo.train()
-        orden = torch.randperm(len(x_train))
+        orden = torch.randperm(len(y_train))
         for i in range(0, len(orden), e["batch"]):
             lote = orden[i : i + e["batch"]]
             optimizador.zero_grad()
-            perdida = perdida_focal(modelo(x_train[lote]), y_train[lote], pesos, e["focal_gamma"])
+            perdida = perdida_focal(modelo(*(t[lote] for t in x_train)), y_train[lote], pesos, e["focal_gamma"])
             perdida.backward()
             optimizador.step()
         f1 = metricas(val.y, F.softmax(predecir_logits(modelo, x_val), dim=1).numpy())["f1_macro"]
@@ -144,7 +162,15 @@ def guardar_modelo(ruta: Path, datos: DatosActivo, arquitectura: str, semilla: i
         "estado": r.modelo.state_dict(), "arquitectura": arquitectura, "semilla": semilla,
         "activo": datos.activo, "variables": datos.variables, "clases": datos.clases,
         "media": datos.media, "desviacion": datos.desviacion, "temperatura": r.temperatura,
+        "extra": datos.particiones["train"].extra.shape[1],
     }, ruta)
+
+
+def cargar_modelo(ruta: Path, pasos: int, cfg: dict[str, Any]) -> tuple[nn.Module, dict[str, Any]]:
+    ck = torch.load(ruta, weights_only=False)
+    modelo = crear_modelo(ck["arquitectura"], len(ck["variables"]), pasos, len(ck["clases"]), cfg, ck.get("extra", 0))
+    modelo.load_state_dict(ck["estado"])
+    return modelo, ck
 
 
 def ejecutar(args: argparse.Namespace) -> pd.DataFrame:

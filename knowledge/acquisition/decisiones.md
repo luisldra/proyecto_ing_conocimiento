@@ -73,6 +73,7 @@
 | D-053 | Ventanas y entrenamiento de los modelos | media |
 | D-054 | Ventanas grises y métricas de aviso temprano | media |
 | D-055 | Confusores multivariable, más unidades y ajustes con datos públicos | media en estructura, baja en parámetros |
+| D-056 | Integración del conocimiento: M0, M2 y M3 | media |
 
 ---
 
@@ -761,6 +762,18 @@
   - **Herramienta:** severidad propia 0.72–0.95, con falla cerca de 215 min como en AI4I; el valor 240 de la firma se conserva como referencia del nivel crítico.
 - **Fuentes:** D-036, D-050, D-052; AI4I 2020 y SKAB. Confusores: inferencia física.
 - **Confianza:** media en la estructura; baja en los parámetros.
+
+## D-056 – Integración del conocimiento: M0, M2 y M3
+- **Decisión:**
+  - **Conocimiento por ventana:** el motor de reglas recibe el último paso sin normalizar, la línea base de puesta en marcha (mediana de los primeros 14 días de la unidad; solo sensores, también para la unidad reservada) y las expresiones de técnicos de las 6 h previas.
+  - **M0:** las certezas por clase, normalizadas; sin reglas disparadas, la clase es normal.
+  - **M2:** la arquitectura de M1 de cada activo con una rama que recibe certezas de falla y grados de síntoma, combinada antes de la salida. Se reentrena con la misma semilla y criterio que M1.
+  - **M3:** `alfa * p_M1 + (1 - alfa) * certeza_reglas`, con veto opcional (una alerta sin respaldo de reglas con certeza < 0.3 vuelve a normal).
+  - **Criterio fijado antes de ver test:** mayor F1 macro de validación sobre `alfa` en {0.3, …, 0.8} y veto sí/no; empate, menor falsa alarma.
+- **Resultado de la elección:** alfa entre 0.6 y 0.8 y **ningún activo eligió el veto**. Tres activos eligieron 0.8, el borde de la rejilla; no se amplió para no ajustar la rejilla después de ver resultados.
+- **Limitación:** una semilla; las diferencias de F1 entre M1, M2 y M3 son de centésimas y pueden caer dentro de la variación entre semillas (Fase 7).
+- **Fuentes:** D-043, D-053, D-054; configuración `fusion` en `configs/train.yaml`.
+- **Confianza:** media.
 
 ---
 

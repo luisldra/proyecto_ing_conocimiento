@@ -3,9 +3,9 @@
 > Protocolo y formato: [AGENTS.md](../../AGENTS.md) · Errores: [ERRORES.md](ERRORES.md) · Plan: [PLAN.md](../PLAN.md)
 
 ## Estado actual
-- **Fase en curso:** Fase 4 terminada y corregida (D-054, D-055). El equipo revisa antes de abrir la Fase 5.
-- **Última tarea:** ventanas grises, confusores multivariable, 32 unidades con una reservada por tipo, ajustes con datos públicos, turnos rotativos y reentrenamiento. F1 macro medio: test 0.919, unidad no vista 0.930.
-- **Siguiente tarea:** Fase 5 (fusión M0–M3), cuando el equipo lo indique.
+- **Fase en curso:** Fase 5 terminada (comparación M0–M3, una semilla).
+- **Última tarea:** conocimiento por ventana, M2, M3 y comparación (D-056). F1 macro medio en test: M0 0.606, M1 0.919, M2 0.914, M3 0.922. Falsa alarma con confusor: M3 reduce 30 % frente a M1 y 89 % frente a M0.
+- **Siguiente tarea:** Fase 6 – explicabilidad (SHAP / gradientes integrados) unida a la traza de reglas de `hybrid/fusion.py::diagnostico_hibrido`.
 - **Equipo:** Alejandro (conocimiento y QA), Luis David (datos y modelos), Junio (API y web demostrativa), David (documento APA, póster y landing).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Pendiente por confirmar:**
@@ -15,6 +15,30 @@
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-11] Fase 5 – Fusión del modelo con el conocimiento experto (agente: Datos/ML)
+- Hecho:
+  - `hybrid/conocimiento.py` (motor de reglas por ventana, línea base de puesta en marcha, expresiones de técnicos; caché en `data/synthetic/conocimiento_*.npz`), `hybrid/fusion.py` (M0, M3, elección en validación, diagnóstico híbrido explicable), `hybrid/comparar.py` y `models/con_conocimiento.py` (M2).
+  - Ventanas con último paso crudo, marca de confusor y entradas extra; `evaluate.falsas_alarmas` con y sin confusor, que deja en el repositorio el cálculo que antes era temporal.
+  - `tests/test_hibrido.py`; resultados en `reports/tables/comparacion_*` y `fusion_parametros.json`.
+- Resultados (media por activo, una semilla):
+
+  | | M0 | M1 | M2 | M3 |
+  |---|---|---|---|---|
+  | F1 test | 0.606 | 0.919 | 0.914 | 0.922 |
+  | F1 unidad no vista | 0.656 | 0.930 | 0.942 | 0.944 |
+  | Falsa alarma con confusor, test | 19.1 % | 2.9 % | 3.6 % | 2.0 % |
+  | Falsa alarma con confusor, unidad no vista | 17.3 % | 3.6 % | 2.7 % | 2.3 % |
+
+  - Reducción de falsa alarma con confusor de M3: 29.7 % frente a M1 y 89.5 % frente a M0 (test); 34.7 % y 86.6 % (unidad no vista).
+  - Elegido en validación: alfa 0.6–0.8, sin veto en ningún activo. Tres activos quedaron en el borde de la rejilla (0.8).
+  - M2 no mejora de forma consistente: baja en test, sube en la unidad no vista y empeora la falsa alarma en test. Da la mayor anticipación (181.6 h en test).
+  - M3 avisa algo más tarde que M1 (154.9 frente a 159.9 h de mediana en test).
+- Pendiente:
+  - Las diferencias de F1 entre M1, M2 y M3 son pequeñas; confirmar con 5 semillas e intervalos (Fase 7) antes de afirmar que M3 es mejor.
+  - Fase 6 (explicabilidad).
+- Errores: ninguno.
+- Decisiones: D-056.
 
 ## [2026-11-08] Fases 3 y 4 – Documento de avances (agente: Documentación)
 - Hecho: `docs/AVANCES_FASES_3_Y_4.md`, con el recorrido de las fases, resultados, límites y guía de todos los archivos. Conteos verificados contra el repositorio.

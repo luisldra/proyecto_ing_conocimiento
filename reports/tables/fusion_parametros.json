@@ -1,0 +1,488 @@
+{
+  "motor_electrico": {
+    "arquitectura": "mlp",
+    "alfa": 0.7,
+    "veto": false,
+    "fc_min": 0.3,
+    "epocas_m2": 18,
+    "rejilla_val": [
+      {
+        "alfa": 0.3,
+        "veto": false,
+        "f1_macro": 0.622879721365993,
+        "falsa_alarma": 0.0005452067242162653
+      },
+      {
+        "alfa": 0.3,
+        "veto": true,
+        "f1_macro": 0.622879721365993,
+        "falsa_alarma": 0.0005452067242162653
+      },
+      {
+        "alfa": 0.4,
+        "veto": false,
+        "f1_macro": 0.6259926841460897,
+        "falsa_alarma": 0.00045433893684688776
+      },
+      {
+        "alfa": 0.4,
+        "veto": true,
+        "f1_macro": 0.6234745337122828,
+        "falsa_alarma": 0.00045433893684688776
+      },
+      {
+        "alfa": 0.5,
+        "veto": false,
+        "f1_macro": 0.6261001085751189,
+        "falsa_alarma": 0.0003634711494775102
+      },
+      {
+        "alfa": 0.5,
+        "veto": true,
+        "f1_macro": 0.6239874530829987,
+        "falsa_alarma": 0.00027260336210813266
+      },
+      {
+        "alfa": 0.6,
+        "veto": false,
+        "f1_macro": 0.9228626773790919,
+        "falsa_alarma": 0.0017264879600181735
+      },
+      {
+        "alfa": 0.6,
+        "veto": true,
+        "f1_macro": 0.6236682093657359,
+        "falsa_alarma": 0.00027260336210813266
+      },
+      {
+        "alfa": 0.7,
+        "veto": false,
+        "f1_macro": 0.9339166728077198,
+        "falsa_alarma": 0.002271694684234439
+      },
+      {
+        "alfa": 0.7,
+        "veto": true,
+        "f1_macro": 0.6236682093657359,
+        "falsa_alarma": 0.00027260336210813266
+      },
+      {
+        "alfa": 0.8,
+        "veto": false,
+        "f1_macro": 0.9323812975173769,
+        "falsa_alarma": 0.002635165833711949
+      },
+      {
+        "alfa": 0.8,
+        "veto": true,
+        "f1_macro": 0.623346983231841,
+        "falsa_alarma": 0.00027260336210813266
+      }
+    ]
+  },
+  "bomba_centrifuga": {
+    "arquitectura": "cnn1d",
+    "alfa": 0.8,
+    "veto": false,
+    "fc_min": 0.3,
+    "epocas_m2": 23,
+    "rejilla_val": [
+      {
+        "alfa": 0.3,
+        "veto": false,
+        "f1_macro": 0.6245225630241632,
+        "falsa_alarma": 0.0002042692268409764
+      },
+      {
+        "alfa": 0.3,
+        "veto": true,
+        "f1_macro": 0.6245225630241632,
+        "falsa_alarma": 0.0002042692268409764
+      },
+      {
+        "alfa": 0.4,
+        "veto": false,
+        "f1_macro": 0.6245225630241632,
+        "falsa_alarma": 0.0002042692268409764
+      },
+      {
+        "alfa": 0.4,
+        "veto": true,
+        "f1_macro": 0.6245225630241632,
+        "falsa_alarma": 0.0002042692268409764
+      },
+      {
+        "alfa": 0.5,
+        "veto": false,
+        "f1_macro": 0.6304867695859395,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.5,
+        "veto": true,
+        "f1_macro": 0.6289272815970413,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.6,
+        "veto": false,
+        "f1_macro": 0.9677919978048626,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.6,
+        "veto": true,
+        "f1_macro": 0.6289272815970413,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.7,
+        "veto": false,
+        "f1_macro": 0.9705430089087056,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.7,
+        "veto": true,
+        "f1_macro": 0.6289272815970413,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.8,
+        "veto": false,
+        "f1_macro": 0.9706016380944053,
+        "falsa_alarma": 0.0001021346134204882
+      },
+      {
+        "alfa": 0.8,
+        "veto": true,
+        "f1_macro": 0.6289272815970413,
+        "falsa_alarma": 0.0
+      }
+    ]
+  },
+  "compresor_tornillo": {
+    "arquitectura": "mlp",
+    "alfa": 0.8,
+    "veto": false,
+    "fc_min": 0.3,
+    "epocas_m2": 52,
+    "rejilla_val": [
+      {
+        "alfa": 0.3,
+        "veto": false,
+        "f1_macro": 0.47414962861953747,
+        "falsa_alarma": 0.01899865891819401
+      },
+      {
+        "alfa": 0.3,
+        "veto": true,
+        "f1_macro": 0.47414962861953747,
+        "falsa_alarma": 0.01899865891819401
+      },
+      {
+        "alfa": 0.4,
+        "veto": false,
+        "f1_macro": 0.47526485475458674,
+        "falsa_alarma": 0.0006705409029950827
+      },
+      {
+        "alfa": 0.4,
+        "veto": true,
+        "f1_macro": 0.47526485475458674,
+        "falsa_alarma": 0.0006705409029950827
+      },
+      {
+        "alfa": 0.5,
+        "veto": false,
+        "f1_macro": 0.47714911432834245,
+        "falsa_alarma": 0.00022351363433169424
+      },
+      {
+        "alfa": 0.5,
+        "veto": true,
+        "f1_macro": 0.47714911432834245,
+        "falsa_alarma": 0.00022351363433169424
+      },
+      {
+        "alfa": 0.6,
+        "veto": false,
+        "f1_macro": 0.9493052160432705,
+        "falsa_alarma": 0.00022351363433169424
+      },
+      {
+        "alfa": 0.6,
+        "veto": true,
+        "f1_macro": 0.4750807221141126,
+        "falsa_alarma": 0.00022351363433169424
+      },
+      {
+        "alfa": 0.7,
+        "veto": false,
+        "f1_macro": 0.953201270103633,
+        "falsa_alarma": 0.0004470272686633885
+      },
+      {
+        "alfa": 0.7,
+        "veto": true,
+        "f1_macro": 0.4750807221141126,
+        "falsa_alarma": 0.00022351363433169424
+      },
+      {
+        "alfa": 0.8,
+        "veto": false,
+        "f1_macro": 0.9758010455189138,
+        "falsa_alarma": 0.0004470272686633885
+      },
+      {
+        "alfa": 0.8,
+        "veto": true,
+        "f1_macro": 0.4750807221141126,
+        "falsa_alarma": 0.00022351363433169424
+      }
+    ]
+  },
+  "prensa_hidraulica": {
+    "arquitectura": "cnn1d",
+    "alfa": 0.8,
+    "veto": false,
+    "fc_min": 0.3,
+    "epocas_m2": 15,
+    "rejilla_val": [
+      {
+        "alfa": 0.3,
+        "veto": false,
+        "f1_macro": 0.686236587073984,
+        "falsa_alarma": 0.0004769285799451532
+      },
+      {
+        "alfa": 0.3,
+        "veto": true,
+        "f1_macro": 0.686236587073984,
+        "falsa_alarma": 0.0004769285799451532
+      },
+      {
+        "alfa": 0.4,
+        "veto": false,
+        "f1_macro": 0.6909474342377036,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.4,
+        "veto": true,
+        "f1_macro": 0.6900656026797575,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.5,
+        "veto": false,
+        "f1_macro": 0.694112209358141,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.5,
+        "veto": true,
+        "f1_macro": 0.6914931467034066,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.6,
+        "veto": false,
+        "f1_macro": 0.9691845302559702,
+        "falsa_alarma": 0.0005961607249314415
+      },
+      {
+        "alfa": 0.6,
+        "veto": true,
+        "f1_macro": 0.6914931467034066,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.7,
+        "veto": false,
+        "f1_macro": 0.9709663763111345,
+        "falsa_alarma": 0.0008346250149040181
+      },
+      {
+        "alfa": 0.7,
+        "veto": true,
+        "f1_macro": 0.6914931467034066,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.8,
+        "veto": false,
+        "f1_macro": 0.9719256542517457,
+        "falsa_alarma": 0.0009538571598903064
+      },
+      {
+        "alfa": 0.8,
+        "veto": true,
+        "f1_macro": 0.6914931467034066,
+        "falsa_alarma": 0.0
+      }
+    ]
+  },
+  "banda_transportadora": {
+    "arquitectura": "cnn1d",
+    "alfa": 0.7,
+    "veto": false,
+    "fc_min": 0.3,
+    "epocas_m2": 16,
+    "rejilla_val": [
+      {
+        "alfa": 0.3,
+        "veto": false,
+        "f1_macro": 0.6737393620559073,
+        "falsa_alarma": 0.00044407790395229336
+      },
+      {
+        "alfa": 0.3,
+        "veto": true,
+        "f1_macro": 0.6737393620559073,
+        "falsa_alarma": 0.00044407790395229336
+      },
+      {
+        "alfa": 0.4,
+        "veto": false,
+        "f1_macro": 0.6773880942465925,
+        "falsa_alarma": 6.343970056461333e-05
+      },
+      {
+        "alfa": 0.4,
+        "veto": true,
+        "f1_macro": 0.6773880942465925,
+        "falsa_alarma": 6.343970056461333e-05
+      },
+      {
+        "alfa": 0.5,
+        "veto": false,
+        "f1_macro": 0.7029878897729807,
+        "falsa_alarma": 6.343970056461333e-05
+      },
+      {
+        "alfa": 0.5,
+        "veto": true,
+        "f1_macro": 0.6775866055367802,
+        "falsa_alarma": 6.343970056461333e-05
+      },
+      {
+        "alfa": 0.6,
+        "veto": false,
+        "f1_macro": 0.9584029444332975,
+        "falsa_alarma": 0.0005075176045169067
+      },
+      {
+        "alfa": 0.6,
+        "veto": true,
+        "f1_macro": 0.6775866055367802,
+        "falsa_alarma": 6.343970056461333e-05
+      },
+      {
+        "alfa": 0.7,
+        "veto": false,
+        "f1_macro": 0.960815978885681,
+        "falsa_alarma": 0.0009515955084692001
+      },
+      {
+        "alfa": 0.7,
+        "veto": true,
+        "f1_macro": 0.6775866055367802,
+        "falsa_alarma": 6.343970056461333e-05
+      },
+      {
+        "alfa": 0.8,
+        "veto": false,
+        "f1_macro": 0.95878350186989,
+        "falsa_alarma": 0.0010784749095984268
+      },
+      {
+        "alfa": 0.8,
+        "veto": true,
+        "f1_macro": 0.6775866055367802,
+        "falsa_alarma": 6.343970056461333e-05
+      }
+    ]
+  },
+  "centro_cnc": {
+    "arquitectura": "lstm",
+    "alfa": 0.6,
+    "veto": false,
+    "fc_min": 0.3,
+    "epocas_m2": 37,
+    "rejilla_val": [
+      {
+        "alfa": 0.3,
+        "veto": false,
+        "f1_macro": 0.5321746857271877,
+        "falsa_alarma": 0.00017208742040956807
+      },
+      {
+        "alfa": 0.3,
+        "veto": true,
+        "f1_macro": 0.5299716688611923,
+        "falsa_alarma": 0.00017208742040956807
+      },
+      {
+        "alfa": 0.4,
+        "veto": false,
+        "f1_macro": 0.5912929302370404,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.4,
+        "veto": true,
+        "f1_macro": 0.546452063388354,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.5,
+        "veto": false,
+        "f1_macro": 0.593176648762792,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.5,
+        "veto": true,
+        "f1_macro": 0.5467737264295301,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.6,
+        "veto": false,
+        "f1_macro": 0.8594060165363634,
+        "falsa_alarma": 0.0013766993632765446
+      },
+      {
+        "alfa": 0.6,
+        "veto": true,
+        "f1_macro": 0.5467737264295301,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.7,
+        "veto": false,
+        "f1_macro": 0.8578756539577936,
+        "falsa_alarma": 0.0017208742040956805
+      },
+      {
+        "alfa": 0.7,
+        "veto": true,
+        "f1_macro": 0.5467737264295301,
+        "falsa_alarma": 0.0
+      },
+      {
+        "alfa": 0.8,
+        "veto": false,
+        "f1_macro": 0.8482762357887513,
+        "falsa_alarma": 0.0022371364653243847
+      },
+      {
+        "alfa": 0.8,
+        "veto": true,
+        "f1_macro": 0.5467737264295301,
+        "falsa_alarma": 0.0
+      }
+    ]
+  }
+}

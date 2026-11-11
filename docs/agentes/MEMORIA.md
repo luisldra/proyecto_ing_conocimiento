@@ -3,9 +3,9 @@
 > Protocolo y formato: [AGENTS.md](../../AGENTS.md) · Errores: [ERRORES.md](ERRORES.md) · Plan: [PLAN.md](../PLAN.md)
 
 ## Estado actual
-- **Fase en curso:** Fase 5 terminada (comparación M0–M3, una semilla).
-- **Última tarea:** conocimiento por ventana, M2, M3 y comparación (D-056). F1 macro medio en test: M0 0.606, M1 0.919, M2 0.914, M3 0.922. Falsa alarma con confusor: M3 reduce 30 % frente a M1 y 89 % frente a M0.
-- **Siguiente tarea:** Fase 6 – explicabilidad (SHAP / gradientes integrados) unida a la traza de reglas de `hybrid/fusion.py::diagnostico_hibrido`.
+- **Fase en curso:** Fase 6 terminada (explicabilidad).
+- **Última tarea:** gradientes integrados sobre M1, explicación de alertas en texto y métricas de explicabilidad (D-057). El top-3 del modelo cae en la firma real de la falla en 74.6 % de los casos (azar: 33.0 %).
+- **Siguiente tarea:** Fase 7 – 5 semillas e intervalos de confianza, equidad por turno y técnico, latencia e impacto.
 - **Equipo:** Alejandro (conocimiento y QA), Luis David (datos y modelos), Junio (API y web demostrativa), David (documento APA, póster y landing).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Pendiente por confirmar:**
@@ -15,6 +15,17 @@
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-11] Fase 6 – Explicabilidad (agente: Datos/ML)
+- Hecho: `xai/explain.py` (gradientes integrados, fidelidad, concordancia, estabilidad y `explicar_alerta`), `tests/test_xai.py`, `reports/tables/xai_metricas.csv` y `xai_ejemplos.json` (40 alertas explicadas de ejemplo, una por modo y activo).
+- Resultados (media de 6 activos, hasta 300 alertas correctas de test por activo):
+  - Fidelidad: anular el top-3 baja la probabilidad 0.983; al azar, 0.300. El top-3 supera al azar en 99.7 % de las alertas.
+  - Top-3 en la firma real de la falla: 74.6 % (azar 33.0 %). Top-3 en las variables de las reglas disparadas: 67.5 %. Solo el 52.1 % de las alertas correctas tiene una regla que las respalde.
+  - Estabilidad: 1.000, 0.999 y 0.996 con ruido de 0.05, 0.25 y 0.5 desviaciones.
+  - La banda es la de menor concordancia con las reglas (37.4 %).
+- Pendiente: evaluación humana con escala Likert; verificar la referencia de Sundararajan et al. (2017).
+- Errores: ERR-024 (resuelto).
+- Decisiones: D-057.
 
 ## [2026-11-11] Fase 5 – Fusión del modelo con el conocimiento experto (agente: Datos/ML)
 - Hecho:

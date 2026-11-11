@@ -74,6 +74,7 @@
 | D-054 | Ventanas grises y métricas de aviso temprano | media |
 | D-055 | Confusores multivariable, más unidades y ajustes con datos públicos | media en estructura, baja en parámetros |
 | D-056 | Integración del conocimiento: M0, M2 y M3 | media |
+| D-057 | Explicabilidad: gradientes integrados, traza de reglas y métricas | media |
 
 ---
 
@@ -775,6 +776,19 @@
 - **Fuentes:** D-043, D-053, D-054; configuración `fusion` en `configs/train.yaml`.
 - **Confianza:** media.
 
+## D-057 – Explicabilidad: gradientes integrados, traza de reglas y métricas
+- **Decisión:**
+  - **Atribución:** gradientes integrados (Captum, 32 pasos) sobre M1, con línea base cero en variables normalizadas, es decir, la media de entrenamiento. Se usa en las tres arquitecturas; en el MLP se suman las 7 estadísticas de cada sensor. Se prefirió a SHAP por costo con redes recurrentes y porque da atribuciones exactas respecto a una línea base explícita.
+  - **Explicación de una alerta:** el diagnóstico híbrido de M3 (reglas con valores reales, causas, acciones, expresión del técnico) más los 3 sensores con más peso y un texto en español. Si ninguna regla la respalda, el texto lo dice.
+  - **Métricas** sobre hasta 300 alertas correctas de test por activo:
+    - fidelidad: caída de la probabilidad al anular el top-3 frente a 3 sensores al azar;
+    - concordancia con la firma del simulador (verdad de terreno) y con las variables de las reglas disparadas, frente al azar;
+    - estabilidad: similitud coseno con ruido de 0.05, 0.25 y 0.5 desviaciones. Se reporta la curva, porque con el nivel inicial el resultado era siempre 1.
+- **Pendiente:** la evaluación humana (Likert de comprensibilidad, utilidad y confianza) prevista en el plan, que requiere personas.
+- **Límites:** anular sensores lleva la entrada fuera de lo visto en entrenamiento, lo que puede exagerar la fidelidad; la estabilidad ante ruido aleatorio no garantiza robustez ante perturbaciones dirigidas.
+- **Fuentes:** Sundararajan et al. (2017), *Axiomatic attribution for deep networks*; D-056.
+- **Confianza:** media.
+
 ---
 
 ## Resumen de conflictos registrados
@@ -898,6 +912,7 @@
 - Siemens. (s. f.). *Siemens 880 user's manual* [Manual de motor, tabla de temperaturas de rodamientos]. https://manualzilla.com/doc/6980939/siemens-880-user-s-manual?page=10
 - Smith, W. A., & Randall, R. B. (2015). Rolling element bearing diagnostics using the Case Western Reserve University data: A benchmark study. *Mechanical Systems and Signal Processing, 64–65*, 100–131. https://doi.org/10.1016/j.ymssp.2015.04.021
 - TECO-Westinghouse. (2008). *RTD alarm & trip settings* [Tabla técnica]. https://www.tecowestinghouse.com/Stock_Motor_PDF/RTD_Alarm_Trip_Settings.pdf
+- Sundararajan, M., Taly, A., & Yan, Q. (2017). Axiomatic attribution for deep networks. En *Proceedings of the 34th International Conference on Machine Learning* (Vol. 70, pp. 3319–3328). PMLR. https://proceedings.mlr.press/v70/sundararajan17a.html [consultada de memoria; verificar]
 - Teti, R., Jemielniak, K., O'Donnell, G., & Dornfeld, D. (2010). Advanced monitoring of machining operations. *CIRP Annals, 59*(2), 717–739. https://doi.org/10.1016/j.cirp.2010.05.010
 - U.S. Department of Energy. (2003). *Improving compressed air system performance: A sourcebook for industry*. Office of Energy Efficiency and Renewable Energy; Compressed Air Challenge. [datos verificados en Open Library; contenido visto vía Compressed Air Challenge, 2026]
 - UCI Machine Learning Repository. (2020). *AI4I 2020 predictive maintenance dataset* [Conjunto de datos]. https://doi.org/10.24432/C5HS5C

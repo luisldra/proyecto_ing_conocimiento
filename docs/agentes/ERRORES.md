@@ -12,7 +12,7 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 | código (bugs, lógica) | ERR-009, ERR-011 |
 | datos (generador, fugas, desbalance) | ERR-020, ERR-023 |
 | conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010, ERR-014, ERR-015, ERR-016, ERR-017 |
-| agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019, ERR-021, ERR-022 |
+| agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019, ERR-021, ERR-022, ERR-024 |
 
 ## Lecciones aprendidas
 - Las normas ISO, IEC, NEMA, HI e IEEE son de pago: hay que citar la fuente secundaria que da el valor y marcar la confianza (ERR-001).
@@ -46,6 +46,16 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-024 – Métrica de estabilidad sin capacidad de discriminar
+- Fecha: 2026-11-11
+- Fase/archivo: Fase 6, `src/metaltech/xai/explain.py`, `tests/test_xai.py`
+- Origen: agente
+- Síntoma: la estabilidad dio 1.000 en los 6 activos; además, una prueba nueva falló porque el modelo de juguete, lineal en una sola variable, da la misma explicación con cualquier ruido.
+- Causa raíz: el nivel de ruido (0.05 desviaciones) se fijó sin comprobar que la métrica pudiera bajar, y la prueba usó un modelo en el que la estabilidad es 1 por construcción.
+- Solución: se reporta la curva con 0.05, 0.25 y 0.5 desviaciones (sin elegir un nivel tras ver resultados) y la prueba usa un modelo no lineal.
+- Prevención: antes de reportar una métrica, comprobar que puede tomar valores distintos en un caso controlado.
+- Estado: resuelto
 
 ### ERR-023 – La métrica de falsa alarma mezcla avisos tempranos con alarmas reales
 - Fecha: 2026-11-08

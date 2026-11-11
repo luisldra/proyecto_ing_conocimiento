@@ -1,0 +1,85 @@
+{
+  "supuestos": {
+    "reparacion_planificada": 1.0,
+    "ratio_no_planificada": [
+      3,
+      5,
+      9
+    ],
+    "falsa_alarma": 0.1
+  },
+  "medias": {
+    "M0": {
+      "fallas": 405.0,
+      "detectadas_pct": 68.148,
+      "anticipacion_mediana_h": 39.0,
+      "eventos_falsa_alarma_por_unidad_anio": 9.572,
+      "costo_unidad_anio_r3": 20.728,
+      "costo_unidad_anio_r5": 28.421,
+      "costo_unidad_anio_r9": 43.808
+    },
+    "M1": {
+      "fallas": 405.0,
+      "detectadas_pct": 99.16,
+      "anticipacion_mediana_h": 74.917,
+      "eventos_falsa_alarma_por_unidad_anio": 8.797,
+      "costo_unidad_anio_r3": 13.159,
+      "costo_unidad_anio_r5": 13.362,
+      "costo_unidad_anio_r9": 13.768
+    },
+    "M2": {
+      "fallas": 405.0,
+      "detectadas_pct": 98.568,
+      "anticipacion_mediana_h": 75.1,
+      "eventos_falsa_alarma_por_unidad_anio": 5.153,
+      "costo_unidad_anio_r3": 12.938,
+      "costo_unidad_anio_r5": 13.284,
+      "costo_unidad_anio_r9": 13.976
+    },
+    "M3": {
+      "fallas": 405.0,
+      "detectadas_pct": 98.765,
+      "anticipacion_mediana_h": 70.817,
+      "eventos_falsa_alarma_por_unidad_anio": 4.729,
+      "costo_unidad_anio_r3": 12.848,
+      "costo_unidad_anio_r5": 13.146,
+      "costo_unidad_anio_r9": 13.743
+    }
+  },
+  "ahorro_vs_M0_r3_pct": {
+    "M0": 0.0,
+    "M1": 36.52,
+    "M2": 37.58,
+    "M3": 38.02
+  },
+  "ahorro_vs_M1_r3_pct": {
+    "M0": -57.52,
+    "M1": 0.0,
+    "M2": 1.68,
+    "M3": 2.36
+  },
+  "ahorro_vs_M0_r5_pct": {
+    "M0": 0.0,
+    "M1": 52.99,
+    "M2": 53.26,
+    "M3": 53.75
+  },
+  "ahorro_vs_M1_r5_pct": {
+    "M0": -112.7,
+    "M1": 0.0,
+    "M2": 0.58,
+    "M3": 1.62
+  },
+  "ahorro_vs_M0_r9_pct": {
+    "M0": 0.0,
+    "M1": 68.57,
+    "M2": 68.1,
+    "M3": 68.63
+  },
+  "ahorro_vs_M1_r9_pct": {
+    "M0": -218.19,
+    "M1": 0.0,
+    "M2": -1.51,
+    "M3": 0.18
+  }
+}

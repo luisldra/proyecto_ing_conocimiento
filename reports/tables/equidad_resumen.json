@@ -1,0 +1,137 @@
+{
+  "ventanas_por_observacion": {
+    "correcta": 473,
+    "incorrecta": 2234,
+    "ninguna": 133120
+  },
+  "brechas": [
+    {
+      "grupo": "activo",
+      "sistema": "M0",
+      "acierto_falla_brecha": 0.2183,
+      "acierto_falla_peor": "centro_cnc",
+      "falsa_alarma_brecha": 0.0622,
+      "falsa_alarma_peor": "compresor_tornillo"
+    },
+    {
+      "grupo": "activo",
+      "sistema": "M1",
+      "acierto_falla_brecha": 0.0557,
+      "acierto_falla_peor": "compresor_tornillo",
+      "falsa_alarma_brecha": 0.0112,
+      "falsa_alarma_peor": "compresor_tornillo"
+    },
+    {
+      "grupo": "activo",
+      "sistema": "M2",
+      "acierto_falla_brecha": 0.05,
+      "acierto_falla_peor": "compresor_tornillo",
+      "falsa_alarma_brecha": 0.009,
+      "falsa_alarma_peor": "compresor_tornillo"
+    },
+    {
+      "grupo": "activo",
+      "sistema": "M3",
+      "acierto_falla_brecha": 0.0571,
+      "acierto_falla_peor": "compresor_tornillo",
+      "falsa_alarma_brecha": 0.011,
+      "falsa_alarma_peor": "compresor_tornillo"
+    },
+    {
+      "grupo": "maquina",
+      "sistema": "M0",
+      "acierto_falla_brecha": 0.0745,
+      "acierto_falla_peor": "vista",
+      "falsa_alarma_brecha": 0.002,
+      "falsa_alarma_peor": "vista"
+    },
+    {
+      "grupo": "maquina",
+      "sistema": "M1",
+      "acierto_falla_brecha": 0.005,
+      "acierto_falla_peor": "vista",
+      "falsa_alarma_brecha": 0.0008,
+      "falsa_alarma_peor": "no_vista"
+    },
+    {
+      "grupo": "maquina",
+      "sistema": "M2",
+      "acierto_falla_brecha": 0.0055,
+      "acierto_falla_peor": "vista",
+      "falsa_alarma_brecha": 0.0001,
+      "falsa_alarma_peor": "vista"
+    },
+    {
+      "grupo": "maquina",
+      "sistema": "M3",
+      "acierto_falla_brecha": 0.004,
+      "acierto_falla_peor": "vista",
+      "falsa_alarma_brecha": 0.0005,
+      "falsa_alarma_peor": "vista"
+    },
+    {
+      "grupo": "observacion",
+      "sistema": "M0",
+      "acierto_falla_brecha": 0.2299,
+      "acierto_falla_peor": "ninguna",
+      "falsa_alarma_brecha": 0.0103,
+      "falsa_alarma_peor": "incorrecta"
+    },
+    {
+      "grupo": "observacion",
+      "sistema": "M1",
+      "acierto_falla_brecha": 0.0169,
+      "acierto_falla_peor": "ninguna",
+      "falsa_alarma_brecha": 0.0003,
+      "falsa_alarma_peor": "incorrecta"
+    },
+    {
+      "grupo": "observacion",
+      "sistema": "M2",
+      "acierto_falla_brecha": 0.0255,
+      "acierto_falla_peor": "ninguna",
+      "falsa_alarma_brecha": 0.0003,
+      "falsa_alarma_peor": "incorrecta"
+    },
+    {
+      "grupo": "observacion",
+      "sistema": "M3",
+      "acierto_falla_brecha": 0.0145,
+      "acierto_falla_peor": "ninguna",
+      "falsa_alarma_brecha": 0.0004,
+      "falsa_alarma_peor": "incorrecta"
+    },
+    {
+      "grupo": "turno",
+      "sistema": "M0",
+      "acierto_falla_brecha": 0.0103,
+      "acierto_falla_peor": "noche",
+      "falsa_alarma_brecha": 0.0008,
+      "falsa_alarma_peor": "noche"
+    },
+    {
+      "grupo": "turno",
+      "sistema": "M1",
+      "acierto_falla_brecha": 0.0214,
+      "acierto_falla_peor": "tarde",
+      "falsa_alarma_brecha": 0.0021,
+      "falsa_alarma_peor": "noche"
+    },
+    {
+      "grupo": "turno",
+      "sistema": "M2",
+      "acierto_falla_brecha": 0.0211,
+      "acierto_falla_peor": "tarde",
+      "falsa_alarma_brecha": 0.0016,
+      "falsa_alarma_peor": "noche"
+    },
+    {
+      "grupo": "turno",
+      "sistema": "M3",
+      "acierto_falla_brecha": 0.022,
+      "acierto_falla_peor": "tarde",
+      "falsa_alarma_brecha": 0.0021,
+      "falsa_alarma_peor": "noche"
+    }
+  ]
+}

@@ -3,9 +3,9 @@
 > Protocolo y formato: [AGENTS.md](../../AGENTS.md) · Errores: [ERRORES.md](ERRORES.md) · Plan: [PLAN.md](../PLAN.md)
 
 ## Estado actual
-- **Fase en curso:** Fase 6 terminada (explicabilidad).
-- **Última tarea:** gradientes integrados sobre M1, explicación de alertas en texto y métricas de explicabilidad (D-057). El top-3 del modelo cae en la firma real de la falla en 74.6 % de los casos (azar: 33.0 %).
-- **Siguiente tarea:** Fase 7 – 5 semillas e intervalos de confianza, equidad por turno y técnico, latencia e impacto. Para la Fase 8, mostrar las acciones de la FMEA como texto legible (hallazgo del panel, D-059).
+- **Fase en curso:** Fase 7 terminada (evaluación con 5 semillas).
+- **Última tarea:** intervalos, equidad, impacto y latencia (D-060). M3 supera a M1 en F1 por poco pero con intervalo que excluye 0, y reduce la falsa alarma con confusor en los 30 pares activo-semilla.
+- **Siguiente tarea:** Fase 8 – API (FastAPI) y web demostrativa. Mostrar las acciones de la FMEA como texto legible (hallazgo del panel, D-059) y medir la latencia de la API.
 - **Equipo:** Alejandro (conocimiento y QA), Luis David (datos y modelos), Junio (API y web demostrativa), David (documento APA, póster y landing).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Pendiente por confirmar:**
@@ -15,6 +15,33 @@
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-11] Fase 7 – Evaluación final con 5 semillas (agente: Datos/ML + QA)
+- Hecho:
+  - `hybrid/comparar.py --todas` (5 semillas; reutiliza los modelos existentes, de modo que la semilla 42 reproduce exactamente la Fase 5).
+  - `metrics/{intervalos,equidad,impacto,latencia}.py` y `tests/test_metricas_fase7.py`.
+  - Tablas `reports/tables/{comparacion_semillas,intervalos_*,equidad_*,impacto_*,latencia*}`.
+  - Predicciones por ventana en `data/synthetic/predicciones_*.parquet` (no versionadas).
+- Resultados (media de 6 activos; intervalo del 95 % entre 5 semillas):
+  - **F1 macro, test:** M0 0.606 · M1 0.914 [0.909, 0.919] · M2 0.913 [0.909, 0.917] · M3 0.917 [0.911, 0.923].
+  - **F1 macro, unidad no vista:** M1 0.932 · M2 0.934 · M3 0.940.
+  - **M3 − M1 en F1:** +0.0030 [0.0009, 0.0051] en test (73 % de pares a favor) y +0.0078 [0.0033, 0.0124] en unidad no vista. Es una mejora pequeña pero consistente.
+  - **M3 − M1 en falsa alarma con confusor:** −0.83 puntos [−1.05, −0.61] en test y −1.12 [−1.37, −0.88] en unidad no vista; M3 es menor en 30 de 30 y 27 de 30 pares.
+  - **M2 frente a M1:** sin diferencia significativa en F1.
+  - **Equidad:**
+    - Ningún sistema amplifica el sesgo del turno de noche; las brechas por turno son de unos 2 puntos en los cuatro sistemas.
+    - Con observaciones incorrectas, M0 duplica su falsa alarma (2.08 % frente a 1.05 %), mientras que M3 apenas cambia (0.32 % frente a 0.28 %): la fusión amortigua el error humano.
+    - La mayor brecha está entre activos: el compresor es el peor en los cuatro sistemas.
+  - **Impacto (por unidad y año):**
+    - Fallas detectadas: M0 68.1 %, M1 99.2 %, M3 98.8 %.
+    - Eventos de falsa alarma: M0 9.6, M1 8.8, M3 4.7 (−46 % frente a M1).
+    - Ahorro de M3 frente a M0: 38 % / 54 % / 69 % con r = 3 / 5 / 9. Frente a M1: 2.4 % / 1.6 % / 0.2 %.
+  - **Latencia p95 (peor activo):** M0 0.39 ms, M1 1.78 ms, M3 2.12 ms y M3 con explicación completa 52.06 ms. Todo cumple el objetivo de 200 ms.
+- Pendiente:
+  - Latencia de la API en la Fase 8.
+  - Informe de sesgos y limitaciones en la Fase 9.
+- Errores: ninguno.
+- Decisiones: D-060.
 
 ## [2026-11-11] Fase 6 – Evaluación de explicaciones con panel de agentes (agente: Documentación)
 - Hecho:

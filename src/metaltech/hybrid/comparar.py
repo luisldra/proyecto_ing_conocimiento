@@ -43,7 +43,20 @@ def _fila(activo: str, sistema: str, particion: str, v, proba: np.ndarray) -> di
             **metricas(v.y[~g], proba[~g]), **falsas_alarmas(v.y[~g], proba[~g], v.confusor[~g]), **aviso}
 
 
-def comparar_activo(activo: str, cfg: dict[str, Any], datos_dir: Path, arquitectura: str, semilla: int, base) -> tuple:
+def _modelo(ruta: Path, datos, arquitectura: str, semilla: int, cfg: dict[str, Any]):
+    """Carga el modelo si ya existe (resultados idénticos al reejecutar); si no, lo entrena."""
+    if ruta.exists():
+        modelo, ck = cargar_modelo(ruta, cfg["datos"]["ventana_pasos"], cfg)
+        return modelo, ck["temperatura"], None
+    r = entrenar(datos, arquitectura, semilla, cfg)
+    guardar_modelo(ruta, datos, arquitectura, semilla, r)
+    return r.modelo, r.temperatura, r.epocas
+
+
+def comparar_activo(
+    activo: str, cfg: dict[str, Any], datos_dir: Path, arquitectura: str, semillas: list[int], base
+) -> tuple[list, list, dict, pd.DataFrame]:
+    """M0–M3 para cada semilla; los datos y el conocimiento se cargan una sola vez."""
     d = cfg["datos"]
     datos = cargar_activo(activo, datos_dir, d["ventana_pasos"], d["paso_ventana"], base)
     conocimiento = {
@@ -51,39 +64,48 @@ def comparar_activo(activo: str, cfg: dict[str, Any], datos_dir: Path, arquitect
         for p in PARTICIONES
     }
     modelos = RAIZ / cfg["rutas"]["checkpoints"]
-    m1, ck = cargar_modelo(modelos / f"{activo}_{arquitectura}_s{semilla}.pt", d["ventana_pasos"], cfg)
-    probas: dict[str, dict[str, np.ndarray]] = {s: {} for s in SISTEMAS}
-    for p in EVALUADAS:
-        v = datos.particiones[p]
-        probas["M0"][p] = proba_m0(conocimiento[p].fc)
-        probas["M1"][p] = probabilidades(predecir_logits(m1, entradas(arquitectura, v)), ck["temperatura"])
-
-    for p in PARTICIONES:  # M2: misma arquitectura, con conocimiento como entrada
-        datos.particiones[p].extra = conocimiento[p].vector
-    r2 = entrenar(datos, arquitectura, semilla, cfg)
-    guardar_modelo(modelos / f"{activo}_{arquitectura}_m2_s{semilla}.pt", datos, arquitectura, semilla, r2)
-    for p in EVALUADAS:
-        probas["M2"][p] = probabilidades(predecir_logits(r2.modelo, entradas(arquitectura, datos.particiones[p])), r2.temperatura)
-
-    val = datos.particiones["val"]
-    limpias = ~val.gris
-    f = cfg["fusion"]
-    parametros, rejilla = elegir_fusion(
-        probas["M1"]["val"][limpias], conocimiento["val"].fc[limpias], val.y[limpias], f["alfa_grid"], f["veto_reglas_fc_min"]
-    )
-    for p in EVALUADAS:
-        probas["M3"][p] = fusionar(probas["M1"][p], conocimiento[p].fc, parametros)
-
-    filas, por_clase = [], []
-    for s in SISTEMAS:
+    filas, por_clase, infos, predicciones = [], [], {}, []
+    for semilla in semillas:
+        for p in PARTICIONES:  # M1 se entrena solo con sensores
+            datos.particiones[p].extra = np.zeros((len(datos.particiones[p]), 0), dtype=np.float32)
+        m1, t1, _ = _modelo(modelos / f"{activo}_{arquitectura}_s{semilla}.pt", datos, arquitectura, semilla, cfg)
+        probas: dict[str, dict[str, np.ndarray]] = {s: {} for s in SISTEMAS}
         for p in EVALUADAS:
+            probas["M0"][p] = proba_m0(conocimiento[p].fc)
+            probas["M1"][p] = probabilidades(predecir_logits(m1, entradas(arquitectura, datos.particiones[p])), t1)
+
+        for p in PARTICIONES:  # M2: misma arquitectura, con conocimiento como entrada
+            datos.particiones[p].extra = conocimiento[p].vector
+        m2, t2, epocas_m2 = _modelo(modelos / f"{activo}_{arquitectura}_m2_s{semilla}.pt", datos, arquitectura, semilla, cfg)
+        for p in EVALUADAS:
+            probas["M2"][p] = probabilidades(predecir_logits(m2, entradas(arquitectura, datos.particiones[p])), t2)
+
+        val = datos.particiones["val"]
+        limpias = ~val.gris
+        f = cfg["fusion"]
+        parametros, rejilla = elegir_fusion(
+            probas["M1"]["val"][limpias], conocimiento["val"].fc[limpias], val.y[limpias], f["alfa_grid"], f["veto_reglas_fc_min"]
+        )
+        for p in EVALUADAS:
+            probas["M3"][p] = fusionar(probas["M1"][p], conocimiento[p].fc, parametros)
+
+        for s in SISTEMAS:
+            for p in EVALUADAS:
+                v = datos.particiones[p]
+                filas.append({"semilla": semilla, **_fila(activo, s, p, v, probas[s][p])})
+                por_clase += [{"semilla": semilla, "activo": activo, "sistema": s, "particion": p, **c}
+                              for c in metricas_por_clase(v.y[~v.gris], probas[s][p][~v.gris], datos.clases)]
+        for p in ("test", "test_unidad"):
             v = datos.particiones[p]
-            filas.append(_fila(activo, s, p, v, probas[s][p]))
-            por_clase += [{"activo": activo, "sistema": s, "particion": p, **c}
-                          for c in metricas_por_clase(v.y[~v.gris], probas[s][p][~v.gris], datos.clases)]
-    info = {"arquitectura": arquitectura, "alfa": parametros.alfa, "veto": parametros.veto,
-            "fc_min": parametros.fc_min, "epocas_m2": r2.epocas, "rejilla_val": rejilla}
-    return filas, por_clase, info
+            predicciones.append(pd.DataFrame({
+                "semilla": semilla, "activo": activo, "particion": p, "unidad": v.unidad, "ts": v.ts, "y": v.y,
+                "gris": v.gris, "modo": v.modo, "horas_a_falla": v.horas_a_falla, "confusor": v.confusor,
+                **{f"pred_{s}": probas[s][p].argmax(1) for s in SISTEMAS},
+            }))
+        infos[semilla] = {"arquitectura": arquitectura, "alfa": parametros.alfa, "veto": parametros.veto,
+                          "fc_min": parametros.fc_min, "epocas_m2": epocas_m2, "rejilla_val": rejilla}
+        print(f"[{activo}] semilla={semilla} alfa={parametros.alfa} veto={parametros.veto}", flush=True)
+    return filas, por_clase, infos, pd.concat(predicciones, ignore_index=True)
 
 
 def resumir(tabla: pd.DataFrame) -> dict[str, Any]:
@@ -106,23 +128,35 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--config", default=RAIZ / "configs" / "train.yaml", type=Path)
     ap.add_argument("--datos", default=RAIZ / "data" / "synthetic", type=Path)
     ap.add_argument("--activos", nargs="*", default=None)
+    ap.add_argument("--semillas", nargs="*", type=int, default=None,
+                    help="por defecto solo la semilla principal; 'todas' las de configs/train.yaml con --todas")
+    ap.add_argument("--todas", action="store_true", help="usa todas las semillas de configs/train.yaml (Fase 7)")
     args = ap.parse_args(argv)
     with open(args.config, encoding="utf-8") as f:
         cfg = yaml.safe_load(f)
+    principal = cfg["semilla_principal"]
+    semillas = cfg["semillas"] if args.todas else (args.semillas or [principal])
     base = cargar_base()
     tablas = RAIZ / cfg["rutas"]["tablas"]
     seleccion = json.loads((tablas / "modelos_seleccion.json").read_text(encoding="utf-8"))
     filas, por_clase, parametros = [], [], {}
     for activo in args.activos or list(base.activos):
-        a, b, info = comparar_activo(activo, cfg, args.datos, seleccion[activo], cfg["semilla_principal"], base)
+        a, b, infos, pred = comparar_activo(activo, cfg, args.datos, seleccion[activo], semillas, base)
         filas += a
         por_clase += b
-        parametros[activo] = info
-        print(f"[{activo}] alfa={info['alfa']} veto={info['veto']}", flush=True)
-    tabla = pd.DataFrame(filas)
+        parametros[activo] = infos
+        pred.to_parquet(args.datos / f"predicciones_{activo}.parquet", index=False)
+    todas = pd.DataFrame(filas)
+    todas.to_csv(tablas / "comparacion_semillas.csv", index=False)
+    (tablas / "fusion_parametros_semillas.json").write_text(json.dumps(parametros, indent=2), encoding="utf-8")
+    if principal not in semillas:
+        return 0
+    tabla = todas[todas["semilla"] == principal].drop(columns="semilla")
     tabla.to_csv(tablas / "comparacion_sistemas.csv", index=False)
-    pd.DataFrame(por_clase).to_csv(tablas / "comparacion_por_clase.csv", index=False)
-    (tablas / "fusion_parametros.json").write_text(json.dumps(parametros, indent=2), encoding="utf-8")
+    pd.DataFrame(por_clase).query("semilla == @principal").drop(columns="semilla").to_csv(
+        tablas / "comparacion_por_clase.csv", index=False)
+    (tablas / "fusion_parametros.json").write_text(
+        json.dumps({a: info[principal] for a, info in parametros.items()}, indent=2), encoding="utf-8")
     resumen = resumir(tabla)
     (tablas / "comparacion_resumen.json").write_text(json.dumps(resumen, indent=2, ensure_ascii=False), encoding="utf-8")
     columnas = ["activo", "sistema", "particion", "f1_macro", "falsa_alarma_sin_confusor", "falsa_alarma_con_confusor", "aviso_episodios_pct"]

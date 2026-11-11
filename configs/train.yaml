@@ -69,6 +69,11 @@ evaluacion:
   latencia_solicitudes: 1000
   latencia_objetivo_p95_ms: 200
 
+impacto:                         # supuestos en unidades relativas a una reparación planificada (D-060)
+  reparacion_planificada: 1.0
+  ratio_no_planificada: [3, 5, 9] # sensibilidad: una falla no detectada cuesta r veces más
+  falsa_alarma: 0.1              # inspección innecesaria
+
 rutas:
   datos: data/synthetic
   checkpoints: checkpoints

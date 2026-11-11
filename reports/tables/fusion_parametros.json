@@ -4,7 +4,7 @@
     "alfa": 0.7,
     "veto": false,
     "fc_min": 0.3,
-    "epocas_m2": 18,
+    "epocas_m2": null,
     "rejilla_val": [
       {
         "alfa": 0.3,
@@ -85,7 +85,7 @@
     "alfa": 0.8,
     "veto": false,
     "fc_min": 0.3,
-    "epocas_m2": 23,
+    "epocas_m2": null,
     "rejilla_val": [
       {
         "alfa": 0.3,
@@ -166,7 +166,7 @@
     "alfa": 0.8,
     "veto": false,
     "fc_min": 0.3,
-    "epocas_m2": 52,
+    "epocas_m2": null,
     "rejilla_val": [
       {
         "alfa": 0.3,
@@ -247,7 +247,7 @@
     "alfa": 0.8,
     "veto": false,
     "fc_min": 0.3,
-    "epocas_m2": 15,
+    "epocas_m2": null,
     "rejilla_val": [
       {
         "alfa": 0.3,
@@ -328,7 +328,7 @@
     "alfa": 0.7,
     "veto": false,
     "fc_min": 0.3,
-    "epocas_m2": 16,
+    "epocas_m2": null,
     "rejilla_val": [
       {
         "alfa": 0.3,
@@ -409,7 +409,7 @@
     "alfa": 0.6,
     "veto": false,
     "fc_min": 0.3,
-    "epocas_m2": 37,
+    "epocas_m2": null,
     "rejilla_val": [
       {
         "alfa": 0.3,

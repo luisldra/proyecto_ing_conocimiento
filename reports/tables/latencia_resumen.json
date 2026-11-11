@@ -1,0 +1,15 @@
+{
+  "objetivo_p95_ms": 200,
+  "por_sistema_p95_max_ms": {
+    "M0": 0.39,
+    "M1": 1.78,
+    "M3": 2.12,
+    "M3+XAI": 52.06
+  },
+  "cumple_objetivo": {
+    "M0": true,
+    "M1": true,
+    "M3": true,
+    "M3+XAI": true
+  }
+}

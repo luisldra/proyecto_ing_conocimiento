@@ -77,6 +77,7 @@
 | D-057 | Explicabilidad: gradientes integrados, traza de reglas y métricas | media |
 | D-058 | Diseño de la evaluación humana de explicaciones | media |
 | D-059 | Evaluación de explicaciones con un panel de agentes (sin personas disponibles) | baja |
+| D-060 | Evaluación final: semillas, intervalos, equidad, impacto y latencia | media |
 
 ---
 
@@ -839,6 +840,24 @@
   - El control de longitud solo descarta ese sesgo, no otros.
   - Los resultados son una **validación exploratoria** y no sustituyen una evaluación con técnicos.
 - **Confianza:** baja.
+
+## D-060 – Evaluación final: semillas, intervalos, equidad, impacto y latencia
+- **Decisión:**
+  - **Semillas:** 42 a 46 para M1, M2 y M3 (M0 es determinista). La semilla cambia la inicialización, el submuestreo de normales y el orden de entrenamiento, pero **no los datos**.
+  - **Intervalos:** para cada semilla se promedian los 6 activos; el intervalo del 95 % es t de Student entre las 5 semillas. Las diferencias entre sistemas son pareadas por activo y semilla, con Wilcoxon como apoyo.
+  - **Equidad:** acierto en ventanas con falla y falsa alarma en sanas, por turno, observación del técnico (ninguna, correcta o incorrecta), máquina vista o no vista y activo. Brecha = mejor menos peor grupo. Grupos con menos de 30 ventanas no se calculan.
+  - **Impacto:** una falla cuenta como detectada si alguna de sus ventanas predijo el modo correcto. Las alarmas en equipo sano se agrupan en eventos (separados por más de 1 h). Costo relativo a una reparación planificada:
+    - falla no detectada = 3, 5 o 9 veces una reparación planificada;
+    - falsa alarma = 0.1.
+
+    Todos son **supuestos**, y por eso se reportan con sensibilidad.
+  - **Latencia:** 1000 solicitudes de una ventana por activo (100 con gradientes integrados), un hilo de CPU, sin red ni servidor.
+- **Límites:**
+  - Los pares activo-semilla comparten datos, así que los valores p de Wilcoxon son optimistas; el intervalo entre semillas es la medida principal.
+  - La variación entre semillas no incluye la de los datos.
+  - Los costos no salen de una planta real.
+- **Fuentes:** D-054, D-056; configuración `evaluacion` e `impacto` en `configs/train.yaml`.
+- **Confianza:** media.
 
 ---
 

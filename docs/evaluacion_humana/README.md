@@ -2,7 +2,14 @@
 
 **Objetivo:** medir si el conocimiento experto (reglas, observación del técnico y acción sugerida) hace que la explicación de una alerta sea más comprensible, útil y confiable que la del modelo solo. Es la evaluación humana prevista en la Fase 6 del plan (D-057, D-058).
 
-**Estado:** el instrumento está listo y **todavía no se ha aplicado**. No hay resultados hasta que el equipo recoja respuestas reales.
+**Estado:** el equipo no tiene evaluadores humanos disponibles, así que el instrumento se aplicó con un **panel de 5 agentes** con perfiles de la planta (D-059), con controles de sesgo por longitud. Esos resultados están en `reports/tables/evaluacion_agentes*` y **no son una evaluación humana**. Si más adelante hay personas disponibles, el procedimiento de abajo sigue vigente.
+
+### Panel de agentes
+
+- `formulario_agentes.md`, `clave_agentes.csv`: las 12 alertas más 2 de control (A13, A14), con dos versiones del mismo contenido, una de ellas con una frase de relleno.
+- `respuestas_agentes.csv`: las 140 respuestas del panel (E01 a E05).
+- `python -m metaltech.xai.evaluacion_humana preparar --agentes` y `analizar --agentes` lo regeneran y analizan.
+- Resultado: la explicación híbrida gana en las tres dimensiones (utilidad 3.75 frente a 1.67) y es la preferida en 60 de 60 pares; el control de longitud no muestra sesgo. Límites en D-059.
 
 ## Diseño
 

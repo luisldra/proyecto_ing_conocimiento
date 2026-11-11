@@ -5,7 +5,7 @@
 ## Estado actual
 - **Fase en curso:** Fase 6 terminada (explicabilidad).
 - **Última tarea:** gradientes integrados sobre M1, explicación de alertas en texto y métricas de explicabilidad (D-057). El top-3 del modelo cae en la firma real de la falla en 74.6 % de los casos (azar: 33.0 %).
-- **Siguiente tarea:** Fase 7 – 5 semillas e intervalos de confianza, equidad por turno y técnico, latencia e impacto. En paralelo, el equipo aplica la evaluación humana (`docs/evaluacion_humana/`).
+- **Siguiente tarea:** Fase 7 – 5 semillas e intervalos de confianza, equidad por turno y técnico, latencia e impacto. Para la Fase 8, mostrar las acciones de la FMEA como texto legible (hallazgo del panel, D-059).
 - **Equipo:** Alejandro (conocimiento y QA), Luis David (datos y modelos), Junio (API y web demostrativa), David (documento APA, póster y landing).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Pendiente por confirmar:**
@@ -15,6 +15,18 @@
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-11] Fase 6 – Evaluación de explicaciones con panel de agentes (agente: Documentación)
+- Hecho:
+  - Sin personas disponibles, el instrumento de D-058 se aplicó con 5 agentes con perfiles de la planta, a ciegas, más 2 alertas de control de sesgo por longitud (D-059).
+  - `preparar --agentes` y `analizar --agentes`; respuestas en `docs/evaluacion_humana/respuestas_agentes.csv` y resultados en `reports/tables/evaluacion_agentes*`.
+- Resultados: la explicación híbrida supera a la del modelo solo en comprensibilidad (3.85 frente a 2.70), utilidad (3.75 frente a 1.67) y confianza (3.30 frente a 2.12), con p < 1e-8, y es la preferida en 60 de 60 pares. El control de longitud da diferencia 0, así que no hay sesgo por texto más largo.
+- Pendiente:
+  - Acciones de la FMEA en texto legible.
+  - Revisar atribuciones poco físicas, como el desgaste de herramienta en un fallo de rodamiento.
+  - Declarar en el documento que es un panel de agentes, no humano.
+- Errores: ERR-025 (resuelto).
+- Decisiones: D-059.
 
 ## [2026-11-11] Fase 6 – Pendientes: referencia y evaluación humana (agente: Documentación)
 - Hecho:

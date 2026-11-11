@@ -1,0 +1,56 @@
+{
+  "evaluadores": 5,
+  "alertas": 14,
+  "pruebas": {
+    "comprensibilidad": {
+      "pares": 60,
+      "diferencia_media": 1.15,
+      "p_wilcoxon": 2.6964519379663555e-09
+    },
+    "utilidad": {
+      "pares": 60,
+      "diferencia_media": 2.0833333333333335,
+      "p_wilcoxon": 6.472826094887816e-12
+    },
+    "confianza": {
+      "pares": 60,
+      "diferencia_media": 1.1833333333333333,
+      "p_wilcoxon": 1.4189638069675046e-08
+    }
+  },
+  "preferencia": {
+    "hibrida": 60,
+    "control_simple": 2
+  },
+  "por_respaldo_reglas": {
+    "comprensibilidad": {
+      "false": 3.1,
+      "true": 4.6
+    },
+    "utilidad": {
+      "false": 2.867,
+      "true": 4.633
+    },
+    "confianza": {
+      "false": 2.367,
+      "true": 4.233
+    }
+  },
+  "control_longitud": {
+    "comprensibilidad": {
+      "pares": 10,
+      "diferencia_media": 0.0,
+      "p_wilcoxon": NaN
+    },
+    "utilidad": {
+      "pares": 10,
+      "diferencia_media": 0.0,
+      "p_wilcoxon": NaN
+    },
+    "confianza": {
+      "pares": 10,
+      "diferencia_media": 0.0,
+      "p_wilcoxon": NaN
+    }
+  }
+}

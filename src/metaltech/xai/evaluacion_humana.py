@@ -30,6 +30,10 @@ DIMENSIONES = {
     "confianza": "Confiaría en esta alerta para programar una intervención.",
 }
 ALERTAS_POR_ACTIVO = 2
+CONTROLES = 2
+# Frase sin información para medir el sesgo por longitud en el panel de agentes (D-059).
+RELLENO = ("Esta alerta fue generada automáticamente por el sistema de monitoreo de condición de la planta "
+           "a partir del análisis de las señales registradas durante la ventana de observación más reciente.")
 COLUMNAS = ["evaluador", "perfil", "alerta", "explicacion", *DIMENSIONES, "preferida", "comentario"]
 
 
@@ -61,10 +65,20 @@ def seleccionar(ejemplos: dict[str, list[dict[str, Any]]], semilla: int = 42) ->
     return elegidas
 
 
-def preparar(carpeta: Path = CARPETA, semilla: int = 42) -> pd.DataFrame:
-    """Escribe el formulario (orden contrabalanceado), la clave oculta y la plantilla de respuestas."""
+def preparar(carpeta: Path = CARPETA, semilla: int = 42, controles: bool = False) -> pd.DataFrame:
+    """Escribe el formulario (orden contrabalanceado), la clave oculta y la plantilla de respuestas.
+
+    Con ``controles`` se agregan alertas de control (mismo contenido, una con relleno) y los
+    archivos llevan el sufijo ``_agentes``.
+    """
     ejemplos = json.loads(EJEMPLOS.read_text(encoding="utf-8"))
-    elegidas = seleccionar(ejemplos, semilla)
+    elegidas = [{**e, "tipo": "estudio"} for e in seleccionar(ejemplos, semilla)]
+    if controles:
+        usadas = {(e["activo"], e["modo"]) for e in elegidas}
+        resto = [{"activo": a, **e} for a, lista in sorted(ejemplos.items()) for e in lista if (a, e["modo"]) not in usadas]
+        rng = np.random.default_rng(semilla + 1)
+        elegidas += [{**resto[i], "tipo": "control"} for i in rng.choice(len(resto), CONTROLES, replace=False)]
+    sufijo = "_agentes" if controles else ""
     carpeta.mkdir(parents=True, exist_ok=True)
     lineas = [
         "# Formulario de evaluación de explicaciones",
@@ -79,8 +93,12 @@ def preparar(carpeta: Path = CARPETA, semilla: int = 42) -> pd.DataFrame:
     ]
     clave = []
     for i, e in enumerate(elegidas, 1):
-        textos = {"modelo": texto_solo_modelo(e), "hibrida": e["texto"]}
-        orden = ["hibrida", "modelo"] if i % 2 else ["modelo", "hibrida"]
+        if e["tipo"] == "control":
+            textos = {"control_relleno": f"{texto_solo_modelo(e)} {RELLENO}", "control_simple": texto_solo_modelo(e)}
+        else:
+            textos = {"modelo": texto_solo_modelo(e), "hibrida": e["texto"]}
+        variantes = list(textos)
+        orden = variantes[::-1] if i % 2 else variantes
         lineas += [f"## Alerta A{i:02d} – {e['activo'].replace('_', ' ')}", "",
                    f"Unidad {e['unidad']}, {e['ts']}.", ""]
         for k, variante in enumerate(orden, 1):
@@ -90,12 +108,12 @@ def preparar(carpeta: Path = CARPETA, semilla: int = 42) -> pd.DataFrame:
         lineas += ["| | Comprensibilidad | Utilidad | Confianza |", "|---|---|---|---|",
                    "| Explicación 1 | | | |", "| Explicación 2 | | | |", "",
                    "Prefiero: ☐ Explicación 1 ☐ Explicación 2 ☐ Me da igual", "", "---", ""]
-    (carpeta / "formulario.md").write_text("\n".join(lineas), encoding="utf-8")
+    (carpeta / f"formulario{sufijo}.md").write_text("\n".join(lineas), encoding="utf-8")
     clave_df = pd.DataFrame(clave)
-    clave_df.to_csv(carpeta / "clave.csv", index=False)
+    clave_df.to_csv(carpeta / f"clave{sufijo}.csv", index=False)
     plantilla = clave_df[["alerta", "explicacion"]].assign(evaluador="E01", perfil="", comprensibilidad="",
                                                          utilidad="", confianza="", preferida="", comentario="")
-    plantilla[COLUMNAS].to_csv(carpeta / "respuestas_plantilla.csv", index=False)
+    plantilla[COLUMNAS].to_csv(carpeta / f"respuestas_plantilla{sufijo}.csv", index=False)
     return clave_df
 
 
@@ -128,12 +146,7 @@ def analizar(respuestas: pd.DataFrame, clave: pd.DataFrame) -> tuple[pd.DataFram
                           "mediana": g[d].median(), "acuerdo_pct": 100 * (g[d] >= 4).mean()})
     tabla = pd.DataFrame(filas)
     pares = r.pivot_table(index=["evaluador", "alerta"], columns="variante", values=list(DIMENSIONES))
-    pruebas = {}
-    for d in DIMENSIONES:
-        dif = (pares[(d, "hibrida")] - pares[(d, "modelo")]).dropna()
-        no_nulas = dif[dif != 0]
-        p = float(wilcoxon(no_nulas).pvalue) if len(no_nulas) >= 6 else float("nan")
-        pruebas[d] = {"pares": int(len(dif)), "diferencia_media": float(dif.mean()), "p_wilcoxon": p}
+    pruebas = {d: _comparar(pares, d, "hibrida", "modelo") for d in DIMENSIONES}
     pref = r[r["preferida"].notna() & (r["preferida"].astype(str) != "")].drop_duplicates(["evaluador", "alerta"])
     elegida = pref.apply(lambda f: _variante_preferida(f, clave), axis=1)
     resumen = {
@@ -141,30 +154,44 @@ def analizar(respuestas: pd.DataFrame, clave: pd.DataFrame) -> tuple[pd.DataFram
         "pruebas": pruebas, "preferencia": elegida.value_counts().to_dict(),
         "por_respaldo_reglas": r[r["variante"] == "hibrida"].groupby("respaldo_reglas")[list(DIMENSIONES)].mean().round(3).to_dict(),
     }
+    if "control_relleno" in set(r["variante"]):  # sesgo por longitud: relleno sin información vs. simple
+        resumen["control_longitud"] = {d: _comparar(pares, d, "control_relleno", "control_simple") for d in DIMENSIONES}
     return tabla, resumen
 
 
+def _comparar(pares: pd.DataFrame, d: str, a: str, b: str) -> dict[str, float]:
+    dif = (pares[(d, a)] - pares[(d, b)]).dropna()
+    no_nulas = dif[dif != 0]
+    p = float(wilcoxon(no_nulas).pvalue) if len(no_nulas) >= 6 else float("nan")
+    return {"pares": int(len(dif)), "diferencia_media": float(dif.mean()) if len(dif) else float("nan"), "p_wilcoxon": p}
+
+
 def _variante_preferida(fila: pd.Series, clave: pd.DataFrame) -> str:
-    valor = str(fila["preferida"]).strip()
-    if valor not in ("1", "2"):
+    try:  # pandas puede leer la columna como texto o como número (1.0)
+        valor = int(float(str(fila["preferida"]).strip()))
+    except ValueError:
         return "indiferente"
-    k = clave[(clave["alerta"] == fila["alerta"]) & (clave["explicacion"] == int(valor))]
+    if valor not in (1, 2):
+        return "indiferente"
+    k = clave[(clave["alerta"] == fila["alerta"]) & (clave["explicacion"] == valor)]
     return str(k["variante"].iloc[0])
 
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Evaluación humana de explicaciones (Likert).")
     ap.add_argument("accion", choices=["preparar", "analizar"])
-    ap.add_argument("--respuestas", default=CARPETA / "respuestas.csv", type=Path)
+    ap.add_argument("--agentes", action="store_true", help="panel de agentes: formulario con controles (D-059)")
     args = ap.parse_args(argv)
+    sufijo = "_agentes" if args.agentes else ""
     if args.accion == "preparar":
-        clave = preparar()
+        clave = preparar(controles=args.agentes)
         print(f"{clave['alerta'].nunique()} alertas preparadas en {CARPETA}")
         return 0
-    tabla, resumen = analizar(pd.read_csv(args.respuestas), pd.read_csv(CARPETA / "clave.csv"))
+    tabla, resumen = analizar(pd.read_csv(CARPETA / f"respuestas{sufijo}.csv"), pd.read_csv(CARPETA / f"clave{sufijo}.csv"))
     salida = RAIZ / "reports" / "tables"
-    tabla.to_csv(salida / "evaluacion_humana.csv", index=False)
-    (salida / "evaluacion_humana_resumen.json").write_text(json.dumps(resumen, indent=2, ensure_ascii=False), encoding="utf-8")
+    nombre = "evaluacion_agentes" if args.agentes else "evaluacion_humana"
+    tabla.to_csv(salida / f"{nombre}.csv", index=False)
+    (salida / f"{nombre}_resumen.json").write_text(json.dumps(resumen, indent=2, ensure_ascii=False), encoding="utf-8")
     print(tabla.round(2).to_string(index=False))
     print(json.dumps(resumen, indent=2, ensure_ascii=False))
     return 0

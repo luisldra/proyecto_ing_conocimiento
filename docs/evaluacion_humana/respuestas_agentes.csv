@@ -1,0 +1,141 @@
+evaluador,perfil,alerta,explicacion,comprensibilidad,utilidad,confianza,preferida,comentario
+E01,agente: técnico electromecánico,A01,1,4,5,4,1,La regla y la acción sirven aunque el cascabeleo no cuadra con patinaje
+E01,agente: técnico electromecánico,A01,2,3,2,2,,Solo dice qué sensor pesó y no qué revisar
+E01,agente: técnico electromecánico,A02,1,3,1,2,2,Sin acción ni respaldo no sé qué hacer
+E01,agente: técnico electromecánico,A02,2,3,2,2,,Avisa que es solo del modelo y pide parar pero la acción viene como código
+E01,agente: técnico electromecánico,A03,1,5,5,5,1,Valores contra umbral y orden de revisión claro como en campo
+E01,agente: técnico electromecánico,A03,2,3,2,2,,Falta qué revisar y con qué valores
+E01,agente: técnico electromecánico,A04,1,3,1,2,2,No dice qué hacer con el rodamiento
+E01,agente: técnico electromecánico,A04,2,3,3,3,,El análisis de envolvente es lo que haría pero la acción viene como código
+E01,agente: técnico electromecánico,A05,1,5,5,4,1,Regla y ajustes de corte concretos
+E01,agente: técnico electromecánico,A05,2,2,1,2,,El CV de carga del husillo no me dice nada solo
+E01,agente: técnico electromecánico,A06,1,2,1,1,2,Que el desgaste de herramienta pese en una falla de rodamiento no me convence
+E01,agente: técnico electromecánico,A06,2,3,2,2,,Puntaje bajo y sin regla pero al menos es honesta
+E01,agente: técnico electromecánico,A07,1,5,5,5,1,Diferencial del separador alto y acción directa
+E01,agente: técnico electromecánico,A07,2,3,2,2,,Sin valores ni acción
+E01,agente: técnico electromecánico,A08,1,3,1,2,2,Falta qué hacer
+E01,agente: técnico electromecánico,A08,2,3,3,3,,Sugiere envolvente y avisa que no hay regla
+E01,agente: técnico electromecánico,A09,1,5,5,4,1,Útil aunque la temperatura está justo en el límite
+E01,agente: técnico electromecánico,A09,2,3,2,2,,No dice qué medir
+E01,agente: técnico electromecánico,A10,1,3,1,2,2,Sin acción ni valores
+E01,agente: técnico electromecánico,A10,2,4,4,3,,La alineación láser es concreta pero falta confirmar con regla
+E01,agente: técnico electromecánico,A11,1,5,5,5,1,Tres variables sobre umbral y revisión de válvula clara
+E01,agente: técnico electromecánico,A11,2,3,2,2,,No explica qué revisar
+E01,agente: técnico electromecánico,A12,1,3,2,2,2,El nivel del tanque se entiende pero falta dónde buscar la fuga
+E01,agente: técnico electromecánico,A12,2,3,3,2,,Bloqueo es seguridad pero no dice dónde buscar la fuga
+E01,agente: técnico electromecánico,A13,1,3,2,2,,Sin acción ni valores de temperatura
+E01,agente: técnico electromecánico,A13,2,3,2,2,,El texto extra no aporta nada
+E01,agente: técnico electromecánico,A14,1,3,2,2,,El texto extra es relleno
+E01,agente: técnico electromecánico,A14,2,3,2,2,,Igual de útil que la otra sin acción
+E02,agente: jefe de mantenimiento,A01,1,4,5,4,1,Regla y accion claras pero el cascabeleo no cuadra con patinaje
+E02,agente: jefe de mantenimiento,A01,2,3,2,2,,Solo porcentajes sin accion ni umbral
+E02,agente: jefe de mantenimiento,A02,1,3,2,2,2,Probabilidad 100% sin respaldo ni accion no justifica parar
+E02,agente: jefe de mantenimiento,A02,2,3,3,3,,Honesta al decir que no hay regla pero la accion es solo un codigo
+E02,agente: jefe de mantenimiento,A03,1,5,5,5,1,Valores contra umbrales y orden de revision muy util
+E02,agente: jefe de mantenimiento,A03,2,3,2,2,,No dice que revisar
+E02,agente: jefe de mantenimiento,A04,1,3,2,2,2,Falta accion
+E02,agente: jefe de mantenimiento,A04,2,4,3,3,,Analisis de envolvente es un paso razonable antes de parar
+E02,agente: jefe de mantenimiento,A05,1,5,5,4,1,Accion concreta de proceso sin parada
+E02,agente: jefe de mantenimiento,A05,2,3,2,2,,Solo pesos de variables
+E02,agente: jefe de mantenimiento,A06,1,3,2,2,2,Desgaste de herramienta pesa y genera duda
+E02,agente: jefe de mantenimiento,A06,2,4,3,2,,Puntaje bajo y sin regla pero sugiere verificar primero
+E02,agente: jefe de mantenimiento,A07,1,5,5,5,1,Diferencial medido y reemplazo claro
+E02,agente: jefe de mantenimiento,A07,2,3,2,3,,Sin accion
+E02,agente: jefe de mantenimiento,A08,1,3,2,2,2,Sin accion
+E02,agente: jefe de mantenimiento,A08,2,4,3,3,,Paso de verificacion util aunque sin regla
+E02,agente: jefe de mantenimiento,A09,1,5,5,4,1,Accion clara aunque la temperatura esta justo en el umbral
+E02,agente: jefe de mantenimiento,A09,2,3,2,2,,No dice que medir
+E02,agente: jefe de mantenimiento,A10,1,3,2,2,2,Sin accion
+E02,agente: jefe de mantenimiento,A10,2,4,4,3,,Alineacion laser es accion entendible
+E02,agente: jefe de mantenimiento,A11,1,5,5,5,1,Tres variables sobre umbral y accion detallada
+E02,agente: jefe de mantenimiento,A11,2,3,2,2,,Sin accion
+E02,agente: jefe de mantenimiento,A12,1,3,2,2,2,Sin accion
+E02,agente: jefe de mantenimiento,A12,2,4,3,3,,Bloqueo es correcto pero falta indicar buscar la fuga
+E02,agente: jefe de mantenimiento,A13,1,3,2,2,1,Mas concisa
+E02,agente: jefe de mantenimiento,A13,2,3,2,2,,El texto extra no aporta nada
+E02,agente: jefe de mantenimiento,A14,1,3,2,2,2,El texto extra no aporta nada
+E02,agente: jefe de mantenimiento,A14,2,3,2,2,,Mas concisa pero sin accion
+E03,agente: instrumentista,A01,1,5,4,4,1,Veo el valor medido 5.88 contra el umbral 2 y puedo verificar el sensor
+E03,agente: instrumentista,A01,2,3,2,2,,Solo pesos del modelo sin valores medidos ni umbral
+E03,agente: instrumentista,A02,1,3,2,2,2,Sin valores medidos no sé si es un pico del encoder de velocidad
+E03,agente: instrumentista,A02,2,3,3,2,,Aclara que ninguna regla la respalda pero la acción aparece como código
+E03,agente: instrumentista,A03,1,5,5,5,1,Tres mediciones sobre umbral coherentes entre sí dan mucha confianza
+E03,agente: instrumentista,A03,2,3,2,2,,No muestra valores de vibración para revisar el sensor
+E03,agente: instrumentista,A04,1,3,2,2,2,Faltan valores de HF y curtosis para descartar un sensor mal montado
+E03,agente: instrumentista,A04,2,3,3,2,,Útil saber que es solo del modelo y pedir análisis de envolvente
+E03,agente: instrumentista,A05,1,5,4,4,1,Valores contra umbral claros aunque la carga del husillo no es un sensor de vibración directo
+E03,agente: instrumentista,A05,2,3,2,2,,Sin valores no puedo validar la medición
+E03,agente: instrumentista,A06,1,2,2,1,2,Raro que el desgaste de herramienta pese en un fallo de rodamiento
+E03,agente: instrumentista,A06,2,3,3,2,,Puntaje bajo y sin regla lo dice con honestidad
+E03,agente: instrumentista,A07,1,5,5,4,1,El diferencial de 1.11 bar duplica el umbral y es fácil de verificar
+E03,agente: instrumentista,A07,2,3,2,2,,Solo pesos sin la medición de presión diferencial
+E03,agente: instrumentista,A08,1,3,2,2,2,Faltan valores medidos para confirmar
+E03,agente: instrumentista,A08,2,3,3,2,,Indica que no hay regla y sugiere un análisis concreto
+E03,agente: instrumentista,A09,1,5,4,3,1,La temperatura 130.05 apenas pasa el umbral 130 y cabe dentro del error del RTD
+E03,agente: instrumentista,A09,2,3,2,2,,No muestra la temperatura real del devanado
+E03,agente: instrumentista,A10,1,3,2,2,2,Sin valores de vibración axial y radial no puedo juzgar
+E03,agente: instrumentista,A10,2,3,3,2,,Dice que es solo del modelo y sugiere alineación láser
+E03,agente: instrumentista,A11,1,5,4,3,1,El código ISO está justo en el umbral 14 pero presión y tiempo de ciclo lo confirman
+E03,agente: instrumentista,A11,2,3,2,2,,Sin mediciones ni umbrales
+E03,agente: instrumentista,A12,1,3,2,2,2,No dice cuánto bajó el nivel ni si es un sensor de nivel derivando
+E03,agente: instrumentista,A12,2,3,3,2,,Aclara que es solo del modelo y pide aislar energía
+E03,agente: instrumentista,A13,1,3,2,2,,Sin valor de temperatura del rodamiento ni umbral
+E03,agente: instrumentista,A13,2,3,2,2,,El texto extra no aporta ninguna medición
+E03,agente: instrumentista,A14,1,3,2,2,,El párrafo agregado no dice nada útil
+E03,agente: instrumentista,A14,2,3,2,2,,Igual de útil sin valores ni umbrales
+E04,agente: ingeniero de confiabilidad,A01,1,4,4,4,1,Regla y valor medido coherentes con patinaje pero el cascabeleo no encaja con el modo
+E04,agente: ingeniero de confiabilidad,A01,2,3,2,2,,Probabilidad del 100% sin respaldo físico ni acción
+E04,agente: ingeniero de confiabilidad,A02,1,2,1,1,2,Solo pesos y un 100% que no me dice nada del empalme
+E04,agente: ingeniero de confiabilidad,A02,2,3,2,2,,Admite que no hay regla y eso es honesto pero la acción es un código crudo
+E04,agente: ingeniero de confiabilidad,A03,1,5,5,5,1,Tres umbrales coherentes con holgura y acción bien ordenada
+E04,agente: ingeniero de confiabilidad,A03,2,3,2,2,,Variables correctas pero sin valores ni acción
+E04,agente: ingeniero de confiabilidad,A04,1,3,2,2,2,Curtosis y alta frecuencia encajan pero el 100% no tiene sustento
+E04,agente: ingeniero de confiabilidad,A04,2,4,3,3,,Envolvente es el paso correcto aunque falta valor medido
+E04,agente: ingeniero de confiabilidad,A05,1,5,5,4,1,Variación de carga y alta frecuencia coherentes con chatter y acción práctica
+E04,agente: ingeniero de confiabilidad,A05,2,3,2,2,,Sin valores ni acción concreta
+E04,agente: ingeniero de confiabilidad,A06,1,2,1,1,2,El desgaste de herramienta pesando en un rodamiento me genera dudas
+E04,agente: ingeniero de confiabilidad,A06,2,3,2,2,,Puntaje bajo y sin regla lo mismo que pide envolvente antes de actuar
+E04,agente: ingeniero de confiabilidad,A07,1,5,5,5,1,Diferencial del separador con valor y umbral es evidencia directa
+E04,agente: ingeniero de confiabilidad,A07,2,3,2,2,,Variable correcta pero sin magnitud ni acción
+E04,agente: ingeniero de confiabilidad,A08,1,2,2,1,2,La corriente con tanto peso no es física de rodamiento y el 99% no convence
+E04,agente: ingeniero de confiabilidad,A08,2,3,3,2,,Al menos aclara que es solo del modelo y sugiere envolvente
+E04,agente: ingeniero de confiabilidad,A09,1,4,5,4,1,Temperatura apenas sobre el umbral pero desbalance coherente y acción adecuada
+E04,agente: ingeniero de confiabilidad,A09,2,3,2,2,,Sin valores ni acción
+E04,agente: ingeniero de confiabilidad,A10,1,3,2,2,2,Axial alto encaja pero 2x casi nulo y 98% sin respaldo
+E04,agente: ingeniero de confiabilidad,A10,2,3,3,3,,Alineación láser es razonable aunque sin regla que lo confirme
+E04,agente: ingeniero de confiabilidad,A11,1,5,5,4,1,Tres síntomas coherentes aunque el código ISO está justo en el umbral
+E04,agente: ingeniero de confiabilidad,A11,2,3,2,2,,Sin valores ni acción
+E04,agente: ingeniero de confiabilidad,A12,1,3,2,2,2,Nivel de tanque tiene sentido pero el 100% no tiene respaldo
+E04,agente: ingeniero de confiabilidad,A12,2,3,3,2,,La acción es solo de seguridad y no de inspección de fugas
+E04,agente: ingeniero de confiabilidad,A13,1,3,2,2,,Temperatura de rodamiento encaja pero 100% sin regla ni acción
+E04,agente: ingeniero de confiabilidad,A13,2,3,2,2,,El texto extra no aporta nada
+E04,agente: ingeniero de confiabilidad,A14,1,3,2,2,,El párrafo genérico no añade evidencia
+E04,agente: ingeniero de confiabilidad,A14,2,3,2,2,,Variables coherentes con desalineación pero 100% sin valores ni acción
+E05,agente: supervisor de turno,A01,1,4,4,4,1,Me dice que la banda patina y qué revisar aunque lo del cascabeleo no lo conecto
+E05,agente: supervisor de turno,A01,2,2,1,3,,Solo nombres de sensores y no sé qué hacer
+E05,agente: supervisor de turno,A02,1,2,1,3,2,Rotura suena grave pero no me dice si paro la línea
+E05,agente: supervisor de turno,A02,2,3,4,2,,Entiendo que hay que parar y bloquear aunque ninguna regla la respalda
+E05,agente: supervisor de turno,A03,1,3,4,4,1,Anclajes flojos lo entiendo y las reglas con valores dan respaldo
+E05,agente: supervisor de turno,A03,2,2,1,3,,Sin acción ni respaldo solo un porcentaje
+E05,agente: supervisor de turno,A04,1,2,1,3,2,No sé qué hacer con esto
+E05,agente: supervisor de turno,A04,2,2,2,2,,analisis_envolvente no me dice nada pero al menos sugiere algo
+E05,agente: supervisor de turno,A05,1,3,4,4,1,Entiendo que hay vibración y que se ajusta el corte para el operario
+E05,agente: supervisor de turno,A05,2,2,1,3,,Solo variables técnicas
+E05,agente: supervisor de turno,A06,1,2,1,2,2,Mezcla desgaste de herramienta con rodamiento y me confunde
+E05,agente: supervisor de turno,A06,2,2,2,2,,Puntaje bajo y acción en código técnico
+E05,agente: supervisor de turno,A07,1,4,4,4,1,Clara cambiar el separador de aceite con evidencia
+E05,agente: supervisor de turno,A07,2,2,1,3,,No me indica qué hacer
+E05,agente: supervisor de turno,A08,1,2,1,3,2,Solo sensores sin instrucción
+E05,agente: supervisor de turno,A08,2,2,2,2,,Acción en jerga técnica que debo pasar al técnico
+E05,agente: supervisor de turno,A09,1,4,4,4,1,Temperatura alta del motor y qué medir lo entiendo bien
+E05,agente: supervisor de turno,A09,2,2,1,3,,Sin acción ni regla
+E05,agente: supervisor de turno,A10,1,2,1,3,2,No sé si parar o seguir
+E05,agente: supervisor de turno,A10,2,2,2,2,,alineacion_laser lo entiendo a medias y no hay regla
+E05,agente: supervisor de turno,A11,1,4,4,4,1,Prensa dura y revisar la válvula queda claro con valores
+E05,agente: supervisor de turno,A11,2,2,1,3,,Solo porcentajes de sensores
+E05,agente: supervisor de turno,A12,1,2,1,3,2,Fuga es claro pero no dice qué hacer
+E05,agente: supervisor de turno,A12,2,3,4,3,,Fuga y bloquear energía me dice que pare y llame al técnico
+E05,agente: supervisor de turno,A13,1,2,1,3,,Sin acción sugerida
+E05,agente: supervisor de turno,A13,2,2,1,3,,El texto extra no aporta nada útil
+E05,agente: supervisor de turno,A14,1,2,1,3,,El párrafo adicional es relleno sin instrucción
+E05,agente: supervisor de turno,A14,2,2,1,3,,Igual de poco útil que la otra

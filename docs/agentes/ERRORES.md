@@ -9,7 +9,7 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 | Origen | Errores |
 |---|---|
 | entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008, ERR-012, ERR-013 |
-| código (bugs, lógica) | ERR-009, ERR-011 |
+| código (bugs, lógica) | ERR-009, ERR-011, ERR-025 |
 | datos (generador, fugas, desbalance) | ERR-020, ERR-023 |
 | conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010, ERR-014, ERR-015, ERR-016, ERR-017 |
 | agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019, ERR-021, ERR-022, ERR-024 |
@@ -46,6 +46,16 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-025 – Preferencias leídas como "indiferente" por el tipo de dato
+- Fecha: 2026-11-11
+- Fase/archivo: Fase 6, `src/metaltech/xai/evaluacion_humana.py`
+- Origen: código
+- Síntoma: el análisis del panel daba 62 preferencias "indiferente" y ninguna por una explicación.
+- Causa raíz: pandas lee la columna `preferida` como número (1.0) y el código comparaba con el texto "1".
+- Solución: conversión a entero tolerante a texto y número; prueba que lee el CSV desde disco.
+- Prevención: las pruebas de análisis deben pasar por un archivo real y no solo por un DataFrame construido en memoria.
+- Estado: resuelto
 
 ### ERR-024 – Métrica de estabilidad sin capacidad de discriminar
 - Fecha: 2026-11-11

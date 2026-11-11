@@ -1,0 +1,13 @@
+dimension,variante,n,media,mediana,acuerdo_pct
+comprensibilidad,control_relleno,10,2.8,3.0,0.0
+comprensibilidad,control_simple,10,2.8,3.0,0.0
+comprensibilidad,hibrida,60,3.85,4.0,58.333333333333336
+comprensibilidad,modelo,60,2.7,3.0,0.0
+utilidad,control_relleno,10,1.8,2.0,0.0
+utilidad,control_simple,10,1.8,2.0,0.0
+utilidad,hibrida,60,3.75,4.0,56.666666666666664
+utilidad,modelo,60,1.6666666666666667,2.0,0.0
+confianza,control_relleno,10,2.2,2.0,0.0
+confianza,control_simple,10,2.2,2.0,0.0
+confianza,hibrida,60,3.3,3.0,46.666666666666664
+confianza,modelo,60,2.1166666666666667,2.0,0.0

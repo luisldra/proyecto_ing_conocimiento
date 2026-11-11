@@ -76,6 +76,7 @@
 | D-056 | Integración del conocimiento: M0, M2 y M3 | media |
 | D-057 | Explicabilidad: gradientes integrados, traza de reglas y métricas | media |
 | D-058 | Diseño de la evaluación humana de explicaciones | media |
+| D-059 | Evaluación de explicaciones con un panel de agentes (sin personas disponibles) | baja |
 
 ---
 
@@ -799,8 +800,45 @@
   - Evaluadores anónimos (E01…), con consentimiento informado y referencia a la Ley 1581 de 2012.
 - **Alternativas:** calificar solo la explicación híbrida, que no permite atribuir el efecto al conocimiento; usar un formulario en línea, posible copiando `formulario.md`.
 - **Límites:** de 3 a 5 evaluadores dan resultados exploratorios; el orden es el mismo para todos los evaluadores.
-- **Estado:** instrumento listo en `docs/evaluacion_humana/`; **sin aplicar**.
+- **Estado:** instrumento listo en `docs/evaluacion_humana/`. Sin personas disponibles, se aplicó con un panel de agentes (D-059).
 - **Confianza:** media.
+
+## D-059 – Evaluación de explicaciones con un panel de agentes (sin personas disponibles)
+- **Contexto:** el equipo no tiene acceso a técnicos ni a otros evaluadores. Igual que en la adquisición del conocimiento (Fase 1), la evaluación se hace con agentes.
+- **Decisión:**
+  - **Panel:** 5 agentes con perfiles de la planta:
+    - técnico electromecánico;
+    - jefe de mantenimiento;
+    - instrumentista;
+    - ingeniero de confiabilidad;
+    - supervisor de turno noche (no técnico).
+  - **Instrumento:** el mismo de D-058, a ciegas: cada agente recibió solo el texto del formulario, sin herramientas ni acceso a la clave o al código.
+  - **Control de sesgo por longitud:** 2 alertas extra con dos versiones de igual contenido, una con una frase de relleno sin información. Los modelos de lenguaje suelen preferir el texto más largo.
+  - Los resultados se rotulan **"panel de agentes"** y nunca como evaluación humana. Archivos: `respuestas_agentes.csv` y `reports/tables/evaluacion_agentes*`.
+- **Resultados (5 agentes × 12 alertas = 60 pares):**
+
+  | Dimensión | Modelo solo | Híbrida | Diferencia | p (Wilcoxon) |
+  |---|---|---|---|---|
+  | Comprensibilidad | 2.70 | 3.85 | +1.15 | 2.7e-09 |
+  | Utilidad | 1.67 | 3.75 | +2.08 | 6.5e-12 |
+  | Confianza | 2.12 | 3.30 | +1.18 | 1.4e-08 |
+
+  - **Preferencia:** la explicación híbrida en 60 de 60 pares.
+  - **Control de longitud:** diferencia 0.00 en las tres dimensiones; en preferencia, 8 "me da igual" y 2 a favor de la versión **sin** relleno. No se detectó sesgo por longitud.
+  - **Respaldo de reglas:** la ganancia en utilidad es mucho mayor cuando la alerta tiene respaldo de reglas (4.63 frente a 1.77) que cuando no lo tiene (2.87 frente a 1.57).
+- **Hallazgos cualitativos para mejorar el sistema:**
+  1. Sin reglas, la acción sugerida aparece como un identificador de la FMEA (`analisis_envolvente`, `paro_y_bloqueo`), y los cinco perfiles lo critican.
+  2. Una observación de técnico que no corresponde al modo ("cascabeleo" en un patinaje) resta credibilidad.
+  3. Atribuciones poco físicas (desgaste de herramienta o corriente pesando en una falla de rodamiento) bajan la confianza.
+  4. Probabilidades del 100 % sin respaldo generan desconfianza.
+  5. Valores apenas sobre el umbral (130.05 frente a 130) se perciben dentro del error del sensor.
+- **Límites:**
+  - Los agentes no son personas.
+  - Los 5 perfiles son el mismo modelo de lenguaje, así que las respuestas no son independientes. Eso explica en parte la unanimidad y los valores p tan bajos.
+  - El modelo evaluador es de la misma familia que el que redactó las explicaciones.
+  - El control de longitud solo descarta ese sesgo, no otros.
+  - Los resultados son una **validación exploratoria** y no sustituyen una evaluación con técnicos.
+- **Confianza:** baja.
 
 ---
 

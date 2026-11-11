@@ -68,6 +68,27 @@ def test_analisis_detecta_una_mejora_clara(tmp_path):
     assert resumen["preferencia"] == {"hibrida": 4 * clave["alerta"].nunique()}
 
 
+def test_preferencia_leida_desde_csv_como_numero(tmp_path):
+    clave = preparar(tmp_path)
+    ruta = tmp_path / "r.csv"
+    _respuestas(clave, 2, 1).to_csv(ruta, index=False)
+    _, resumen = analizar(pd.read_csv(ruta), clave)  # 'preferida' llega como 1.0 / 2.0
+    assert resumen["preferencia"] == {"hibrida": 2 * clave["alerta"].nunique()}
+
+
+def test_controles_de_longitud_para_el_panel_de_agentes(tmp_path):
+    clave = preparar(tmp_path, controles=True)
+    controles = clave[clave["variante"].str.startswith("control")]
+    assert controles["alerta"].nunique() == 2 and (tmp_path / "formulario_agentes.md").exists()
+    filas = _respuestas(clave[~clave["variante"].str.startswith("control")], 3, 1)
+    for e in range(1, 4):  # un panel sin sesgo califica igual el relleno y el texto simple
+        filas = pd.concat([filas, pd.DataFrame([
+            {"evaluador": f"E{e:02d}", "perfil": "agente", "alerta": k["alerta"], "explicacion": k["explicacion"],
+             **dict.fromkeys(DIMENSIONES, 3), "preferida": "", "comentario": ""} for _, k in controles.iterrows()])])
+    _, resumen = analizar(filas, clave)
+    assert resumen["control_longitud"]["utilidad"]["diferencia_media"] == 0
+
+
 def test_validar_rechaza_valores_fuera_de_escala():
     r = pd.DataFrame([{c: 1 for c in COLUMNAS} | {"utilidad": 7}])
     with pytest.raises(ValueError, match="utilidad"):

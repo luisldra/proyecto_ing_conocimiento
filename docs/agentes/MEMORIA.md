@@ -5,7 +5,7 @@
 ## Estado actual
 - **Fase en curso:** Fase 6 terminada (explicabilidad).
 - **Última tarea:** gradientes integrados sobre M1, explicación de alertas en texto y métricas de explicabilidad (D-057). El top-3 del modelo cae en la firma real de la falla en 74.6 % de los casos (azar: 33.0 %).
-- **Siguiente tarea:** Fase 7 – 5 semillas e intervalos de confianza, equidad por turno y técnico, latencia e impacto.
+- **Siguiente tarea:** Fase 7 – 5 semillas e intervalos de confianza, equidad por turno y técnico, latencia e impacto. En paralelo, el equipo aplica la evaluación humana (`docs/evaluacion_humana/`).
 - **Equipo:** Alejandro (conocimiento y QA), Luis David (datos y modelos), Junio (API y web demostrativa), David (documento APA, póster y landing).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Pendiente por confirmar:**
@@ -16,6 +16,20 @@
 
 ## Bitácora (más reciente arriba)
 
+## [2026-11-11] Fase 6 – Pendientes: referencia y evaluación humana (agente: Documentación)
+- Hecho:
+  - Referencia de Sundararajan et al. (2017) verificada en la página de PMLR; se agregan los editores.
+  - Instrumento de evaluación humana (D-058):
+    - `src/metaltech/xai/evaluacion_humana.py`, con los comandos `preparar` y `analizar`;
+    - `docs/evaluacion_humana/` (formulario de 12 alertas, clave oculta, plantilla, protocolo y consentimiento informado);
+    - `tests/test_evaluacion_humana.py`, con respuestas ficticias que solo prueban el cálculo.
+- Pendiente:
+  - **Aplicar la evaluación** con al menos 3 evaluadores que no sean del equipo y correr `analizar`.
+  - Llevar el consentimiento a los anexos del documento.
+  - No hay resultados humanos todavía.
+- Errores: ninguno.
+- Decisiones: D-058.
+
 ## [2026-11-11] Fase 6 – Explicabilidad (agente: Datos/ML)
 - Hecho: `xai/explain.py` (gradientes integrados, fidelidad, concordancia, estabilidad y `explicar_alerta`), `tests/test_xai.py`, `reports/tables/xai_metricas.csv` y `xai_ejemplos.json` (40 alertas explicadas de ejemplo, una por modo y activo).
 - Resultados (media de 6 activos, hasta 300 alertas correctas de test por activo):
@@ -23,7 +37,7 @@
   - Top-3 en la firma real de la falla: 74.6 % (azar 33.0 %). Top-3 en las variables de las reglas disparadas: 67.5 %. Solo el 52.1 % de las alertas correctas tiene una regla que las respalde.
   - Estabilidad: 1.000, 0.999 y 0.996 con ruido de 0.05, 0.25 y 0.5 desviaciones.
   - La banda es la de menor concordancia con las reglas (37.4 %).
-- Pendiente: evaluación humana con escala Likert; verificar la referencia de Sundararajan et al. (2017).
+- Pendiente: evaluación humana con escala Likert y verificación de la referencia de Sundararajan et al. (2017); ambas atendidas en la entrada siguiente.
 - Errores: ERR-024 (resuelto).
 - Decisiones: D-057.
 

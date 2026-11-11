@@ -75,6 +75,7 @@
 | D-055 | Confusores multivariable, más unidades y ajustes con datos públicos | media en estructura, baja en parámetros |
 | D-056 | Integración del conocimiento: M0, M2 y M3 | media |
 | D-057 | Explicabilidad: gradientes integrados, traza de reglas y métricas | media |
+| D-058 | Diseño de la evaluación humana de explicaciones | media |
 
 ---
 
@@ -789,6 +790,18 @@
 - **Fuentes:** Sundararajan et al. (2017), *Axiomatic attribution for deep networks*; D-056.
 - **Confianza:** media.
 
+## D-058 – Diseño de la evaluación humana de explicaciones
+- **Decisión:** comparación pareada y a ciegas, en la misma alerta, de la explicación del modelo solo frente a la híbrida, para medir el aporte del conocimiento experto a la explicación y no solo su calidad absoluta.
+  - 12 alertas de test, 2 por activo: una con respaldo de reglas y otra sin él.
+  - Escala de 1 a 5 en comprensibilidad, utilidad y confianza, más una preferencia.
+  - Orden alternado entre alertas y clave oculta.
+  - Análisis con prueba de Wilcoxon pareada, por ser datos ordinales y una muestra pequeña.
+  - Evaluadores anónimos (E01…), con consentimiento informado y referencia a la Ley 1581 de 2012.
+- **Alternativas:** calificar solo la explicación híbrida, que no permite atribuir el efecto al conocimiento; usar un formulario en línea, posible copiando `formulario.md`.
+- **Límites:** de 3 a 5 evaluadores dan resultados exploratorios; el orden es el mismo para todos los evaluadores.
+- **Estado:** instrumento listo en `docs/evaluacion_humana/`; **sin aplicar**.
+- **Confianza:** media.
+
 ---
 
 ## Resumen de conflictos registrados
@@ -912,7 +925,7 @@
 - Siemens. (s. f.). *Siemens 880 user's manual* [Manual de motor, tabla de temperaturas de rodamientos]. https://manualzilla.com/doc/6980939/siemens-880-user-s-manual?page=10
 - Smith, W. A., & Randall, R. B. (2015). Rolling element bearing diagnostics using the Case Western Reserve University data: A benchmark study. *Mechanical Systems and Signal Processing, 64–65*, 100–131. https://doi.org/10.1016/j.ymssp.2015.04.021
 - TECO-Westinghouse. (2008). *RTD alarm & trip settings* [Tabla técnica]. https://www.tecowestinghouse.com/Stock_Motor_PDF/RTD_Alarm_Trip_Settings.pdf
-- Sundararajan, M., Taly, A., & Yan, Q. (2017). Axiomatic attribution for deep networks. En *Proceedings of the 34th International Conference on Machine Learning* (Vol. 70, pp. 3319–3328). PMLR. https://proceedings.mlr.press/v70/sundararajan17a.html [consultada de memoria; verificar]
+- Sundararajan, M., Taly, A., & Yan, Q. (2017). Axiomatic attribution for deep networks. En D. Precup & Y. W. Teh (Eds.), *Proceedings of the 34th International Conference on Machine Learning* (Vol. 70, pp. 3319–3328). PMLR. https://proceedings.mlr.press/v70/sundararajan17a.html [verificada en la página de PMLR el 2026-11-11]
 - Teti, R., Jemielniak, K., O'Donnell, G., & Dornfeld, D. (2010). Advanced monitoring of machining operations. *CIRP Annals, 59*(2), 717–739. https://doi.org/10.1016/j.cirp.2010.05.010
 - U.S. Department of Energy. (2003). *Improving compressed air system performance: A sourcebook for industry*. Office of Energy Efficiency and Renewable Energy; Compressed Air Challenge. [datos verificados en Open Library; contenido visto vía Compressed Air Challenge, 2026]
 - UCI Machine Learning Repository. (2020). *AI4I 2020 predictive maintenance dataset* [Conjunto de datos]. https://doi.org/10.24432/C5HS5C

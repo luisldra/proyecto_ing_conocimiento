@@ -110,6 +110,7 @@ python scripts/contrastar_datasets.py # contraste con AI4I 2020 y SKAB
 python -m metaltech.models.train --config configs/train.yaml
 python -m metaltech.hybrid.comparar  # M0 · M1 · M2 · M3 (reports/tables/comparacion_*)
 python -m metaltech.xai.explain     # explicabilidad (reports/tables/xai_*)
+python -m metaltech.xai.evaluacion_humana preparar|analizar  # evaluación humana (docs/evaluacion_humana/)
 uvicorn metaltech.api.main:app --reload
 streamlit run src/metaltech/dashboard/app.py
 ```

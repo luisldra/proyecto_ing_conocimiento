@@ -28,11 +28,13 @@ SUPERFICIE, REJILLA, EJE = "#fcfcfb", "#e1e0d9", "#c3c2b7"
 
 def estilo(fig: go.Figure, titulo: str | None = None, alto: int = 360) -> go.Figure:
     """Ejes y rejilla discretos, marcas finas, una sola escala por gráfico."""
+    # El título va arriba del todo y la leyenda en su propia franja, entre el título y el gráfico.
     fig.update_layout(
-        title=titulo, height=alto, plot_bgcolor=SUPERFICIE, paper_bgcolor=SUPERFICIE,
+        title={"text": titulo, "y": 0.98, "yanchor": "top", "x": 0, "xanchor": "left"} if titulo else None,
+        height=alto, plot_bgcolor=SUPERFICIE, paper_bgcolor=SUPERFICIE,
         font={"color": TINTA_2, "size": 13}, title_font={"color": TINTA, "size": 16},
-        margin={"l": 10, "r": 10, "t": 50 if titulo else 20, "b": 10}, hovermode="closest",
-        legend={"orientation": "h", "yanchor": "bottom", "y": 1.02, "x": 0, "title": None},
+        margin={"l": 10, "r": 10, "t": 95 if titulo else 40, "b": 10}, hovermode="closest",
+        legend={"orientation": "h", "yanchor": "bottom", "y": 1.03, "x": 0, "title": None},
         bargap=0.25, bargroupgap=0.08,
     )
     fig.update_xaxes(showgrid=False, linecolor=EJE, tickfont={"color": MUTE})
@@ -77,8 +79,15 @@ def nombre_modo(modo: str) -> str:
     return "Operación normal" if modo == "normal" else base().modos[modo]["nombre"]
 
 
+NOMBRES_ACTIVO = {
+    "motor_electrico": "Motor eléctrico", "bomba_centrifuga": "Bomba centrífuga",
+    "compresor_tornillo": "Compresor de tornillo", "prensa_hidraulica": "Prensa hidráulica",
+    "banda_transportadora": "Banda transportadora", "centro_cnc": "Centro de mecanizado CNC",
+}
+
+
 def nombre_activo(activo: str) -> str:
-    return activo.replace("_", " ").capitalize()
+    return NOMBRES_ACTIVO.get(activo, activo.replace("_", " ").capitalize())
 
 
 def falta(ruta: Path, comando: str) -> bool:

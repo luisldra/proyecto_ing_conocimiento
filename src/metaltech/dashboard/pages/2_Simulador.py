@@ -56,8 +56,11 @@ cols = st.columns(3)
 for col, (s, info) in zip(cols, r["sistemas"].items(), strict=True):
     valor = info.get("certeza", info.get("probabilidad", info.get("puntaje", 0.0)))
     icono = "✅" if info["modo"] == "normal" else "⚠️"
-    col.metric(NOMBRE_SISTEMA[s], f"{icono} {nombre_modo(info['modo'])}", f"{valor:.0%}", delta_color="off")
-    col.caption({"M0": "certeza de las reglas", "M1": "probabilidad del modelo", "M3": "puntaje fusionado"}[s])
+    with col.container(border=True):
+        st.caption(NOMBRE_SISTEMA[s])
+        st.markdown(f"**{icono} {nombre_modo(info['modo'])}**")
+        medida = {"M0": "certeza de las reglas", "M1": "probabilidad del modelo", "M3": "puntaje fusionado"}[s]
+        st.caption(f"{medida}: {valor:.0%}")
 
 simulado = r["modo_simulado"]
 if d["modo"] == simulado:

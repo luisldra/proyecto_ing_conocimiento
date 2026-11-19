@@ -16,6 +16,22 @@
 
 ## Bitácora (más reciente arriba)
 
+## [2026-11-19] Fase 8 – Revisión completa de la web con Playwright (agente: QA + Frontend)
+- Hecho:
+  - `scripts/revisar_web.py` levanta API y web en puertos propios y recorre las 9 vistas con Chromium: 57 acciones, que cubren cada lista, deslizador, pestaña, botón y opción relevante. Guarda capturas e `informe.json` con excepciones, errores, avisos y consola.
+  - Hallazgos corregidos (ERR-029):
+    - el grafo de pyvis rompía JavaScript y quedaba cortado;
+    - leyendas sobre títulos y rótulos encimados;
+    - columna clave fuera de la vista en la Planta, que además ahora distingue acierto, aviso temprano, falla no detectada, falsa alarma y falla equivocada;
+    - nombres internos en tablas y nombres de activos sin tildes;
+    - siglas en minúscula y flechas en textos;
+    - títulos cortados en la portada.
+  - Ajustes del script a Streamlit 1.67, que cambió sus controles a react-aria (deslizador `input type="range"`, listas `ComboBox`).
+- Resultados: última corrida con 57 acciones, 0 excepciones, 0 errores y 0 errores de consola. En los 6 activos, el simulador identificó la falla inyectada. Pruebas de la web: 13 OK.
+- Pendiente: nada de la web; el equipo puede repetir la revisión con `python scripts/revisar_web.py --salida <carpeta>`.
+- Errores: ERR-029 (resuelto).
+- Decisiones: ninguna.
+
 ## [2026-11-19] Fase 8 – Ajustes tras la primera revisión visual de la web (agente: Frontend)
 - Hecho:
   - Portada en `inicio.py` con cifras leídas de los reportes.

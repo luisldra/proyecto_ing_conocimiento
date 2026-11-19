@@ -62,6 +62,13 @@ uvicorn metaltech.api.main:app --reload             # documentación interactiva
 streamlit run src/metaltech/dashboard/app.py        # web en http://localhost:8501
 ```
 
+Para revisar la web de punta a punta con un navegador real (capturas e informe de errores):
+
+```bash
+pip install playwright && python -m playwright install chromium   # una vez
+python scripts/revisar_web.py --salida revision_web                 # levanta API y web en puertos propios
+```
+
 La web usa la API si está levantada; si no, carga la misma API dentro del proceso, de modo que basta con `streamlit run` para la demo. Necesita los modelos (`checkpoints/`) y los datos (`data/synthetic/`), que no se versionan y se regeneran con los comandos anteriores.
 
 ### Endpoints

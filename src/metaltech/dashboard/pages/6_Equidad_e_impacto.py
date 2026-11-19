@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
@@ -44,7 +45,15 @@ fig.update_yaxes(tickformat=".1%")
 mostrar(estilo(fig, f"{MEDIDAS[medida]} por {GRUPOS[grupo].lower()}", alto=380),
         g.pivot(index="valor", columns="sistema", values=medida).round(4).reset_index(), "equidad")
 st.markdown("**Brecha entre el mejor y el peor grupo**")
-st.dataframe(brechas[brechas["grupo"] == grupo].round(4), width="stretch", hide_index=True)
+b = brechas[brechas["grupo"] == grupo]
+legible = (lambda v: nombre_activo(v)) if grupo == "activo" else (lambda v: v)
+st.dataframe(pd.DataFrame({
+    "Sistema": b["sistema"].map(NOMBRE_SISTEMA),
+    "Brecha en acierto (puntos)": (100 * b["acierto_falla_brecha"]).round(1),
+    "Grupo con menor acierto": b["acierto_falla_peor"].map(legible),
+    "Brecha en falsa alarma (puntos)": (100 * b["falsa_alarma_brecha"]).round(2),
+    "Grupo con más falsas alarmas": b["falsa_alarma_peor"].map(legible),
+}), width="stretch", hide_index=True)
 
 st.subheader("Impacto operativo simulado")
 impacto = tabla("impacto_sistemas.csv")

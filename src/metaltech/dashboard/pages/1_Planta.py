@@ -9,8 +9,20 @@ from metaltech.dashboard.comun import DATOS, base, clases, falta, nombre_activo,
 
 st.set_page_config(page_title="Planta · Metal Tech", page_icon="🏭", layout="wide")
 st.title("🏭 Planta")
-st.markdown("Estado de las 32 unidades según el sistema híbrido (M3), en cualquier instante del periodo de prueba. "
-            "La columna **real** muestra lo que de verdad estaba pasando en la simulación.")
+st.markdown("Estado de cada unidad según el sistema híbrido (M3) en cualquier instante del periodo de prueba: las 26 "
+            "unidades usadas en el entrenamiento o las 6 reservadas, que el modelo nunca vio. La columna **real** muestra "
+            "lo que de verdad estaba pasando en la simulación.")
+
+
+def resultado(pred_modo: str, real: str, etiqueta: str) -> str:
+    """Compara la alerta con la verdad: la etiqueta solo marca las últimas 24 h antes de la falla."""
+    if pred_modo == etiqueta:
+        return "✔ Correcto"
+    if pred_modo == real != "normal":
+        return "⏳ Aviso temprano"  # degradación real a más de 24 h de la falla, modo correcto
+    if pred_modo == "normal":
+        return "✘ Falla no detectada"
+    return "✘ Falsa alarma" if real == "normal" else "✘ Falla equivocada"
 
 
 @st.cache_data(show_spinner="Cargando predicciones…")
@@ -41,17 +53,19 @@ for _, f in ultimo.iterrows():
     filas.append({
         "Activo": nombre_activo(f["activo"]), "Unidad": f["unidad"],
         "Estado según M3": "✅ Normal" if pred_modo == "normal" else f"⚠️ {nombre_modo(pred_modo)}",
-        "Real": "Sana" if real == "normal" else f"{nombre_modo(real)} (falla en {f['horas_a_falla']:.0f} h)",
-        "Acierto": "✔" if pred_modo == cl[int(f["y"])] or (pred_modo == real != "normal") else "✘",
+        "Resultado": resultado(pred_modo, real, cl[int(f["y"])]),
+        "Real": "Sana" if real == "normal" else f"{nombre_modo(real)} · falla en {f['horas_a_falla']:.0f} h",
         "Última lectura": f["ts"],
     })
 estado = pd.DataFrame(filas).sort_values(["Activo", "Unidad"])
-alertas = int(estado["Estado según M3"].str.startswith("⚠️").sum())
-c1, c2, c3 = st.columns(3)
+c1, c2, c3, c4 = st.columns(4)
 c1.metric("Unidades", len(estado))
-c2.metric("⚠️ En alerta", alertas)
-c3.metric("✔ Coincide con la realidad", f"{(estado['Acierto'] == '✔').mean():.0%}")
-st.dataframe(estado, width="stretch", hide_index=True)
-st.caption("Una alerta puede llegar antes de las 24 h previas a la falla (aviso temprano): en ese caso aparece como acierto "
-           "si el modo coincide con la degradación real.")
+c2.metric("⚠️ En alerta", int(estado["Estado según M3"].str.startswith("⚠️").sum()))
+c3.metric("Degradándose de verdad", int((estado["Real"] != "Sana").sum()))
+c4.metric("✘ Errores", int(estado["Resultado"].str.startswith("✘").sum()))
+st.dataframe(estado, width="stretch", hide_index=True, height=35 * (len(estado) + 1) + 3,
+             column_config={"Activo": st.column_config.TextColumn(width="medium"),
+                            "Real": st.column_config.TextColumn("Real (simulación)", width="large")})
+st.caption("Una máquina que se degrada pero a la que le faltan más de 24 h para fallar se espera en «Normal» "
+           "(✔ Correcto); si el sistema ya avisa con el modo correcto, es un ⏳ aviso temprano.")
 pie()

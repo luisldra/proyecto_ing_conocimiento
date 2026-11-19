@@ -9,7 +9,7 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 | Origen | Errores |
 |---|---|
 | entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008, ERR-012, ERR-013, ERR-026, ERR-027 |
-| código (bugs, lógica) | ERR-009, ERR-011, ERR-025 |
+| código (bugs, lógica) | ERR-009, ERR-011, ERR-025, ERR-029 |
 | datos (generador, fugas, desbalance) | ERR-020, ERR-023 |
 | conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010, ERR-014, ERR-015, ERR-016, ERR-017 |
 | agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019, ERR-021, ERR-022, ERR-024, ERR-028 |
@@ -46,6 +46,35 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-029 – El grafo de la ontología rompía JavaScript y la web tenía fallos de diseño
+- Fecha: 2026-11-19
+- Fase/archivo: Fase 8, `src/metaltech/dashboard/`
+- Origen: código
+- Síntoma: la revisión con Playwright mostró:
+  - un error de consola "Unexpected identifier 'Streamlit'" al dibujar el grafo;
+  - nodos del grafo cortados en el borde;
+  - leyendas montadas sobre el título de los gráficos;
+  - rótulos de fallas encimados en el gráfico de datos;
+  - la columna clave de la Planta fuera de la vista;
+  - nombres internos en tablas y menús ("Motor electrico", `acierto_falla_brecha`, `colision_husillo`);
+  - "npsh" en minúscula en la explicación;
+  - flechas en métricas que eran texto.
+- Causa raíz:
+  - pyvis carga `lib/bindings/utils.js` con ruta relativa; dentro del marco de Streamlit esa ruta devolvía el HTML de Streamlit, que el navegador intentaba ejecutar.
+  - pyvis no reencuadra la red tras estabilizarla.
+  - El estilo común dejaba poco espacio entre título y leyenda.
+  - Las pruebas automáticas solo comprobaban que las páginas cargaran, no cómo se veían.
+- Solución:
+  - `cdn_resources="in_line"`, estabilización y `network.fit()` al terminar.
+  - Margen superior y posición de título y leyenda en `estilo()`.
+  - Marcadores ✕ con nombre al pasar el cursor, en lugar de rótulos.
+  - Columnas reordenadas y renombradas, y nombres legibles de activos.
+  - Solo la inicial en minúscula en la explicación.
+  - Tarjetas sin flecha en el Simulador.
+  - `scripts/revisar_web.py` recorre la web con Playwright y guarda capturas.
+- Prevención: antes de cerrar una fase con interfaz, correr `scripts/revisar_web.py` y mirar las capturas.
+- Estado: resuelto
 
 ### ERR-028 – Portada con una cifra fija, flechas engañosas y conexión a la API fallida
 - Fecha: 2026-11-19

@@ -132,7 +132,8 @@ def explicar_alerta(diagnostico: dict[str, Any], importancias: dict[str, float],
     if diagnostico["modo"] == "normal":
         texto = "Sin alerta: el sistema clasifica la operación como normal."
     else:
-        partes = [f"Alerta de {diagnostico['nombre'].lower()} (puntaje {diagnostico['puntaje']:.0%})."]
+        nombre = diagnostico["nombre"]  # solo la inicial en minúscula: conserva siglas como NPSH o CNC
+        partes = [f"Alerta de {nombre[:1].lower() + nombre[1:]} (puntaje {diagnostico['puntaje']:.0%})."]
         partes.append("El modelo se apoyó sobre todo en " + ", ".join(f"{v} ({w:.0%})" for v, w in top) + ".")
         if diagnostico["reglas"]:
             premisas = [f"{p['variable']} = {p['valor']:.2f} ({p['operador']} {p['umbral']:g})"

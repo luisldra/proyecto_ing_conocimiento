@@ -32,14 +32,15 @@ if intervalos is not None and impacto is not None:
     ev_m3 = impacto["medias"]["M3"]["eventos_falsa_alarma_por_unidad_anio"]
     ev_m1 = impacto["medias"]["M1"]["eventos_falsa_alarma_por_unidad_anio"]
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("F1 macro de M3 · máquinas nunca vistas", f"{f1_m3:.3f}", f"{f1_m3 - f1_m1:+.3f} frente a M1")
-    c2.metric("Falsa alarma con confusores · M3", f"{fa_m3:.1%}", f"{(fa_m3 - fa_m1) * 100:+.1f} puntos frente a M1",
-              delta_color="inverse")
-    c3.metric("Eventos de falsa alarma por unidad-año · M3", f"{ev_m3:.1f}", f"{ev_m3 - ev_m1:+.1f} frente a M1",
-              delta_color="inverse")
+    c1.metric("F1 macro · M3", f"{f1_m3:.3f}", f"{f1_m3 - f1_m1:+.3f} frente a M1",
+              help="En las máquinas que el modelo nunca vio en el entrenamiento.")
+    c2.metric("Falsa alarma · M3", f"{fa_m3:.1%}", f"{(fa_m3 - fa_m1) * 100:+.1f} puntos frente a M1", delta_color="inverse",
+              help="Ventanas sanas con un evento que imita una falla, en máquinas nunca vistas.")
+    c3.metric("Falsas alarmas al año · M3", f"{ev_m3:.1f}", f"{ev_m3 - ev_m1:+.1f} frente a M1", delta_color="inverse",
+              help="Eventos de falsa alarma por unidad y año (alarmas consecutivas cuentan una vez).")
     if latencia_api:
-        c4.metric("Latencia de la API con explicación", f"{latencia_api['p95_max_ms']['con_explicacion']:.0f} ms",
-                  help="Percentil 95 del activo más lento, por HTTP local. Sin explicación: "
+        c4.metric("Latencia de la API", f"{latencia_api['p95_max_ms']['con_explicacion']:.0f} ms",
+                  help="Diagnóstico con explicación: percentil 95 del activo más lento, por HTTP local. Sin explicación: "
                        f"{latencia_api['p95_max_ms']['sin_explicacion']:.0f} ms. Objetivo: 200 ms.")
     st.caption("Medias de 6 tipos de activo y 5 semillas. Detalle e intervalos en la página Modelos y comparación.")
 

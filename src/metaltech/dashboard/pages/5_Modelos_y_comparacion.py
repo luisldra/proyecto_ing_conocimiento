@@ -54,8 +54,12 @@ vista = difs[difs["comparacion"].isin(["M3-M1", "M2-M1", "M3-M0"])].copy()
 vista["particion"] = vista["particion"].map(PARTICIONES)
 vista["metrica"] = vista["metrica"].map(lambda m: METRICAS.get(m, m))
 vista["consistente"] = (vista["ic95_inf"] > 0) | (vista["ic95_sup"] < 0)
-st.dataframe(vista[["particion", "comparacion", "metrica", "diferencia_media", "ic95_inf", "ic95_sup", "a_mayor_pct", "consistente"]]
-             .round(4), width="stretch", hide_index=True)
+st.dataframe(pd.DataFrame({
+    "Conjunto": vista["particion"], "Comparación": vista["comparacion"].str.replace("-", " − "), "Métrica": vista["metrica"],
+    "Diferencia media": vista["diferencia_media"].round(4), "IC 95 % inferior": vista["ic95_inf"].round(4),
+    "IC 95 % superior": vista["ic95_sup"].round(4), "Pares donde el primero es mayor (%)": vista["a_mayor_pct"].round(0),
+    "Consistente": vista["consistente"].map({True: "✔ sí", False: "no"}),
+}), width="stretch", hide_index=True)
 st.caption("En falsa alarma, una diferencia negativa es buena (M3 tiene menos). Los valores p de Wilcoxon están en el archivo "
            "completo; son optimistas porque los pares comparten datos (D-060).")
 
@@ -82,7 +86,8 @@ with izq:
 with der:
     st.markdown("**Latencia por solicitud (ms, CPU)**")
     if latencia is not None:
-        st.dataframe(latencia.pivot(index="activo", columns="sistema", values="p95_ms").round(2).reset_index(),
-                     width="stretch", hide_index=True)
-        st.caption("Percentil 95 por activo. Objetivo: 200 ms.")
+        lat = latencia.pivot(index="activo", columns="sistema", values="p95_ms").round(2).reset_index()
+        lat["activo"] = lat["activo"].map(nombre_activo)
+        st.dataframe(lat.rename(columns={"activo": "Activo", "M3+XAI": "M3 + explicación"}), width="stretch", hide_index=True)
+        st.caption("Percentil 95 por solicitud, sin red ni servidor. Objetivo: 200 ms. Vía API con explicación: ver la portada.")
 pie()

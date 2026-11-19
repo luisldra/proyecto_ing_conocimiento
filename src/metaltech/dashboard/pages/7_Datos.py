@@ -55,24 +55,32 @@ ep = ep[(ep["unidad"] == unidad) & (ep["falla"] >= tramo["ts"].min()) & (ep["ini
 
 fig = go.Figure(go.Scatter(x=tramo["ts"], y=tramo[variable], mode="lines", line_color=SERIES[0], name=variable,
                            hovertemplate="%{x|%Y-%m-%d %H:%M}: %{y:.3g}<extra></extra>"))
-for _, e in ep.iterrows():
-    fig.add_vrect(x0=e["inicio"], x1=e["falla"], fillcolor=ESTADO["alerta"], opacity=0.12, line_width=0,
-                  annotation_text=nombre_modo(e["modo"])[:40], annotation_position="top left",
-                  annotation_font_color="#52514e")
-for nivel, color in (("alerta", ESTADO["alerta"]), ("critico", ESTADO["critico"])):
+for _, e in ep.iterrows():  # sin rótulos sobre el gráfico: se encimaban; el nombre va en el marcador
+    fig.add_vrect(x0=e["inicio"], x1=e["falla"], fillcolor=ESTADO["alerta"], opacity=0.12, line_width=0)
+fig.add_trace(go.Scatter(
+    x=ep["falla"], y=[variables[variable]["critico"]] * len(ep), mode="markers",
+    marker={"symbol": "x", "size": 11, "color": ESTADO["critico"], "line": {"width": 2, "color": ESTADO["critico"]}},
+    text=[nombre_modo(m) for m in ep["modo"]], hovertemplate="Falla: %{text}<br>%{x|%Y-%m-%d %H:%M}<extra></extra>",
+))
+for nivel, color, texto in (("alerta", ESTADO["alerta"], "umbral de alerta"), ("critico", ESTADO["critico"], "umbral crítico")):
     fig.add_hline(y=variables[variable][nivel], line_dash="dash", line_color=color, line_width=1,
-                  annotation_text=f"umbral de {nivel}", annotation_font_color="#52514e")
+                  annotation_text=texto, annotation_position="bottom right", annotation_font_color="#52514e")
 fig.update_layout(showlegend=False)
 mostrar(estilo(fig, f"{variable} · {unidad} ({variables[variable]['unidad']})", alto=420), tramo, "serie")
-st.caption("Bandas amarillas: degradación hasta la falla. Huecos: unidad en reparación (sin datos).")
+st.caption("Bandas amarillas: degradación hasta la falla. ✕ rojas: instante de cada falla (pase el cursor para ver cuál). "
+           "Huecos: unidad en reparación (sin datos).")
 
+TAREAS = {"prediccion": "Predicción (24 h antes)", "deteccion": "Detección"}
 izq, der = st.columns(2)
 with izq:
-    st.markdown("**Episodios de falla en el tramo**")
-    st.dataframe(ep[["modo", "tarea", "inicio", "falla", "duracion_h", "particion"]], width="stretch", hide_index=True)
+    st.markdown("**Fallas en el tramo**")
+    st.dataframe(pd.DataFrame({"Falla": ep["modo"].map(nombre_modo), "Tarea": ep["tarea"].map(TAREAS),
+                               "Inicio": ep["inicio"], "Falla en": ep["falla"], "Duración (h)": ep["duracion_h"].round(1)}),
+                 width="stretch", hide_index=True)
 with der:
     st.markdown("**Eventos que imitan fallas en el tramo**")
-    st.dataframe(tramo.loc[tramo["confusor"] != "ninguno", ["ts", "confusor"]].drop_duplicates("confusor").head(50),
+    eventos = tramo.loc[tramo["confusor"] != "ninguno", ["ts", "confusor"]].drop_duplicates("confusor").head(50)
+    st.dataframe(pd.DataFrame({"Inicio": eventos["ts"], "Evento": eventos["confusor"].astype(str).str.replace("_", " ").str.capitalize()}),
                  width="stretch", hide_index=True)
 with st.expander("Ficha de datos completa"):
     st.markdown((RAIZ / "data" / "README.md").read_text(encoding="utf-8"))

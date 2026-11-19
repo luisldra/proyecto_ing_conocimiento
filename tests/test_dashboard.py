@@ -48,4 +48,5 @@ def test_simulador_diagnostica_al_pulsar_el_boton():
     app.button[0].click().run()
     assert not app.exception, [e.value for e in app.exception]
     textos = " ".join(m.value for m in app.markdown)
-    assert "Explicación" in textos and app.metric
+    assert "Explicación" in textos
+    assert any("puntaje fusionado" in c.value for c in app.caption)

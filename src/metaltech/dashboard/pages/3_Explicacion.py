@@ -38,8 +38,9 @@ mostrar(estilo(fig, "Top-3 de sensores dentro de la firma real de la falla"),
         metricas[["activo", "top_k_en_firma", "top_k_en_firma_azar", "top_k_en_reglas", "caida_top_k", "caida_azar_k"]], "firma")
 
 c1, c2, c3 = st.columns(3)
-c1.metric("Fidelidad: caída al anular el top-3", f"{metricas['caida_top_k'].mean():.2f}", f"azar {metricas['caida_azar_k'].mean():.2f}",
-          delta_color="off")
+c1.metric("Fidelidad: caída al anular el top-3", f"{metricas['caida_top_k'].mean():.2f}",
+          f"{metricas['caida_top_k'].mean() - metricas['caida_azar_k'].mean():+.2f} frente al azar",
+          help=f"Al anular 3 sensores al azar la caída es {metricas['caida_azar_k'].mean():.2f}.")
 c2.metric("Top-3 en reglas disparadas", f"{metricas['top_k_en_reglas'].mean():.0%}")
 estab = [c for c in metricas if c.startswith("estabilidad")]
 c3.metric("Estabilidad con ruido de 0.5 desviaciones", f"{metricas[estab[-1]].mean():.3f}" if estab else "–")

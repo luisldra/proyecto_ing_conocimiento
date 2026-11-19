@@ -44,7 +44,7 @@ fig.update_yaxes(tickformat=".1%")
 mostrar(estilo(fig, f"{MEDIDAS[medida]} por {GRUPOS[grupo].lower()}", alto=380),
         g.pivot(index="valor", columns="sistema", values=medida).round(4).reset_index(), "equidad")
 st.markdown("**Brecha entre el mejor y el peor grupo**")
-st.dataframe(brechas[brechas["grupo"] == grupo].round(4), use_container_width=True, hide_index=True)
+st.dataframe(brechas[brechas["grupo"] == grupo].round(4), width="stretch", hide_index=True)
 
 st.subheader("Impacto operativo simulado")
 impacto = tabla("impacto_sistemas.csv")

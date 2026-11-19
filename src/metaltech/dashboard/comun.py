@@ -44,10 +44,10 @@ def estilo(fig: go.Figure, titulo: str | None = None, alto: int = 360) -> go.Fig
 
 def mostrar(fig: go.Figure, tabla: pd.DataFrame | None = None, clave: str | None = None) -> None:
     """Gráfico y, debajo, su tabla: los colores con poco contraste nunca son la única vía."""
-    st.plotly_chart(fig, use_container_width=True, key=clave)
+    st.plotly_chart(fig, width="stretch", key=clave)
     if tabla is not None:
         with st.expander("Ver como tabla"):
-            st.dataframe(tabla, use_container_width=True, hide_index=True)
+            st.dataframe(tabla, width="stretch", hide_index=True)
 
 
 @st.cache_data(show_spinner=False)

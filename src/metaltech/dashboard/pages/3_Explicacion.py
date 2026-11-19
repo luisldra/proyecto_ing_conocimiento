@@ -56,13 +56,13 @@ if opciones:
     with izq:
         v = pd.DataFrame(e["variables_influyentes"])
         st.markdown("**Sensores con más peso**")
-        st.dataframe(v.assign(peso=v["peso"].map("{:.0%}".format)), use_container_width=True, hide_index=True)
+        st.dataframe(v.assign(peso=v["peso"].map("{:.0%}".format)), width="stretch", hide_index=True)
     with der:
         st.markdown("**Reglas**")
         if e["reglas"]:
             for r in e["reglas"]:
                 st.markdown(f"**{r['id']}**")
-                st.dataframe(pd.DataFrame(r["premisas"]), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(r["premisas"]), width="stretch", hide_index=True)
         else:
             st.write("Sin regla que la respalde (alerta solo del modelo).")
 

@@ -8,7 +8,7 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 
 | Origen | Errores |
 |---|---|
-| entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008, ERR-012, ERR-013, ERR-026 |
+| entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008, ERR-012, ERR-013, ERR-026, ERR-027 |
 | código (bugs, lógica) | ERR-009, ERR-011, ERR-025 |
 | datos (generador, fugas, desbalance) | ERR-020, ERR-023 |
 | conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010, ERR-014, ERR-015, ERR-016, ERR-017 |
@@ -46,6 +46,16 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-027 – Streamlit no se detiene con Ctrl+C en Windows
+- Fecha: 2026-11-19
+- Fase/archivo: Fase 8, web demostrativa
+- Origen: entorno
+- Síntoma: al cerrar la web con Ctrl+C, la terminal repite "Stopping..." y el proceso no termina. También aparecen un `ConnectionResetError [WinError 10054]` y un aviso de que `use_container_width` está obsoleto.
+- Causa raíz: el vigilante de archivos de Streamlit recorre los módulos importados, incluido PyTorch, cuya forma de exponer módulos es conocida por romper ese recorrido y dejar hilos activos al cerrar. El `ConnectionResetError` es un aviso inofensivo de asyncio en Windows cuando el navegador cierra la conexión. `use_container_width` está obsoleto en Streamlit 1.67.
+- Solución: `.streamlit/config.toml` con `fileWatcherType = "none"`, que obliga a recargar a mano con "Rerun" tras editar el código; 16 usos cambiados a `width="stretch"`. El proceso colgado se detuvo buscándolo por su línea de comando.
+- Prevención: en proyectos con PyTorch, desactivar el vigilante de archivos de Streamlit. Si vuelve a colgarse, cerrar la terminal o detener el proceso `streamlit.exe`.
+- Estado: resuelto (no se pudo reproducir el Ctrl+C de forma automática; confirmar al usar la web)
 
 ### ERR-026 – Medición de latencia contaminada por una pausa del entorno
 - Fecha: 2026-11-19

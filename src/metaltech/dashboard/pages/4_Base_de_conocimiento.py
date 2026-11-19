@@ -28,21 +28,21 @@ with reglas:
     if modo:
         r = r[r["entonces"] == modo]
     r = r.assign(si=r["si"].map(" ∧ ".join), fuentes=r["fuentes"].map(", ".join))
-    st.dataframe(r[["id", "activo", "si", "entonces", "fc", "accion", "fuentes"]], use_container_width=True, hide_index=True)
+    st.dataframe(r[["id", "activo", "si", "entonces", "fc", "accion", "fuentes"]], width="stretch", hide_index=True)
 
 with fmea:
     filas = [{"activo": a, **f} for a, lista in b.fmea.items() for f in lista if activo in (None, a)]
     f = pd.DataFrame(filas)
     for c in ("sintomas", "causas", "acciones", "fuentes"):
         f[c] = f[c].map(lambda x: ", ".join(x) if isinstance(x, list) else x)
-    st.dataframe(f.sort_values("npr", ascending=False), use_container_width=True, hide_index=True)
+    st.dataframe(f.sort_values("npr", ascending=False), width="stretch", hide_index=True)
 
 with lexico:
     lx = pd.DataFrame(cliente.obtener("/kb/lexicon"))
     if activo:
         lx = lx[lx["activos"].map(lambda a: activo in a)]
     lx = lx.assign(candidatos=lx["modos_falla_candidatos"].map(lambda c: ", ".join(f"{x['id']} ({x['fc_max']})" for x in c)))
-    st.dataframe(lx[["id", "expresion", "sintoma_percibido", "candidatos"]], use_container_width=True, hide_index=True)
+    st.dataframe(lx[["id", "expresion", "sintoma_percibido", "candidatos"]], width="stretch", hide_index=True)
     with st.expander("Física de cada expresión"):
         for _, e in lx.iterrows():
             st.markdown(f"**{e['expresion']}** — {e['fisica']}")

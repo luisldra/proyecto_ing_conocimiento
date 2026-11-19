@@ -51,7 +51,7 @@ c1, c2, c3 = st.columns(3)
 c1.metric("Unidades", len(estado))
 c2.metric("⚠️ En alerta", alertas)
 c3.metric("✔ Coincide con la realidad", f"{(estado['Acierto'] == '✔').mean():.0%}")
-st.dataframe(estado, use_container_width=True, hide_index=True)
+st.dataframe(estado, width="stretch", hide_index=True)
 st.caption("Una alerta puede llegar antes de las 24 h previas a la falla (aviso temprano): en ese caso aparece como acierto "
            "si el modo coincide con la degradación real.")
 pie()

@@ -80,12 +80,12 @@ with der:
     if d["reglas"]:
         for regla in d["reglas"]:
             st.markdown(f"**{regla['id']}** · certeza {regla['fc']:.2f}")
-            st.dataframe(pd.DataFrame(regla["premisas"]), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(regla["premisas"]), width="stretch", hide_index=True)
     else:
         st.info("Ninguna regla respalda esta conclusión: es una alerta solo del modelo.")
     if r["reglas_parciales"]:
         with st.expander("Reglas que casi se cumplen"):
-            st.dataframe(pd.DataFrame(r["reglas_parciales"]), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(r["reglas_parciales"]), width="stretch", hide_index=True)
     st.markdown("**Acciones sugeridas**")
     for a in d["acciones"][:4]:
         st.markdown(f"- {a}")

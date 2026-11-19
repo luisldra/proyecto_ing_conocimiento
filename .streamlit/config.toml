@@ -1,0 +1,19 @@
+# Configuración de la web demostrativa (se lee al ejecutar streamlit desde la raíz del proyecto).
+
+[server]
+# El vigilante de archivos recorre los módulos de PyTorch y deja el proceso colgado al
+# cerrarlo con Ctrl+C en Windows (ERR-027). Tras editar el código, recargue con "Rerun".
+fileWatcherType = "none"
+runOnSave = false
+headless = false
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+# Tema claro: la paleta de los gráficos se validó contra la superficie clara (#fcfcfb).
+base = "light"
+backgroundColor = "#f9f9f7"
+secondaryBackgroundColor = "#fcfcfb"
+textColor = "#0b0b0b"
+primaryColor = "#2a78d6"

@@ -16,6 +16,12 @@
 
 ## Bitácora (más reciente arriba)
 
+## [2026-11-19] Fase 8 – La web no se detenía con Ctrl+C (agente: Frontend)
+- Hecho: `.streamlit/config.toml` (vigilante de archivos desactivado y tema claro) y `use_container_width` reemplazado por `width="stretch"` en 16 lugares. Se detuvo el proceso colgado. Pruebas de la web: 10 OK.
+- Pendiente: confirmar en uso real que Ctrl+C cierra la web; tras editar el código, recargar con "Rerun".
+- Errores: ERR-027 (resuelto).
+- Decisiones: ninguna.
+
 ## [2026-11-19] Fase 8 – API y web demostrativa (agente: Backend + Frontend)
 - Hecho:
   - `api/servicio.py` (carga modelos y conocimiento una vez; valida e imputa ventanas; M0, M1, M3 y explicación; simulador de ventanas), `api/esquemas.py` y `api/main.py` con 10 endpoints.

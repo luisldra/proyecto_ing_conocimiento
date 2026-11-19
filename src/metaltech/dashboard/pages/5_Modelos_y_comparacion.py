@@ -55,7 +55,7 @@ vista["particion"] = vista["particion"].map(PARTICIONES)
 vista["metrica"] = vista["metrica"].map(lambda m: METRICAS.get(m, m))
 vista["consistente"] = (vista["ic95_inf"] > 0) | (vista["ic95_sup"] < 0)
 st.dataframe(vista[["particion", "comparacion", "metrica", "diferencia_media", "ic95_inf", "ic95_sup", "a_mayor_pct", "consistente"]]
-             .round(4), use_container_width=True, hide_index=True)
+             .round(4), width="stretch", hide_index=True)
 st.caption("En falsa alarma, una diferencia negativa es buena (M3 tiene menos). Los valores p de Wilcoxon están en el archivo "
            "completo; son optimistas porque los pares comparten datos (D-060).")
 
@@ -78,11 +78,11 @@ izq, der = st.columns(2)
 with izq:
     st.markdown("**Arquitectura elegida por validación**")
     st.dataframe(pd.DataFrame({"activo": map(nombre_activo, seleccion), "modelo": seleccion.values()}),
-                 use_container_width=True, hide_index=True)
+                 width="stretch", hide_index=True)
 with der:
     st.markdown("**Latencia por solicitud (ms, CPU)**")
     if latencia is not None:
         st.dataframe(latencia.pivot(index="activo", columns="sistema", values="p95_ms").round(2).reset_index(),
-                     use_container_width=True, hide_index=True)
+                     width="stretch", hide_index=True)
         st.caption("Percentil 95 por activo. Objetivo: 200 ms.")
 pie()

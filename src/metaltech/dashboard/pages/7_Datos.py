@@ -69,11 +69,11 @@ st.caption("Bandas amarillas: degradación hasta la falla. Huecos: unidad en rep
 izq, der = st.columns(2)
 with izq:
     st.markdown("**Episodios de falla en el tramo**")
-    st.dataframe(ep[["modo", "tarea", "inicio", "falla", "duracion_h", "particion"]], use_container_width=True, hide_index=True)
+    st.dataframe(ep[["modo", "tarea", "inicio", "falla", "duracion_h", "particion"]], width="stretch", hide_index=True)
 with der:
     st.markdown("**Eventos que imitan fallas en el tramo**")
     st.dataframe(tramo.loc[tramo["confusor"] != "ninguno", ["ts", "confusor"]].drop_duplicates("confusor").head(50),
-                 use_container_width=True, hide_index=True)
+                 width="stretch", hide_index=True)
 with st.expander("Ficha de datos completa"):
     st.markdown((RAIZ / "data" / "README.md").read_text(encoding="utf-8"))
 pie()

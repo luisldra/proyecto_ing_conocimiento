@@ -6,6 +6,8 @@ Uso: ``uvicorn metaltech.api.main:app --reload`` y documentación en ``/docs``.
 from __future__ import annotations
 
 import json
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
 from functools import lru_cache
 from typing import Any
 
@@ -26,11 +28,19 @@ REPORTES = {  # nombre público -> archivo de reports/tables
     "evaluacion_agentes": "evaluacion_agentes.csv",
 }
 
+@asynccontextmanager
+async def ciclo_de_vida(_: FastAPI) -> AsyncIterator[None]:
+    """Carga modelos y conocimiento al arrancar: así la primera consulta no tarda segundos."""
+    servicio()
+    yield
+
+
 app = FastAPI(
     title="Metal Tech – mantenimiento predictivo explicable",
     description="Deep Learning + base de conocimiento experto (ontología y reglas con factores de certeza). "
                 "Datos sintéticos; proyecto académico de Ingeniería del Conocimiento.",
     version="1.0.0",
+    lifespan=ciclo_de_vida,
 )
 
 

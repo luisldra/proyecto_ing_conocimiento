@@ -12,7 +12,7 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 | código (bugs, lógica) | ERR-009, ERR-011, ERR-025 |
 | datos (generador, fugas, desbalance) | ERR-020, ERR-023 |
 | conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010, ERR-014, ERR-015, ERR-016, ERR-017 |
-| agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019, ERR-021, ERR-022, ERR-024 |
+| agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019, ERR-021, ERR-022, ERR-024, ERR-028 |
 
 ## Lecciones aprendidas
 - Las normas ISO, IEC, NEMA, HI e IEEE son de pago: hay que citar la fuente secundaria que da el valor y marcar la confianza (ERR-001).
@@ -46,6 +46,29 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-028 – Portada con una cifra fija, flechas engañosas y conexión a la API fallida
+- Fecha: 2026-11-19
+- Fase/archivo: Fase 8, `src/metaltech/dashboard/app.py`, `cliente.py`, `api/main.py`
+- Origen: agente
+- Síntoma:
+  - El F1 de la portada se calculaba como 0.932 más una diferencia, en lugar de leerse del reporte.
+  - Las métricas con texto mostraban una flecha hacia arriba.
+  - La latencia mostrada era la medida sin red.
+  - La web decía "API en proceso" aunque `uvicorn` estaba corriendo.
+  - El menú mostraba "app" y nombres sin tildes.
+- Causa raíz:
+  - Un valor copiado a mano en el código.
+  - El campo de variación de `st.metric` se usó para un texto.
+  - La primera llamada a `/health` cargaba los modelos y superaba el límite de 1.5 s.
+  - El menú automático toma los nombres de los archivos.
+- Solución:
+  - La portada pasa a `inicio.py` y lee las cifras de `intervalos_sistemas.csv` y `latencia_api_resumen.json`; el texto va en `help`.
+  - La API carga los modelos al arrancar y la web espera hasta 5 s.
+  - El menú se define con `st.navigation` y títulos legibles.
+  - Prueba que compara la cifra de la portada con el reporte.
+- Prevención: ninguna cifra de resultados se escribe en el código; se lee del reporte y una prueba lo comprueba.
+- Estado: resuelto
 
 ### ERR-027 – Streamlit no se detiene con Ctrl+C en Windows
 - Fecha: 2026-11-19

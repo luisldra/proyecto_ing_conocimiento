@@ -29,7 +29,7 @@ def modo_conexion() -> str:
     if URL == "local":
         return "local"
     try:
-        httpx.get(f"{URL}/health", timeout=1.5).raise_for_status()
+        httpx.get(f"{URL}/health", timeout=5).raise_for_status()
         return "api"
     except httpx.HTTPError:
         return "local"

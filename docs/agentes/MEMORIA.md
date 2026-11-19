@@ -16,6 +16,17 @@
 
 ## Bitácora (más reciente arriba)
 
+## [2026-11-19] Fase 8 – Ajustes tras la primera revisión visual de la web (agente: Frontend)
+- Hecho:
+  - Portada en `inicio.py` con cifras leídas de los reportes.
+  - Latencia de la API con explicación (79 ms) en lugar de la medida sin red.
+  - Menú con `st.navigation` y títulos con tildes.
+  - La API carga los modelos al arrancar y la web espera hasta 5 s a `/health`.
+  - Pruebas de la web y la API: 24 OK.
+- Pendiente: que el equipo recorra las demás páginas en el navegador.
+- Errores: ERR-028 (resuelto).
+- Decisiones: ninguna.
+
 ## [2026-11-19] Fase 8 – La web no se detenía con Ctrl+C (agente: Frontend)
 - Hecho: `.streamlit/config.toml` (vigilante de archivos desactivado y tema claro) y `use_container_width` reemplazado por `width="stretch"` en 16 lugares. Se detuvo el proceso colgado. Pruebas de la web: 10 OK.
 - Pendiente: confirmar en uso real que Ctrl+C cierra la web; tras editar el código, recargar con "Rerun".

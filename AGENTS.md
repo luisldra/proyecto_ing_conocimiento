@@ -116,6 +116,8 @@ python -m metaltech.xai.explain     # explicabilidad (reports/tables/xai_*)
 python -m metaltech.xai.evaluacion_humana preparar|analizar  # evaluación humana (docs/evaluacion_humana/)
 uvicorn metaltech.api.main:app --reload
 streamlit run src/metaltech/dashboard/app.py
+python scripts/revisar_web.py --salida revision_web   # revisión de la web con Playwright
+python scripts/generar_datos_landing.py            # landing/data.js desde reports/
 ```
 
 ### Definición de "terminado"

@@ -62,6 +62,14 @@ uvicorn metaltech.api.main:app --reload             # documentación interactiva
 streamlit run src/metaltech/dashboard/app.py        # web en http://localhost:8501
 ```
 
+### Landing page (Fase 8b)
+
+`landing/index.html` se abre con doble clic o se publica en GitHub Pages (`.github/workflows/landing.yml`; activar una vez en *Settings → Pages → Source: GitHub Actions*). Sus cifras salen de `reports/`: tras cambiar resultados, regenere `landing/data.js` con
+
+```bash
+python scripts/generar_datos_landing.py
+```
+
 Para revisar la web de punta a punta con un navegador real (capturas e informe de errores):
 
 ```bash

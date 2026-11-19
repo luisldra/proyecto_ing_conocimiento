@@ -696,7 +696,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de falla de variador (disparos intermitentes, armónicos, bus dc, sobretemperatura) (puntaje 70%). El modelo se apoyó sobre todo en disparos_variador_24h (38%), tension_bus_dc_pct (29%), temp_devanado_c (5%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Un técnico reportó: \"el motor está cantando\". Acción sugerida (de las reglas de este modo de falla): Leer registro de fallas del variador (código, corriente, bus DC y temperatura en el disparo); revisar rampas, datos de placa cargados y cable de motor."
+      "texto": "Alerta de falla de variador (disparos intermitentes, armónicos, bus DC, sobretemperatura) (puntaje 70%). El modelo se apoyó sobre todo en disparos_variador_24h (38%), tension_bus_dc_pct (29%), temp_devanado_c (5%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Un técnico reportó: \"el motor está cantando\". Acción sugerida (de las reglas de este modo de falla): Leer registro de fallas del variador (código, corriente, bus DC y temperatura en el disparo); revisar rampas, datos de placa cargados y cable de motor."
     }
   ],
   "bomba_centrifuga": [

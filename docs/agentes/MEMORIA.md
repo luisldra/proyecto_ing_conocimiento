@@ -5,7 +5,7 @@
 ## Estado actual
 - **Fase en curso:** Fase 8 terminada (API y web demostrativa).
 - **Última tarea:** API FastAPI de 10 endpoints, web Streamlit de 8 páginas, acciones legibles y latencia de la API (D-061). p95 de 21 ms sin explicación y 79 ms con ella.
-- **Siguiente tarea:** Fase 8b – landing page estática (`landing/`), con cifras generadas desde `reports/`. Después, Fase 9 (informe de sesgos y limitaciones) y Fase 10 (documento APA, póster y guion de demo).
+- **Siguiente tarea:** Fase 9 – informe de sesgos y limitaciones (`reports/sesgos_limitaciones.md`). Después, Fase 10 (documento APA, póster y guion de demo). La landing (Fase 8b) está lista; falta activar GitHub Pages.
 - **Equipo:** Alejandro (conocimiento y QA), Luis David (datos y modelos), Junio (API y web demostrativa), David (documento APA, póster y landing).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Pendiente por confirmar:**
@@ -15,6 +15,26 @@
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-19] Fase 8b – Landing page de presentación (agente: Frontend + Documentación)
+- Hecho:
+  - `landing/` (`index.html`, `styles.css`, `app.js`, `data.js`): página estática sin dependencias de JavaScript, con:
+    - portada con la pregunta y cifras clave; el reto;
+    - lo consultado (contadores, normas, datasets, regla y expresión de ejemplo);
+    - arquitectura en SVG con los cuatro sistemas;
+    - resultados (F1 con intervalo y eventos de falsa alarma en SVG, cada uno con su tabla);
+    - una alerta real explicada con métricas de explicabilidad; ética, equidad y límites; equipo y recursos.
+  - Tema claro y oscuro con la paleta validada; adaptable a móvil.
+  - `scripts/generar_datos_landing.py` genera `data.js` desde `reports/` y la base de conocimiento: ninguna cifra está escrita a mano. Es JS y no JSON para que la página abra con doble clic.
+  - `tests/test_landing.py` (data.js al día con los reportes, recursos presentes, cifras no fijadas en el HTML, ejemplo con regla).
+  - `.github/workflows/landing.yml` publica `landing/` en GitHub Pages.
+  - `xai_ejemplos.json` regenerado con las siglas corregidas.
+- Verificación: Playwright en escritorio, móvil (390 px) y modo oscuro, abriendo la página como archivo local: sin errores de consola, sin desborde horizontal y sin secciones vacías. Capturas revisadas.
+- Pendiente:
+  - Activar GitHub Pages (Settings → Pages → Source: GitHub Actions) y hacer push.
+  - Enlazar el documento APA y el póster cuando existan.
+- Errores: ninguno.
+- Decisiones: ninguna de conocimiento. Como ejemplo se muestra una alerta respaldada por regla y sin observación incoherente del técnico.
 
 ## [2026-11-19] Fase 8 – Revisión completa de la web con Playwright (agente: QA + Frontend)
 - Hecho:

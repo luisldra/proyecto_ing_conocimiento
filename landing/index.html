@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Metal Tech · Mantenimiento predictivo explicable</title>
+  <meta name="description" content="Deep Learning y base de conocimiento experto para predecir fallas y explicar cada alerta en una planta metalmecánica. Proyecto de Ingeniería del Conocimiento, Universidad de Caldas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+  <header class="barra">
+    <nav class="contenedor barra__nav" aria-label="Secciones">
+      <a class="marca" href="#inicio">Metal Tech</a>
+      <ul>
+        <li><a href="#reto">El reto</a></li>
+        <li><a href="#conocimiento">Conocimiento</a></li>
+        <li><a href="#arquitectura">Arquitectura</a></li>
+        <li><a href="#resultados">Resultados</a></li>
+        <li><a href="#explicacion">Explicación</a></li>
+        <li><a href="#etica">Ética</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="contenido">
+    <!-- Portada -->
+    <section id="inicio" class="portada">
+      <div class="contenedor portada__rejilla">
+        <div>
+          <p class="antetitulo">Ingeniería del Conocimiento · Universidad de Caldas · 2026-2</p>
+          <h1>Mantenimiento predictivo <em>explicable</em></h1>
+          <p class="entrada">Un modelo de Deep Learning y una base de conocimiento experto trabajan juntos para predecir
+            fallas en una planta metalmecánica y decir, en cada alerta, <strong>qué sensores la sustentan y qué
+            reglas la respaldan</strong>.</p>
+          <blockquote class="pregunta">¿Cómo integrar un modelo de Deep Learning con una base de conocimiento experto para
+            predecir fallas y generar diagnósticos explicables en una planta manufacturera?</blockquote>
+          <div class="acciones">
+            <a class="boton boton--principal" href="#resultados">Ver resultados</a>
+            <a class="boton" data-enlace="repositorio" href="#">Código en GitHub</a>
+          </div>
+        </div>
+        <aside class="tarjetas-cifra" aria-label="Cifras principales">
+          <div class="cifra"><span class="cifra__valor" data-campo="f1M3"></span><span class="cifra__texto">F1 macro de la fusión en máquinas que el modelo nunca vio</span></div>
+          <div class="cifra"><span class="cifra__valor" data-campo="reduccionEventos"></span><span class="cifra__texto">menos eventos de falsa alarma que el modelo solo</span></div>
+          <div class="cifra"><span class="cifra__valor" data-campo="detectadasM3"></span><span class="cifra__texto">de las fallas detectadas por la fusión</span></div>
+          <div class="cifra"><span class="cifra__valor" data-campo="latencia"></span><span class="cifra__texto">para diagnosticar y explicar una alerta</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- El reto -->
+    <section id="reto" class="seccion">
+      <div class="contenedor">
+        <p class="antetitulo">El reto</p>
+        <h2>Sensores que nadie cruza con la experiencia de los técnicos</h2>
+        <div class="dos-columnas">
+          <div>
+            <p>Metal Tech, una planta metalmecánica ficticia de 240 personas, tiene sensores de temperatura, vibración,
+              corriente, presión y caudal en motores, bombas, compresores, prensas, bandas y centros CNC. Pero la
+              información se consulta aislada y las decisiones dependen de la experiencia de cada técnico.</p>
+            <p>El resultado son intervenciones tardías, falsas alarmas, repuestos cambiados sin necesidad y paradas
+              no planificadas. El reto: <strong>formalizar ese conocimiento heurístico</strong>, unirlo a los datos y
+              entrenar un modelo que prediga fallas y explique sus alertas.</p>
+          </div>
+          <figure class="voces">
+            <figcaption>Así diagnostican hoy los técnicos</figcaption>
+            <ul>
+              <li>«el motor está cantando»</li>
+              <li>«huele a quemado»</li>
+              <li>«la bomba está golpeando»</li>
+              <li>«la prensa está dura»</li>
+              <li>«ese rodamiento ya se va»</li>
+              <li>«el variador está disparando por nada»</li>
+            </ul>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conocimiento -->
+    <section id="conocimiento" class="seccion seccion--alterna">
+      <div class="contenedor">
+        <p class="antetitulo">Lo consultado</p>
+        <h2>Una base de conocimiento construida con fuentes, sin entrevistas</h2>
+        <p class="ancho-lectura">Sin acceso a técnicos ni a normas de pago, un agente investigador consultó normas por fuentes
+          públicas, literatura y datasets abiertos, y tomó cada decisión con su fuente. Un agente revisor la verificó de
+          forma independiente.</p>
+        <div class="contadores" id="contadores"></div>
+        <div class="dos-columnas">
+          <div class="panel">
+            <h3>Normas y guías</h3>
+            <ul class="lista" id="normas"></ul>
+          </div>
+          <div class="panel">
+            <h3>Datasets públicos de referencia</h3>
+            <ul class="lista" id="datasets"></ul>
+          </div>
+        </div>
+        <div class="dos-columnas">
+          <article class="panel regla" aria-labelledby="titulo-regla">
+            <h3 id="titulo-regla">Una regla, con su certeza</h3>
+            <p class="regla__codigo" id="regla"></p>
+            <p class="nota" id="regla-accion"></p>
+          </article>
+          <article class="panel" aria-labelledby="titulo-expresion">
+            <h3 id="titulo-expresion">Del lenguaje del técnico a un síntoma</h3>
+            <p class="expresion" id="expresion"></p>
+            <p class="nota">Una expresión nunca diagnostica sola: sugiere modos (certeza máxima 0.6) que los sensores
+              confirman o descartan.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Arquitectura -->
+    <section id="arquitectura" class="seccion">
+      <div class="contenedor">
+        <p class="antetitulo">Arquitectura</p>
+        <h2>Cuatro sistemas comparados</h2>
+        <figure class="diagrama">
+          <svg viewBox="0 0 960 330" role="img" aria-labelledby="diagrama-titulo diagrama-desc">
+            <title id="diagrama-titulo">Arquitectura del sistema híbrido</title>
+            <desc id="diagrama-desc">Los sensores alimentan el modelo de Deep Learning (M1); la base de conocimiento alimenta el motor de reglas (M0); ambos se combinan en la fusión (M3), que produce un diagnóstico explicable servido por una API y una web.</desc>
+            <defs><marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="diagrama__punta"/></marker></defs>
+            <g class="diagrama__caja"><rect x="10" y="40" width="190" height="80" rx="10"/><text x="105" y="72">Sensores</text><text x="105" y="96" class="diagrama__sub">ventana de 6 h</text></g>
+            <g class="diagrama__caja"><rect x="10" y="210" width="190" height="80" rx="10"/><text x="105" y="242">Base de conocimiento</text><text x="105" y="266" class="diagrama__sub">ontología · reglas · léxico</text></g>
+            <g class="diagrama__caja diagrama__caja--m1"><rect x="270" y="40" width="200" height="80" rx="10"/><text x="370" y="72">M1 · Deep Learning</text><text x="370" y="96" class="diagrama__sub">MLP · CNN1D · LSTM</text></g>
+            <g class="diagrama__caja diagrama__caja--m0"><rect x="270" y="210" width="200" height="80" rx="10"/><text x="370" y="242">M0 · Sistema experto</text><text x="370" y="266" class="diagrama__sub">factores de certeza</text></g>
+            <g class="diagrama__caja diagrama__caja--m3"><rect x="540" y="125" width="180" height="80" rx="10"/><text x="630" y="157">M3 · Fusión</text><text x="630" y="181" class="diagrama__sub">modelo + reglas</text></g>
+            <g class="diagrama__caja"><rect x="780" y="110" width="170" height="110" rx="10"/><text x="865" y="146">Diagnóstico</text><text x="865" y="170" class="diagrama__sub">sensores · reglas</text><text x="865" y="192" class="diagrama__sub">causas · acciones</text></g>
+            <path d="M200,80 H270" marker-end="url(#flecha)"/><path d="M200,250 H270" marker-end="url(#flecha)"/>
+            <path d="M470,80 C510,80 505,150 540,150" marker-end="url(#flecha)"/><path d="M470,250 C510,250 505,180 540,180" marker-end="url(#flecha)"/>
+            <path d="M720,165 H780" marker-end="url(#flecha)"/>
+            <path d="M190,210 C225,165 330,178 330,126" class="diagrama__punteada" marker-end="url(#flecha)"/>
+            <text x="14" y="158" class="diagrama__sub diagrama__izq">M2: el conocimiento</text>
+            <text x="14" y="178" class="diagrama__sub diagrama__izq">como entrada del modelo</text>
+          </svg>
+        </figure>
+        <ul class="leyenda-sistemas" id="leyenda-sistemas"></ul>
+      </div>
+    </section>
+
+    <!-- Resultados -->
+    <section id="resultados" class="seccion seccion--alterna">
+      <div class="contenedor">
+        <p class="antetitulo">Resultados</p>
+        <h2>Modelo solo frente a modelo + conocimiento experto</h2>
+        <p class="ancho-lectura" id="resumen-resultados"></p>
+        <div class="dos-columnas">
+          <figure class="grafico">
+            <figcaption>F1 macro en máquinas nunca vistas <span class="nota">media e intervalo del 95 % entre semillas</span></figcaption>
+            <div id="grafico-f1"></div>
+            <details><summary>Ver como tabla</summary><div id="tabla-f1"></div></details>
+          </figure>
+          <figure class="grafico">
+            <figcaption>Eventos de falsa alarma por unidad y año <span class="nota">menos es mejor</span></figcaption>
+            <div id="grafico-eventos"></div>
+            <details><summary>Ver como tabla</summary><div id="tabla-eventos"></div></details>
+          </figure>
+        </div>
+        <ul class="hallazgos" id="hallazgos"></ul>
+      </div>
+    </section>
+
+    <!-- Explicación -->
+    <section id="explicacion" class="seccion">
+      <div class="contenedor">
+        <p class="antetitulo">Explicación</p>
+        <h2>Cada alerta dice por qué</h2>
+        <div class="dos-columnas">
+          <article class="panel alerta">
+            <h3>Una alerta real del periodo de prueba</h3>
+            <p id="ejemplo-texto"></p>
+          </article>
+          <figure class="grafico">
+            <figcaption>Peso de cada sensor en la predicción <span class="nota">gradientes integrados</span></figcaption>
+            <div id="grafico-sensores"></div>
+          </figure>
+        </div>
+        <div class="contadores" id="metricas-xai"></div>
+        <p class="nota ancho-lectura">La comparación de explicaciones la hizo un panel de cinco agentes con perfiles de planta,
+          a ciegas y con controles de sesgo por longitud. No son personas: es una validación exploratoria.</p>
+      </div>
+    </section>
+
+    <!-- Ética -->
+    <section id="etica" class="seccion seccion--alterna">
+      <div class="contenedor">
+        <p class="antetitulo">Ética, equidad y límites</p>
+        <h2>Lo que el sistema no es</h2>
+        <div class="dos-columnas">
+          <ul class="lista lista--marcada" id="equidad"></ul>
+          <ul class="lista lista--marcada">
+            <li><strong>Datos sintéticos.</strong> Todo sale de un simulador calibrado con datasets públicos; las cifras
+              no son desempeño en una planta real.</li>
+            <li><strong>El técnico decide.</strong> El sistema recomienda y explica; no reemplaza la inspección.</li>
+            <li><strong>Normas sin texto oficial.</strong> Los umbrales vienen de fuentes públicas y quedan marcados con su confianza.</li>
+            <li><strong>Costos supuestos.</strong> El impacto económico se reporta en tres escenarios.</li>
+            <li><strong>Sin datos personales.</strong> Técnicos anónimos y ficticios (Ley 1581 de 2012).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Equipo -->
+    <section id="equipo" class="seccion">
+      <div class="contenedor">
+        <p class="antetitulo">Equipo</p>
+        <h2>Quiénes lo hicieron</h2>
+        <ul class="equipo">
+          <li><span class="equipo__nombre">Alejandro</span><span>Conocimiento y calidad</span></li>
+          <li><span class="equipo__nombre">Luis David</span><span>Datos y modelos</span></li>
+          <li><span class="equipo__nombre">Junio</span><span>API y web demostrativa</span></li>
+          <li><span class="equipo__nombre">David</span><span>Documento, póster y landing</span></li>
+        </ul>
+        <p class="nota">Docente: Ing. Wilson Fernando López Cardona · Facultad de Inteligencia Artificial e Ingenierías.</p>
+        <div class="recursos">
+          <a class="recurso" data-enlace="repositorio" href="#"><strong>Repositorio</strong><span>Código, datos reproducibles y bitácora</span></a>
+          <a class="recurso" data-enlace="web" href="#"><strong>Web demostrativa</strong><span>Cómo ejecutarla para probar el sistema</span></a>
+          <span class="recurso recurso--pendiente"><strong>Documento APA</strong><span>Próximamente</span></span>
+          <span class="recurso recurso--pendiente"><strong>Póster</strong><span>Próximamente</span></span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">Proyecto académico con datos sintéticos. Metal Tech es una empresa ficticia del enunciado del curso.</div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -143,7 +143,8 @@ def explicar_alerta(diagnostico: dict[str, Any], importancias: dict[str, float],
         if diagnostico["expresiones"]:
             partes.append("Un técnico reportó: \"" + diagnostico["expresiones"][0] + "\".")
         if diagnostico["acciones"]:
-            partes.append(f"Acción sugerida: {diagnostico['acciones'][0]}")
+            origen = " (de las reglas de este modo de falla)" if diagnostico.get("origen_accion") == "reglas del modo" else ""
+            partes.append(f"Acción sugerida{origen}: {diagnostico['acciones'][0]}")
         texto = " ".join(partes)
     return {
         **diagnostico,

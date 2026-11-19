@@ -12,16 +12,18 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "asentamiento_de_base",
-        "dilatacion_termica",
-        "montaje_incorrecto",
-        "pata_coja"
+        "Asentamiento de base",
+        "Dilatacion termica",
+        "Montaje incorrecto",
+        "Pata coja"
       ],
       "acciones": [
-        "alineacion_laser",
-        "corregir_pata_coja",
-        "reapriete_anclajes"
+        "Verificar alineación del acople con láser/relojes; revisar pata coja y tornillería de anclaje.",
+        "Alineacion laser",
+        "Corregir pata coja",
+        "Reapriete anclajes"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -55,7 +57,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de desalineación de ejes/acople (puntaje 69%). El modelo se apoyó sobre todo en vib_rms_mm_s (44%), vib_axial_radial_ratio (42%), vib_2x_1x_ratio (3%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: alineacion_laser"
+      "texto": "Alerta de desalineación de ejes/acople (puntaje 69%). El modelo se apoyó sobre todo en vib_rms_mm_s (44%), vib_axial_radial_ratio (42%), vib_2x_1x_ratio (3%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Verificar alineación del acople con láser/relojes; revisar pata coja y tornillería de anclaje."
     },
     {
       "unidad": "motor_electrico_01",
@@ -90,19 +92,20 @@
         }
       ],
       "causas": [
-        "humedad_contaminacion",
-        "perdida_de_fase",
-        "picos_dv_dt_variador",
-        "sobrecarga_sostenida",
-        "ventilacion_obstruida"
+        "Humedad contaminacion",
+        "Perdida de fase",
+        "Picos dv dt variador",
+        "Sobrecarga sostenida",
+        "Ventilacion obstruida"
       ],
       "acciones": [
         "Medir resistencia de aislamiento (megóhmetro) e índice de polarización; revisar la tensión de alimentación por fase.",
-        "prueba_megohmetro_e_indice_polarizacion",
-        "prueba_surge",
-        "reducir_carga",
-        "rebobinado_o_reemplazo"
+        "Prueba megohmetro e indice polarizacion",
+        "Prueba surge",
+        "Reducir carga",
+        "Rebobinado o reemplazo"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -150,16 +153,20 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "contaminacion_lubricante",
-        "corrientes_por_rodamiento_variador",
-        "fatiga",
-        "sobrecarga_por_desalineacion"
+        "Contaminacion lubricante",
+        "Corrientes por rodamiento variador",
+        "Fatiga",
+        "Sobrecarga por desalineacion"
       ],
       "acciones": [
-        "analisis_envolvente",
-        "planificar_cambio_rodamiento",
-        "aislar_rodamiento_o_escobilla_a_tierra"
+        "Realizar análisis de envolvente para confirmar frecuencias de defecto (BPFO/BPFI); programar cambio de rodamiento en la próxima parada.",
+        "Etapa avanzada de falla de rodamiento: planificar parada inmediata y reemplazo; no relubricar como solución.",
+        "Confirmar con análisis de envolvente y programar el cambio de rodamiento; no relubricar como solución.",
+        "Analisis envolvente",
+        "Planificar cambio rodamiento",
+        "Aislar rodamiento o escobilla a tierra"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -193,7 +200,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de desgaste/defecto localizado de rodamiento (pista o elemento rodante) (puntaje 70%). El modelo se apoyó sobre todo en vib_hf_rel (70%), vib_rms_mm_s (7%), vib_curtosis (4%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: analisis_envolvente"
+      "texto": "Alerta de desgaste/defecto localizado de rodamiento (pista o elemento rodante) (puntaje 70%). El modelo se apoyó sobre todo en vib_hf_rel (70%), vib_rms_mm_s (7%), vib_curtosis (4%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Realizar análisis de envolvente para confirmar frecuencias de defecto (BPFO/BPFI); programar cambio de rodamiento en la próxima parada."
     },
     {
       "unidad": "motor_electrico_01",
@@ -207,15 +214,18 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "exceso_de_grasa",
-        "falta_de_grasa",
-        "grasa_incompatible_o_degradada"
+        "Exceso de grasa",
+        "Falta de grasa",
+        "Grasa incompatible o degradada"
       ],
       "acciones": [
-        "relubricar_segun_plan",
-        "corregir_cantidad_e_intervalo",
-        "vigilar_tendencia_24h"
+        "Revisar plan de relubricación (cantidad, tipo e intervalo de grasa); relubricar y vigilar la tendencia de alta frecuencia y temperatura 24 h.",
+        "Confirmar con la tendencia de alta frecuencia y la temperatura del rodamiento; relubricar según el plan y vigilar 24 h.",
+        "Relubricar segun plan",
+        "Corregir cantidad e intervalo",
+        "Vigilar tendencia 24h"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -249,7 +259,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de lubricación deficiente de rodamientos (falta, exceso o grasa degradada) (puntaje 70%). El modelo se apoyó sobre todo en temp_rodamiento_c (64%), vib_1x_frac (5%), thd_tension_pct (5%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: relubricar_segun_plan"
+      "texto": "Alerta de lubricación deficiente de rodamientos (falta, exceso o grasa degradada) (puntaje 70%). El modelo se apoyó sobre todo en temp_rodamiento_c (64%), vib_1x_frac (5%), thd_tension_pct (5%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Revisar plan de relubricación (cantidad, tipo e intervalo de grasa); relubricar y vigilar la tendencia de alta frecuencia y temperatura 24 h."
     },
     {
       "unidad": "motor_electrico_01",
@@ -263,19 +273,21 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "base_o_soldaduras_agrietadas",
-        "grout_degradado",
-        "holgura_en_alojamiento_de_rodamiento",
-        "pata_coja",
-        "tornilleria_de_anclaje_floja"
+        "Base o soldaduras agrietadas",
+        "Grout degradado",
+        "Holgura en alojamiento de rodamiento",
+        "Pata coja",
+        "Tornilleria de anclaje floja"
       ],
       "acciones": [
-        "reapriete_con_torque",
-        "reparar_base_o_regrout",
-        "calzar_pata_coja",
-        "reemplazar_rodamiento_o_acople_con_ajuste_estrecho",
-        "analisis_de_vibracion_post_correccion"
+        "Revisar torque de tornillería de anclaje, pata coja, grietas en base o soldaduras y holgura en el alojamiento del rodamiento; verificar con medición de fase.",
+        "Reapriete con torque",
+        "Reparar base o regrout",
+        "Calzar pata coja",
+        "Reemplazar rodamiento o acople con ajuste estrecho",
+        "Analisis de vibracion post correccion"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -309,7 +321,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de holgura mecánica (anclajes flojos, base degradada, ajuste de rodamiento o acople suelto) (puntaje 70%). El modelo se apoyó sobre todo en vib_curtosis (41%), vib_2x_1x_ratio (40%), temp_devanado_c (4%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: reapriete_con_torque"
+      "texto": "Alerta de holgura mecánica (anclajes flojos, base degradada, ajuste de rodamiento o acople suelto) (puntaje 70%). El modelo se apoyó sobre todo en vib_curtosis (41%), vib_2x_1x_ratio (40%), temp_devanado_c (4%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Revisar torque de tornillería de anclaje, pata coja, grietas en base o soldaduras y holgura en el alojamiento del rodamiento; verificar con medición de fase."
     },
     {
       "unidad": "motor_electrico_01",
@@ -344,16 +356,17 @@
         }
       ],
       "causas": [
-        "atasco_de_la_maquina_accionada",
-        "freno_arrastrando",
-        "proceso_fuera_de_diseno"
+        "Atasco de la maquina accionada",
+        "Freno arrastrando",
+        "Proceso fuera de diseno"
       ],
       "acciones": [
         "Verificar carga accionada (atascos, freno, acople); comparar con la corriente de placa y el factor de servicio; reducir carga.",
-        "verificar_carga",
-        "comparar_con_corriente_de_placa_y_fs",
-        "ajustar_proteccion"
+        "Verificar carga",
+        "Comparar con corriente de placa y fs",
+        "Ajustar proteccion"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [
         "el motor está cantando"
       ],
@@ -431,17 +444,18 @@
         }
       ],
       "causas": [
-        "operacion_a_baja_velocidad_con_variador",
-        "rejillas_aletas_sucias",
-        "temperatura_ambiente_alta",
-        "ventilador_danado"
+        "Operacion a baja velocidad con variador",
+        "Rejillas aletas sucias",
+        "Temperatura ambiente alta",
+        "Ventilador danado"
       ],
       "acciones": [
         "Inspeccionar y limpiar rejillas, aletas y ventilador; verificar temperatura ambiente y sentido de giro del ventilador.",
-        "limpiar_carcasa_y_rejillas",
-        "verificar_ventilador",
-        "ventilacion_forzada_si_baja_velocidad"
+        "Limpiar carcasa y rejillas",
+        "Verificar ventilador",
+        "Ventilacion forzada si baja velocidad"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -489,16 +503,18 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "bobina_debil",
-        "bornes_flojos",
-        "contactos_picados",
-        "fin_de_vida_electrica"
+        "Bobina debil",
+        "Bornes flojos",
+        "Contactos picados",
+        "Fin de vida electrica"
       ],
       "acciones": [
-        "inspeccion_termografica_tablero",
-        "cambio_de_contactos_o_contactor",
-        "reapriete_bornes"
+        "Inspeccionar contactos del contactor (picado, soldadura), bornes flojos y fusibles; descartar pérdida de fase.",
+        "Inspeccion termografica tablero",
+        "Cambio de contactos o contactor",
+        "Reapriete bornes"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -532,7 +548,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de falla de contactor (contactos picados/abiertos, pérdida de fase) (puntaje 70%). El modelo se apoyó sobre todo en desbalance_corriente_pct (70%), temp_rodamiento_c (6%), temp_devanado_c (6%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: inspeccion_termografica_tablero"
+      "texto": "Alerta de falla de contactor (contactos picados/abiertos, pérdida de fase) (puntaje 70%). El modelo se apoyó sobre todo en desbalance_corriente_pct (70%), temp_rodamiento_c (6%), temp_devanado_c (6%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Inspeccionar contactos del contactor (picado, soldadura), bornes flojos y fusibles; descartar pérdida de fase."
     },
     {
       "unidad": "motor_electrico_03",
@@ -567,15 +583,16 @@
         }
       ],
       "causas": [
-        "acumulacion_de_suciedad",
-        "barras_de_rotor_danadas",
-        "perdida_de_masa_ventilador"
+        "Acumulacion de suciedad",
+        "Barras de rotor danadas",
+        "Perdida de masa ventilador"
       ],
       "acciones": [
         "Verificar suciedad o pérdida de masa en rotor/ventilador; balancear en sitio según grado de calidad del rotor.",
-        "limpieza",
-        "balanceo_en_sitio"
+        "Limpieza",
+        "Balanceo en sitio"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -623,20 +640,26 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "cable_largo_sin_reactancia",
-        "condensadores_bus_envejecidos",
-        "datos_de_motor_erroneos",
-        "rampas_muy_cortas",
-        "regeneracion_sin_resistencia_de_frenado",
-        "ventilador_del_variador"
+        "Cable largo sin reactancia",
+        "Condensadores bus envejecidos",
+        "Datos de motor erroneos",
+        "Rampas muy cortas",
+        "Regeneracion sin resistencia de frenado",
+        "Ventilador del variador"
       ],
       "acciones": [
-        "leer_registro_de_fallas",
-        "ajustar_rampas_y_parametros",
-        "reactancia_o_filtro",
-        "resistencia_de_frenado",
-        "mantenimiento_ventiladores"
+        "Leer registro de fallas del variador (código, corriente, bus DC y temperatura en el disparo); revisar rampas, datos de placa cargados y cable de motor.",
+        "Medir armónicos en el punto de conexión; evaluar reactancia de línea/filtro y estado de condensadores del bus DC.",
+        "Revisar la regeneración: rampa de deceleración, resistencia de frenado y tensión de red; leer el valor de bus DC guardado en el disparo.",
+        "Limpiar el disipador, comprobar los ventiladores del variador y la temperatura del tablero antes de resetear.",
+        "Leer el registro de fallas para relacionar la observación con un código concreto antes de cambiar parámetros.",
+        "Leer registro de fallas",
+        "Ajustar rampas y parametros",
+        "Reactancia o filtro",
+        "Resistencia de frenado",
+        "Mantenimiento ventiladores"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [
         "el motor está cantando",
         "esto está cascabeleando"
@@ -673,7 +696,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de falla de variador (disparos intermitentes, armónicos, bus dc, sobretemperatura) (puntaje 70%). El modelo se apoyó sobre todo en disparos_variador_24h (38%), tension_bus_dc_pct (29%), temp_devanado_c (5%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Un técnico reportó: \"el motor está cantando\". Acción sugerida: leer_registro_de_fallas"
+      "texto": "Alerta de falla de variador (disparos intermitentes, armónicos, bus dc, sobretemperatura) (puntaje 70%). El modelo se apoyó sobre todo en disparos_variador_24h (38%), tension_bus_dc_pct (29%), temp_devanado_c (5%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Un técnico reportó: \"el motor está cantando\". Acción sugerida (de las reglas de este modo de falla): Leer registro de fallas del variador (código, corriente, bus DC y temperatura en el disparo); revisar rampas, datos de placa cargados y cable de motor."
     }
   ],
   "bomba_centrifuga": [
@@ -710,14 +733,15 @@
         }
       ],
       "causas": [
-        "erosion_por_cavitacion",
-        "incrustaciones_en_impulsor"
+        "Erosion por cavitacion",
+        "Incrustaciones en impulsor"
       ],
       "acciones": [
         "Inspeccionar el impulsor por erosión de cavitación o incrustaciones; balancear o reemplazar el impulsor. Descartar antes la desalineación y la holgura.",
-        "balanceo_del_impulsor",
-        "reemplazo_del_impulsor"
+        "Balanceo del impulsor",
+        "Reemplazo del impulsor"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -793,20 +817,21 @@
         }
       ],
       "causas": [
-        "base_o_soldaduras_agrietadas",
-        "grout_degradado",
-        "holgura_en_alojamiento_de_rodamiento",
-        "pata_coja",
-        "tornilleria_de_anclaje_floja"
+        "Base o soldaduras agrietadas",
+        "Grout degradado",
+        "Holgura en alojamiento de rodamiento",
+        "Pata coja",
+        "Tornilleria de anclaje floja"
       ],
       "acciones": [
         "Revisar anclaje de la bancada, grout y soportes de tubería; verificar ajuste del rodamiento y del acople antes de intervenir el impulsor.",
-        "reapriete_con_torque",
-        "reparar_base_o_regrout",
-        "calzar_pata_coja",
-        "reemplazar_rodamiento_o_acople_con_ajuste_estrecho",
-        "analisis_de_vibracion_post_correccion"
+        "Reapriete con torque",
+        "Reparar base o regrout",
+        "Calzar pata coja",
+        "Reemplazar rodamiento o acople con ajuste estrecho",
+        "Analisis de vibracion post correccion"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -854,14 +879,16 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "dilatacion_termica",
-        "esfuerzos_de_tuberia",
-        "montaje"
+        "Dilatacion termica",
+        "Esfuerzos de tuberia",
+        "Montaje"
       ],
       "acciones": [
-        "alineacion_laser",
-        "revisar_soportes_de_tuberia"
+        "Verificar alineación motor-bomba y esfuerzos de tubería sobre la carcasa.",
+        "Alineacion laser",
+        "Revisar soportes de tuberia"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -895,7 +922,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de desalineación de ejes/acople (puntaje 65%). El modelo se apoyó sobre todo en vib_rms_mm_s (55%), temp_rodamiento_c (13%), corriente_pct (6%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: alineacion_laser"
+      "texto": "Alerta de desalineación de ejes/acople (puntaje 65%). El modelo se apoyó sobre todo en vib_rms_mm_s (55%), temp_rodamiento_c (13%), corriente_pct (6%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Verificar alineación motor-bomba y esfuerzos de tubería sobre la carcasa."
     },
     {
       "unidad": "bomba_centrifuga_01",
@@ -909,15 +936,17 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "contaminacion_del_aceite",
-        "fatiga",
-        "sobrecarga_axial_por_operacion_fuera_bep"
+        "Contaminacion del aceite",
+        "Fatiga",
+        "Sobrecarga axial por operacion fuera bep"
       ],
       "acciones": [
-        "analisis_envolvente",
-        "cambio_de_rodamientos",
-        "revisar_lubricante"
+        "Confirmar con espectro de envolvente; revisar nivel/estado del lubricante; planificar el cambio de rodamientos.",
+        "Analisis envolvente",
+        "Cambio de rodamientos",
+        "Revisar lubricante"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -951,7 +980,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de desgaste/defecto localizado de rodamiento (pista o elemento rodante) (puntaje 80%). El modelo se apoyó sobre todo en vib_hf_rel (44%), vib_curtosis (32%), temp_rodamiento_c (10%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: analisis_envolvente"
+      "texto": "Alerta de desgaste/defecto localizado de rodamiento (pista o elemento rodante) (puntaje 80%). El modelo se apoyó sobre todo en vib_hf_rel (44%), vib_curtosis (32%), temp_rodamiento_c (10%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Confirmar con espectro de envolvente; revisar nivel/estado del lubricante; planificar el cambio de rodamientos."
     },
     {
       "unidad": "bomba_centrifuga_01",
@@ -965,15 +994,17 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "canastilla_sucia",
-        "incrustaciones",
-        "objetos_extranos",
-        "valvula_parcialmente_cerrada"
+        "Canastilla sucia",
+        "Incrustaciones",
+        "Objetos extranos",
+        "Valvula parcialmente cerrada"
       ],
       "acciones": [
-        "limpiar_canastilla_e_impulsor",
-        "verificar_valvulas"
+        "Inspeccionar canastilla/filtro de succión e impulsor por objetos o incrustaciones; verificar posición de válvulas.",
+        "Limpiar canastilla e impulsor",
+        "Verificar valvulas"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -1007,7 +1038,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de obstrucción de succión/impulsor (filtro, canastilla, incrustaciones) (puntaje 80%). El modelo se apoyó sobre todo en caudal_pct (46%), corriente_pct (17%), presion_descarga_pct (12%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: limpiar_canastilla_e_impulsor"
+      "texto": "Alerta de obstrucción de succión/impulsor (filtro, canastilla, incrustaciones) (puntaje 80%). El modelo se apoyó sobre todo en caudal_pct (46%), corriente_pct (17%), presion_descarga_pct (12%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Inspeccionar canastilla/filtro de succión e impulsor por objetos o incrustaciones; verificar posición de válvulas."
     },
     {
       "unidad": "bomba_centrifuga_02",
@@ -1035,17 +1066,18 @@
         }
       ],
       "causas": [
-        "abrasivos",
-        "operacion_en_seco",
-        "plan_de_lavado_inadecuado",
-        "vibracion_excesiva"
+        "Abrasivos",
+        "Operacion en seco",
+        "Plan de lavado inadecuado",
+        "Vibracion excesiva"
       ],
       "acciones": [
         "Inspeccionar el sello mecánico y su plan de lavado; programar el cambio; revisar vibración y alineación como causas de desgaste.",
-        "cambio_de_sello",
-        "revisar_plan_de_lavado",
-        "corregir_vibracion_y_alineacion"
+        "Cambio de sello",
+        "Revisar plan de lavado",
+        "Corregir vibracion y alineacion"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -1116,14 +1148,15 @@
         }
       ],
       "causas": [
-        "aceite_degradado_o_barnizado",
-        "fin_de_vida_del_elemento"
+        "Aceite degradado o barnizado",
+        "Fin de vida del elemento"
       ],
       "acciones": [
         "Reemplazar el elemento separador de aceite según el diferencial del fabricante; revisar el arrastre de aceite.",
-        "cambiar_elemento_separador",
-        "cambiar_aceite"
+        "Cambiar elemento separador",
+        "Cambiar aceite"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -1199,16 +1232,17 @@
         }
       ],
       "causas": [
-        "herramientas_y_acoples_desgastados",
-        "purgadores_abiertos",
-        "racores_y_mangueras"
+        "Herramientas y acoples desgastados",
+        "Purgadores abiertos",
+        "Racores y mangueras"
       ],
       "acciones": [
         "Prueba de aislamiento (compresor contra red) y detección ultrasónica de fugas; reparar fugas y revisar nuevos consumos.",
-        "deteccion_ultrasonica_de_fugas",
-        "prueba_de_aislamiento",
-        "programa_de_fugas"
+        "Deteccion ultrasonica de fugas",
+        "Prueba de aislamiento",
+        "Programa de fugas"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -1284,14 +1318,15 @@
         }
       ],
       "causas": [
-        "desgaste_del_acople",
-        "montaje_del_acople"
+        "Desgaste del acople",
+        "Montaje del acople"
       ],
       "acciones": [
         "Verificar la alineación motor-elemento tornillo y el estado del elemento elástico del acople; realinear con láser.",
-        "alineacion",
-        "cambio_de_elemento_elastico"
+        "Alineacion",
+        "Cambio de elemento elastico"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -1339,19 +1374,21 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "base_o_soldaduras_agrietadas",
-        "grout_degradado",
-        "holgura_en_alojamiento_de_rodamiento",
-        "pata_coja",
-        "tornilleria_de_anclaje_floja"
+        "Base o soldaduras agrietadas",
+        "Grout degradado",
+        "Holgura en alojamiento de rodamiento",
+        "Pata coja",
+        "Tornilleria de anclaje floja"
       ],
       "acciones": [
-        "reapriete_con_torque",
-        "reparar_base_o_regrout",
-        "calzar_pata_coja",
-        "reemplazar_rodamiento_o_acople_con_ajuste_estrecho",
-        "analisis_de_vibracion_post_correccion"
+        "Revisar los soportes antivibratorios y el anclaje del paquete compresor; verificar ajustes del acople y del elemento tornillo con el fabricante.",
+        "Reapriete con torque",
+        "Reparar base o regrout",
+        "Calzar pata coja",
+        "Reemplazar rodamiento o acople con ajuste estrecho",
+        "Analisis de vibracion post correccion"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -1385,7 +1422,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de holgura mecánica (anclajes flojos, base degradada, ajuste de rodamiento o acople suelto) (puntaje 80%). El modelo se apoyó sobre todo en vib_curtosis (61%), vib_2x_1x_ratio (19%), temp_descarga_c (5%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: reapriete_con_torque"
+      "texto": "Alerta de holgura mecánica (anclajes flojos, base degradada, ajuste de rodamiento o acople suelto) (puntaje 80%). El modelo se apoyó sobre todo en vib_curtosis (61%), vib_2x_1x_ratio (19%), temp_descarga_c (5%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Revisar los soportes antivibratorios y el anclaje del paquete compresor; verificar ajustes del acople y del elemento tornillo con el fabricante."
     },
     {
       "unidad": "compresor_tornillo_02",
@@ -1420,19 +1457,20 @@
         }
       ],
       "causas": [
-        "aceite_degradado",
-        "enfriador_sucio",
-        "nivel_de_aceite_bajo",
-        "valvula_termostatica",
-        "ventilacion_de_sala_deficiente"
+        "Aceite degradado",
+        "Enfriador sucio",
+        "Nivel de aceite bajo",
+        "Valvula termostatica",
+        "Ventilacion de sala deficiente"
       ],
       "acciones": [
         "Revisar nivel y estado del aceite, limpieza del enfriador, válvula termostática y ventilación de la sala.",
-        "limpiar_enfriador",
-        "reponer_o_cambiar_aceite",
-        "verificar_termostatica",
-        "mejorar_ventilacion"
+        "Limpiar enfriador",
+        "Reponer o cambiar aceite",
+        "Verificar termostatica",
+        "Mejorar ventilacion"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -1480,15 +1518,17 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "barniz_en_el_piston",
-        "filtro_de_aire_obstruido",
-        "solenoide_de_control"
+        "Barniz en el piston",
+        "Filtro de aire obstruido",
+        "Solenoide de control"
       ],
       "acciones": [
-        "revisar_apertura_en_carga",
-        "limpiar_o_reparar_valvula",
-        "cambiar_filtro_de_aire"
+        "Verificar la apertura de la válvula de admisión en carga (solenoide, barniz, pistón) y el estado del filtro de aire.",
+        "Revisar apertura en carga",
+        "Limpiar o reparar valvula",
+        "Cambiar filtro de aire"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -1522,7 +1562,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de válvula de admisión que no abre por completo (solenoide, barniz) (puntaje 78%). El modelo se apoyó sobre todo en presion_descarga_pct (45%), corriente_pct (17%), vib_curtosis (12%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: revisar_apertura_en_carga"
+      "texto": "Alerta de válvula de admisión que no abre por completo (solenoide, barniz) (puntaje 78%). El modelo se apoyó sobre todo en presion_descarga_pct (45%), corriente_pct (17%), vib_curtosis (12%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Verificar la apertura de la válvula de admisión en carga (solenoide, barniz, pistón) y el estado del filtro de aire."
     },
     {
       "unidad": "compresor_tornillo_02",
@@ -1536,14 +1576,16 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "dilucion_o_degradacion_del_aceite",
-        "fatiga"
+        "Dilucion o degradacion del aceite",
+        "Fatiga"
       ],
       "acciones": [
-        "analisis_envolvente",
-        "analisis_de_aceite",
-        "overhaul_del_elemento"
+        "Análisis de envolvente del elemento tornillo; revisar el análisis de aceite (metales de desgaste); consultar al fabricante.",
+        "Analisis envolvente",
+        "Analisis de aceite",
+        "Overhaul del elemento"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -1577,7 +1619,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de desgaste/defecto localizado de rodamiento (pista o elemento rodante) (puntaje 79%). El modelo se apoyó sobre todo en vib_hf_rel (62%), corriente_pct (14%), vib_rms_mm_s (5%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: analisis_envolvente"
+      "texto": "Alerta de desgaste/defecto localizado de rodamiento (pista o elemento rodante) (puntaje 79%). El modelo se apoyó sobre todo en vib_hf_rel (62%), corriente_pct (14%), vib_rms_mm_s (5%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Análisis de envolvente del elemento tornillo; revisar el análisis de aceite (metales de desgaste); consultar al fabricante."
     }
   ],
   "prensa_hidraulica": [
@@ -1614,16 +1656,17 @@
         }
       ],
       "causas": [
-        "contaminacion",
-        "rayado_de_camisa",
-        "sello_de_piston_desgastado"
+        "Contaminacion",
+        "Rayado de camisa",
+        "Sello de piston desgastado"
       ],
       "acciones": [
         "Prueba de bypass del pistón en fin de carrera; aislar válvulas para separar fuga de válvula de fuga de cilindro.",
-        "prueba_de_bypass_fin_de_carrera",
-        "aislar_valvulas",
-        "reemplazo_de_sellos"
+        "Prueba de bypass fin de carrera",
+        "Aislar valvulas",
+        "Reemplazo de sellos"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -1671,15 +1714,17 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "enfriador_sucio_o_sin_agua",
-        "fugas_internas",
-        "valvula_de_alivio_descargando"
+        "Enfriador sucio o sin agua",
+        "Fugas internas",
+        "Valvula de alivio descargando"
       ],
       "acciones": [
-        "limpiar_enfriador",
-        "ajustar_alivio",
-        "buscar_fugas_internas"
+        "Revisar enfriador (caudal de agua, aletas), válvula de alivio descargando de forma continua y fugas internas.",
+        "Limpiar enfriador",
+        "Ajustar alivio",
+        "Buscar fugas internas"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -1713,7 +1758,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de sobrecalentamiento del aceite hidráulico (enfriador, alivio, fugas) (puntaje 80%). El modelo se apoyó sobre todo en temp_aceite_c (67%), iso4406_14um_codigo (9%), corriente_pct (8%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: limpiar_enfriador"
+      "texto": "Alerta de sobrecalentamiento del aceite hidráulico (enfriador, alivio, fugas) (puntaje 80%). El modelo se apoyó sobre todo en temp_aceite_c (67%), iso4406_14um_codigo (9%), corriente_pct (8%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Revisar enfriador (caudal de agua, aletas), válvula de alivio descargando de forma continua y fugas internas."
     },
     {
       "unidad": "prensa_hidraulica_01",
@@ -1755,18 +1800,19 @@
         }
       ],
       "causas": [
-        "aceite_frio",
-        "barniz",
-        "bobina_debil",
-        "particulas_en_carrete"
+        "Aceite frio",
+        "Barniz",
+        "Bobina debil",
+        "Particulas en carrete"
       ],
       "acciones": [
         "Revisar la respuesta de la válvula proporcional/direccional (corriente de bobina vs. posición); limpiar o reemplazar la válvula y filtrar el aceite.",
-        "verificar_respuesta_bobina_vs_posicion",
-        "limpiar_o_reemplazar_valvula",
-        "filtrar_aceite",
-        "calentar_aceite_antes_de_producir"
+        "Verificar respuesta bobina vs posicion",
+        "Limpiar o reemplazar valvula",
+        "Filtrar aceite",
+        "Calentar aceite antes de producir"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -1842,17 +1888,18 @@
         }
       ],
       "causas": [
-        "aceite_nuevo_sin_filtrar",
-        "filtro_saturado_o_bypass",
-        "ingreso_por_sellos",
-        "respiradero_sin_filtro"
+        "Aceite nuevo sin filtrar",
+        "Filtro saturado o bypass",
+        "Ingreso por sellos",
+        "Respiradero sin filtro"
       ],
       "acciones": [
         "Cambiar filtros, filtrar el aceite en circuito (riñón) hasta el código objetivo; buscar la fuente de ingreso (respiradero, sellos).",
-        "cambio_de_filtros",
-        "filtrado_en_rinon",
-        "conteo_de_particulas_iso4406"
+        "Cambio de filtros",
+        "Filtrado en rinon",
+        "Conteo de particulas iso4406"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -1900,16 +1947,18 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "manguera_danada",
-        "racor_flojo",
-        "sello_de_vastago_desgastado",
-        "temperatura_excesiva"
+        "Manguera danada",
+        "Racor flojo",
+        "Sello de vastago desgastado",
+        "Temperatura excesiva"
       ],
       "acciones": [
-        "bloqueo_y_aislamiento_de_energia",
-        "reemplazo_de_manguera_o_sello",
-        "reponer_aceite_filtrado"
+        "Inspección visual de mangueras, racores y sellos de vástago; bloquear y aislar energía antes de intervenir; reponer aceite filtrado.",
+        "Bloqueo y aislamiento de energia",
+        "Reemplazo de manguera o sello",
+        "Reponer aceite filtrado"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -1943,7 +1992,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de fuga hidráulica externa (manguera, racor, sello de vástago) (puntaje 80%). El modelo se apoyó sobre todo en nivel_tanque_pct (52%), presion_sistema_pct (16%), corriente_pct (9%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: bloqueo_y_aislamiento_de_energia"
+      "texto": "Alerta de fuga hidráulica externa (manguera, racor, sello de vástago) (puntaje 80%). El modelo se apoyó sobre todo en nivel_tanque_pct (52%), presion_sistema_pct (16%), corriente_pct (9%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Inspección visual de mangueras, racores y sellos de vástago; bloquear y aislar energía antes de intervenir; reponer aceite filtrado."
     }
   ],
   "banda_transportadora": [
@@ -1973,17 +2022,18 @@
         }
       ],
       "causas": [
-        "agua_o_material_entre_banda_y_tambor",
-        "recubrimiento_de_tambor_gastado",
-        "sobrecarga",
-        "tension_insuficiente"
+        "Agua o material entre banda y tambor",
+        "Recubrimiento de tambor gastado",
+        "Sobrecarga",
+        "Tension insuficiente"
       ],
       "acciones": [
         "Verificar tensión de la banda (contrapeso/tensor), recubrimiento del tambor motriz y presencia de material o agua entre banda y tambor.",
-        "ajustar_tension",
-        "recubrir_tambor",
-        "limpiar"
+        "Ajustar tension",
+        "Recubrir tambor",
+        "Limpiar"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [
         "hay cascabeleo en la línea"
       ],
@@ -2033,13 +2083,15 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "contaminacion",
-        "fatiga"
+        "Contaminacion",
+        "Fatiga"
       ],
       "acciones": [
-        "analisis_envolvente",
-        "cambio_de_rodamiento_del_tambor"
+        "Medir con estetoscopio o análisis de envolvente en el tambor motriz; revisar la lubricación y planificar el cambio del rodamiento del tambor.",
+        "Analisis envolvente",
+        "Cambio de rodamiento del tambor"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -2073,7 +2125,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de desgaste/defecto localizado de rodamiento (pista o elemento rodante) (puntaje 39%). El modelo se apoyó sobre todo en vib_curtosis (59%), vib_rms_mm_s (23%), temp_rodamiento_c (7%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: analisis_envolvente"
+      "texto": "Alerta de desgaste/defecto localizado de rodamiento (pista o elemento rodante) (puntaje 39%). El modelo se apoyó sobre todo en vib_curtosis (59%), vib_rms_mm_s (23%), temp_rodamiento_c (7%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Medir con estetoscopio o análisis de envolvente en el tambor motriz; revisar la lubricación y planificar el cambio del rodamiento del tambor."
     },
     {
       "unidad": "banda_transportadora_01",
@@ -2087,14 +2139,17 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "rodamiento_del_rodillo_danado",
-        "rodillo_trabado_por_material",
-        "sellos_del_rodillo"
+        "Rodamiento del rodillo danado",
+        "Rodillo trabado por material",
+        "Sellos del rodillo"
       ],
       "acciones": [
-        "inspeccion_termografica_o_acustica",
-        "reemplazo_de_rodillos"
+        "Recorrer la línea e identificar rodillos trabados o con rodamiento dañado (termografía/estetoscopio); reemplazarlos.",
+        "Inspeccionar rodillos que no giran (actúan como barra de fricción) y su efecto en el arrastre del motor.",
+        "Inspeccion termografica o acustica",
+        "Reemplazo de rodillos"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -2128,7 +2183,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de rodillo trabado o con rodamiento dañado (\"cascabeleo en la línea\") (puntaje 64%). El modelo se apoyó sobre todo en vib_curtosis (61%), vib_rms_mm_s (21%), temp_rodamiento_c (9%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: inspeccion_termografica_o_acustica"
+      "texto": "Alerta de rodillo trabado o con rodamiento dañado (\"cascabeleo en la línea\") (puntaje 64%). El modelo se apoyó sobre todo en vib_curtosis (61%), vib_rms_mm_s (21%), temp_rodamiento_c (9%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Recorrer la línea e identificar rodillos trabados o con rodamiento dañado (termografía/estetoscopio); reemplazarlos."
     },
     {
       "unidad": "banda_transportadora_01",
@@ -2156,14 +2211,15 @@
         }
       ],
       "causas": [
-        "atasco_de_material",
-        "sobrecarga_de_piezas"
+        "Atasco de material",
+        "Sobrecarga de piezas"
       ],
       "acciones": [
         "Despejar atascos de material, verificar la carga de piezas sobre la banda y el estado del motorreductor; comparar con la corriente de placa.",
-        "despejar_atasco",
-        "verificar_carga"
+        "Despejar atasco",
+        "Verificar carga"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -2225,19 +2281,20 @@
         }
       ],
       "causas": [
-        "acumulacion_de_material",
-        "carga_descentrada",
-        "empalme_no_escuadrado",
-        "rodillo_trabado",
-        "tambores_o_rodillos_fuera_de_escuadra"
+        "Acumulacion de material",
+        "Carga descentrada",
+        "Empalme no escuadrado",
+        "Rodillo trabado",
+        "Tambores o rodillos fuera de escuadra"
       ],
       "acciones": [
         "Revisar escuadra de tambores y rodillos, empalme, rodillos trabados y carga centrada; ajustar con rodillos autoalineantes.",
-        "alinear_tambores_y_rodillos",
-        "rehacer_empalme",
-        "rodillos_autoalineantes",
-        "centrar_carga"
+        "Alinear tambores y rodillos",
+        "Rehacer empalme",
+        "Rodillos autoalineantes",
+        "Centrar carga"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -2285,16 +2342,18 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "desgaste_de_bordes_por_corrimiento",
-        "empalme_deteriorado",
-        "objeto_atrapado",
-        "sobretension"
+        "Desgaste de bordes por corrimiento",
+        "Empalme deteriorado",
+        "Objeto atrapado",
+        "Sobretension"
       ],
       "acciones": [
-        "paro_y_bloqueo",
-        "reemplazar_o_reempalmar",
-        "inspeccion_periodica_de_empalmes"
+        "Detener y bloquear la línea; inspeccionar banda y empalme; revisar interruptores de desalineación y de velocidad cero.",
+        "Paro y bloqueo",
+        "Reemplazar o reempalmar",
+        "Inspeccion periodica de empalmes"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -2328,7 +2387,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de rotura de banda o de empalme (puntaje 70%). El modelo se apoyó sobre todo en velocidad_banda_pct (61%), vib_curtosis (21%), corriente_pct (8%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: paro_y_bloqueo"
+      "texto": "Alerta de rotura de banda o de empalme (puntaje 70%). El modelo se apoyó sobre todo en velocidad_banda_pct (61%), vib_curtosis (21%), corriente_pct (8%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Detener y bloquear la línea; inspeccionar banda y empalme; revisar interruptores de desalineación y de velocidad cero."
     }
   ],
   "centro_cnc": [
@@ -2344,14 +2403,16 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "parametros_de_corte_agresivos",
-        "refrigerante_insuficiente",
-        "vida_util_alcanzada"
+        "Parametros de corte agresivos",
+        "Refrigerante insuficiente",
+        "Vida util alcanzada"
       ],
       "acciones": [
-        "cambio_de_herramienta",
-        "revisar_parametros_de_corte"
+        "Cambiar la herramienta o el inserto; verificar acabado y medidas de la última pieza.",
+        "Cambio de herramienta",
+        "Revisar parametros de corte"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -2385,7 +2446,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de desgaste progresivo de herramienta (flanco) (puntaje 59%). El modelo se apoyó sobre todo en desgaste_herramienta_min (83%), carga_husillo_cv_pct (8%), vib_rms_mm_s (4%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: cambio_de_herramienta"
+      "texto": "Alerta de desgaste progresivo de herramienta (flanco) (puntaje 59%). El modelo se apoyó sobre todo en desgaste_herramienta_min (83%), carga_husillo_cv_pct (8%), vib_rms_mm_s (4%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Cambiar la herramienta o el inserto; verificar acabado y medidas de la última pieza."
     },
     {
       "unidad": "centro_cnc_01",
@@ -2399,15 +2460,17 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "error_de_programa",
-        "offset_de_herramienta_erroneo",
-        "sujecion_de_pieza"
+        "Error de programa",
+        "Offset de herramienta erroneo",
+        "Sujecion de pieza"
       ],
       "acciones": [
-        "paro_inmediato",
-        "verificar_runout_y_rodamientos",
-        "simulacion_de_programa"
+        "Paro inmediato; verificar el programa/offsets; inspeccionar runout del husillo y rodamientos antes de reanudar.",
+        "Paro inmediato",
+        "Verificar runout y rodamientos",
+        "Simulacion de programa"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -2441,7 +2504,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de golpe/colisión de husillo o herramienta (error de programa/offset) (puntaje 58%). El modelo se apoyó sobre todo en vib_pico_g (68%), carga_husillo_cv_pct (13%), vib_rms_mm_s (13%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: paro_inmediato"
+      "texto": "Alerta de golpe/colisión de husillo o herramienta (error de programa/offset) (puntaje 58%). El modelo se apoyó sobre todo en vib_pico_g (68%), carga_husillo_cv_pct (13%), vib_rms_mm_s (13%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Paro inmediato; verificar el programa/offsets; inspeccionar runout del husillo y rodamientos antes de reanudar."
     },
     {
       "unidad": "centro_cnc_01",
@@ -2455,15 +2518,17 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "falla_del_enfriador",
-        "lubricacion_aceite_aire_deficiente",
-        "precarga_excesiva"
+        "Falla del enfriador",
+        "Lubricacion aceite aire deficiente",
+        "Precarga excesiva"
       ],
       "acciones": [
-        "revisar_enfriador",
-        "revisar_lubricacion",
-        "ciclo_de_calentamiento"
+        "Revisar el enfriador del husillo, la lubricación de rodamientos (aceite-aire/grasa) y la precarga; hacer ciclo de calentamiento.",
+        "Revisar enfriador",
+        "Revisar lubricacion",
+        "Ciclo de calentamiento"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -2497,7 +2562,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de sobrecalentamiento de husillo (refrigeración, lubricación, precarga) (puntaje 60%). El modelo se apoyó sobre todo en temp_husillo_c (83%), desgaste_herramienta_min (7%), vib_hf_rel (4%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: revisar_enfriador"
+      "texto": "Alerta de sobrecalentamiento de husillo (refrigeración, lubricación, precarga) (puntaje 60%). El modelo se apoyó sobre todo en temp_husillo_c (83%), desgaste_herramienta_min (7%), vib_hf_rel (4%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Revisar el enfriador del husillo, la lubricación de rodamientos (aceite-aire/grasa) y la precarga; hacer ciclo de calentamiento."
     },
     {
       "unidad": "centro_cnc_01",
@@ -2511,14 +2576,16 @@
       "respaldo_reglas": false,
       "reglas": [],
       "causas": [
-        "colisiones_previas",
-        "contaminacion_por_refrigerante",
-        "fatiga"
+        "Colisiones previas",
+        "Contaminacion por refrigerante",
+        "Fatiga"
       ],
       "acciones": [
-        "analisis_envolvente",
-        "reconstruccion_del_husillo"
+        "Análisis de envolvente en el cabezal; revisar historial de colisiones y la lubricación; planificar la reconstrucción del husillo.",
+        "Analisis envolvente",
+        "Reconstruccion del husillo"
       ],
+      "origen_accion": "reglas del modo",
       "expresiones": [],
       "alternativas": [
         {
@@ -2552,7 +2619,7 @@
         }
       ],
       "concordancia_reglas": null,
-      "texto": "Alerta de desgaste/defecto localizado de rodamiento (pista o elemento rodante) (puntaje 60%). El modelo se apoyó sobre todo en vib_hf_rel (76%), vib_rms_mm_s (12%), desgaste_herramienta_min (7%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida: analisis_envolvente"
+      "texto": "Alerta de desgaste/defecto localizado de rodamiento (pista o elemento rodante) (puntaje 60%). El modelo se apoyó sobre todo en vib_hf_rel (76%), vib_rms_mm_s (12%), desgaste_herramienta_min (7%). Ninguna regla la respalda todavía: es una alerta solo del modelo. Acción sugerida (de las reglas de este modo de falla): Análisis de envolvente en el cabezal; revisar historial de colisiones y la lubricación; planificar la reconstrucción del husillo."
     },
     {
       "unidad": "centro_cnc_01",
@@ -2587,16 +2654,17 @@
         }
       ],
       "causas": [
-        "profundidad_de_corte_excesiva",
-        "velocidad_en_zona_inestable",
-        "voladizo_largo"
+        "Profundidad de corte excesiva",
+        "Velocidad en zona inestable",
+        "Voladizo largo"
       ],
       "acciones": [
         "Ajustar velocidad de husillo hacia un lóbulo estable, reducir la profundidad de corte o el voladizo de la herramienta.",
-        "ajustar_rpm_a_lobulo_estable",
-        "reducir_profundidad",
-        "acortar_voladizo"
+        "Ajustar rpm a lobulo estable",
+        "Reducir profundidad",
+        "Acortar voladizo"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {
@@ -2665,17 +2733,18 @@
         }
       ],
       "causas": [
-        "chatter",
-        "desgaste_no_detectado",
-        "evacuacion_de_viruta_deficiente",
-        "inclusion_dura_en_material"
+        "Chatter",
+        "Desgaste no detectado",
+        "Evacuacion de viruta deficiente",
+        "Inclusion dura en material"
       ],
       "acciones": [
         "Detener el programa (paro de avance), inspeccionar la herramienta y la pieza; medir la herramienta con el palpador.",
-        "paro_de_avance",
-        "inspeccion_con_palpador",
-        "revisar_pieza"
+        "Paro de avance",
+        "Inspeccion con palpador",
+        "Revisar pieza"
       ],
+      "origen_accion": "regla disparada",
       "expresiones": [],
       "alternativas": [
         {

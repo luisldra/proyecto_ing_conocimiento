@@ -3,9 +3,9 @@
 > Protocolo y formato: [AGENTS.md](../../AGENTS.md) · Errores: [ERRORES.md](ERRORES.md) · Plan: [PLAN.md](../PLAN.md)
 
 ## Estado actual
-- **Fase en curso:** Fase 7 terminada (evaluación con 5 semillas).
-- **Última tarea:** intervalos, equidad, impacto y latencia (D-060). M3 supera a M1 en F1 por poco pero con intervalo que excluye 0, y reduce la falsa alarma con confusor en los 30 pares activo-semilla.
-- **Siguiente tarea:** Fase 8 – API (FastAPI) y web demostrativa. Mostrar las acciones de la FMEA como texto legible (hallazgo del panel, D-059) y medir la latencia de la API.
+- **Fase en curso:** Fase 8 terminada (API y web demostrativa).
+- **Última tarea:** API FastAPI de 10 endpoints, web Streamlit de 8 páginas, acciones legibles y latencia de la API (D-061). p95 de 21 ms sin explicación y 79 ms con ella.
+- **Siguiente tarea:** Fase 8b – landing page estática (`landing/`), con cifras generadas desde `reports/`. Después, Fase 9 (informe de sesgos y limitaciones) y Fase 10 (documento APA, póster y guion de demo).
 - **Equipo:** Alejandro (conocimiento y QA), Luis David (datos y modelos), Junio (API y web demostrativa), David (documento APA, póster y landing).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Pendiente por confirmar:**
@@ -15,6 +15,20 @@
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-19] Fase 8 – API y web demostrativa (agente: Backend + Frontend)
+- Hecho:
+  - `api/servicio.py` (carga modelos y conocimiento una vez; valida e imputa ventanas; M0, M1, M3 y explicación; simulador de ventanas), `api/esquemas.py` y `api/main.py` con 10 endpoints.
+  - `dashboard/` con portada y 8 páginas: Planta, Simulador, Explicación, Base de conocimiento (reglas, FMEA, léxico, grafo de la ontología con pyvis y decisiones), Modelos y comparación, Equidad e impacto, Datos y Bitácora. Paleta validada con `validate_palette.js`.
+  - Acciones legibles cuando no hay regla disparada (hallazgo del panel); `xai_ejemplos.json` regenerado.
+  - `metrics/latencia.py --api` mide la latencia extremo a extremo.
+  - `tests/test_api.py` y `tests/test_dashboard.py` (cada página carga y el simulador diagnostica); README con endpoints y uso.
+- Resultados: latencia de la API, p95 del peor activo, 21.2 ms sin explicación y 79.2 ms con explicación (objetivo 200 ms).
+- Pendiente:
+  - Revisión visual de la web en navegador por el equipo.
+  - Landing page (Fase 8b).
+- Errores: ERR-026 (resuelto).
+- Decisiones: D-061.
 
 ## [2026-11-11] Fase 7 – Evaluación final con 5 semillas (agente: Datos/ML + QA)
 - Hecho:

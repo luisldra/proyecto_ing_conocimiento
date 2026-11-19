@@ -74,16 +74,53 @@ def medir_activo(activo: str, cfg: dict, datos_dir: Path, arquitectura: str, fus
             for s, t in tiempos.items()]
 
 
+def medir_api(url: str, n: int, tablas: Path, objetivo: float) -> int:
+    """Latencia extremo a extremo de ``POST /diagnose`` contra un servidor ya levantado (HTTP local)."""
+    import httpx
+
+    from metaltech.api.servicio import Servicio
+
+    srv = Servicio()
+    filas = []
+    with httpx.Client(base_url=url, timeout=60) as cliente:
+        for activo in srv.base.activos:
+            modos = srv.clases(activo)
+            for explicar in (False, True):
+                tiempos = []
+                for k in range(n if not explicar else max(n // 5, 10)):
+                    modo = modos[k % len(modos)]
+                    ventana = srv.construir_ventana(activo, None if modo == "normal" else modo, semilla=k)
+                    t0 = time.perf_counter()
+                    cliente.post("/diagnose", json={"activo": activo, "ventana": ventana, "explicar": explicar}).raise_for_status()
+                    tiempos.append(time.perf_counter() - t0)
+                filas.append({"activo": activo, "endpoint": "/diagnose", "explicar": explicar,
+                              "solicitudes": len(tiempos), **percentiles(tiempos)})
+            print(f"[{activo}] listo", flush=True)
+    t = pd.DataFrame(filas)
+    t.to_csv(tablas / "latencia_api.csv", index=False)
+    resumen = {"objetivo_p95_ms": objetivo, "url": url,
+               "p95_max_ms": {("con_explicacion" if e else "sin_explicacion"): round(float(g["p95_ms"].max()), 2)
+                              for e, g in t.groupby("explicar")}}
+    resumen["cumple_objetivo"] = all(v <= objetivo for v in resumen["p95_max_ms"].values())
+    (tablas / "latencia_api_resumen.json").write_text(json.dumps(resumen, indent=2), encoding="utf-8")
+    print(t.round(2).to_string(index=False))
+    print(json.dumps(resumen, indent=2))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Latencia por solicitud en CPU.")
     ap.add_argument("--config", default=RAIZ / "configs" / "train.yaml", type=Path)
     ap.add_argument("--datos", default=RAIZ / "data" / "synthetic", type=Path)
     ap.add_argument("--solicitudes", default=None, type=int)
+    ap.add_argument("--api", default=None, help="URL de la API levantada para medir la latencia extremo a extremo")
     args = ap.parse_args(argv)
     with open(args.config, encoding="utf-8") as f:
         cfg = yaml.safe_load(f)
     n = args.solicitudes or cfg["evaluacion"]["latencia_solicitudes"]
     tablas = RAIZ / cfg["rutas"]["tablas"]
+    if args.api:
+        return medir_api(args.api, n, tablas, cfg["evaluacion"]["latencia_objetivo_p95_ms"])
     seleccion = json.loads((tablas / "modelos_seleccion.json").read_text(encoding="utf-8"))
     fusion = json.loads((tablas / "fusion_parametros.json").read_text(encoding="utf-8"))
     base = cargar_base()

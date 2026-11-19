@@ -78,6 +78,7 @@
 | D-058 | Diseño de la evaluación humana de explicaciones | media |
 | D-059 | Evaluación de explicaciones con un panel de agentes (sin personas disponibles) | baja |
 | D-060 | Evaluación final: semillas, intervalos, equidad, impacto y latencia | media |
+| D-061 | API, web demostrativa y acciones legibles | media |
 
 ---
 
@@ -857,6 +858,19 @@
   - La variación entre semillas no incluye la de los datos.
   - Los costos no salen de una planta real.
 - **Fuentes:** D-054, D-056; configuración `evaluacion` e `impacto` en `configs/train.yaml`.
+- **Confianza:** media.
+
+## D-061 – API, web demostrativa y acciones legibles
+- **Decisión:**
+  - **API (FastAPI):** recibe ventanas crudas de 36 lecturas por sensor, rellena los vacíos con el último valor conocido y devuelve M0, M1 y M3 con la explicación. Valida sensores y longitud (error 422). Las consultas de la base de conocimiento salen de la ontología OWL (`detalle_modo`, `grafo`).
+  - **Web (Streamlit, 8 páginas):** planta, simulador, explicación, base de conocimiento, modelos, equidad e impacto, datos y bitácora. Usa la API si está levantada y, si no, la misma API dentro del proceso: un solo camino de código, y la demo no depende del servidor.
+  - **Simulador:** ventana de operación sana más el tramo final de la degradación según la firma del modo. Los pulsos intermitentes se aproximan por su envolvente, de modo que el simulador de la web es más regular que el del dataset.
+  - **Acciones legibles (hallazgo del panel, D-059):** si ninguna regla respalda la alerta, la acción sale de las reglas del mismo modo y se rotula como tal; los identificadores de la FMEA se muestran humanizados. Las alertas de ejemplo se regeneraron; el formulario ya evaluado por el panel conserva el texto anterior.
+  - **Gráficos:** paleta de referencia validada, en orden fijo (M0 azul, M1 naranja, M2 aqua, M3 amarillo), con tabla bajo cada gráfico porque aqua y amarillo tienen poco contraste. El semáforo usa la paleta de estado con ícono y texto.
+- **Latencia extremo a extremo (HTTP local, un proceso de uvicorn):** p95 del peor activo 21.2 ms sin explicación y 79.2 ms con explicación; cumple el objetivo de 200 ms. Una primera corrida se descartó por una pausa del entorno (ERR-026).
+- **Límites:**
+  - Sin autenticación ni control de carga concurrente: es una demo local.
+  - La web solo se probó con pruebas automáticas de cada página (`streamlit.testing`), sin revisión visual en navegador.
 - **Confianza:** media.
 
 ---

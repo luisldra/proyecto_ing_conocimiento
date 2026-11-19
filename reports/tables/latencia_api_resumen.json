@@ -1,0 +1,9 @@
+{
+  "objetivo_p95_ms": 200,
+  "url": "http://127.0.0.1:8765",
+  "p95_max_ms": {
+    "sin_explicacion": 21.24,
+    "con_explicacion": 79.24
+  },
+  "cumple_objetivo": true
+}

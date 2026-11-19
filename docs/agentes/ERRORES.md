@@ -8,7 +8,7 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 
 | Origen | Errores |
 |---|---|
-| entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008, ERR-012, ERR-013 |
+| entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008, ERR-012, ERR-013, ERR-026 |
 | código (bugs, lógica) | ERR-009, ERR-011, ERR-025 |
 | datos (generador, fugas, desbalance) | ERR-020, ERR-023 |
 | conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010, ERR-014, ERR-015, ERR-016, ERR-017 |
@@ -46,6 +46,16 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-026 – Medición de latencia contaminada por una pausa del entorno
+- Fecha: 2026-11-19
+- Fase/archivo: Fase 8, `src/metaltech/metrics/latencia.py --api`
+- Origen: entorno
+- Síntoma: una solicitud del compresor midió 2 136 s y el p95 con explicación salió en 375 ms, por encima del objetivo.
+- Causa raíz: el comando superó el tiempo límite de la herramienta y se pasó a segundo plano a mitad de la medición; el proceso quedó en pausa durante ese cambio.
+- Solución: se descartó esa corrida y se repitió la medición lanzada desde el inicio en segundo plano.
+- Prevención: las mediciones de tiempo largas se lanzan en segundo plano desde el principio, y un máximo absurdo se revisa antes de reportar un percentil.
+- Estado: resuelto
 
 ### ERR-025 – Preferencias leídas como "indiferente" por el tipo de dato
 - Fecha: 2026-11-11

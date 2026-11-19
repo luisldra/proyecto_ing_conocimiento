@@ -111,6 +111,7 @@ python -m metaltech.models.train --config configs/train.yaml
 python -m metaltech.hybrid.comparar  # M0 · M1 · M2 · M3 (reports/tables/comparacion_*)
 python -m metaltech.hybrid.comparar --todas   # Fase 7: 5 semillas
 python -m metaltech.metrics.intervalos | equidad | impacto | latencia   # Fase 7
+python -m metaltech.metrics.latencia --api http://127.0.0.1:8000   # Fase 8: latencia extremo a extremo
 python -m metaltech.xai.explain     # explicabilidad (reports/tables/xai_*)
 python -m metaltech.xai.evaluacion_humana preparar|analizar  # evaluación humana (docs/evaluacion_humana/)
 uvicorn metaltech.api.main:app --reload

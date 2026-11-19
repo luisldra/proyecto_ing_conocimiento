@@ -54,6 +54,12 @@ def elegir_fusion(
     return ParametrosFusion(mejor["alfa"], mejor["veto"], fc_min), rejilla
 
 
+def humanizar(identificador: str) -> str:
+    """``analisis_envolvente`` -> ``Analisis envolvente`` (identificadores de la FMEA)."""
+    texto = identificador.replace("_", " ").strip()
+    return texto[:1].upper() + texto[1:]
+
+
 def diagnostico_hibrido(
     activo: str, clases: list[str], p_dl: np.ndarray, diag: Diagnostico,
     parametros: ParametrosFusion, base: BaseConocimiento,
@@ -68,6 +74,10 @@ def diagnostico_hibrido(
     modo = clases[k]
     reglas = [r for r in diag.reglas_disparadas if r.modo == modo]
     filas = [f for f in base.fmea.get(activo, []) if f.get("modo_falla") == modo]
+    # Sin regla disparada, la acción sale de las reglas del mismo modo (texto experto) y no del
+    # identificador de la FMEA, que el panel de evaluación juzgó ilegible (D-059, D-061).
+    del_modo = [r["accion"] for r in base.reglas_de(activo) if r["entonces"] == modo]
+    acciones = [r.accion for r in reglas] or del_modo
     return {
         "activo": activo,
         "modo": modo,
@@ -82,8 +92,9 @@ def diagnostico_hibrido(
                 for p in r.premisas
             ]} for r in reglas
         ],
-        "causas": sorted({c for f in filas for c in f.get("causas", [])}),
-        "acciones": list(dict.fromkeys([r.accion for r in reglas] + [a for f in filas for a in f.get("acciones", [])])),
+        "causas": sorted({humanizar(c) for f in filas for c in f.get("causas", [])}),
+        "acciones": list(dict.fromkeys(acciones + [humanizar(a) for f in filas for a in f.get("acciones", [])])),
+        "origen_accion": "regla disparada" if reglas else ("reglas del modo" if del_modo else "FMEA"),
         "expresiones": [e.expresion for e in diag.expresiones],
         "alternativas": [
             {"modo": clases[j], "puntaje": float(s[j])} for j in np.argsort(-s)[1:4] if s[j] > 0

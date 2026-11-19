@@ -50,12 +50,34 @@ python -m metaltech.kb.rules_engine --activo bomba_centrifuga \
   --valores '{"npsh_margen_ratio": 1.0, "vib_hf_rel": 4.2, "caudal_cv_pct": 8, "presion_descarga_pct": 88}' \
   --texto "la bomba está golpeando"
 
-# Se habilitan en fases posteriores
-python -m metaltech.data.generator --config configs/assets.yaml
-python -m metaltech.models.train --config configs/train.yaml
-uvicorn metaltech.api.main:app --reload
-streamlit run src/metaltech/dashboard/app.py
+# Datos, modelos, fusión y evaluación (Fases 3 a 7)
+python -m metaltech.data.generator                  # data/synthetic/ (unos 50 s)
+python -m metaltech.models.train                    # M1 por activo (unos 25 min en CPU)
+python -m metaltech.hybrid.comparar --todas         # M0 · M1 · M2 · M3 con 5 semillas
+python -m metaltech.xai.explain                     # explicabilidad
+python -m metaltech.metrics.intervalos              # también: equidad, impacto, latencia
+
+# API y web demostrativa (Fase 8)
+uvicorn metaltech.api.main:app --reload             # documentación interactiva en http://127.0.0.1:8000/docs
+streamlit run src/metaltech/dashboard/app.py        # web en http://localhost:8501
 ```
+
+La web usa la API si está levantada; si no, carga la misma API dentro del proceso, de modo que basta con `streamlit run` para la demo. Necesita los modelos (`checkpoints/`) y los datos (`data/synthetic/`), que no se versionan y se regeneran con los comandos anteriores.
+
+### Endpoints
+
+| Método | Ruta | Para qué |
+|---|---|---|
+| GET | `/health` | Estado y modelos cargados |
+| GET | `/assets`, `/assets/{activo}` | Activos, sensores con umbrales y modos de falla |
+| GET | `/kb/rules?activo=&modo=` | Reglas con factor de certeza, acción y fuentes |
+| GET | `/kb/failure/{modo}` | Ficha del modo desde la ontología: síntomas, causas, acciones, reglas, FMEA |
+| GET | `/kb/lexicon` | Expresiones de técnicos y su traducción a síntomas |
+| GET | `/kb/ontology/graph?activo=` | Nodos y aristas de la ontología |
+| POST | `/predict` | Probabilidades del modelo (M1) para una ventana de 36 lecturas por sensor |
+| POST | `/diagnose` | M0, M1 y diagnóstico híbrido M3 explicado (reglas, sensores, causas, acciones) |
+| POST | `/simulate` | Genera una ventana con una falla inyectada y la diagnostica |
+| GET | `/reports/{nombre}` | Tablas de resultados (comparación, intervalos, equidad, impacto, latencia…) |
 
 ## Estructura
 

@@ -3,9 +3,9 @@
 > Protocolo y formato: [AGENTS.md](../../AGENTS.md) · Errores: [ERRORES.md](ERRORES.md) · Plan: [PLAN.md](../PLAN.md)
 
 ## Estado actual
-- **Fase en curso:** Fase 8 terminada (API y web demostrativa).
-- **Última tarea:** API FastAPI de 10 endpoints, web Streamlit de 8 páginas, acciones legibles y latencia de la API (D-061). p95 de 21 ms sin explicación y 79 ms con ella.
-- **Siguiente tarea:** Fase 9 – informe de sesgos y limitaciones (`reports/sesgos_limitaciones.md`). Después, Fase 10 (documento APA, póster y guion de demo). La landing (Fase 8b) está publicada en https://luisldra.github.io/proyecto_ing_conocimiento/.
+- **Fase en curso:** Fase 9 terminada (sesgos, limitaciones y marco legal).
+- **Última tarea:** [reports/sesgos_limitaciones.md](../../reports/sesgos_limitaciones.md), marco legal D-062 a D-075 y [acta ética](../etica/acta_etica.md). Se agregó al plan la Fase 11 (manuales y guías).
+- **Siguiente tarea:** Fase 10 (documento APA, anexos, póster y guion de demo) y Fase 11 (puesta en marcha, guías de comandos y documentos, diagramas de flujo, manuales de usuario, API y técnico, glosario). La landing está publicada en https://luisldra.github.io/proyecto_ing_conocimiento/.
 - **Equipo:** Alejandro (conocimiento y QA), Luis David (datos y modelos), Junio (API y web demostrativa), David (documento APA, póster y landing).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Pendiente por confirmar:**
@@ -15,6 +15,26 @@
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-20] Fase 9 – Sesgos, limitaciones y marco legal (agente: Investigador + Documentación + QA)
+- Hecho:
+  - `reports/sesgos_limitaciones.md`: registro de 10 riesgos, sesgos del simulador, sesgo de técnico y turno, brecha entre activos, sobreconfianza, deriva, límites de la evaluación y de la explicación, marco legal y requisitos para una planta real. Todas las cifras salen de `reports/tables/`.
+  - Hallazgos que van al documento:
+    - una observación incorrecta duplica la falsa alarma de M0 (1.05 % → 2.08 %); en M3 casi no cambia (0.28 % → 0.32 %);
+    - el aporte del conocimiento en máquina no vista está en las falsas alarmas (−1.1 puntos, de 4.2 % a 3.1 %) más que en el F1 (+0.8 puntos);
+    - con veto, o con α < 0.6, el F1 de validación cae a 0.47–0.70, así que las reglas no sirven como validador con su cobertura actual.
+  - Agente investigador: marco legal consultado en fuentes públicas. D-062 a D-075 y 21 referencias APA en `decisiones.md`, con marcas [V]/[S] y la lista de lo no verificado.
+  - `docs/etica/acta_etica.md`: declaración de datos sintéticos, origen del conocimiento, uso de IA, compromisos de diseño y firmas del equipo.
+  - `tests/test_sesgos.py`: comprueba que las cifras del informe coinciden con `reports/tables/`.
+  - `landing/data.js` regenerado (más decisiones y referencias).
+  - Plan: nueva **Fase 11** con manuales de usuario, API y técnico, puesta en marcha, guías de comandos y documentos, diagramas de flujo y glosario.
+  - Se confirmó que `static.yml` quedó eliminado (commit `6c8021b`).
+- Pendiente:
+  - verificar en texto oficial lo listado como no verificado en D-075 antes de citarlo en el documento;
+  - firmas del acta ética;
+  - registro de decisiones humanas en la web (D-069) y enmascarado de datos sensibles en texto libre (D-064), solo en una versión real.
+- Errores: ERR-031.
+- Decisiones: D-062 a D-075. La más importante es D-063: las observaciones nunca se usan para evaluar personas.
 
 ## [2026-11-20] Fase 8b – Fallo de la publicación en GitHub Pages (agente: QA)
 - Hecho: diagnóstico con la API pública de GitHub. El flujo falla en `configure-pages` porque Pages no está activado (404).

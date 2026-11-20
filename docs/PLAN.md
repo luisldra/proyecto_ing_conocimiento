@@ -251,6 +251,24 @@ La web demostrativa debe permitir **probar** el sistema y **ver todo** lo implem
 - Póster: problema → arquitectura → resultados M1 vs. M3 → ejemplo de explicación → conclusiones.
 - Guion de demo (10–15 min): contexto (2) → conocimiento y ontología (3) → simulación de falla en vivo en el tablero (4) → comparación de métricas (3) → ética y limitaciones (2).
 
+## Fase 11 – Manuales y guías del proyecto (semana 9)
+Documentación de uso para quien recibe el proyecto: docente, evaluadores, equipo y quien lo retome. Va en `docs/manuales/`, en Markdown con diagramas Mermaid (GitHub los renderiza), y queda enlazada desde el README y la landing.
+- **`puesta_en_marcha.md`**: requisitos, instalación paso a paso (Windows PowerShell, Git Bash, Linux/macOS), JDK opcional, cómo regenerar datos, modelos y reportes en orden, tiempos aproximados, cómo levantar API, web y landing, y verificación de que todo quedó bien (`pytest`, `/health`). Incluye problemas frecuentes con enlace a su `ERR-NNN`.
+- **`guia_comandos.md`**: todos los comandos agrupados por fase. Para cada uno: qué hace, argumentos, qué archivos produce y cuánto tarda.
+- **`guia_documentos.md`**: mapa de todos los documentos y archivos importantes: qué contiene, para quién es, quién lo mantiene, cuándo se actualiza y de qué otro archivo depende (por ejemplo YAML → OWL → API → web).
+- **`diagramas_flujo.md`**:
+  - flujo general del sistema (datos → modelos → reglas → fusión → diagnóstico);
+  - flujo de un diagnóstico desde que llega una ventana hasta la explicación;
+  - flujo del motor de reglas con factores de certeza;
+  - flujo de generación de datos y entrenamiento;
+  - flujo de trabajo de agentes (MEMORIA y ERRORES);
+  - flujo de publicación de la landing.
+- **`manual_usuario_web.md`**: manual de la web demostrativa página por página, con capturas (`scripts/revisar_web.py`): qué muestra, cómo usar cada control y cómo interpretar el resultado. Incluye un recorrido guiado ("inyectar cavitación en una bomba").
+- **`manual_api.md`**: cada endpoint con ejemplos de solicitud y respuesta (curl y Python) y códigos de error.
+- **`manual_tecnico.md`**: cómo extender el sistema: agregar una regla, un síntoma, un modo de falla, un activo o una expresión del léxico (YAML → regenerar OWL → tests), reentrenar y actualizar la landing. Explica la arquitectura de `src/metaltech/` módulo por módulo.
+- **`glosario.md`**: términos del dominio y técnicos (FC, MYCIN, NPSH, ventana gris, M0–M3, IG, F1 macro…).
+- **Verificación:** un test comprueba que los enlaces internos de `docs/manuales/` existen y que cada módulo citado en `guia_comandos.md` se puede importar. También se recorre la puesta en marcha desde un clon limpio.
+
 ## Cronograma resumido (ajustar a la fecha de entrega)
 | Semana | Entregable |
 |---|---|
@@ -263,6 +281,7 @@ La web demostrativa debe permitir **probar** el sistema y **ver todo** lo implem
 | 6–8 | API + web demostrativa (8 páginas) |
 | 8–9 | Landing page publicada en GitHub Pages |
 | 7–9 | Documento APA, anexos, póster, demo ensayada |
+| 9 | Manuales de usuario, API y técnico; puesta en marcha; guías de comandos y documentos; diagramas de flujo |
 
 ## Verificación
 - `pytest` sobre generador (firmas de falla presentes, sin fuga entre particiones), motor de reglas (casos positivos y negativos por regla), ontología (consistencia con HermiT) y API (tests con `TestClient`).

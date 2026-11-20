@@ -6,8 +6,8 @@ window.DATOS = {
   "sintomas": 68,
   "fmea": 41,
   "expresiones": 10,
-  "decisiones": 61,
-  "referencias": 105,
+  "decisiones": 75,
+  "referencias": 126,
   "activos": 6,
   "unidades": 32,
   "normas": [

@@ -79,6 +79,20 @@
 | D-059 | Evaluación de explicaciones con un panel de agentes (sin personas disponibles) | baja |
 | D-060 | Evaluación final: semillas, intervalos, equidad, impacto y latencia | media |
 | D-061 | API, web demostrativa y acciones legibles | media |
+| D-062 | Seudónimos para los técnicos | alta |
+| D-063 | Las observaciones no se usan para evaluar personas | alta |
+| D-064 | Sin datos sensibles | alta |
+| D-065 | Autorización y aviso en una planta real | alta (contenido) / media (numeración D. 1074) |
+| D-066 | Responsabilidad demostrada | alta |
+| D-067 | La Ley 1266 de 2008 no aplica | alta |
+| D-068 | Clasificación de referencia bajo el AI Act | media |
+| D-069 | Supervisión humana obligatoria | alta |
+| D-070 | Transparencia de cada alerta | alta |
+| D-071 | Integración con el SG-SST | alta |
+| D-072 | Marco de gestión de riesgos (NIST AI RMF; ISO/IEC 23894 y 42001 como referencia) | alta |
+| D-073 | Análisis de sesgo según ISO/IEC TR 24027 | media |
+| D-074 | Política pública colombiana de IA | alta (estado) / media (proyecto de ley) |
+| D-075 | Retención de registros | media |
 
 ---
 
@@ -873,6 +887,105 @@
   - La web solo se probó con pruebas automáticas de cada página (`streamlit.testing`), sin revisión visual en navegador.
 - **Confianza:** media.
 
+## D-062 – Seudónimos para los técnicos
+- **Contexto (Fase 9):** consulta del agente investigador el 2026-11-20. Marcas: [V] texto oficial o espejo oficial; [S] solo fuente secundaria. Los sitios de Función Pública, SIC, Senado, ISO y EUR-Lex no respondieron (ERR-031); se usaron espejos oficiales (Alcaldía de Bogotá, normogramas de Cancillería y MinTIC, AI Act Service Desk).
+- **Decisión:** el sistema no guarda nombre, cédula ni otro identificador directo del técnico, sino un seudónimo estable. La tabla que une el seudónimo con la persona queda fuera del sistema, a cargo de la empresa (Responsable). En el prototipo los técnicos y turnos son ficticios (T01–T08, I01–I02).
+- **Justificación:** el turno, el identificador y las observaciones de un técnico son datos personales (Ley 1581, art. 3). Los principios de finalidad, circulación restringida, seguridad y confidencialidad (art. 4) piden reducir la identificabilidad.
+- **Fuentes:** Congreso de Colombia (2012), arts. 3–4 [V]; Superintendencia de Industria y Comercio (2024) [S].
+- **Confianza:** alta.
+
+## D-063 – Las observaciones no se usan para evaluar personas
+- **Decisión:** las observaciones de los técnicos y el turno se usan solo para diagnosticar el activo. Nunca se usan para evaluar, clasificar, sancionar ni asignar tareas a una persona. Ni la API ni la web muestran métricas o rankings por técnico.
+  - La tabla `calibracion_observaciones.csv`, con el acierto por técnico ficticio, solo verifica que el simulador inyecta el sesgo previsto (D-050). No se publica en la web.
+  - La equidad se mide por turno, activo y tipo de observación, nunca por persona (D-073).
+- **Justificación:**
+  - Principio de finalidad (Ley 1581, art. 4 lit. b; Decreto 1377, art. 4).
+  - El AI Act clasifica como alto riesgo los sistemas que monitorean y evalúan el desempeño de trabajadores (Anexo III, punto 4(b)); esta línea mantiene al sistema fuera de esa categoría.
+  - Dignidad del trabajador (Código Sustantivo del Trabajo, art. 59 num. 9).
+- **Fuentes:** Congreso de Colombia (2012) [V]; Ministerio de Comercio, Industria y Turismo (2013) [V]; Unión Europea (2024), Anexo III [V]; Presidente de la República de Colombia (1950) [S; no se confirmó si la Ley 2466 de 2025 cambió la numeración].
+- **Confianza:** alta.
+
+## D-064 – Sin datos sensibles
+- **Decisión:** el sistema no recoge biometría, salud, afiliación sindical ni imagen o voz del técnico. Si una observación libre trae un dato sensible, se descarta o se enmascara al procesar el léxico (pendiente en una versión real; el prototipo solo usa las expresiones del léxico).
+- **Justificación:** la Ley 1581 define como sensibles los datos que afectan la intimidad o pueden generar discriminación (art. 5) y restringe su tratamiento (art. 6). El turno y la observación técnica no lo son por sí mismos.
+- **Fuentes:** Congreso de Colombia (2012), arts. 5–6 [V; no se verificó la lista literal de categorías]; Ministerio de Comercio, Industria y Turismo (2013), art. 6 [V].
+- **Confianza:** alta.
+
+## D-065 – Autorización y aviso en una planta real
+- **Decisión:** en una planta real se pediría autorización previa, expresa e informada del técnico, con aviso de la finalidad (diagnóstico de equipos), sus derechos y quién es el Responsable. Los datos se suprimen al cumplirse la finalidad y existe una política de tratamiento escrita. El silencio no vale como autorización.
+- **Fuentes:** Congreso de Colombia (2012), arts. 9 y 12 [V]; Ministerio de Comercio, Industria y Turismo (2013), arts. 5, 7, 11 y 13 [V]. Compilado en el Decreto 1074 de 2015, Lib. 2, Parte 2, Tít. 2, Cap. 25 [S; la numeración compilada no se verificó salvo 2.2.2.25.2.2 = art. 5].
+- **Confianza:** alta en el contenido; media en la numeración del Decreto 1074.
+
+## D-066 – Responsabilidad demostrada
+- **Decisión:** se documentan la evaluación de riesgos e impacto del tratamiento, la traza y los controles para poder demostrarlos ante la SIC. En el prototipo esa evidencia es este informe, [sesgos_limitaciones.md](../../reports/sesgos_limitaciones.md), y el acta ética.
+- **Fuentes:** Ministerio de Comercio, Industria y Turismo (2013), art. 26 [V]; Superintendencia de Industria y Comercio (2024), lineamientos de IA: minimización, análisis de riesgos, evaluación de impacto y anonimización [S].
+- **Confianza:** alta.
+
+## D-067 – La Ley 1266 de 2008 no aplica
+- **Decisión:** no se aplica. Es el régimen de hábeas data financiero, crediticio, comercial y de servicios, y el sistema no trata esa información.
+- **Fuentes:** Congreso de Colombia (2008), art. 1 [S].
+- **Confianza:** alta.
+
+## D-068 – Clasificación de referencia bajo el AI Act
+- **Contexto:** el prototipo no se comercializa en la UE; el AI Act se usa como referencia.
+- **Decisión:**
+  1. Con D-063, el sistema no entra en el Anexo III, punto 4.
+  2. Como apoyo al mantenimiento, separado del control de la máquina, no es componente de seguridad de un producto del Anexo I (art. 6(1)). No sería de alto riesgo.
+  3. **Restricción de diseño:** el sistema no ejecuta funciones de seguridad (paro automático, enclavamientos). Si algún día lo hiciera, habría que revisar la clasificación con el Reglamento de Máquinas 2023/1230.
+- **Fechas (art. 113 consolidado):** prohibiciones desde el 2-02-2025; aplicación general el 2-08-2026; alto riesgo del Anexo III el 2-12-2027 y del Anexo I el 2-08-2028, según la versión modificada por el Reglamento (UE) 2026/1744 (*Digital Omnibus*).
+- **Fuentes:** Comisión Europea (2026), arts. 6, 113 y Anexos I y III [V]; White & Case (2026) [S]; European Agency for Safety and Health at Work (2025) [S].
+- **Confianza:** media. Es una interpretación propia: no hay guía oficial para el mantenimiento predictivo.
+
+## D-069 – Supervisión humana obligatoria
+- **Decisión:** "el sistema recomienda, el humano decide".
+  - Ninguna alerta dispara órdenes de trabajo ni paros.
+  - Una persona confirma, rechaza o modifica cada recomendación, y en una versión real su decisión queda registrada (pendiente en el prototipo).
+  - La interfaz advierte cuando ninguna regla respalda la alerta.
+- **Justificación:** se adopta como buena práctica el AI Act, art. 14(4): conocer los límites, ser consciente del sesgo de automatización, poder no usar la salida y detener el sistema. Lo apoyan el Marco Ético de IA de Colombia (control humano de las decisiones) y el SG-SST, donde el empleador decide los controles (Decreto 1072, art. 2.2.4.6.24).
+- **Fuentes:** Comisión Europea (2026), art. 14 [V]; Presidencia de la República de Colombia (2021) [S]; Ministerio del Trabajo (2014) [V].
+- **Confianza:** alta.
+
+## D-070 – Transparencia de cada alerta
+- **Decisión:** cada alerta muestra las variables con más peso (gradientes integrados), las reglas disparadas con su FC y valores reales, y sus límites. La ficha del sistema es el conjunto README, [data/README.md](../../data/README.md) y [sesgos_limitaciones.md](../../reports/sesgos_limitaciones.md).
+- **Justificación:** AI Act, art. 13: transparencia suficiente para interpretar la salida e instrucciones con desempeño, límites y supervisión humana. Principio de transparencia y explicabilidad del Marco Ético.
+- **Fuentes:** Comisión Europea (2026), art. 13 [V]; Presidencia de la República de Colombia (2021) [S].
+- **Confianza:** alta.
+
+## D-071 – Integración con el SG-SST
+- **Decisión:**
+  1. Implantar el sistema en una planta es un cambio interno sujeto a gestión del cambio: antes se identifican peligros, se evalúan riesgos y se capacita al personal.
+  2. Las recomendaciones alimentan el plan de mantenimiento y la matriz de peligros, sin reemplazarlos.
+- **Justificación:**
+  - El Decreto 1072 pide identificar peligros de máquinas y equipos (art. 2.2.4.6.15), mantener instalaciones y equipos (art. 2.2.4.6.24, par. 2) y evaluar los cambios antes de implementarlos (art. 2.2.4.6.26).
+  - La Resolución 0312 de 2019 incluye entre los estándares mínimos el mantenimiento periódico de equipos y la gestión del cambio (arts. 9 y 16).
+- **Fuentes:** Ministerio del Trabajo (2014) [V vía el Decreto 1443 compilado]; Ministerio del Trabajo (2019) [V].
+- **Confianza:** alta.
+
+## D-072 – Marco de gestión de riesgos
+- **Decisión:** el marco operativo es el NIST AI RMF 1.0 (Govern, Map, Measure, Manage), que es público. ISO/IEC 23894 (riesgos de IA, basada en ISO 31000) e ISO/IEC 42001 (sistema de gestión de IA, certificable) se citan como referencia **sin declarar conformidad**: no se tiene el texto y no hay certificación.
+- **Fuentes:** National Institute of Standards and Technology (2023) [S]; International Electrotechnical Commission (2023a, 2023b) [S].
+- **Confianza:** alta como decisión.
+
+## D-073 – Análisis de sesgo según ISO/IEC TR 24027
+- **Decisión:** el análisis de equidad sigue la estructura del TR 24027: sesgo medido por activo, turno y condición operativa, nunca por persona, y documentación del sesgo de automatización.
+- **Fuentes:** International Electrotechnical Commission (2021), resumen y tabla de contenido [S].
+- **Confianza:** media.
+
+## D-074 – Política pública colombiana de IA
+- **Decisión:** se sigue como orientación no vinculante. A 2026-11-20 no hay ley de IA vigente en Colombia.
+  - CONPES 3975 de 2019 (transformación digital e IA) y CONPES 4144 de 2025 (Política Nacional de IA). Este último tiene ejes de ética, riesgos y apoyo a los trabajadores, con los que el prototipo se alinea.
+  - Marco Ético para la IA en Colombia (2021).
+  - El Proyecto de Ley 025 de 2026 Cámara, con ponencia para primer debate, propone clasificar por niveles de riesgo. Se monitorea: D-063 evitaría que el sistema quede como de alto riesgo si se clasifica así la evaluación de personal.
+- **Fuentes:** Departamento Nacional de Planeación (2019, 2025) [V]; Vanegas et al. (2025) [V]; Cámara de Representantes de Colombia (2026) [S; PDF escaneado, contenido no leído]; Del Hierro Gamboa (2026) [S].
+- **Confianza:** alta en el estado; media en el contenido del proyecto de ley.
+
+## D-075 – Retención de registros
+- **Decisión:** los registros de decisiones humanas se guardan con seudónimo y con un plazo definido. Los datos del técnico se suprimen al cumplirse la finalidad, salvo obligación legal. Si esos registros pasan a formar parte del SG-SST, siguen su retención, que la empresa debe revisar.
+- **Fuentes:** Ministerio de Comercio, Industria y Turismo (2013), art. 11 [V]; Ministerio del Trabajo (2014), art. 13 del Decreto 1443, compilado como 2.2.4.6.13 [V].
+- **Confianza:** media.
+
+**No verificado en esta consulta (Fase 9):** la numeración compilada del Decreto 1074; la lista literal de datos sensibles (Ley 1581, art. 5); la vigencia del art. 59 del CST tras la Ley 2466 de 2025; el articulado y el estado posterior a octubre de 2026 del PL 025/2026C; los detalles del Reglamento 2026/1744 (solo fuentes secundarias); el texto de las normas ISO; el PDF oficial del Marco Ético; la Constitución, art. 15, y la Ley 1010 de 2006, que no se consultaron.
+
 ---
 
 ## Resumen de conflictos registrados
@@ -1006,3 +1119,27 @@
 - Vibromera. (2025). *Alarm level in vibration monitoring: Threshold guide*. https://vibromera.eu/?p=20619
 - World Fertilizer. (2022, 14 de octubre). *Martin Engineering: Identifying and addressing conveyor idler issues*. https://www.worldfertilizer.com/materials-handling/14102022/martin-engineering-identifying-and-addressing-conveyor-idler-issues/
 - Zhou, Z., Sun, J., Cai, W., & Liu, W. (2023). Test investigation and rule analysis of bearing fault diagnosis in induction motors. *Energies, 16*(2), Artículo 699. https://doi.org/10.3390/en16020699
+
+### Marco legal y normativo (Fase 9, consultado el 2026-11-20)
+
+- Cámara de Representantes de Colombia. (2026). *Proyecto de Ley 025 de 2026 Cámara: ponencia para primer debate* (Gaceta del Congreso 1445/2026). https://www.camara.gov.co/wp-content/uploads/2026/09/proyectos-ley/publicaciones/proyecto-36127/PPD-PL-025-26C-CON-FIRMAS.pdf
+- Comisión Europea. (2026). *AI Act Service Desk: artículos 6, 13, 14 y 113 y anexos I y III* (versión consolidada al 27 de julio de 2026). https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-113
+- Congreso de Colombia. (2008). *Ley 1266 de 2008, por la cual se dictan las disposiciones generales del hábeas data*. https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=34488
+- Congreso de Colombia. (2012). *Ley Estatutaria 1581 de 2012, por la cual se dictan disposiciones generales para la protección de datos personales*. https://www.alcaldiabogota.gov.co/sisjur/normas/Norma1.jsp?i=49981
+- Del Hierro Gamboa, J. E. (2026, 29 de octubre). Ley de IA en las pymes: qué hacer antes de que se apruebe. *Asuntos Legales*. https://www.asuntoslegales.com.co/analisis/jose-elias-del-hierro-gamboa-4513255/ley-de-ia-en-las-pymes-que-hacer-antes-de-que-se-apruebe-4513251
+- Departamento Nacional de Planeación. (2019). *Documento CONPES 3975: Política Nacional para la Transformación Digital e Inteligencia Artificial*. https://cancilleria.gov.co/normograma/compilacion/docs/conpes_dnp_3975_2019.htm
+- Departamento Nacional de Planeación. (2025). *Documento CONPES 4144: Política Nacional de Inteligencia Artificial*. https://cancilleria.gov.co/normograma/compilacion/docs/conpes_dnp_4144_2025.htm
+- European Agency for Safety and Health at Work. (2025). *Regulation (EU) 2023/1230 on machinery*. https://osha.europa.eu/en/legislation/directive/regulation-20231230eu-machinery
+- International Electrotechnical Commission. (2021). *ISO/IEC TR 24027:2021 Information technology — Artificial intelligence (AI) — Bias in AI systems and AI aided decision making*. https://webstore.iec.ch/publication/71949
+- International Electrotechnical Commission. (2023a). *ISO/IEC 23894:2023 Information technology — Artificial intelligence — Guidance on risk management*. https://webstore.iec.ch/publication/82914
+- International Electrotechnical Commission. (2023b). *ISO/IEC 42001:2023 Information technology — Artificial intelligence — Management system*. https://webstore.iec.ch/publication/90574
+- Ministerio de Comercio, Industria y Turismo. (2013). *Decreto 1377 de 2013, por el cual se reglamenta parcialmente la Ley 1581 de 2012*. https://www.alcaldiabogota.gov.co/sisjur/normas/Norma1.jsp?i=53646
+- Ministerio del Trabajo. (2014). *Decreto 1443 de 2014* (compilado en el Decreto 1072 de 2015, arts. 2.2.4.6.1 y ss.). https://cancilleria.gov.co/normograma/compilacion/docs/decreto_1443_2014.htm
+- Ministerio del Trabajo. (2019). *Resolución 0312 de 2019, por la cual se definen los Estándares Mínimos del Sistema de Gestión de la Seguridad y Salud en el Trabajo*. https://normograma.mintic.gov.co/mintic/compilacion/docs/resolucion_mtra_0312_2019.htm
+- National Institute of Standards and Technology. (2023). *Artificial Intelligence Risk Management Framework (AI RMF 1.0)* (NIST AI 100-1). https://doi.org/10.6028/NIST.AI.100-1
+- Presidencia de la República de Colombia. (2021). *Marco ético para la inteligencia artificial en Colombia* [Copia en repositorio universitario]. https://www.usergioarboleda.edu.co/wp-content/uploads/2021/11/Marco-etico-para-la-inteligencia-artificial-en-Colombia-Maestria-en-Inteligencia-artificial.pdf
+- Presidente de la República de Colombia. (1950). *Código Sustantivo del Trabajo* (art. 59). https://cancilleria.gov.co/sites/default/files/Normograma/docs/codigo_sustantivo_trabajo.htm
+- Superintendencia de Industria y Comercio. (2024). *Circular Externa 002 del 21 de agosto de 2024: Lineamientos sobre el tratamiento de datos personales en sistemas de inteligencia artificial*. https://cancilleria.gov.co/normograma/compilacion/docs/circular_superindustria_0002_2024.htm
+- Unión Europea. (2024). *Reglamento (UE) 2024/1689 del Parlamento Europeo y del Consejo, por el que se establecen normas armonizadas en materia de inteligencia artificial*. https://eur-lex.europa.eu/eli/reg/2024/1689/oj
+- Vanegas, V., Aguilera, A., & Niño, R. (2025, 16 de mayo). CONPES 4144: hoja de ruta de Colombia en inteligencia artificial. *Departamento Nacional de Planeación*. https://www.dnp.gov.co/publicaciones/Planeacion/Paginas/conpes-4144-hoja-de-ruta-colombia-inteligencia-artificial-retos-actuales-transformacion-futura.aspx
+- White & Case. (2026). *EU AI Omnibus enters into force, amending the AI Act*. https://www.whitecase.com/insight-alert/eu-ai-omnibus-enters-force-amending-ai-act

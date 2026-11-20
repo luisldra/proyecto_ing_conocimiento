@@ -8,7 +8,7 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 
 | Origen | Errores |
 |---|---|
-| entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008, ERR-012, ERR-013, ERR-026, ERR-027, ERR-030 |
+| entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008, ERR-012, ERR-013, ERR-026, ERR-027, ERR-030, ERR-031 |
 | código (bugs, lógica) | ERR-009, ERR-011, ERR-025, ERR-029 |
 | datos (generador, fugas, desbalance) | ERR-020, ERR-023 |
 | conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010, ERR-014, ERR-015, ERR-016, ERR-017 |
@@ -46,6 +46,16 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-031 – Sitios oficiales de normas inaccesibles durante la consulta legal
+- Fecha: 2026-11-20
+- Fase/archivo: Fase 9, consulta del marco legal (D-062 a D-075)
+- Origen: entorno
+- Síntoma: funcionpublica.gov.co y sic.gov.co rechazan la conexión por certificado TLS; secretariasenado.gov.co no resuelve DNS; iso.org y EUR-Lex devuelven 403 al agente.
+- Causa raíz: restricciones de los servidores o de la red frente a clientes automatizados. No es un fallo del proyecto.
+- Solución: se usaron espejos oficiales (Alcaldía de Bogotá – Sisjur, normogramas de Cancillería y MinTIC, AI Act Service Desk de la Comisión Europea) y se marcó cada afirmación como [V] (texto oficial o espejo) o [S] (fuente secundaria). No se forzó ninguna conexión insegura.
+- Prevención: para normas colombianas, empezar por los normogramas de Cancillería o MinTIC y por Sisjur. Lo que no se pudo verificar queda listado al final de D-075 y se revisa antes de citarlo en el documento final.
+- Estado: resuelto (con verificaciones pendientes declaradas)
 
 ### ERR-030 – La publicación de la landing falló: GitHub Pages no estaba activado
 - Fecha: 2026-11-20

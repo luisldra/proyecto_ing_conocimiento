@@ -5,7 +5,7 @@
 ## Estado actual
 - **Fase en curso:** Fase 8 terminada (API y web demostrativa).
 - **Última tarea:** API FastAPI de 10 endpoints, web Streamlit de 8 páginas, acciones legibles y latencia de la API (D-061). p95 de 21 ms sin explicación y 79 ms con ella.
-- **Siguiente tarea:** Fase 9 – informe de sesgos y limitaciones (`reports/sesgos_limitaciones.md`). Después, Fase 10 (documento APA, póster y guion de demo). La landing (Fase 8b) está lista; falta activar GitHub Pages.
+- **Siguiente tarea:** Fase 9 – informe de sesgos y limitaciones (`reports/sesgos_limitaciones.md`). Después, Fase 10 (documento APA, póster y guion de demo). La landing (Fase 8b) está publicada en https://luisldra.github.io/proyecto_ing_conocimiento/.
 - **Equipo:** Alejandro (conocimiento y QA), Luis David (datos y modelos), Junio (API y web demostrativa), David (documento APA, póster y landing).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Pendiente por confirmar:**
@@ -18,8 +18,8 @@
 
 ## [2026-11-20] Fase 8b – Fallo de la publicación en GitHub Pages (agente: QA)
 - Hecho: diagnóstico con la API pública de GitHub. El flujo falla en `configure-pages` porque Pages no está activado (404).
-- Pendiente: un administrador activa *Settings → Pages → Source: GitHub Actions* y vuelve a ejecutar el flujo. La URL esperada es https://luisldra.github.io/proyecto_ing_conocimiento/.
-- Errores: ERR-030 (abierto).
+- Resolución: Pages activado. Landing publicada en **https://luisldra.github.io/proyecto_ing_conocimiento/**, verificada con Playwright sin errores. Se eliminó `static.yml`, creado por la plantilla de GitHub, que publicaba todo el repositorio y habría tapado la landing en el siguiente push.
+- Errores: ERR-030 (resuelto).
 - Decisiones: ninguna.
 
 ## [2026-11-19] Fase 8b – Landing page de presentación (agente: Frontend + Documentación)

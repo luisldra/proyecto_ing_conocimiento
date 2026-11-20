@@ -64,7 +64,7 @@ streamlit run src/metaltech/dashboard/app.py        # web en http://localhost:85
 
 ### Landing page (Fase 8b)
 
-`landing/index.html` se abre con doble clic o se publica en GitHub Pages (`.github/workflows/landing.yml`; activar una vez en *Settings → Pages → Source: GitHub Actions*). Sus cifras salen de `reports/`: tras cambiar resultados, regenere `landing/data.js` con
+Publicada en **https://luisldra.github.io/proyecto_ing_conocimiento/**. `landing/index.html` también se abre con doble clic. Se publica con `.github/workflows/landing.yml`, el único flujo de Pages, cuando cambia `landing/` (Pages ya está activado con *Source: GitHub Actions*; no usar las plantillas que sugiere GitHub, que publican todo el repositorio). Sus cifras salen de `reports/`: tras cambiar resultados, regenere `landing/data.js` con
 
 ```bash
 python scripts/generar_datos_landing.py

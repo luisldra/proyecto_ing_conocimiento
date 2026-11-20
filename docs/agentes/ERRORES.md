@@ -53,9 +53,10 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Origen: entorno
 - Síntoma: tras el push, el flujo "Landing en GitHub Pages" falló a los 10 s en el paso `actions/configure-pages@v5`, y GitHub mostró "All checks have failed".
 - Causa raíz: Pages no estaba habilitado en el repositorio (la API `GET /repos/.../pages` respondía 404). El token del flujo no tiene permisos para activarlo.
-- Solución: activar una vez *Settings → Pages → Build and deployment → Source: GitHub Actions* y volver a ejecutar el flujo (*Actions → Landing en GitHub Pages → Run workflow*).
-- Prevención: el README indica este paso; activar Pages antes del primer push de un flujo de publicación.
-- Estado: abierto (requiere que un administrador del repositorio active Pages)
+- Solución: se activó *Settings → Pages → Build and deployment → Source: GitHub Actions* y se volvió a ejecutar el flujo. La landing quedó publicada en https://luisldra.github.io/proyecto_ing_conocimiento/ y se verificó con Playwright (escritorio, móvil y modo oscuro, sin errores).
+- Efecto secundario: al pulsar "Configure" en la tarjeta *Static HTML* de GitHub se creó `.github/workflows/static.yml`, que publica **todo el repositorio** en cada push a `main` y habría reemplazado la landing por un sitio sin `index.html`. Se eliminó; el único flujo de publicación es `landing.yml`.
+- Prevención: el README indica este paso. No usar las plantillas sugeridas por GitHub Pages cuando el repositorio ya tiene su flujo.
+- Estado: resuelto
 
 ### ERR-029 – El grafo de la ontología rompía JavaScript y la web tenía fallos de diseño
 - Fecha: 2026-11-19

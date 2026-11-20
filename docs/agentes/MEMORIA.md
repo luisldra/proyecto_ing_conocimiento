@@ -16,6 +16,12 @@
 
 ## Bitácora (más reciente arriba)
 
+## [2026-11-20] Fase 8b – Fallo de la publicación en GitHub Pages (agente: QA)
+- Hecho: diagnóstico con la API pública de GitHub. El flujo falla en `configure-pages` porque Pages no está activado (404).
+- Pendiente: un administrador activa *Settings → Pages → Source: GitHub Actions* y vuelve a ejecutar el flujo. La URL esperada es https://luisldra.github.io/proyecto_ing_conocimiento/.
+- Errores: ERR-030 (abierto).
+- Decisiones: ninguna.
+
 ## [2026-11-19] Fase 8b – Landing page de presentación (agente: Frontend + Documentación)
 - Hecho:
   - `landing/` (`index.html`, `styles.css`, `app.js`, `data.js`): página estática sin dependencias de JavaScript, con:

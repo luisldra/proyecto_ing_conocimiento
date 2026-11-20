@@ -8,7 +8,7 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 
 | Origen | Errores |
 |---|---|
-| entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008, ERR-012, ERR-013, ERR-026, ERR-027 |
+| entorno (instalación, SO, dependencias) | ERR-002, ERR-006, ERR-007, ERR-008, ERR-012, ERR-013, ERR-026, ERR-027, ERR-030 |
 | código (bugs, lógica) | ERR-009, ERR-011, ERR-025, ERR-029 |
 | datos (generador, fugas, desbalance) | ERR-020, ERR-023 |
 | conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010, ERR-014, ERR-015, ERR-016, ERR-017 |
@@ -46,6 +46,16 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-030 – La publicación de la landing falló: GitHub Pages no estaba activado
+- Fecha: 2026-11-20
+- Fase/archivo: Fase 8b, `.github/workflows/landing.yml`
+- Origen: entorno
+- Síntoma: tras el push, el flujo "Landing en GitHub Pages" falló a los 10 s en el paso `actions/configure-pages@v5`, y GitHub mostró "All checks have failed".
+- Causa raíz: Pages no estaba habilitado en el repositorio (la API `GET /repos/.../pages` respondía 404). El token del flujo no tiene permisos para activarlo.
+- Solución: activar una vez *Settings → Pages → Build and deployment → Source: GitHub Actions* y volver a ejecutar el flujo (*Actions → Landing en GitHub Pages → Run workflow*).
+- Prevención: el README indica este paso; activar Pages antes del primer push de un flujo de publicación.
+- Estado: abierto (requiere que un administrador del repositorio active Pages)
 
 ### ERR-029 – El grafo de la ontología rompía JavaScript y la web tenía fallos de diseño
 - Fecha: 2026-11-19

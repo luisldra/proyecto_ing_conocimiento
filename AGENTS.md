@@ -118,6 +118,8 @@ uvicorn metaltech.api.main:app --reload
 streamlit run src/metaltech/dashboard/app.py
 python scripts/revisar_web.py --salida revision_web   # revisión de la web con Playwright
 python scripts/generar_datos_landing.py            # landing/data.js desde reports/
+python scripts/generar_documento.py --figuras --pdf   # Fase 10: documento APA (docx + PDF con Word) desde docs/documento_APA/documento.md
+python scripts/generar_poster.py                   # Fase 10: póster A1 (HTML + PDF)
 ```
 
 ### Definición de "terminado"

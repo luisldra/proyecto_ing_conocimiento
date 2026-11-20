@@ -79,6 +79,18 @@ python scripts/revisar_web.py --salida revision_web                 # levanta AP
 
 La web usa la API si está levantada; si no, carga la misma API dentro del proceso, de modo que basta con `streamlit run` para la demo. Necesita los modelos (`checkpoints/`) y los datos (`data/synthetic/`), que no se versionan y se regeneran con los comandos anteriores.
 
+### Documento APA, póster y demo (Fase 10)
+
+- Documento: [docs/documento_APA/documento_apa.pdf](docs/documento_APA/documento_apa.pdf). Se edita el texto en `documento.md` (y `referencias.md`), nunca el Word; las cifras y tablas salen de `reports/`.
+- Póster A1: [docs/poster/poster.pdf](docs/poster/poster.pdf). Guion de la demostración: [docs/demo_guion.md](docs/demo_guion.md).
+- Informe de sesgos y limitaciones: [reports/sesgos_limitaciones.md](reports/sesgos_limitaciones.md). Acta ética: [docs/etica/acta_etica.md](docs/etica/acta_etica.md).
+
+```bash
+python scripts/generar_documento.py --figuras --pdf   # Word y PDF (el PDF requiere Microsoft Word en Windows)
+python scripts/generar_documento.py --capturas revision_web   # actualiza la captura del simulador
+python scripts/generar_poster.py                       # póster HTML y PDF (Playwright)
+```
+
 ### Endpoints
 
 | Método | Ruta | Para qué |

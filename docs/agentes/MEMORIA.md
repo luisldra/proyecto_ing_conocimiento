@@ -3,18 +3,38 @@
 > Protocolo y formato: [AGENTS.md](../../AGENTS.md) · Errores: [ERRORES.md](ERRORES.md) · Plan: [PLAN.md](../PLAN.md)
 
 ## Estado actual
-- **Fase en curso:** Fase 9 terminada (sesgos, limitaciones y marco legal).
-- **Última tarea:** [reports/sesgos_limitaciones.md](../../reports/sesgos_limitaciones.md), marco legal D-062 a D-075 y [acta ética](../etica/acta_etica.md). Se agregó al plan la Fase 11 (manuales y guías).
-- **Siguiente tarea:** Fase 10 (documento APA, anexos, póster y guion de demo) y Fase 11 (puesta en marcha, guías de comandos y documentos, diagramas de flujo, manuales de usuario, API y técnico, glosario). La landing está publicada en https://luisldra.github.io/proyecto_ing_conocimiento/.
+- **Fase en curso:** Fase 10 terminada (documento APA, póster y guion de demo), pendiente de datos que solo el equipo tiene.
+- **Última tarea:** [documento APA](../documento_APA/documento_apa.pdf) de 44 páginas generado desde `documento.md`, [póster A1](../poster/poster.pdf) y [guion de demo](../demo_guion.md).
+- **Siguiente tarea:** Fase 11 (puesta en marcha, guías de comandos y documentos, diagramas de flujo, manuales de usuario, API y técnico, glosario). La landing está publicada en https://luisldra.github.io/proyecto_ing_conocimiento/.
 - **Equipo:** Alejandro (conocimiento y QA), Luis David (datos y modelos), Junio (API y web demostrativa), David (documento APA, póster y landing).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Pendiente por confirmar:**
   - definición exacta de RA/R1–R6 con el docente;
   - fecha de entrega;
+  - para el documento APA: apellidos de Alejandro, Junio y David; departamento; firmas del acta ética; esquema de presentación visto en clase (marcados como `[PENDIENTE]` en `docs/documento_APA/documento.md` y `scripts/generar_documento.py`, `PORTADA`);
 
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-20] Fase 10 – Documento APA, póster y guion de demo (agente: Documentación + QA)
+- Hecho:
+  - **Documento APA 7** con las 15 secciones del enunciado, generado de forma reproducible:
+    - fuente editable `docs/documento_APA/documento.md` y referencias en `referencias.md` (43 referencias; DOI nuevos verificados en Crossref);
+    - `scripts/generar_documento.py` llena las cifras (`{{v:…}}`) y las 14 tablas desde `reports/` y la base de conocimiento, genera las figuras (F1 y falsas alarmas con matplotlib, arquitectura desde el SVG de la landing, captura del simulador) y da formato APA: Times New Roman 12, interlineado 1.5, márgenes de 2.54 cm, sangría de 1.27 cm, títulos APA, tablas y figuras numeradas con nota, índice, referencias con sangría francesa y número de página;
+    - con `--pdf`, Word actualiza el índice y exporta `documento_apa.pdf` (44 páginas).
+  - Anexos A–H: matriz de adquisición, 55 reglas, ontología, código, consentimiento, ficha de datos, acta ética y esquema de la presentación.
+  - **Póster** A1 vertical (`docs/poster/`), con la identidad visual de la landing y las mismas cifras y figuras: `python scripts/generar_poster.py` (Playwright).
+  - **Guion de demo** de 10 a 15 minutos (`docs/demo_guion.md`): reparto por integrante, clics exactos, plan B y preguntas probables.
+  - La landing enlaza el documento y el póster.
+  - `tests/test_documento.py` comprueba citas ↔ referencias, cifras, tablas, figuras, resumen (150–250 palabras) y las 5 referencias base.
+  - `python-docx` agregado a `requirements.txt`.
+  - Revisión de la web con Playwright: 57 acciones sin errores ni avisos.
+- Pendiente:
+  - datos que solo tiene el equipo (apellidos, departamento, firmas, esquema de clase) y la definición de RA/R1–R6;
+  - con esos datos, regenerar con `python scripts/generar_documento.py --pdf`.
+- Errores: ERR-032.
+- Decisiones: el documento es Word → PDF porque el enunciado pide formato APA con fuente, márgenes y sangrías concretas. Las cifras nunca se escriben a mano, igual que en la landing. La relación con RA/R1–R6 queda como tabla provisional marcada.
 
 ## [2026-11-20] Fase 9 – Sesgos, limitaciones y marco legal (agente: Investigador + Documentación + QA)
 - Hecho:

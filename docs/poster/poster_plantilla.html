@@ -1,0 +1,167 @@
+<!doctype html>
+<!-- Plantilla del póster (Fase 10). Las {{v:clave}} las llena scripts/generar_poster.py con las cifras de reports/. -->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Póster Metal Tech</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  @page { size: 594mm 841mm; margin: 0; }
+  :root {
+    --fondo: #f9f9f7; --superficie: #ffffff; --alterna: #f1f0ec; --tinta: #0b0b0b; --tinta-2: #52514e;
+    --mute: #6f6d68; --rejilla: #e1e0d9; --borde: #d6d5cd; --acento: #1c5cab;
+    --m0: #2a78d6; --m1: #eb6834; --m2: #1baf7a; --m3: #eda100;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--fondo); color: var(--tinta); }
+  body { width: 594mm; height: 841mm; font: 400 31px/1.4 "Source Sans 3", Arial, sans-serif; overflow: hidden; }
+  header { background: var(--acento); color: #fff; padding: 48px 64px 40px; }
+  header .curso { font-size: 24px; letter-spacing: .04em; text-transform: uppercase; opacity: .85; }
+  h1 { font: 700 80px/1.05 "Source Serif 4", Georgia, serif; margin: 14px 0 18px; }
+  h1 em { font-style: normal; color: #ffd27a; }
+  header .equipo { font-size: 26px; opacity: .95; }
+  .pregunta { margin: 0; padding: 30px 64px; background: var(--alterna); font: 600 34px/1.3 "Source Serif 4", Georgia, serif; border-bottom: 1px solid var(--borde); }
+  .pregunta span { color: var(--acento); }
+  main { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 36px; padding: 36px 64px 0; }
+  section { background: var(--superficie); border: 1px solid var(--borde); border-radius: 18px; padding: 26px 30px; margin-bottom: 30px; }
+  h2 { font: 700 42px/1.15 "Source Serif 4", Georgia, serif; margin: 0 0 14px; color: var(--acento); }
+  p { margin: 0 0 12px; }
+  ul { margin: 0; padding-left: 28px; } li { margin-bottom: 8px; }
+  .cifras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .cifra { background: var(--alterna); border-radius: 12px; padding: 14px 16px; }
+  .cifra b { display: block; font: 700 56px/1 "Source Serif 4", Georgia, serif; }
+  .cifra span { font-size: 26px; color: var(--tinta-2); }
+  .regla { font-size: 28px; background: var(--alterna); border-radius: 12px; padding: 14px 18px; }
+  .regla code { font: 600 27px Consolas, monospace; }
+  img { width: 100%; display: block; }
+  .sistemas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; font-size: 28px; }
+  .sistemas div { border-left: 8px solid; padding: 4px 12px; }
+  .destacados { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+  .destacado { border-radius: 12px; padding: 14px 16px; background: var(--alterna); }
+  .destacado b { display: block; white-space: nowrap; font: 700 50px/1 "Source Serif 4", Georgia, serif; }
+  .destacado span { font-size: 26px; color: var(--tinta-2); }
+  .ejemplo { font-size: 28px; background: #fff8e6; border-left: 8px solid var(--m3); padding: 16px 20px; border-radius: 0 12px 12px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 28px; }
+  th, td { padding: 6px 8px; text-align: left; border-bottom: 1px solid var(--rejilla); }
+  th { color: var(--tinta-2); font-weight: 600; }
+  td.n { text-align: right; font-variant-numeric: tabular-nums; }
+  .nota { font-size: 24px; color: var(--mute); margin-top: 8px; }
+  footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 22px 64px; background: var(--tinta); color: #f0efec; font-size: 22px; display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+<header>
+  <div class="curso">Universidad de Caldas · Facultad de Inteligencia Artificial e Ingenierías · Ingeniería del Conocimiento 2026-2</div>
+  <h1>Mantenimiento predictivo <em>explicable</em> con Deep Learning y base de conocimiento</h1>
+  <div class="equipo">Alejandro · Luis David Rodríguez Arias · Junio · David — Docente: Ing. Wilson Fernando López Cardona</div>
+</header>
+<p class="pregunta"><span>Pregunta:</span> ¿cómo integrar un modelo de Deep Learning con una base de conocimiento experto para predecir fallas y generar diagnósticos explicables en una planta manufacturera?</p>
+<main>
+  <div>
+    <section>
+      <h2>El reto</h2>
+      <p>En la planta ficticia <b>Metal Tech</b>, los sensores se consultan aislados y los técnicos diagnostican con los sentidos: <i>“el motor está cantando”</i>, <i>“la bomba está golpeando”</i>. Ese criterio cambia entre turnos y personas, y lleva a falsas alarmas e intervenciones tardías.</p>
+      <p>El sistema debe <b>predecir la falla</b> y mostrar <b>qué variables y qué reglas</b> la sustentan.</p>
+    </section>
+    <section>
+      <h2>Lo consultado</h2>
+      <p>Sin entrevistas: un <b>agente investigador</b> revisó normas (por fuentes públicas), literatura, guías de fabricantes y datasets, y documentó cada decisión.</p>
+      <div class="cifras">
+        <div class="cifra"><b>{{v:decisiones}}</b><span>decisiones</span></div>
+        <div class="cifra"><b>{{v:referencias_kb}}</b><span>referencias</span></div>
+        <div class="cifra"><b>{{v:reglas}}</b><span>reglas con FC</span></div>
+        <div class="cifra"><b>{{v:modos}}</b><span>modos de falla</span></div>
+        <div class="cifra"><b>{{v:sintomas}}</b><span>síntomas</span></div>
+        <div class="cifra"><b>{{v:activos}}</b><span>tipos de activo</span></div>
+      </div>
+      <p class="nota">ISO 17359 · ISO 13374 · ISO 20816 · IEC 60034 · ANSI/HI 9.6.1 · AI4I 2020 · SKAB</p>
+    </section>
+    <section>
+      <h2>Base de conocimiento</h2>
+      <p>FMEA, léxico de técnicos, reglas con factores de certeza (MYCIN) y una <b>ontología OWL</b> validada con HermiT.</p>
+      <div class="regla"><code>R13</code> SI margen de NPSH bajo Y vibración de alta frecuencia alta Y caudal inestable ENTONCES <b>cavitación</b> (FC 0.85)</div>
+      <p style="margin-top:12px">“La bomba está golpeando” → golpeteo percibido → cavitación, obstrucción de succión o rodamiento.</p>
+    </section>
+    <section>
+      <h2>Datos y método</h2>
+      <ul>
+        <li>Datos <b>sintéticos</b>: {{v:unidades}} máquinas, 36 meses cada 10 min, 1075 fallas, confusores y técnicos ficticios.</li>
+        <li>MLP, CNN1D y LSTM por tipo de activo; ventanas de 6 h, horizonte de 24 h.</li>
+        <li>Partición temporal + una máquina por tipo nunca vista; 5 semillas.</li>
+        <li>ABP/ABPr, CommonKADS y CRISP-DM.</li>
+      </ul>
+    </section>
+  </div>
+  <div>
+    <section>
+      <h2>Arquitectura</h2>
+      <img src="../documento_APA/figuras/arquitectura.png" alt="Arquitectura del sistema híbrido">
+      <div class="sistemas" style="margin-top:14px">
+        <div style="border-color:var(--m0)"><b>M0</b> solo reglas</div>
+        <div style="border-color:var(--m1)"><b>M1</b> solo Deep Learning</div>
+        <div style="border-color:var(--m2)"><b>M2</b> conocimiento como entrada</div>
+        <div style="border-color:var(--m3)"><b>M3</b> fusión α·p(DL) + (1−α)·reglas</div>
+      </div>
+    </section>
+    <section>
+      <h2>Resultados</h2>
+      <img src="../documento_APA/figuras/f1.png" alt="F1 macro de los cuatro sistemas">
+      <p class="nota">F1 macro, media de 5 semillas con intervalo del 95 %.</p>
+      <img src="../documento_APA/figuras/falsas.png" alt="Falsa alarma ante confusores">
+      <p class="nota">Falsa alarma ante condiciones confusoras, máquina no vista.</p>
+      <div class="destacados">
+        <div class="destacado"><b>{{v:f1_m3_nv}}</b><span>F1 de M3 en máquina no vista (M1: {{v:f1_m1_nv}})</span></div>
+        <div class="destacado"><b>−{{v:fa_red_rel}}</b><span>falsas alarmas ante confusores frente a M1</span></div>
+        <div class="destacado"><b>{{v:lat_con}}</b><span>p95 de un diagnóstico explicado</span></div>
+      </div>
+    </section>
+    <section>
+      <h2>Prototipo</h2>
+      <ul>
+        <li><b>API FastAPI</b>: predecir, diagnosticar, simular y consultar la ontología.</li>
+        <li><b>Web demostrativa</b> de 8 páginas: simulador en vivo, explicación, grafo de la ontología, comparación, equidad y bitácora.</li>
+        <li><b>{{v:pruebas}} pruebas</b> automáticas y revisión con Playwright.</li>
+      </ul>
+    </section>
+  </div>
+  <div>
+    <section>
+      <h2>Una alerta explicada</h2>
+      <div class="ejemplo">{{v:ejemplo}}</div>
+      <p class="nota">Variables: gradientes integrados. Reglas: traza del motor con valores reales.</p>
+    </section>
+    <section>
+      <h2>Explicabilidad</h2>
+      <table>
+        <tr><th>Medida</th><th class="n">Valor</th><th class="n">Azar</th></tr>
+        <tr><td>Top-3 sensores en la firma real</td><td class="n">{{v:xai_firma}}</td><td class="n">{{v:xai_azar}}</td></tr>
+        <tr><td>Caída al anular el top-3</td><td class="n">{{v:fidelidad}}</td><td class="n">{{v:fidelidad_azar}}</td></tr>
+      </table>
+      <p style="margin-top:12px">Panel exploratorio de 5 agentes (no son personas): la explicación híbrida fue preferida en <b>60 de 60</b> pares.</p>
+    </section>
+    <section>
+      <h2>Equidad y ética</h2>
+      <ul>
+        <li>Una observación incorrecta del técnico duplica la falsa alarma de M0 ({{v:fa_sin_obs_m0}} → {{v:fa_obs_inc_m0}}); en M3 casi no cambia.</li>
+        <li>El sistema <b>recomienda</b>; una persona decide.</li>
+        <li>Las observaciones nunca se usan para <b>evaluar técnicos</b> (Ley 1581 de 2012).</li>
+        <li>Límites: datos sintéticos, reglas sin validar por técnicos, panel de agentes.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Conclusiones</h2>
+      <ul>
+        <li>La <b>fusión (M3)</b> fue la mejor integración: mejor F1 y menos falsas alarmas.</li>
+        <li>El conocimiento aporta <b>explicación y prudencia</b> más que detección; como veto, rechaza alertas correctas.</li>
+        <li>Siguiente paso: validar reglas y explicaciones con técnicos y datos reales.</li>
+      </ul>
+    </section>
+  </div>
+</main>
+<footer>
+  <span>Landing: luisldra.github.io/proyecto_ing_conocimiento</span>
+  <span>Código: github.com/luisldra/proyecto_ing_conocimiento</span>
+  <span>Datos 100 % sintéticos · Proyecto académico</span>
+</footer>
+</body>
+</html>

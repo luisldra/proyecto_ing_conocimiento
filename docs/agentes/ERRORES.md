@@ -12,7 +12,7 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 | código (bugs, lógica) | ERR-009, ERR-011, ERR-025, ERR-029 |
 | datos (generador, fugas, desbalance) | ERR-020, ERR-023 |
 | conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010, ERR-014, ERR-015, ERR-016, ERR-017 |
-| agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019, ERR-021, ERR-022, ERR-024, ERR-028 |
+| agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019, ERR-021, ERR-022, ERR-024, ERR-028, ERR-032 |
 
 ## Lecciones aprendidas
 - Las normas ISO, IEC, NEMA, HI e IEEE son de pago: hay que citar la fuente secundaria que da el valor y marcar la confianza (ERR-001).
@@ -46,6 +46,31 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-032 – Primer borrador del documento APA con una afirmación sin verificar y defectos del generador
+- Fecha: 2026-11-20
+- Fase/archivo: Fase 10, `docs/documento_APA/documento.md`, `scripts/generar_documento.py`
+- Origen: agente
+- Síntoma:
+  - El análisis de errores decía que la falla de la válvula de admisión se confunde con la fuga de aire. La matriz de confusión muestra que se confunde con la operación normal.
+  - En el primer PDF:
+    - el número de pruebas salía como "más de 600";
+    - la Tabla 10 mostraba "nan %" y "manana";
+    - la matriz de adquisición arrastraba una segunda tabla del archivo fuente;
+    - la nota de la Tabla 12 se repetía como párrafo;
+    - en la Figura 3 los títulos se montaban sobre las etiquetas.
+  - Además, una referencia (Europump) estaba en la lista sin cita en el texto.
+- Causa raíz:
+  - La afirmación se escribió por razonamiento físico, sin abrir la matriz de confusión.
+  - `pytest --co -q` se sumaba al `-q` de `addopts` y suprimía el total.
+  - El analizador repetía la línea de nota por un error de índice.
+  - La sección "Matriz" se leía hasta el final del archivo.
+- Solución: se corrigió el texto con los datos de `modelos_confusion_*.csv` y se arreglaron el conteo, los valores vacíos ("—"), el recorte de la matriz, el índice y las etiquetas. Se revisó el PDF página por página.
+- Prevención:
+  - `tests/test_documento.py` comprueba que cada cita tenga referencia y cada referencia su cita, y que existan las cifras, tablas y figuras.
+  - Toda afirmación sobre resultados se contrasta con su tabla en `reports/` antes de escribirla.
+  - El PDF generado se revisa visualmente.
+- Estado: resuelto
 
 ### ERR-031 – Sitios oficiales de normas inaccesibles durante la consulta legal
 - Fecha: 2026-11-20

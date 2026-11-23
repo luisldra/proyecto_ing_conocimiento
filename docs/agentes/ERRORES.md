@@ -70,6 +70,7 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
   - `tests/test_documento.py` comprueba que cada cita tenga referencia y cada referencia su cita, y que existan las cifras, tablas y figuras.
   - Toda afirmación sobre resultados se contrasta con su tabla en `reports/` antes de escribirla.
   - El PDF generado se revisa visualmente.
+- Corrección posterior (2026-11-23): el arreglo de la nota estaba incompleto. La línea "Nota:" seguía entrando como última fila de las tablas escritas en Markdown, porque el corte de filas se calculaba después de avanzar sobre ella. Se vio al revisar la nueva Tabla 12 (riesgos RA/R1–R6) y se corrigió.
 - Estado: resuelto
 
 ### ERR-031 – Sitios oficiales de normas inaccesibles durante la consulta legal

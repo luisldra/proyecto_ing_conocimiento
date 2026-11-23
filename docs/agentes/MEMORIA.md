@@ -3,19 +3,29 @@
 > Protocolo y formato: [AGENTS.md](../../AGENTS.md) · Errores: [ERRORES.md](ERRORES.md) · Plan: [PLAN.md](../PLAN.md)
 
 ## Estado actual
-- **Fase en curso:** Fase 10 terminada (documento APA, póster y guion de demo), pendiente de datos que solo el equipo tiene.
+- **Fase en curso:** Fase 10 terminada (documento APA, póster y guion de demo), con los datos del equipo incluidos.
 - **Última tarea:** [documento APA](../documento_APA/documento_apa.pdf) de 44 páginas generado desde `documento.md`, [póster A1](../poster/poster.pdf) y [guion de demo](../demo_guion.md).
 - **Siguiente tarea:** Fase 11 (puesta en marcha, guías de comandos y documentos, diagramas de flujo, manuales de usuario, API y técnico, glosario). La landing está publicada en https://luisldra.github.io/proyecto_ing_conocimiento/.
-- **Equipo:** Alejandro (conocimiento y QA), Luis David (datos y modelos), Junio (API y web demostrativa), David (documento APA, póster y landing).
+- **Equipo:** Alejandro Pineda Gomez (conocimiento y QA), Luis David Rodríguez Arias (datos y modelos), Ivan Junior Echeverri Gomez (API y web demostrativa), David Ramirez Cruz (documento APA, póster y landing).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Pendiente por confirmar:**
-  - definición exacta de RA/R1–R6 con el docente;
   - fecha de entrega;
-  - para el documento APA: apellidos de Alejandro, Junio y David; departamento; firmas del acta ética; esquema de presentación visto en clase (marcados como `[PENDIENTE]` en `docs/documento_APA/documento.md` y `scripts/generar_documento.py`, `PORTADA`);
 
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-23] Fase 10 – Datos del equipo y riesgos RA/R1–R6 en el documento (agente: Documentación)
+- Hecho:
+  - Nombres completos del equipo (editados por Luis David en `PORTADA`) llevados al acta ética, al Anexo G, al póster, a la landing y al guion. Se quitó la línea de departamento.
+  - **RA/R1–R6 son los riesgos del proyecto** (aclaración del equipo). La Discusión trae la Tabla 12: RA (aplicación indebida: evaluar técnicos o automatizar paros) y R1–R6, con evidencia, mitigación y estado. Agrupan los 10 riesgos del informe de sesgos, que ahora incluye la misma correspondencia.
+  - Esquema de presentación = la landing (Anexo H y guion).
+  - Cifra corregida: 2118 observaciones de técnicos, no 2220. El documento ahora toma filas, episodios y observaciones de `data/synthetic/manifest.json`; `data/README.md` corregido.
+  - Generador: las tablas cortas no se parten y las tablas en Markdown reparten el ancho según el contenido.
+  - Documento regenerado (44 páginas, sin marcas `[PENDIENTE]`) y póster regenerado.
+- Pendiente: ninguno del documento. Sigue la Fase 11.
+- Errores: ERR-032 (corrección posterior: la nota de las tablas en Markdown seguía entrando como fila).
+- Decisiones: la "A" de RA se interpretó como *aplicación* indebida, porque el equipo no la especificó.
 
 ## [2026-11-20] Fase 10 – Documento APA, póster y guion de demo (agente: Documentación + QA)
 - Hecho:

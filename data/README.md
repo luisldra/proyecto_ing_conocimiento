@@ -13,7 +13,7 @@ Con la misma semilla y configuración el resultado es idéntico. `manifest.json`
 
 ## Contenido (semilla 42)
 
-36 meses cada 10 min, 32 unidades, 5 049 216 filas, 1075 episodios de falla y 2220 observaciones de técnicos.
+36 meses cada 10 min, 32 unidades, 5 049 216 filas, 1075 episodios de falla y 2118 observaciones de técnicos.
 
 | Archivo | Contenido |
 |---|---|

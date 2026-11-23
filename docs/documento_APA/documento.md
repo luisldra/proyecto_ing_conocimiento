@@ -173,7 +173,7 @@ El motor devuelve una traza: qué reglas se dispararon, con qué valores reales 
 
 ## Datos sintéticos
 
-El simulador genera, para cada una de las {{v:unidades}} unidades, 36 meses de lecturas cada 10 minutos: 5 049 216 filas, 1075 episodios de falla y 2220 observaciones de técnicos. Las señales sanas siguen un ciclo de carga por turno, con ruido y deriva de sensor. Cada falla se inyecta con una forma de degradación (lineal, exponencial, sigmoide, escalón o intermitente) sobre las variables de su firma, con severidad variable y omisiones aleatorias de parte de la firma. Se añadieron condiciones confusoras, como carga alta sostenida o ambiente caluroso, que imitan fallas sin serlo, y observaciones de técnicos ficticios cuyo acierto depende de la persona y baja de noche. La dificultad se contrastó con AI4I 2020 y SKAB (Matzka, 2020; Katser y Kozitsin, 2020). Una regla de protección fijó que ningún parámetro del simulador se ajustara mirando los resultados de los modelos. La ficha de datos está en el Anexo F.
+El simulador genera, para cada una de las {{v:unidades}} unidades, 36 meses de lecturas cada 10 minutos: {{v:filas}} filas, {{v:episodios}} episodios de falla y {{v:observaciones}} observaciones de técnicos. Las señales sanas siguen un ciclo de carga por turno, con ruido y deriva de sensor. Cada falla se inyecta con una forma de degradación (lineal, exponencial, sigmoide, escalón o intermitente) sobre las variables de su firma, con severidad variable y omisiones aleatorias de parte de la firma. Se añadieron condiciones confusoras, como carga alta sostenida o ambiente caluroso, que imitan fallas sin serlo, y observaciones de técnicos ficticios cuyo acierto depende de la persona y baja de noche. La dificultad se contrastó con AI4I 2020 y SKAB (Matzka, 2020; Katser y Kozitsin, 2020). Una regla de protección fijó que ningún parámetro del simulador se ajustara mirando los resultados de los modelos. La ficha de datos está en el Anexo F.
 
 ## Modelos de aprendizaje profundo
 
@@ -278,21 +278,21 @@ Durante el desarrollo se registraron 31 errores en la base de errores del proyec
 
 La integración que funcionó fue la fusión posterior (M3): el modelo de aprendizaje profundo aporta la capacidad de detectar y las reglas aportan prudencia y explicación. El conocimiento experto no mejoró de forma importante el F1 ({{v:dif_f1_m3_m1}} puntos), pero sí redujo las falsas alarmas ante condiciones confusoras en un {{v:fa_red_rel}} y permitió explicar cada alerta con reglas, valores reales y acciones. Incorporar el conocimiento como entrada del modelo (M2) no dio una mejora significativa. Usar las reglas como veto tampoco funcionó: con su cobertura actual, el veto rechazaba alertas correctas y el F1 de validación caía a 0.47–0.69, por lo que ningún activo lo eligió. Este hallazgo coincide con la observación de von Rueden et al. (2021) de que el beneficio del conocimiento previo depende de su calidad y cobertura.
 
-## Relación con los resultados de aprendizaje (RA/R1–R6)
+## Relación con los riesgos definidos (RA/R1–R6)
 
-[PENDIENTE: el equipo debe confirmar con el docente la definición exacta de RA y R1–R6. La tabla propone una relación provisional con los temas del curso.]
+El proyecto identificó un riesgo transversal de aplicación indebida (RA) y seis riesgos específicos (R1–R6), que agrupan el registro de riesgos del informe de sesgos y limitaciones. RA es el más grave porque no depende del desempeño del modelo, sino del uso que se le dé: si el sistema se usara para evaluar a los técnicos o para detener máquinas sin intervención humana, causaría daño aunque sus predicciones fueran correctas. La Tabla 12 resume cada riesgo con su evidencia y su mitigación.
 
-Tabla: Relación provisional del proyecto con los resultados de aprendizaje
-| Resultado | Evidencia en el proyecto |
-|---|---|
-| RA – Integrar IA simbólica y subsimbólica en una solución | Sistema híbrido M0–M3 y su comparación |
-| R1 – [PENDIENTE] Adquisición del conocimiento | Decisiones documentadas, matriz de adquisición, FMEA y léxico |
-| R2 – [PENDIENTE] Representación del conocimiento | Ontología OWL validada con HermiT |
-| R3 – [PENDIENTE] Inferencia y razonamiento con incertidumbre | Motor de reglas con factores de certeza y traza |
-| R4 – [PENDIENTE] Aprendizaje automático | Modelos MLP, CNN1D y LSTM con cinco semillas |
-| R5 – [PENDIENTE] Explicabilidad y validación | Gradientes integrados, métricas de explicación, panel de evaluación |
-| R6 – [PENDIENTE] Ética y marco legal | Informe de sesgos, decisiones legales y acta ética |
-Nota: la redacción de cada resultado es provisional hasta recibir la definición del docente.
+Tabla: Riesgos del sistema y su tratamiento
+| Código | Riesgo | Evidencia | Mitigación | Estado |
+|---|---|---|---|---|
+| RA | Aplicación indebida: evaluar o vigilar a los técnicos, o automatizar paros y funciones de seguridad | Las observaciones identifican técnico y turno; el Reglamento europeo considera de alto riesgo evaluar trabajadores | Las observaciones solo diagnostican equipos; seudónimos; el sistema recomienda y una persona decide; no ejecuta acciones | Mitigado por diseño |
+| R1 | Circularidad entre simulador y reglas | Las firmas de falla parten de los umbrales que conocen las reglas | Firmas incompletas, severidad variable, deriva, contraste con AI4I 2020 y SKAB | Reducido, no eliminado |
+| R2 | Evaluación optimista | Los confusores se aprenden del mismo generador; las semillas no cambian los datos | Máquina no vista, intervalos entre semillas y resultados declarados como sintéticos | Abierto |
+| R3 | Sesgo de técnico y turno | Una observación incorrecta lleva la falsa alarma de M0 de {{v:fa_sin_obs_m0}} a {{v:fa_obs_inc_m0}} | M3 pondera poco el texto ({{v:fa_sin_obs_m3}} frente a {{v:fa_obs_inc_m3}}); FC de reglas percibidas ≤ 0.80 | Medido y acotado |
+| R4 | Brecha entre tipos de activo | Brecha de acierto de 21.8 puntos con M0 y 5.7 con M3 | Un modelo por activo; ampliar reglas en compresor y CNC | Medido |
+| R5 | Sobreconfianza en la automatización | Probabilidades cercanas al 100 % sin respaldo de reglas | La explicación dice cuándo ninguna regla respalda la alerta; probabilidad y certeza por separado | Parcial |
+| R6 | Deriva de datos y operación | Sin monitoreo de deriva; la API no tiene autenticación | Línea base por unidad; requisitos previos a uso real | Abierto |
+Nota: el detalle de cada riesgo está en `reports/sesgos_limitaciones.md`. RA se mitiga con decisiones de diseño (D-062 a D-069), no con métricas.
 
 ## Ética
 
@@ -330,7 +330,7 @@ El detalle de cada riesgo y su mitigación está en el informe de sesgos y limit
 3. Aplicar la evaluación de explicaciones con técnicos reales, usando el instrumento preparado.
 4. Ampliar la cobertura de las reglas en los activos y modos con peor desempeño (compresor de tornillo y fallas rápidas del CNC) antes de volver a probar el veto.
 5. Agregar detección de deriva, registro de las decisiones humanas, autenticación y pruebas de carga a la API.
-6. Confirmar con el docente la relación con los resultados de aprendizaje RA/R1–R6.
+6. Revisar los riesgos RA/R1–R6 antes de cualquier piloto, empezando por los abiertos (R2 y R6).
 
 {{referencias}}
 
@@ -369,7 +369,7 @@ Texto que se entrega a cada evaluador antes de la evaluación de explicaciones c
 ## Anexo F. Ficha de los datos sintéticos
 
 - **Origen:** simulación con `python -m metaltech.data.generator` y semilla 42; no proviene de ninguna planta real ni contiene datos personales.
-- **Contenido:** 36 meses cada 10 minutos, {{v:unidades}} unidades, 5 049 216 filas, 1075 episodios de falla y 2220 observaciones de técnicos ficticios (T01–T08, I01–I02).
+- **Contenido:** 36 meses cada 10 minutos, {{v:unidades}} unidades, {{v:filas}} filas, {{v:episodios}} episodios de falla y {{v:observaciones}} observaciones de técnicos ficticios (T01–T08, I01–I02).
 - **Partición:** temporal 60/20/20 con purga entre cortes; la última unidad de cada tipo se reserva solo para evaluación.
 - **Supuestos:** formas, duraciones y magnitudes basadas en literatura, contrastadas con AI4I 2020 y SKAB; confusores y deriva supuestos.
 - **Limitaciones:** firmas más completas que las reales; una falla por unidad a la vez; clases desbalanceadas (2.4 % de filas positivas); el menor acierto nocturno de los técnicos es un sesgo inyectado para medir equidad.
@@ -385,8 +385,8 @@ Texto que se entrega a cada evaluador antes de la evaluación de explicaciones c
 
 **Compromisos de diseño.** El sistema recomienda y una persona decide; no ejecuta funciones de seguridad de las máquinas; las observaciones de los técnicos nunca se usan para evaluar personas; los técnicos se identifican con seudónimos y no se recogen datos sensibles; en una planta real se pediría autorización informada y se integraría el sistema a la gestión de seguridad y salud en el trabajo; cada alerta muestra sus variables, reglas y límites.
 
-Firmas del equipo: Alejandro, Luis David, Junio y David. [PENDIENTE: firmas]
+Firmado por el equipo: Alejandro Pineda Gomez, Luis David Rodríguez Arias, Ivan Junior Echeverri Gomez y David Ramirez Cruz.
 
 ## Anexo H. Esquema de la presentación
 
-La demostración de 10 a 15 minutos sigue el guion de `docs/demo_guion.md`: contexto y problema (2 min), base de conocimiento y ontología (3 min), simulación de una falla en vivo (4 min), comparación de resultados (3 min), y ética y limitaciones (2 min). [PENDIENTE: ajustar al esquema presentado en clase.]
+La presentación usa como esquema la landing del proyecto (https://luisldra.github.io/proyecto_ing_conocimiento/) y recorre sus secciones en orden: el reto, lo consultado, la arquitectura, los resultados, una alerta explicada, ética y limitaciones, y el equipo. Entre la arquitectura y los resultados se hace la demostración en vivo en la web demostrativa. Dura de 10 a 15 minutos y sigue el guion de `docs/demo_guion.md`: contexto y problema (2 min), base de conocimiento y ontología (3 min), simulación de una falla en vivo (4 min), resultados (3 min), y ética, limitaciones y cierre (2 min).

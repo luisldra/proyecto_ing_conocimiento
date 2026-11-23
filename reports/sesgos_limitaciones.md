@@ -25,6 +25,18 @@ El sistema es un **prototipo académico**. Se entrenó y evaluó solo con datos 
 | 9 | Límites de la explicación | Gradientes integrados fuera de distribución al anular sensores | Baja | Comparación contra azar | Declarado |
 | 10 | Seguridad de la demo | Sin autenticación ni control de carga | Baja (demo local) | Uso local | Declarado |
 
+**Riesgos definidos (RA/R1–R6).** El documento APA agrupa este registro en un riesgo transversal y seis específicos:
+
+| Código | Riesgo | Filas del registro |
+|---|---|---|
+| RA | Aplicación indebida: evaluar o vigilar técnicos, o automatizar paros y funciones de seguridad | sección 4.4 y sección 9 (D-063, D-068, D-069) |
+| R1 | Circularidad entre simulador y reglas | 1 |
+| R2 | Evaluación optimista | 2, 8 |
+| R3 | Sesgo de técnico y turno | 3 |
+| R4 | Brecha entre tipos de activo | 4 |
+| R5 | Sobreconfianza y límites de la explicación (incluye el aporte limitado de las reglas) | 5, 6, 9 |
+| R6 | Deriva de datos y operación | 7, 10 |
+
 ## 3. Sesgos de los datos sintéticos
 
 **3.1 Circularidad entre simulador y reglas (riesgo 1).** El simulador genera cada falla a partir de firmas que se basan en los mismos umbrales que conocen las reglas (D-042). Así, M0 y las ramas de conocimiento de M2 y M3 juegan "en casa". Para reducirlo:

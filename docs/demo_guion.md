@@ -1,6 +1,6 @@
 # Guion de la demostración (10 a 15 minutos)
 
-> Fase 10. Para la sustentación del Proyecto 3. Ajustar al esquema presentado en clase (Anexo H del documento).
+> Fase 10. Para la sustentación del Proyecto 3. El esquema de la presentación es la landing (https://luisldra.github.io/proyecto_ing_conocimiento/): se recorren sus secciones en orden y la demo en vivo va entre la arquitectura y los resultados (Anexo H del documento).
 > Las cifras son las de `reports/` al 2026-11-20; si se regeneran los resultados, revisar con la landing o el documento.
 
 ## Antes de empezar (preparación, 10 minutos antes)
@@ -22,7 +22,7 @@
 |---|---|---|---|
 | 1. Contexto y problema | 2 min | David | Landing: portada y reto |
 | 2. Conocimiento y ontología | 3 min | Alejandro | Web: Base de conocimiento |
-| 3. Simulación en vivo | 4 min | Junio | Web: Simulador y Explicación |
+| 3. Simulación en vivo | 4 min | Ivan Junior | Web: Simulador y Explicación |
 | 4. Resultados | 3 min | Luis David | Web: Modelos y comparación; Equidad e impacto |
 | 5. Ética, limitaciones y cierre | 2 min | David | Landing: ética; póster |
 | Preguntas | 1–5 min | Todos | |

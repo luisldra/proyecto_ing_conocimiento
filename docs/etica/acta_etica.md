@@ -40,9 +40,11 @@ Si se aplica la evaluación de explicaciones con personas, se seguirá el proced
 
 ## 6. Firmas del equipo
 
-| Integrante | Responsabilidad | Firma |
-|---|---|---|
-| Alejandro | Conocimiento y QA | |
-| Luis David | Datos y modelos | |
-| Junio | API y web demostrativa | |
-| David | Documento APA, póster y landing | |
+Los integrantes firman esta acta con su nombre:
+
+| Integrante | Responsabilidad |
+|---|---|
+| Alejandro Pineda Gomez | Conocimiento y QA |
+| Luis David Rodríguez Arias | Datos y modelos |
+| Ivan Junior Echeverri Gomez | API y web demostrativa |
+| David Ramirez Cruz | Documento APA, póster y landing |

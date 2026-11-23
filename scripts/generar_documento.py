@@ -43,9 +43,9 @@ TINTA, TINTA_2, REJILLA = "#1f2328", "#57606a", "#d0d7de"
 
 PORTADA = {
     "titulo": "Mantenimiento predictivo explicable en una planta manufacturera con Deep Learning y base de conocimiento",
-    "autores": ["Alejandro [PENDIENTE: apellidos]", "Luis David Rodríguez Arias", "Junio [PENDIENTE: apellidos]",
-                "David [PENDIENTE: apellidos]"],
-    "lineas": ["Facultad de Inteligencia Artificial e Ingenierías", "[PENDIENTE: departamento]", "Universidad de Caldas",
+    "autores": ["Alejandro Pineda Gomez", "Luis David Rodríguez Arias", "Ivan Junior Echeverri Gomez",
+                "David Ramirez Cruz"],
+    "lineas": ["Facultad de Inteligencia Artificial e Ingenierías", "Universidad de Caldas",
                "Ingeniería del Conocimiento", "Ing. Wilson Fernando López Cardona", "Noviembre de 2026"],
 }
 NOMBRES_ACTIVO = {"motor_electrico": "Motor eléctrico", "bomba_centrifuga": "Bomba centrífuga",
@@ -93,6 +93,21 @@ def contar_pruebas() -> str:
         return "más de 600"
 
 
+def _miles(n: int) -> str:
+    return f"{n:,}".replace(",", " ") if n >= 10000 else str(n)
+
+
+def datos_simulados() -> dict[str, str]:
+    """Conteos del dataset desde data/synthetic/manifest.json (los datos no se versionan)."""
+    ruta = RAIZ / "data" / "synthetic" / "manifest.json"
+    if not ruta.exists():
+        raise FileNotFoundError(f"falta {ruta}; genere los datos con python -m metaltech.data.generator")
+    filas = json.loads(ruta.read_text(encoding="utf-8"))["filas"]
+    sensores = sum(n for f, n in filas.items() if f not in ("episodios.parquet", "observaciones.parquet"))
+    return {"filas": _miles(sensores), "episodios": _miles(filas["episodios.parquet"]),
+            "observaciones": _miles(filas["observaciones.parquet"])}
+
+
 def valores() -> dict[str, str]:
     d = construir()
     k, r = d["conocimiento"], d["resultados"]
@@ -129,6 +144,7 @@ def valores() -> dict[str, str]:
         "fa_sin_obs_m3": f"{r['equidad']['fa_sin_obs']['M3']:.2f} %",
         "fa_obs_inc_m3": f"{r['equidad']['fa_obs_incorrecta']['M3']:.2f} %",
         "brecha_turno": f"{r['equidad']['brecha_turno_m3_pts']:.1f}",
+        **datos_simulados(),
         "ejemplo": d["ejemplo"]["texto"],
         "propiedades_objeto": ", ".join(sorted(p.name for p in o.object_properties())),
     }
@@ -617,6 +633,11 @@ class Escritor:
                 self._runs(par, f"**{valor}**" if fila_i == 0 and valor else str(valor), t.letra)
         self._bordes(tab)
         self._repetir_encabezado(tab)
+        if len(t.filas) <= 15:  # las tablas cortas no se parten: cada fila se mantiene con la siguiente
+            for fila in tab.rows[:-1]:
+                for celda in fila.cells:
+                    for par in celda.paragraphs:
+                        par.paragraph_format.keep_with_next = True
         if t.nota:
             n = self.doc.add_paragraph()
             n.paragraph_format.space_after = self.Pt(12)
@@ -655,7 +676,8 @@ class Escritor:
 def _tabla_md(lineas: list[str], titulo: str, nota: str) -> Tabla:
     filas = [[c.strip() for c in linea.strip().strip("|").split("|")] for linea in lineas]
     filas = [f for f in filas if not all(set(c) <= set("-: ") for c in f)]
-    return Tabla(titulo, filas[0], filas[1:], nota)
+    anchos = [min(40, max(12, *(len(f[c]) for f in filas))) for c in range(len(filas[0]))]  # ancho según contenido
+    return Tabla(titulo, filas[0], filas[1:], nota, letra=9, anchos=anchos)
 
 
 def construir_docx(v: dict[str, str]) -> dict[str, int]:
@@ -703,10 +725,10 @@ def construir_docx(v: dict[str, str]) -> dict[str, int]:
             j = i + 1
             while j < len(lineas) and lineas[j].lstrip().startswith("|"):
                 j += 1
-            nota = ""
+            filas_md, nota = lineas[i + 1:j], ""
             if j < len(lineas) and lineas[j].startswith("Nota:"):
                 nota, j = lineas[j][5:].strip(), j + 1
-            w.tabla(_tabla_md(lineas[i + 1:j], s[6:].strip(), nota))
+            w.tabla(_tabla_md(filas_md, s[6:].strip(), nota))
             i = j
             continue
         elif s.startswith(">"):

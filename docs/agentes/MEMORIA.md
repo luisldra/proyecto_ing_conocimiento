@@ -3,17 +3,37 @@
 > Protocolo y formato: [AGENTS.md](../../AGENTS.md) · Errores: [ERRORES.md](ERRORES.md) · Plan: [PLAN.md](../PLAN.md)
 
 ## Estado actual
-- **Fase en curso:** Fase 10 terminada (documento APA, póster y guion de demo), con los datos del equipo incluidos.
-- **Última tarea:** [documento APA](../documento_APA/documento_apa.pdf) de 44 páginas generado desde `documento.md`, [póster A1](../poster/poster.pdf) y [guion de demo](../demo_guion.md).
-- **Siguiente tarea:** Fase 11 (puesta en marcha, guías de comandos y documentos, diagramas de flujo, manuales de usuario, API y técnico, glosario). La landing está publicada en https://luisldra.github.io/proyecto_ing_conocimiento/.
+- **Fase en curso:** Fase 11 terminada (manuales y guías). Todas las fases del plan están completas.
+- **Última tarea:** [docs/manuales/](../manuales/README.md): puesta en marcha, guía de comandos, guía de documentos, diagramas de flujo, manual de usuario de la web, manual de la API, manual técnico y glosario.
+- **Siguiente tarea:** preparar la entrega del **2026-11-30**: push al repositorio (lo hace el equipo), revisar la landing publicada y ensayar la demo con [demo_guion.md](../demo_guion.md). La landing está publicada en https://luisldra.github.io/proyecto_ing_conocimiento/.
 - **Equipo:** Alejandro Pineda Gomez (conocimiento y QA), Luis David Rodríguez Arias (datos y modelos), Ivan Junior Echeverri Gomez (API y web demostrativa), David Ramirez Cruz (documento APA, póster y landing).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
-- **Pendiente por confirmar:**
-  - fecha de entrega;
+- **Fecha de entrega:** 2026-11-30 (confirmada por el equipo).
 
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-24] Fase 11 – Manuales y guías del proyecto (agente: Documentación + QA)
+- Hecho:
+  - `docs/manuales/` con 9 documentos:
+    - índice (README);
+    - **puesta en marcha** (requisitos, instalación en Windows, Linux y macOS, orden de regeneración, levantar el prototipo, problemas frecuentes con su ERR);
+    - **guía de comandos** con las opciones reales de cada comando;
+    - **guía de documentos**: qué es cada archivo, para quién, quién lo mantiene y de qué depende;
+    - **7 diagramas de flujo** en Mermaid, validados con `mermaid.parse`: sistema, diagnóstico, motor de reglas, datos y entrenamiento, agentes, cambios → entregables, publicación de la landing;
+    - **manual de usuario de la web**, página por página, con 10 capturas y un recorrido guiado;
+    - **manual de la API** con ejemplos reales (curl, PowerShell y Python) y errores;
+    - **manual técnico**: arquitectura por módulo, formato de cada YAML y recetas para agregar reglas, síntomas, modos, expresiones y activos;
+    - **glosario**.
+  - `tests/test_manuales.py`: enlaces y anclas, imágenes, comandos y módulos que existen, endpoints del manual = endpoints de la API, diagramas.
+  - Web: la página Equidad muestra "mañana", "no vista" y "sin observación" en lugar de los identificadores.
+  - README y landing enlazan los manuales; el recurso "Web demostrativa" de la landing lleva al manual de usuario.
+  - Fecha de entrega registrada: 2026-11-30.
+  - Cada comando de la guía responde a `--help` (prueba del recorrido; reinstalar desde un clon limpio y regenerar todo toma horas y no se repitió).
+- Pendiente: push y ensayo de la demo antes del 2026-11-30.
+- Errores: ERR-033.
+- Decisiones: los manuales viven en Markdown en el repositorio (GitHub dibuja Mermaid) y se enlazan desde la landing.
 
 ## [2026-11-23] Fase 10 – Datos del equipo y riesgos RA/R1–R6 en el documento (agente: Documentación)
 - Hecho:

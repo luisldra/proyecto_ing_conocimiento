@@ -5,6 +5,8 @@ Integra un modelo de **Deep Learning** con una **base de conocimiento experto** 
 
 > Todos los datos son **sintéticos**. No se usa ningún dato personal real.
 
+**Manuales y guías:** [docs/manuales/](docs/manuales/README.md): puesta en marcha, guía de comandos, guía de documentos, diagramas de flujo, manual de usuario de la web, manual de la API, manual técnico y glosario.
+
 Documentación del proceso: [AGENTS.md](AGENTS.md) (manual de agentes) · [docs/PLAN.md](docs/PLAN.md) (plan maestro) · [docs/agentes/MEMORIA.md](docs/agentes/MEMORIA.md) (bitácora) · [docs/agentes/ERRORES.md](docs/agentes/ERRORES.md) (errores conocidos).
 
 ## Comparación central

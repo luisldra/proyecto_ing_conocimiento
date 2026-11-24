@@ -53,7 +53,7 @@ src/metaltech/      data/, kb/ (base, lexicon, rules_engine, ontology), models/,
 tests/              pytest
 reports/            figures/, tables/, sesgos_limitaciones.md
 landing/            landing page estática (GitHub Pages)
-docs/               PLAN.md, agentes/ (MEMORIA, ERRORES), documento_APA/, poster/, demo_guion.md
+docs/               PLAN.md, agentes/ (MEMORIA, ERRORES), documento_APA/, poster/, demo_guion.md, manuales/ (uso, API, técnico, diagramas)
 ```
 
 ## 5. Roles de agentes

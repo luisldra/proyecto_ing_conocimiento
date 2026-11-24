@@ -12,7 +12,7 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 | código (bugs, lógica) | ERR-009, ERR-011, ERR-025, ERR-029 |
 | datos (generador, fugas, desbalance) | ERR-020, ERR-023 |
 | conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010, ERR-014, ERR-015, ERR-016, ERR-017 |
-| agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019, ERR-021, ERR-022, ERR-024, ERR-028, ERR-032 |
+| agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019, ERR-021, ERR-022, ERR-024, ERR-028, ERR-032, ERR-033 |
 
 ## Lecciones aprendidas
 - Las normas ISO, IEC, NEMA, HI e IEEE son de pago: hay que citar la fuente secundaria que da el valor y marcar la confianza (ERR-001).
@@ -46,6 +46,26 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-033 – Borrador de los manuales con detalles sin verificar y etiqueta "manana" en la web
+- Fecha: 2026-11-24
+- Fase/archivo: Fase 11, `docs/manuales/`, `src/metaltech/dashboard/pages/6_Equidad_e_impacto.py`
+- Origen: agente
+- Síntoma:
+  - El primer borrador de los manuales describía cosas que no son así:
+    - la página Planta como tarjetas, cuando es una tabla;
+    - la página Datos sin sus selectores de activo, unidad y sensor;
+    - la FMEA con una columna de "efectos" que no existe;
+    - en el manual técnico, la subclase de la ontología como un paso manual, cuando se crea sola.
+  - En el manual de la API había valores de ejemplo inventados (unidad, rango nominal, fila FMEA y forma de las reglas).
+  - Al revisar las capturas apareció además un defecto real de la web: la página Equidad mostraba el identificador "manana" en lugar de "mañana".
+- Causa raíz: se escribió a partir del nombre de los controles en el código, sin mirar la página ni llamar a la API. En la web, los valores de grupo se mostraban tal como los guarda el generador.
+- Solución:
+  - Cada página se contrastó con las capturas de `revisar_web.py` y cada ejemplo de la API con respuestas reales de `TestClient`.
+  - La página Equidad traduce los identificadores ("mañana", "no vista", "sin observación").
+  - `tests/test_manuales.py` comprueba enlaces, anclas, comandos, módulos y que los endpoints del manual sean exactamente los de la API.
+- Prevención: un manual se escribe mirando la aplicación (captura o respuesta real), no el código. Los ejemplos JSON se copian de respuestas reales.
+- Estado: resuelto
 
 ### ERR-032 – Primer borrador del documento APA con una afirmación sin verificar y defectos del generador
 - Fecha: 2026-11-20

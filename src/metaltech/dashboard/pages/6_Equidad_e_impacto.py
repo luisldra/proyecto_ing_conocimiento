@@ -34,11 +34,19 @@ MEDIDAS = {"falsa_alarma": "Falsa alarma en equipo sano", "acierto_falla": "Acie
 c1, c2 = st.columns(2)
 grupo = c1.selectbox("Agrupar por", list(GRUPOS), format_func=GRUPOS.get)
 medida = c2.selectbox("Medida", list(MEDIDAS), format_func=MEDIDAS.get)
+VALORES = {"manana": "mañana", "no_vista": "no vista", "ninguna": "sin observación"}  # identificadores → texto
+
+
+def legible(v: str) -> str:
+    return nombre_activo(v) if grupo == "activo" else VALORES.get(v, v)
+
+
 g = grupos[grupos["grupo"] == grupo].groupby(["valor", "sistema"])[medida].mean().reset_index().dropna()
+g["valor"] = g["valor"].map(legible)
 fig = go.Figure()
 for s in SISTEMAS:
     d = g[g["sistema"] == s]
-    etiquetas = d["valor"].map(nombre_activo) if grupo == "activo" else d["valor"]
+    etiquetas = d["valor"]
     fig.add_bar(x=etiquetas, y=d[medida], name=NOMBRE_SISTEMA[s], marker_color=COLOR[s],
                 hovertemplate=f"{NOMBRE_SISTEMA[s]} · %{{x}}: %{{y:.2%}}<extra></extra>")
 fig.update_yaxes(tickformat=".1%")
@@ -46,7 +54,6 @@ mostrar(estilo(fig, f"{MEDIDAS[medida]} por {GRUPOS[grupo].lower()}", alto=380),
         g.pivot(index="valor", columns="sistema", values=medida).round(4).reset_index(), "equidad")
 st.markdown("**Brecha entre el mejor y el peor grupo**")
 b = brechas[brechas["grupo"] == grupo]
-legible = (lambda v: nombre_activo(v)) if grupo == "activo" else (lambda v: v)
 st.dataframe(pd.DataFrame({
     "Sistema": b["sistema"].map(NOMBRE_SISTEMA),
     "Brecha en acierto (puntos)": (100 * b["acierto_falla_brecha"]).round(1),

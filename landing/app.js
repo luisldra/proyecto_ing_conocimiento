@@ -25,9 +25,10 @@
   const por = (lista) => Object.fromEntries(lista.map((x) => [x.sistema, x]));
 
   // --- Enlaces --------------------------------------------------------------------------------
-  const enlaces = { repositorio: D.repositorio, web: D.repositorio + "#comandos",
+  const enlaces = { repositorio: D.repositorio, web: D.repositorio + "/blob/main/docs/manuales/manual_usuario_web.md",
                     documento: D.repositorio + "/blob/main/docs/documento_APA/documento_apa.pdf",
-                    poster: D.repositorio + "/blob/main/docs/poster/poster.pdf" };
+                    poster: D.repositorio + "/blob/main/docs/poster/poster.pdf",
+                    manuales: D.repositorio + "/tree/main/docs/manuales" };
   document.querySelectorAll("[data-enlace]").forEach((a) => { a.href = enlaces[a.dataset.enlace]; a.target = "_blank"; a.rel = "noopener"; });
 
   // --- Cifras de portada ------------------------------------------------------------------------

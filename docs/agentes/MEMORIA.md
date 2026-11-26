@@ -5,7 +5,8 @@
 ## Estado actual
 - **Fase en curso:** Fase 11 terminada (manuales y guías). Todas las fases del plan están completas.
 - **Última tarea:** [docs/manuales/](../manuales/README.md): puesta en marcha, guía de comandos, guía de documentos, diagramas de flujo, manual de usuario de la web, manual de la API, manual técnico y glosario.
-- **Siguiente tarea:** preparar la entrega del **2026-11-30**: push al repositorio (lo hace el equipo), revisar la landing publicada y ensayar la demo con [demo_guion.md](../demo_guion.md). La landing está publicada en https://luisldra.github.io/proyecto_ing_conocimiento/.
+- **Entrega lista:** [entrega/](../../entrega/README.md) con todos los entregables y la lista de verificación contra el enunciado; guion de la presentación con 7 intervenciones (máximo 2 por integrante).
+- **Siguiente tarea:** antes del **2026-11-30**: push al repositorio (lo hace el equipo), comprobar la landing publicada y sus enlaces, y ensayar la presentación con [demo_guion.md](../demo_guion.md). La landing está publicada en https://luisldra.github.io/proyecto_ing_conocimiento/.
 - **Equipo:** Alejandro Pineda Gomez (conocimiento y QA), Luis David Rodríguez Arias (datos y modelos), Ivan Junior Echeverri Gomez (API y web demostrativa), David Ramirez Cruz (documento APA, póster y landing).
 - **Bloqueos:** ninguno. Abiertos: normas sin texto oficial, que se consultan por fuentes públicas porque no hay acceso institucional (ERR-001, ERR-015; ver [normas_fuentes_externas.md](../../knowledge/acquisition/normas_fuentes_externas.md)) y supuestos sin fuente (ERR-003).
 - **Fecha de entrega:** 2026-11-30 (confirmada por el equipo).
@@ -13,6 +14,27 @@
 ---
 
 ## Bitácora (más reciente arriba)
+
+## [2026-11-26] Entrega – Carpeta de entrega, revisión de la landing y guion de la presentación (agente: Documentación + Frontend + QA)
+- Hecho:
+  - **Carpeta `entrega/`**:
+    - documento APA (PDF y Word), póster, guion, informe de sesgos, acta ética, puesta en marcha, manual de la web y manual de la API, todo en PDF;
+    - `README.md` con enlaces y la lista de verificación contra el enunciado (entregables técnicos, resultado esperado y 15 secciones del documento);
+    - se genera con `python scripts/preparar_entrega.py`, que copia los PDF y convierte el Markdown a PDF con Chromium.
+  - **Revisión de la landing:**
+    - se agregaron las secciones *Método* (metodología, fases y datos sintéticos desde el manifiesto) y *Prototipo* (endpoints y páginas contados en el código);
+    - en *Ética*, la tabla de riesgos RA/R1–R6 y el marco legal consultado;
+    - el hallazgo de que las reglas no sirven como veto;
+    - el recurso "Carpeta de entrega" y el menú con las secciones nuevas.
+    - Revisión con Playwright: anclas del menú, enlaces a archivos del repositorio (todos existen), sin bloques vacíos, sin errores de consola ni desborde en escritorio, móvil y modo oscuro.
+  - **Guion de la presentación** (`docs/demo_guion.md`):
+    - 7 intervenciones en 14 minutos siguiendo la landing: David 2, Alejandro 2, Luis David 2, Ivan Junior 1 (la demo en vivo);
+    - qué decir, pantalla y transición de cada una, preparación, plan B y quién responde cada tipo de pregunta.
+    - Anexo H del documento actualizado y documento regenerado.
+  - `tests/test_entrega.py`: índice = archivos, copias idénticas a su fuente, máximo 2 intervenciones por persona y duración entre 10 y 15 minutos.
+- Pendiente: push (equipo), comprobar la landing publicada y ensayar la presentación antes del 2026-11-30.
+- Errores: ninguno.
+- Decisiones: los Markdown de la entrega se convierten a PDF porque sus enlaces relativos se rompen fuera del repositorio. La carpeta se versiona para que el enlace de la landing funcione.
 
 ## [2026-11-24] Fase 11 – Manuales y guías del proyecto (agente: Documentación + QA)
 - Hecho:

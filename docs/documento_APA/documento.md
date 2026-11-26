@@ -389,4 +389,12 @@ Firmado por el equipo: Alejandro Pineda Gomez, Luis David Rodríguez Arias, Ivan
 
 ## Anexo H. Esquema de la presentación
 
-La presentación usa como esquema la landing del proyecto (https://luisldra.github.io/proyecto_ing_conocimiento/) y recorre sus secciones en orden: el reto, lo consultado, la arquitectura, los resultados, una alerta explicada, ética y limitaciones, y el equipo. Entre la arquitectura y los resultados se hace la demostración en vivo en la web demostrativa. Dura de 10 a 15 minutos y sigue el guion de `docs/demo_guion.md`: contexto y problema (2 min), base de conocimiento y ontología (3 min), simulación de una falla en vivo (4 min), resultados (3 min), y ética, limitaciones y cierre (2 min).
+La presentación usa como esquema la landing del proyecto (https://luisldra.github.io/proyecto_ing_conocimiento/) y recorre sus secciones en orden: el reto, lo consultado, la arquitectura, los resultados, una alerta explicada, ética y limitaciones, y el equipo. Entre la arquitectura y los resultados se hace la demostración en vivo en la web demostrativa. Dura unos 14 minutos más preguntas, en siete intervenciones (máximo dos por integrante), según el guion de `docs/demo_guion.md`:
+
+1. Apertura: problema y pregunta (David Ramirez Cruz, 1:30).
+2. Lo consultado y la base de conocimiento (Alejandro Pineda Gomez, 2:30).
+3. Método, datos y arquitectura (Luis David Rodríguez Arias, 2:00).
+4. Prototipo y demostración en vivo (Ivan Junior Echeverri Gomez, 3:00).
+5. Resultados (Luis David Rodríguez Arias, 2:00).
+6. Explicabilidad, equidad y riesgos (Alejandro Pineda Gomez, 1:30).
+7. Cierre: límites, conclusiones y entregables (David Ramirez Cruz, 1:30).

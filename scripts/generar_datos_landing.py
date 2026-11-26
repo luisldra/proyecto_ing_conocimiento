@@ -115,8 +115,22 @@ def ejemplo() -> dict[str, Any]:
             "reglas": [r["id"] for r in e["reglas"]]}
 
 
+def datos_y_prototipo() -> dict[str, Any]:
+    """Tamaño del dataset (desde el manifiesto) y piezas del prototipo (contadas en el código)."""
+    manifiesto = RAIZ / "data" / "synthetic" / "manifest.json"
+    datos = None
+    if manifiesto.exists():
+        m = json.loads(manifiesto.read_text(encoding="utf-8"))
+        filas = m["filas"]
+        datos = {"meses": m["meses"], "filas": sum(n for f, n in filas.items() if f not in ("episodios.parquet", "observaciones.parquet")),
+                 "episodios": filas["episodios.parquet"], "observaciones": filas["observaciones.parquet"]}
+    api = (RAIZ / "src" / "metaltech" / "api" / "main.py").read_text(encoding="utf-8")
+    paginas = sorted((RAIZ / "src" / "metaltech" / "dashboard" / "pages").glob("[0-9]_*.py"))
+    return {"datos": datos, "prototipo": {"endpoints": len(re.findall(r"@app\.(?:get|post)\(", api)), "paginas": len(paginas)}}
+
+
 def construir() -> dict[str, Any]:
-    return {"conocimiento": conocimiento(), "resultados": resultados(), "ejemplo": ejemplo(),
+    return {"conocimiento": conocimiento(), "resultados": resultados(), "ejemplo": ejemplo(), **datos_y_prototipo(),
             "repositorio": "https://github.com/luisldra/proyecto_ing_conocimiento"}
 
 

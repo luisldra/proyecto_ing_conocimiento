@@ -120,6 +120,7 @@ python scripts/revisar_web.py --salida revision_web   # revisión de la web con 
 python scripts/generar_datos_landing.py            # landing/data.js desde reports/
 python scripts/generar_documento.py --figuras --pdf   # Fase 10: documento APA (docx + PDF con Word) desde docs/documento_APA/documento.md
 python scripts/generar_poster.py                   # Fase 10: póster A1 (HTML + PDF)
+python scripts/preparar_entrega.py                 # entrega/: copia y convierte a PDF los entregables
 ```
 
 ### Definición de "terminado"

@@ -28,7 +28,8 @@
   const enlaces = { repositorio: D.repositorio, web: D.repositorio + "/blob/main/docs/manuales/manual_usuario_web.md",
                     documento: D.repositorio + "/blob/main/docs/documento_APA/documento_apa.pdf",
                     poster: D.repositorio + "/blob/main/docs/poster/poster.pdf",
-                    manuales: D.repositorio + "/tree/main/docs/manuales" };
+                    manuales: D.repositorio + "/tree/main/docs/manuales",
+                    entrega: D.repositorio + "/tree/main/entrega" };
   document.querySelectorAll("[data-enlace]").forEach((a) => { a.href = enlaces[a.dataset.enlace]; a.target = "_blank"; a.rel = "noopener"; });
 
   // --- Cifras de portada ------------------------------------------------------------------------
@@ -144,7 +145,21 @@
     ["Costo simulado", `Ahorro de la fusión frente a las reglas de ${num(R.ahorro_m3_vs_m0_pct[3], 0)} %, ${num(R.ahorro_m3_vs_m0_pct[5], 0)} % y `
       + `${num(R.ahorro_m3_vs_m0_pct[9], 0)} % según cuánto cueste una falla no detectada.`],
   ];
+  hallazgos.push(["Las reglas no sirven como veto", "Usadas para vetar las alertas del modelo, las reglas actuales rechazan "
+    + "alertas correctas, y ningún activo eligió el veto: su aporte está en explicar y en moderar las falsas alarmas."]);
   $("hallazgos").innerHTML = hallazgos.map(([t, p]) => `<li><strong>${t}</strong>${esc(p)}</li>`).join("");
+
+  // --- Método y prototipo -----------------------------------------------------------------------
+  const miles = (n) => n.toLocaleString("es-CO");
+  const S = D.datos;
+  $("datos-texto").textContent = S
+    ? `${C.unidades} máquinas de ${C.activos} tipos, ${S.meses} meses de lecturas cada 10 minutos: ${miles(S.filas)} filas, `
+      + `${miles(S.episodios)} episodios de falla y ${miles(S.observaciones)} observaciones de técnicos ficticios.`
+    : `${C.unidades} máquinas de ${C.activos} tipos simuladas con lecturas cada 10 minutos.`;
+  $("prototipo-cifras").innerHTML = [
+    [D.prototipo.endpoints, "endpoints en la API"], [D.prototipo.paginas, "páginas en la web demostrativa"],
+    [Math.round(R.latencia_ms.con_explicacion) + " ms", "p95 de un diagnóstico explicado"], ["3", "sistemas que diagnostican en vivo (M0, M1 y M3)"],
+  ].map(([v, t]) => `<div class="contador"><span class="contador__valor">${v}</span><span class="contador__texto">${t}</span></div>`).join("");
 
   // --- Explicación ------------------------------------------------------------------------------
   $("ejemplo-texto").textContent = D.ejemplo.texto;

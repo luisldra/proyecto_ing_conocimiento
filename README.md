@@ -5,6 +5,8 @@ Integra un modelo de **Deep Learning** con una **base de conocimiento experto** 
 
 > Todos los datos son **sintéticos**. No se usa ningún dato personal real.
 
+**Entrega del curso (2026-11-30):** [entrega/](entrega/README.md) reúne el documento APA, el póster, el guion de la presentación, el informe de sesgos, el acta ética y los manuales en PDF, con la lista de verificación contra el enunciado.
+
 **Manuales y guías:** [docs/manuales/](docs/manuales/README.md): puesta en marcha, guía de comandos, guía de documentos, diagramas de flujo, manual de usuario de la web, manual de la API, manual técnico y glosario.
 
 Documentación del proceso: [AGENTS.md](AGENTS.md) (manual de agentes) · [docs/PLAN.md](docs/PLAN.md) (plan maestro) · [docs/agentes/MEMORIA.md](docs/agentes/MEMORIA.md) (bitácora) · [docs/agentes/ERRORES.md](docs/agentes/ERRORES.md) (errores conocidos).

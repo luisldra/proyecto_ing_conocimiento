@@ -23,7 +23,8 @@ El detalle de cada paso está en los [diagramas de flujo](diagramas_flujo.md#6-d
 | [documento_apa.pdf](../documento_APA/documento_apa.pdf) | Documento APA 7 con las 15 secciones del enunciado y anexos | Docente | David | `python scripts/generar_documento.py --pdf` |
 | [documento.md](../documento_APA/documento.md), [referencias.md](../documento_APA/referencias.md) | Texto y referencias del documento (se edita aquí, no en el Word) | Equipo | David | — |
 | [poster.pdf](../poster/poster.pdf) | Póster A1 | Docente y público | David | `python scripts/generar_poster.py` |
-| [demo_guion.md](../demo_guion.md) | Guion de la demostración de 10 a 15 minutos | Equipo | Todos | A mano |
+| [demo_guion.md](../demo_guion.md) | Guion de la presentación: 7 intervenciones, máximo 2 por integrante, 14 minutos | Equipo | Todos | A mano |
+| [entrega/](../../entrega/README.md) | Carpeta de entrega: documento, póster, guion, informe, acta y manuales en PDF, con la lista de verificación contra el enunciado | Docente | David | `python scripts/preparar_entrega.py` |
 | Landing (`landing/`) | Página de presentación publicada en GitHub Pages | Público | David | `python scripts/generar_datos_landing.py` (cifras) |
 | [README.md](../../README.md) | Presentación del repositorio, instalación y comandos | Cualquiera | Todos | A mano |
 

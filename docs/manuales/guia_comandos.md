@@ -89,3 +89,4 @@ Opciones comunes: `--config`, `--datos` y `--activos motor_electrico bomba_centr
 | `python scripts/generar_documento.py --capturas revision_web` | Actualiza la captura del simulador desde la revisión de la web |
 | `python scripts/generar_documento.py --pdf` | Además actualiza el índice y exporta a PDF con Microsoft Word |
 | `python scripts/generar_poster.py` | Genera `docs/poster/poster.html` y `poster.pdf` (A1) |
+| `python scripts/preparar_entrega.py` | Llena `entrega/`: copia el documento y el póster, y convierte a PDF el guion, el informe de sesgos, el acta ética y tres manuales (requiere internet para el conversor de Markdown) |

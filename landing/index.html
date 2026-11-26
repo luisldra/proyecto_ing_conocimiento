@@ -19,7 +19,9 @@
       <ul>
         <li><a href="#reto">El reto</a></li>
         <li><a href="#conocimiento">Conocimiento</a></li>
+        <li><a href="#metodo">Método</a></li>
         <li><a href="#arquitectura">Arquitectura</a></li>
+        <li><a href="#prototipo">Prototipo</a></li>
         <li><a href="#resultados">Resultados</a></li>
         <li><a href="#explicacion">Explicación</a></li>
         <li><a href="#etica">Ética</a></li>
@@ -118,8 +120,40 @@
       </div>
     </section>
 
+    <!-- Método -->
+    <section id="metodo" class="seccion">
+      <div class="contenedor">
+        <p class="antetitulo">Método</p>
+        <h2>Cómo se construyó</h2>
+        <div class="dos-columnas">
+          <div class="panel">
+            <h3>Metodología</h3>
+            <ul class="lista">
+              <li><strong>ABP / ABPr:</strong> el problema de Metal Tech guía la construcción del artefacto.</li>
+              <li><strong>CommonKADS</strong> para modelar el conocimiento; <strong>CRISP-DM</strong> para datos y modelos;
+                <strong>ISO 17359 e ISO 13374</strong> para ordenar el monitoreo de condición.</li>
+              <li><strong>Agentes de IA con roles</strong> (investigador, revisor, datos, backend, frontend, documentación,
+                QA) bajo un manual común, con bitácora de cada tarea y base de errores.</li>
+              <li><strong>Once fases</strong>: conocimiento, ontología, datos, modelos, integración, explicabilidad,
+                evaluación, prototipo, landing, ética y documentación.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Datos sintéticos</h3>
+            <p id="datos-texto"></p>
+            <ul class="lista">
+              <li>Fallas con formas de degradación (lineal, exponencial, sigmoide, escalón, intermitente) y firmas incompletas.</li>
+              <li>Condiciones que imitan fallas, deriva de sensores y técnicos ficticios cuyo acierto depende del turno.</li>
+              <li>Partición temporal y una máquina de cada tipo reservada, que el modelo nunca ve.</li>
+              <li>Contrastados con AI4I 2020 y SKAB; ningún parámetro se ajustó mirando los resultados.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Arquitectura -->
-    <section id="arquitectura" class="seccion">
+    <section id="arquitectura" class="seccion seccion--alterna">
       <div class="contenedor">
         <p class="antetitulo">Arquitectura</p>
         <h2>Cuatro sistemas comparados</h2>
@@ -143,6 +177,37 @@
           </svg>
         </figure>
         <ul class="leyenda-sistemas" id="leyenda-sistemas"></ul>
+      </div>
+    </section>
+
+    <!-- Prototipo -->
+    <section id="prototipo" class="seccion">
+      <div class="contenedor">
+        <p class="antetitulo">Prototipo</p>
+        <h2>Una API y una web para probarlo todo</h2>
+        <div class="contadores" id="prototipo-cifras"></div>
+        <div class="dos-columnas">
+          <div class="panel">
+            <h3>Web demostrativa</h3>
+            <ul class="lista">
+              <li><strong>Planta:</strong> estado de cada unidad según la fusión, frente a lo que de verdad pasaba.</li>
+              <li><strong>Simulador:</strong> inyecte una falla, escriba lo que diría un técnico y vea el diagnóstico de cada sistema.</li>
+              <li><strong>Explicación:</strong> peso de cada sensor, reglas con sus valores reales y alertas del periodo de prueba.</li>
+              <li><strong>Base de conocimiento:</strong> reglas, FMEA, léxico, grafo de la ontología y decisiones.</li>
+              <li><strong>Modelos, equidad e impacto, datos y bitácora:</strong> todas las métricas y el proceso del proyecto.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>API para otros sistemas</h3>
+            <ul class="lista">
+              <li><code>POST /diagnose</code>: diagnóstico de M0, M1 y M3 con su explicación.</li>
+              <li><code>POST /simulate</code>: genera una ventana con una falla y la diagnostica.</li>
+              <li><code>GET /kb/…</code>: reglas, fichas de falla, léxico y grafo desde la ontología.</li>
+              <li>Documentación interactiva en <code>/docs</code>; la web usa la misma API.</li>
+            </ul>
+            <p class="nota">Se ejecuta en local: vea el manual de usuario en los recursos al final.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -205,6 +270,30 @@
             <li><strong>Sin datos personales.</strong> Técnicos anónimos y ficticios (Ley 1581 de 2012).</li>
           </ul>
         </div>
+        <h3 class="subtitulo">Riesgos definidos (RA/R1–R6)</h3>
+        <div class="tabla-desplazable">
+          <table>
+            <thead><tr><th>Código</th><th>Riesgo</th><th>Cómo se trata</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td>RA</td><td>Aplicación indebida: evaluar o vigilar técnicos, o automatizar paros</td><td>Las observaciones solo diagnostican equipos; seudónimos; el sistema recomienda y no ejecuta</td><td>Mitigado por diseño</td></tr>
+              <tr><td>R1</td><td>Circularidad entre simulador y reglas</td><td>Firmas incompletas, severidad variable, contraste con datos públicos</td><td>Reducido</td></tr>
+              <tr><td>R2</td><td>Evaluación optimista</td><td>Máquina nunca vista e intervalos entre semillas</td><td>Abierto</td></tr>
+              <tr><td>R3</td><td>Sesgo de técnico y turno</td><td>La fusión pondera poco el texto; reglas percibidas con certeza acotada</td><td>Medido</td></tr>
+              <tr><td>R4</td><td>Brecha entre tipos de activo</td><td>Un modelo por activo; ampliar reglas en compresor y CNC</td><td>Medido</td></tr>
+              <tr><td>R5</td><td>Sobreconfianza en la automatización</td><td>La explicación avisa cuando ninguna regla respalda la alerta</td><td>Parcial</td></tr>
+              <tr><td>R6</td><td>Deriva de datos y operación</td><td>Línea base por unidad; requisitos previos a uso real</td><td>Abierto</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 class="subtitulo">Marco legal y normativo consultado</h3>
+        <ul class="lista lista--columnas">
+          <li>Ley 1581 de 2012 y Decreto 1377 de 2013 (datos personales)</li>
+          <li>Circular Externa SIC 002 de 2024 (datos personales en IA)</li>
+          <li>CONPES 3975 (2019), CONPES 4144 (2025) y Marco Ético de IA (2021)</li>
+          <li>Decreto 1072 de 2015 y Resolución 0312 de 2019 (SG-SST)</li>
+          <li>Reglamento (UE) 2024/1689 de IA, como referencia</li>
+          <li>ISO/IEC 42001, ISO/IEC 23894, ISO/IEC TR 24027 y NIST AI RMF</li>
+        </ul>
       </div>
     </section>
 
@@ -226,6 +315,7 @@
           <a class="recurso" data-enlace="documento" href="#"><strong>Documento APA</strong><span>Informe completo en PDF</span></a>
           <a class="recurso" data-enlace="poster" href="#"><strong>Póster</strong><span>Resumen visual en PDF (A1)</span></a>
           <a class="recurso" data-enlace="manuales" href="#"><strong>Manuales</strong><span>Puesta en marcha, uso de la web y la API, diagramas</span></a>
+          <a class="recurso" data-enlace="entrega" href="#"><strong>Carpeta de entrega</strong><span>Todos los entregables del curso en un solo lugar</span></a>
         </div>
       </div>
     </section>

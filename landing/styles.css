@@ -148,6 +148,12 @@ strong { font-weight: 700; }
 .grafico .marca-dato:hover { opacity: 0.8; }
 details { margin-top: 10px; }
 summary { cursor: pointer; color: var(--acento); font-weight: 600; }
+.subtitulo { font: 700 1.25rem "Source Serif 4", serif; margin: 36px 0 8px; }
+.tabla-desplazable { overflow-x: auto; background: var(--superficie); border: 1px solid var(--rejilla); border-radius: var(--radio); padding: 4px 14px 10px; }
+.tabla-desplazable table { min-width: 620px; }
+.lista--columnas { columns: 2 320px; column-gap: 32px; }
+.lista--columnas li { break-inside: avoid; }
+code { font: 0.88em ui-monospace, Consolas, monospace; background: var(--alterna); padding: 1px 5px; border-radius: 4px; }
 table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.93rem; font-variant-numeric: tabular-nums; }
 th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--rejilla); }
 th { color: var(--mute); font-weight: 600; }

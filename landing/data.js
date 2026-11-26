@@ -235,5 +235,15 @@ window.DATOS = {
    "R07"
   ]
  },
+ "datos": {
+  "meses": 36,
+  "filas": 5049216,
+  "episodios": 1075,
+  "observaciones": 2118
+ },
+ "prototipo": {
+  "endpoints": 11,
+  "paginas": 8
+ },
  "repositorio": "https://github.com/luisldra/proyecto_ing_conocimiento"
 };

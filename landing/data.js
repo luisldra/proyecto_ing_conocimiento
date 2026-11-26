@@ -195,6 +195,10 @@ window.DATOS = {
     "hibrida": 3.75
    }
   },
+  "panel_preferencia": {
+   "hibrida": 60,
+   "pares": 60
+  },
   "equidad": {
    "brecha_turno_m3_pts": 2.2,
    "fa_obs_incorrecta": {

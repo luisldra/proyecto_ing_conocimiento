@@ -77,6 +77,7 @@ def resultados() -> dict[str, Any]:
     grupos = pd.read_csv(TABLAS / "equidad_grupos.csv")
     obs = grupos[(grupos["grupo"] == "observacion")].groupby(["valor", "sistema"])["falsa_alarma"].mean()
     latencia = _json("latencia_api_resumen.json")
+    panel_res = _json("evaluacion_agentes_resumen.json")
     return {
         "semillas": int(intervalos["semillas"].max()),
         "f1_test": serie("test", "f1_macro"), "f1_no_vista": serie("test_unidad", "f1_macro"),
@@ -93,6 +94,8 @@ def resultados() -> dict[str, Any]:
                 "fidelidad_azar": _redondear(xai["caida_azar_k"].mean(), 3)},
         "panel": {d: {v: _redondear(g.loc[g["variante"] == v, "media"].iloc[0], 2) for v in ("modelo", "hibrida")}
                   for d, g in panel.groupby("dimension")},
+        "panel_preferencia": {"hibrida": int(panel_res["preferencia"]["hibrida"]),
+                              "pares": int(panel_res["pruebas"]["utilidad"]["pares"])},
         "equidad": {"brecha_turno_m3_pts": _redondear(100 * brechas.loc[("turno", "M3"), "acierto_falla_brecha"], 1),
                     "fa_obs_incorrecta": {s: _redondear(100 * obs.loc[("incorrecta", s)], 2) for s in ("M0", "M3")},
                     "fa_sin_obs": {s: _redondear(100 * obs.loc[("ninguna", s)], 2) for s in ("M0", "M3")}},

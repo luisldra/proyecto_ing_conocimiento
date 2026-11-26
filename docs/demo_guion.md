@@ -14,7 +14,7 @@
 | 4 | Prototipo y demostración en vivo | Ivan Junior Echeverri Gomez | 3:00 | 9:00 | Landing: Prototipo → web: Simulador |
 | 5 | Resultados: modelo solo vs. modelo + conocimiento | Luis David Rodríguez Arias | 2:00 | 11:00 | Landing: Resultados |
 | 6 | Explicabilidad, equidad y riesgos | Alejandro Pineda Gomez | 1:30 | 12:30 | Landing: Explicación y Ética |
-| 7 | Cierre: límites, conclusiones y entregables | David Ramirez Cruz | 1:30 | 14:00 | Landing: Ética (final) y Equipo |
+| 7 | Cierre: límites, conclusiones y entregables | David Ramirez Cruz | 1:30 | 14:00 | Landing: Ética (final), Conclusiones y Equipo |
 | — | Preguntas | Todos (ver tabla al final) | 1–5 min | | |
 
 Intervenciones por persona: David 2, Alejandro 2, Luis David 2, Ivan Junior 1 (la más larga, la demo).
@@ -42,7 +42,7 @@ Intervenciones por persona: David 2, Alejandro 2, Luis David 2, Ivan Junior 1 (l
 - Metal Tech tiene sensores en motores, bombas, compresores, prensas, bandas y CNC, pero los datos se miran por separado. Los técnicos diagnostican con los sentidos: *"el motor está cantando"*, *"la bomba está golpeando"*. Ese criterio cambia entre turnos y personas, y lleva a falsas alarmas e intervenciones tardías.
 - Leer la pregunta de la portada: **¿cómo integrar un modelo de Deep Learning con una base de conocimiento experto para predecir fallas y generar diagnósticos explicables?**
 - Señalar las cifras de la portada: "Al final les mostraremos de dónde salen estas cifras."
-- Dos aclaraciones desde el inicio: **no hubo entrevistas** (la planta es ficticia y no había técnicos disponibles) y **todos los datos son sintéticos**.
+- Dos aclaraciones desde el inicio (están en *El reto*): **no hubo entrevistas** (la planta es ficticia y no había técnicos disponibles) y **todos los datos son sintéticos**.
 
 **Transición:** "Si no había expertos a quién preguntar, ¿de dónde salió el conocimiento? Alejandro."
 
@@ -53,7 +53,7 @@ Intervenciones por persona: David 2, Alejandro 2, Luis David 2, Ivan Junior 1 (l
 **Qué decir:**
 - Un agente investigador consultó normas por fuentes públicas (ISO 17359, ISO 20816, ANSI/HI 9.6.1…), literatura y datasets, con una regla: **cada regla y cada umbral con al menos dos fuentes o una norma**; si las fuentes chocan, el valor más conservador. Un segundo agente revisó todo de forma independiente.
 - Señalar los contadores: 75 decisiones documentadas, 126 referencias, 55 reglas, 31 modos de falla.
-- En la web, activo *Bomba centrífuga*, sección **Reglas**: mostrar **R13**: "SI margen de NPSH bajo Y vibración de alta frecuencia alta Y caudal inestable ENTONCES cavitación, con factor de certeza 0.85". Explicar en una frase: la certeza de la regla se multiplica por la de sus síntomas y varias reglas se combinan como en MYCIN.
+- En la web, activo *Bomba centrífuga*, sección **Reglas**: mostrar **R13**: "SI margen de NPSH bajo Y vibración de alta frecuencia alta Y caudal inestable ENTONCES cavitación, con factor de certeza 0.85". Explicar con la nota de la landing: la certeza de la regla se multiplica por la de sus síntomas y varias reglas se combinan como en MYCIN.
 - Sección **Léxico de técnicos**: "la bomba está golpeando" → golpeteo percibido → cavitación, obstrucción o rodamiento. "Una frase del técnico nunca diagnostica sola: sugiere, y los sensores confirman."
 - Sección **Ontología**: el grafo une activo, componentes, fallas, síntomas, causas y acciones; está en OWL y la valida el razonador HermiT.
 
@@ -92,10 +92,10 @@ Intervenciones por persona: David 2, Alejandro 2, Luis David 2, Ivan Junior 1 (l
 **Pantalla:** landing, *Resultados*.
 
 **Qué decir:**
-- En la máquina nunca vista, con 5 semillas: F1 macro de **0.940 con la fusión**, 0.932 con el modelo solo y 0.656 con las reglas solas.
-- El hallazgo honesto: el conocimiento **casi no sube el F1** (+0.8 puntos), pero **reduce las falsas alarmas** ante eventos que imitan fallas: de 4.2 % a 3.1 %. En eventos por unidad y año, cerca de la mitad que el modelo solo.
+- En la máquina nunca vista, con 5 semillas: F1 macro de **0,940 con la fusión**, 0,932 con el modelo solo y 0,656 con las reglas solas (gráfico de la izquierda).
+- El hallazgo honesto: el conocimiento **casi no sube el F1** (+0,8 puntos, en el texto de arriba), pero **reduce las falsas alarmas** ante eventos que imitan fallas: de 4,2 % a 3,1 %, y hay 46 % menos eventos de falsa alarma por unidad y año (gráfico de la derecha).
 - El conocimiento como entrada (M2) no mejoró al modelo, y usar las reglas como **veto** rechazaba alertas correctas: ningún activo lo eligió.
-- La fusión detecta cerca del 99 % de las fallas y diagnostica con explicación en 79 ms.
+- La fusión detecta el 98,8 % de las fallas y diagnostica con explicación en 79 ms (cifras de la portada).
 
 **Transición:** "Un buen número no basta si nadie entiende la alerta. Alejandro."
 
@@ -104,21 +104,21 @@ Intervenciones por persona: David 2, Alejandro 2, Luis David 2, Ivan Junior 1 (l
 **Pantalla:** landing, *Explicación*; luego *Ética* hasta la tabla de riesgos.
 
 **Qué decir:**
-- Cada alerta dice por qué: el 74.6 % de los sensores con más peso son los que la falla mueve de verdad (al azar sería 33 %).
-- Un panel de cinco agentes con perfiles de planta prefirió la explicación híbrida en los 60 casos. **No son personas**: es exploratorio y así lo declaramos.
-- Equidad: una observación incorrecta del técnico duplica la falsa alarma de las reglas solas; la fusión casi no cambia.
+- Cada alerta dice por qué: leer la alerta real de ejemplo. El 74,6 % de los sensores con más peso son los que la falla mueve de verdad (al azar sería 33 %).
+- Un panel de cinco agentes con perfiles de planta prefirió la explicación híbrida en 60 de 60 comparaciones. **No son personas**: es exploratorio y así lo declaramos.
+- Equidad (sección *Ética*): una observación incorrecta del técnico duplica la falsa alarma de las reglas solas (1,05 % → 2,08 %); la fusión casi no cambia.
 - Tabla de riesgos: el más grave es **RA, la aplicación indebida**: usar el sistema para evaluar a los técnicos o para detener máquinas sin una persona. Por diseño, las observaciones solo diagnostican equipos.
 
 **Transición:** "Para cerrar, lo que el sistema no es. David."
 
 ## 7. Cierre: límites, conclusiones y entregables — David (1:30)
 
-**Pantalla:** landing, *Ética* (columna derecha y marco legal); luego *Equipo* y recursos.
+**Pantalla:** landing, *Ética* (columna derecha y marco legal); luego *Conclusiones*; al final *Equipo* y recursos.
 
 **Qué decir:**
 - Límites: datos sintéticos, reglas sin validar por técnicos, normas consultadas por fuentes públicas, costos supuestos. El sistema **recomienda; el técnico decide**.
 - Marco legal: Ley 1581 de protección de datos, SG-SST y el Reglamento europeo de IA como referencia.
-- Conclusiones:
+- Conclusiones (sección *Conclusiones* de la landing):
   1. Integrar Deep Learning y conocimiento experto es posible y la mejor forma fue la **fusión**.
   2. El conocimiento aporta **explicación y prudencia** más que detección.
   3. El siguiente paso es validar con técnicos y datos reales.

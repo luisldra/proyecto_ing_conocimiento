@@ -25,6 +25,7 @@
         <li><a href="#resultados">Resultados</a></li>
         <li><a href="#explicacion">Explicación</a></li>
         <li><a href="#etica">Ética</a></li>
+        <li><a href="#conclusiones">Conclusiones</a></li>
         <li><a href="#equipo">Equipo</a></li>
       </ul>
     </nav>
@@ -69,6 +70,8 @@
             <p>El resultado son intervenciones tardías, falsas alarmas, repuestos cambiados sin necesidad y paradas
               no planificadas. El reto: <strong>formalizar ese conocimiento heurístico</strong>, unirlo a los datos y
               entrenar un modelo que prediga fallas y explique sus alertas.</p>
+            <p><strong>Dos condiciones del proyecto:</strong> no hubo entrevistas, porque la planta es ficticia y no había
+              técnicos disponibles, y todos los datos son sintéticos, generados por un simulador.</p>
           </div>
           <figure class="voces">
             <figcaption>Así diagnostican hoy los técnicos</figcaption>
@@ -91,8 +94,9 @@
         <p class="antetitulo">Lo consultado</p>
         <h2>Una base de conocimiento construida con fuentes, sin entrevistas</h2>
         <p class="ancho-lectura">Sin acceso a técnicos ni a normas de pago, un agente investigador consultó normas por fuentes
-          públicas, literatura y datasets abiertos, y tomó cada decisión con su fuente. Un agente revisor la verificó de
-          forma independiente.</p>
+          públicas, literatura y datasets abiertos, y tomó cada decisión con su fuente. La regla: <strong>cada regla y
+          cada umbral con al menos dos fuentes o una norma</strong>; si las fuentes chocan, el valor más conservador.
+          Un agente revisor la verificó de forma independiente.</p>
         <div class="contadores" id="contadores"></div>
         <div class="dos-columnas">
           <div class="panel">
@@ -109,6 +113,8 @@
             <h3 id="titulo-regla">Una regla, con su certeza</h3>
             <p class="regla__codigo" id="regla"></p>
             <p class="nota" id="regla-accion"></p>
+            <p class="nota">Cómo razona el motor: la certeza de la regla se multiplica por la de sus síntomas, y varias
+              reglas sobre la misma falla se combinan como en MYCIN: FC = FC₁ + FC₂ · (1 − FC₁).</p>
           </article>
           <article class="panel" aria-labelledby="titulo-expresion">
             <h3 id="titulo-expresion">Del lenguaje del técnico a un síntoma</h3>
@@ -297,8 +303,24 @@
       </div>
     </section>
 
+    <!-- Conclusiones -->
+    <section id="conclusiones" class="seccion">
+      <div class="contenedor">
+        <p class="antetitulo">Conclusiones</p>
+        <h2>Lo que respondemos a la pregunta</h2>
+        <ol class="lista lista--marcada conclusiones">
+          <li><strong>Sí se puede integrar, y la mejor forma fue la fusión.</strong> Combinar a la salida la probabilidad
+            del modelo con la certeza de las reglas (M3) dio el mejor F1 y las menores falsas alarmas.</li>
+          <li><strong>El conocimiento aporta explicación y prudencia más que detección.</strong> Cada alerta dice qué
+            sensores y qué reglas la sustentan; como veto, las reglas actuales rechazan alertas correctas.</li>
+          <li><strong>El siguiente paso es validar con personas y datos reales.</strong> Revisar las reglas con técnicos,
+            reentrenar con datos de planta y evaluar las explicaciones con usuarios.</li>
+        </ol>
+      </div>
+    </section>
+
     <!-- Equipo -->
-    <section id="equipo" class="seccion">
+    <section id="equipo" class="seccion seccion--alterna">
       <div class="contenedor">
         <p class="antetitulo">Equipo</p>
         <h2>Quiénes lo hicieron</h2>

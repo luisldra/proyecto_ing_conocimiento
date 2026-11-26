@@ -12,7 +12,7 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 | código (bugs, lógica) | ERR-009, ERR-011, ERR-025, ERR-029 |
 | datos (generador, fugas, desbalance) | ERR-020, ERR-023 |
 | conocimiento (reglas, ontología, fuentes) | ERR-001, ERR-003, ERR-005, ERR-010, ERR-014, ERR-015, ERR-016, ERR-017 |
-| agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019, ERR-021, ERR-022, ERR-024, ERR-028, ERR-032, ERR-033 |
+| agente (supuestos falsos, malas decisiones del agente) | ERR-004, ERR-018, ERR-019, ERR-021, ERR-022, ERR-024, ERR-028, ERR-032, ERR-033, ERR-034 |
 
 ## Lecciones aprendidas
 - Las normas ISO, IEC, NEMA, HI e IEEE son de pago: hay que citar la fuente secundaria que da el valor y marcar la confianza (ERR-001).
@@ -46,6 +46,27 @@ Antes de empezar una tarea, revise el índice y las lecciones aprendidas. Cada e
 - Prevención:
 - Estado: resuelto | abierto
 -->
+
+### ERR-034 – El guion de la presentación señalaba en la landing cosas que no estaban
+- Fecha: 2026-11-26
+- Fase/archivo: Entrega, `docs/demo_guion.md`, `landing/`
+- Origen: agente
+- Síntoma: el equipo notó que el guion mencionaba contenidos que no veía en la landing:
+  - el criterio de "2 fuentes o 1 norma", la combinación MYCIN, la preferencia "60 de 60" y las conclusiones no estaban;
+  - las cifras se mostraban en otro formato: "+0,008" en lugar de "+0,8 puntos", "75 %" en lugar de "74,6 %", y "1,1 puntos" sin el 4,2 % → 3,1 %;
+  - en la landing publicada faltaban además las secciones Método y Prototipo y la tabla de riesgos.
+- Causa raíz: el guion se escribió desde el documento APA y los reportes, no desde el texto que muestra la landing. Por otra parte, el último commit no se había subido, así que GitHub Pages servía la versión anterior.
+- Solución:
+  - La landing ahora muestra:
+    - las dos condiciones del proyecto en El reto;
+    - el criterio de fuentes y la nota MYCIN;
+    - las diferencias en puntos y las falsas alarmas de M1 y M3 en porcentaje;
+    - la preferencia del panel, leída de `evaluacion_agentes_resumen.json`;
+    - una sección Conclusiones.
+  - El guion usa las mismas cifras y dice en qué parte de la landing está cada una.
+  - Un cruce automático (texto de cada sección frente a lo que el guion manda señalar) quedó sin faltantes.
+- Prevención: un guion que señala una página se verifica contra el texto que la página muestra. Y antes de ensayar con la versión publicada, se hace push.
+- Estado: resuelto (la landing publicada se actualiza con el push)
 
 ### ERR-033 – Borrador de los manuales con detalles sin verificar y etiqueta "manana" en la web
 - Fecha: 2026-11-24

@@ -131,16 +131,16 @@
     ["Sistema", "Eventos de falsa alarma / unidad-año", "Fallas detectadas"]);
 
   // --- Resultados en texto ---------------------------------------------------------------------
-  const dF1 = R.m3_m1_f1_no_vista, dFA = R.m3_m1_fa_no_vista, dM2 = R.m2_m1_f1_no_vista;
+  const dF1 = R.m3_m1_f1_no_vista, dM2 = R.m2_m1_f1_no_vista, fa = por(R.fa_confusor_no_vista);
   $("resumen-resultados").textContent = `Con ${R.semillas} semillas y en máquinas que el modelo nunca vio, combinar el modelo con las reglas `
-    + `(M3) mejora al modelo solo en F1 por poco pero de forma consistente (${dF1.media >= 0 ? "+" : ""}${num(dF1.media, 3)}, intervalo `
-    + `${num(dF1.inf, 3)} a ${num(dF1.sup, 3)}) y, sobre todo, reduce las falsas alarmas.`;
+    + `(M3) mejora al modelo solo en F1 por poco pero de forma consistente (${dF1.media >= 0 ? "+" : ""}${num(100 * dF1.media, 1)} puntos, `
+    + `intervalo ${num(100 * dF1.inf, 1)} a ${num(100 * dF1.sup, 1)}) y, sobre todo, reduce las falsas alarmas.`;
   const hallazgos = [
-    ["Menos falsas alarmas", `La fusión tiene ${pct(reduccion)} menos eventos de falsa alarma que el modelo solo y `
-      + `${num(-100 * dFA.media, 1)} puntos menos de falsa alarma ante eventos que imitan fallas.`],
+    ["Menos falsas alarmas", `Ante eventos que imitan fallas, la falsa alarma baja de ${pct(fa.M1.media, 1)} con el modelo solo `
+      + `a ${pct(fa.M3.media, 1)} con la fusión, y hay ${pct(reduccion)} menos eventos de falsa alarma por unidad y año.`],
     ["El modelo supera a las reglas", `F1 de ${num(f1.M1.media, 3)} del modelo frente a ${num(f1.M0.media, 3)} de las reglas solas; las reglas detectan `
       + `${num(R.impacto.M0.detectadas_pct, 0)} % de las fallas y la fusión ${num(R.impacto.M3.detectadas_pct, 1)} %.`],
-    ["Cómo integrar importa", `Usar el conocimiento como entrada del modelo (M2) no se distingue de M1 (${dM2.media >= 0 ? "+" : ""}${num(dM2.media, 3)}); `
+    ["Cómo integrar importa", `Usar el conocimiento como entrada del modelo (M2) no se distingue de M1 (${dM2.media >= 0 ? "+" : ""}${num(100 * dM2.media, 1)} puntos de F1); `
       + "combinarlo a la salida (M3) sí aporta."],
     ["Costo simulado", `Ahorro de la fusión frente a las reglas de ${num(R.ahorro_m3_vs_m0_pct[3], 0)} %, ${num(R.ahorro_m3_vs_m0_pct[5], 0)} % y `
       + `${num(R.ahorro_m3_vs_m0_pct[9], 0)} % según cuánto cueste una falla no detectada.`],
@@ -170,10 +170,11 @@
     + `<span class="muestra" style="display:inline-block;background:${color("M1")}"></span> solo en el modelo</p>`);
   const X = R.xai, P = R.panel;
   $("metricas-xai").innerHTML = [
-    [pct(X.top3_firma), `de los 3 sensores con más peso son los que la falla mueve de verdad (azar: ${pct(X.top3_azar)})`],
-    [pct(X.top3_reglas), "coinciden con los sensores de las reglas disparadas"],
+    [pct(X.top3_firma, 1), `de los 3 sensores con más peso son los que la falla mueve de verdad (azar: ${pct(X.top3_azar, 1)})`],
+    [pct(X.top3_reglas, 1), "coinciden con los sensores de las reglas disparadas"],
     [num(X.fidelidad), `caída de confianza al anular esos sensores (azar: ${num(X.fidelidad_azar)})`],
     [`${num(P.utilidad.hibrida)} / 5`, `utilidad de la explicación híbrida para el panel (modelo solo: ${num(P.utilidad.modelo)})`],
+    [`${R.panel_preferencia.hibrida} de ${R.panel_preferencia.pares}`, "comparaciones en que el panel prefirió la explicación híbrida"],
   ].map(([v, t]) => `<div class="contador"><span class="contador__valor">${v}</span><span class="contador__texto">${t}</span></div>`).join("");
 
   // --- Equidad ----------------------------------------------------------------------------------

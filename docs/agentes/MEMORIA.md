@@ -15,6 +15,21 @@
 
 ## Bitácora (más reciente arriba)
 
+## [2026-11-26] Entrega – Guion y landing alineados (agente: Frontend + Documentación)
+- Hecho:
+  - Revisión del guion contra el texto visible de cada sección de la landing, a pedido del equipo.
+  - La landing agrega:
+    - las dos condiciones del proyecto (sin entrevistas, datos sintéticos);
+    - el criterio de 2 fuentes o 1 norma y la nota MYCIN;
+    - las diferencias de F1 en puntos y las falsas alarmas de 4,2 % → 3,1 %;
+    - la concordancia con un decimal y la preferencia del panel (60 de 60);
+    - una sección **Conclusiones** en el menú.
+  - El guion usa las mismas cifras e indica dónde está cada una en la landing; el cierre pasa por *Conclusiones*.
+  - Cruce automático guion ↔ landing sin faltantes. Landing sin errores ni desbordes. `entrega/` regenerada.
+- Pendiente: **push**, porque la landing publicada sigue sin Método, Prototipo, riesgos ni Conclusiones hasta entonces. Después, ensayar con la versión publicada.
+- Errores: ERR-034.
+- Decisiones: ninguna nueva.
+
 ## [2026-11-26] Entrega – Carpeta de entrega, revisión de la landing y guion de la presentación (agente: Documentación + Frontend + QA)
 - Hecho:
   - **Carpeta `entrega/`**:
